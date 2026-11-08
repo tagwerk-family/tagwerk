@@ -1619,6 +1619,11 @@ test('a child requests a reward without the parent PIN', async ({ page }) => {
   const request = page.getByTestId('request').filter({ hasText: `„${name}“` })
   await expect(request).toBeVisible()
 
+  // The tap answers where the child looks, beside their balance — the list
+  // above sits below the cards. Other tests' requests may add to the sum.
+  const chosen = people.and(page.locator('[aria-pressed="true"]'))
+  await expect(chosen.getByTestId('requested')).toContainText('−')
+
   await request.getByRole('button', { name: 'Ablehnen' }).click()
   const pin = page.getByRole('dialog', { name: 'Eltern-PIN' })
   await expect(pin).toBeVisible()

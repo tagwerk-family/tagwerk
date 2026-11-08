@@ -105,6 +105,21 @@ function decide(key: string, action: () => Promise<boolean>): void {
  */
 const { kind, can } = useActor()
 const redeemsAtOnce = computed(() => kind.value === 'user' && can('points.award'))
+
+/*
+ * What each person has asked for and nobody decided yet, beside their
+ * balance: the list of open requests sits below the cards, out of sight on
+ * a tablet, and the tap on a reward otherwise showed nothing.
+ */
+const requested = computed(() => {
+  const sums: Record<number, number> = {}
+
+  for (const entry of pending.value) {
+    sums[entry.person_id] = (sums[entry.person_id] ?? 0) + entry.cost
+  }
+
+  return sums
+})
 const { armed, tap } = useTwoStep()
 
 function submitRequest(rewardId: number): void {
@@ -272,13 +287,26 @@ const filtered = computed(() => filter.value.person !== null || filter.value.sig
 
               <span class="min-w-0">
                 <span class="block truncate text-lg font-medium text-ink-2">{{ person.name }}</span>
-                <span
-                  :key="riseKey(person.id, person.balance)"
-                  class="tw-pop flex items-center gap-1.5 font-display text-4xl leading-none font-semibold tabular-nums"
-                  :aria-label="$t('task.stars', person.balance)"
-                >
-                  <TwStar class="text-2xl" />
-                  {{ person.balance }}
+                <span class="flex flex-wrap items-center gap-x-2 gap-y-1">
+                  <span
+                    :key="riseKey(person.id, person.balance)"
+                    class="tw-pop flex items-center gap-1.5 font-display text-4xl leading-none font-semibold tabular-nums"
+                    :aria-label="$t('task.stars', person.balance)"
+                  >
+                    <TwStar class="text-2xl" />
+                    {{ person.balance }}
+                  </span>
+
+                  <span
+                    v-if="requested[person.id]"
+                    :key="`requested-${requested[person.id]}`"
+                    data-testid="requested"
+                    class="tw-pop flex items-center gap-1 rounded-full bg-surface-2 px-2.5 py-1 text-lg leading-none font-semibold text-ink-2 tabular-nums"
+                    :aria-label="$t('points.requested', requested[person.id]!)"
+                  >
+                    <TwIcon name="timer" :size="18" />
+                    −{{ requested[person.id] }}
+                  </span>
                 </span>
               </span>
             </span>

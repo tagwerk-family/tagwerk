@@ -293,6 +293,7 @@
     "points.noChildren": "No children set up yet.",
     "points.ranking": "Ranking",
     "points.range": "Period",
+    "points.requested": "{n} star requested | {n} stars requested",
     "points.requests": "Open requests",
     "points.wants": "{name} would like “{reward}”",
     "points.decline": "Decline",

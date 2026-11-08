@@ -321,7 +321,7 @@ container and checks what nginx serves at `https://tagwerk.test` — so run
 
 ## Status
 
-**Version 0.1.1** (2026-11-08) — everything a family uses from day to day is
+**Version 0.2.0** (2026-11-08) — everything a family uses from day to day is
 in place, on the wall as on the phone:
 
 - **Calendar** — built in, or Google in both directions; day, three days,

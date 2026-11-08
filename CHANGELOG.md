@@ -7,7 +7,11 @@ tokens; such a change is named here.
 
 ## [Unreleased]
 
-## [0.1.1] — 2026-11-08
+## [0.2.0] — 2026-11-08
+
+A minor release because the HTTP contract grows by `GET /api/statistics`
+and the MCP plugin by a tool; nothing that existed changes, a 0.1.0 tablet
+keeps working.
 
 ### Added
 
@@ -29,6 +33,9 @@ tokens; such a change is named here.
   compare children, which a child's phone or the wall in passing should
   not. On the wall it would need the PIN, so the wall offers no entry.
   A custom span is at most two years — every occurrence in it is derived.
+- **Requested stars show beside the balance** (hourglass, `−20`). The open
+  requests are listed below the rewards, out of sight on a tablet, so a
+  child's tap on a reward answered with nothing visible.
 
 ### Changed
 

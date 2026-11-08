@@ -348,6 +348,7 @@
     "noChildren": "No children set up yet.",
     "ranking": "Ranking",
     "range": "Period",
+    "requested": "{n} star requested | {n} stars requested",
     "requests": "Open requests",
     "wants": "{name} would like “{reward}”",
     "decline": "Decline",
