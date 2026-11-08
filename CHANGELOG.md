@@ -7,6 +7,29 @@ tokens; such a change is named here.
 
 ## [Unreleased]
 
+## [0.1.1] — 2026-11-08
+
+### Added
+
+- **Statistics in the admin (Everyday → Statistics).** Who did which task
+  how often, as a table that darkens with the count. Beside it: done tasks
+  over time per person, the share of their own tasks each person did,
+  weekdays, and stars earned against spent. A period, people and one task
+  narrow everything; the rows download as CSV (semicolon and BOM, so Excel
+  with German settings opens it). Everything is read from completions and
+  star entries, nothing new is stored. The share of own tasks counts
+  derived occurrences of *active* tasks only: a retired task has no rule
+  left to say what was due, so its history shows in the counts but not in
+  the share. Gifts between siblings count neither as earned nor as spent.
+- **The same statistics in the app, over the API and for an assistant.**
+  `GET /api/statistics` (period, dates, people, task) answers with the
+  numbers the admin page draws; the app opens them from the menu
+  (“Statistik”), the MCP plugin offers them as `task-statistics` with
+  names instead of ids. Parents only (`household.manage`): the numbers
+  compare children, which a child's phone or the wall in passing should
+  not. On the wall it would need the PIN, so the wall offers no entry.
+  A custom span is at most two years — every occurrence in it is derived.
+
 ### Changed
 
 - **The project lives at `github.com/tagwerk-family`, the image at

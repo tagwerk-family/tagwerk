@@ -343,6 +343,27 @@ Filament 3. Here the respective current major versions are used on purpose, beca
   Integrations (everything that links outside — connections, API access,
   calendar subscriptions, webhooks), Operations. A new resource joins the
   group of what a family does with it, not of its table.
+- **Statistics read, never store** (`App\Services\Statistics\TaskStatistics`,
+  page `App\Filament\Pages\Statistics`). Counts come from `task_completions`
+  (`skipped` left out), stars from `point_entries` without `gift_id`; the
+  share of own tasks from `TaskOccurrenceService` up to today, so it knows
+  only active tasks. Filters are `StatisticsPeriod::fromFilters()` (in the
+  address, garbage falls back to four weeks).
+  - Its widgets live in `app/Filament/Statistics/`, not `Widgets/`: the
+    panel discovers that folder and would put them on the dashboard.
+  - A person keeps their colour in every chart (`ReadsStatistics::seriesOf()`),
+    “without a name” is grey.
+  - `RawJs` chart options are written into an HTML attribute: a `"` from
+    PHP (`json_encode` of a text) ends it and the chart shows as text.
+    Put such texts in the dataset and read them in the callback.
+  - One shape for everyone: `GET /api/statistics` (`StatisticsController`,
+    `household.manage`, `feature:tasks`) feeds the app's `StatisticsView`
+    (account only, opened from drawer and bar like the photo manager, pure
+    rules in `app/utils/statistics.ts`) and the MCP tool `task-statistics`.
+    Per-person maps are cast to objects: a PHP array with keys `0..n`
+    would leave as a JSON list.
+  - `__('Period')` is the school period (“Stunde”); a time span is
+    `__('Time span')`. Check `de.json` before reusing a short English key.
 - **Admin (Filament):** colours in `AdminPanelProvider::colors()`,
   everything else in `public/css/tagwerk-admin.css` via the `fi-` classes. Primary
   shade 500 must carry light text (contrast AA), otherwise Filament picks

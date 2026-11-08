@@ -16,6 +16,7 @@ use Tagwerk\Mcp\Tools\ListEvents;
 use Tagwerk\Mcp\Tools\ListLists;
 use Tagwerk\Mcp\Tools\ListTasks;
 use Tagwerk\Mcp\Tools\MealPlan;
+use Tagwerk\Mcp\Tools\TaskStatistics;
 
 #[Name('Tagwerk')]
 #[Version('1.0.0')]
@@ -27,6 +28,7 @@ final class TagwerkServer extends Server
         CreateEvent::class,
         ListTasks::class,
         CompleteTask::class,
+        TaskStatistics::class,
         ListLists::class,
         AddListItem::class,
         CompleteListItem::class,

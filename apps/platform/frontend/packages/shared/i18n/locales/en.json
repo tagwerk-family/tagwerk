@@ -96,7 +96,8 @@
     "show": "Show {area}",
     "open": "Open menu",
     "close": "Close menu",
-    "admin": "Administration"
+    "admin": "Administration",
+    "statistics": "Statistics"
   },
   "calendar": {
     "createOn": "{date} — add event",
@@ -787,5 +788,41 @@
     "openUnread": "Messages, {count} unread",
     "title": "Messages",
     "none": "No messages."
+  },
+  "statistics": {
+    "title": "Statistics",
+    "period": "Time span",
+    "weeks4": "4 weeks",
+    "months3": "3 months",
+    "months12": "12 months",
+    "year": "This year",
+    "done": "Done",
+    "days": "{count} day | {count} days",
+    "own": "Own tasks done",
+    "ofDue": "{done} of {due}",
+    "nothingDue": "Nothing was due",
+    "earned": "Stars earned",
+    "spentCount": "{count} spent",
+    "busiest": "Did the most",
+    "tasksCount": "{count} task | {count} tasks",
+    "nobodyYet": "Nothing done yet",
+    "perDay": "Done per day",
+    "perWeek": "Done per week",
+    "perMonth": "Done per month",
+    "weekdays": "Weekdays",
+    "matrix": "Who does which task",
+    "matrixHint": "How often, by whom. The darker, the more often.",
+    "reliability": "Own tasks done",
+    "reliabilityHint": "Share of the tasks someone was responsible for, up to today.",
+    "stars": "Stars",
+    "starsHint": "Earned, and spent on rewards.",
+    "spent": "spent",
+    "task": "Task",
+    "total": "Total",
+    "nobody": "Without a name",
+    "empty": "Nothing was done in this period.",
+    "cell": "{person}: {count}× {task}",
+    "column": "{label}: {count} done",
+    "failed": "The statistics could not be loaded."
   }
 }

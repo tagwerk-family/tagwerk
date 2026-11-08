@@ -96,7 +96,8 @@
     "show": "{area} anzeigen",
     "open": "Menü öffnen",
     "close": "Menü schließen",
-    "admin": "Verwaltung"
+    "admin": "Verwaltung",
+    "statistics": "Statistik"
   },
   "calendar": {
     "createOn": "{date} — Termin anlegen",
@@ -787,5 +788,41 @@
     "openUnread": "Nachrichten, {count} ungelesen",
     "title": "Nachrichten",
     "none": "Keine Nachrichten."
+  },
+  "statistics": {
+    "title": "Statistik",
+    "period": "Zeitraum",
+    "weeks4": "4 Wochen",
+    "months3": "3 Monate",
+    "months12": "12 Monate",
+    "year": "Dieses Jahr",
+    "done": "Erledigt",
+    "days": "{count} Tag | {count} Tage",
+    "own": "Eigene erledigt",
+    "ofDue": "{done} von {due}",
+    "nothingDue": "Nichts war fällig",
+    "earned": "Sterne verdient",
+    "spentCount": "{count} ausgegeben",
+    "busiest": "Am fleißigsten",
+    "tasksCount": "{count} Aufgabe | {count} Aufgaben",
+    "nobodyYet": "Noch nichts erledigt",
+    "perDay": "Erledigt pro Tag",
+    "perWeek": "Erledigt pro Woche",
+    "perMonth": "Erledigt pro Monat",
+    "weekdays": "Wochentage",
+    "matrix": "Wer macht welche Aufgabe",
+    "matrixHint": "Wie oft, von wem. Je dunkler, desto öfter.",
+    "reliability": "Eigene Aufgaben erledigt",
+    "reliabilityHint": "Anteil der Aufgaben, für die jemand zuständig war, bis heute.",
+    "stars": "Sterne",
+    "starsHint": "Verdient und für Belohnungen ausgegeben.",
+    "spent": "ausgegeben",
+    "task": "Aufgabe",
+    "total": "Gesamt",
+    "nobody": "Ohne Namen",
+    "empty": "In diesem Zeitraum wurde nichts erledigt.",
+    "cell": "{person}: {count}× {task}",
+    "column": "{label}: {count} erledigt",
+    "failed": "Die Statistik ließ sich nicht laden."
   }
 }

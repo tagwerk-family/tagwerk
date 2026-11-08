@@ -1288,7 +1288,7 @@ test('shows every admin page without sideways scrolling', async ({ page }) => {
     '/admin/export', '/admin/households', '/admin/lessons', '/admin/lessons/create', '/admin/lessons/list', '/admin/people',
     '/admin/people/create', '/admin/photos', '/admin/photos/create', '/admin/point-entries', '/admin/profile',
     '/admin/recipes', '/admin/recipes/create', '/admin/rewards', '/admin/rewards/create',
-    '/admin/school-closures', '/admin/tasks', '/admin/tasks/create', '/admin/webhooks',
+    '/admin/school-closures', '/admin/statistics', '/admin/tasks', '/admin/tasks/create', '/admin/webhooks',
   ]
 
   // The interfaces' pages exist only while switched on, and they are off by default.

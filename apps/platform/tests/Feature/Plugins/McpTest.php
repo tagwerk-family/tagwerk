@@ -13,6 +13,7 @@ use App\Models\Household;
 use App\Models\ListItem;
 use App\Models\Person;
 use App\Models\Task;
+use App\Models\TaskCompletion;
 use App\Models\User;
 use Carbon\CarbonImmutable;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -92,14 +93,14 @@ final class McpTest extends TestCase
     public function test_a_write_token_sees_every_tool(): void
     {
         $this->assertEqualsCanonicalizing([
-            'list-events', 'create-event', 'list-tasks', 'complete-task',
+            'list-events', 'create-event', 'list-tasks', 'complete-task', 'task-statistics',
             'list-lists', 'add-list-item', 'complete-list-item', 'meal-plan',
         ], $this->tools($this->token(write: true)));
     }
 
     public function test_a_read_token_sees_no_writing_tool(): void
     {
-        $this->assertEqualsCanonicalizing(['list-events', 'list-tasks', 'list-lists', 'meal-plan'], $this->tools($this->token(write: false)));
+        $this->assertEqualsCanonicalizing(['list-events', 'list-tasks', 'task-statistics', 'list-lists', 'meal-plan'], $this->tools($this->token(write: false)));
     }
 
     public function test_a_read_token_cannot_call_a_writing_tool(): void
@@ -171,6 +172,33 @@ final class McpTest extends TestCase
 
         $this->assertFalse($this->tool($token, 'complete-task', ['task_id' => $task->id, 'date' => '2026-10-20'])['error']);
         $this->assertDatabaseHas('task_completions', ['task_id' => $task->id, 'person_id' => $child->id]);
+    }
+
+    public function test_statistics_name_people_instead_of_ids(): void
+    {
+        $child = Person::factory()->child()->for($this->household)->create(['name' => 'Lena']);
+        $task = Task::factory()->create(['household_id' => $this->household->id, 'title' => 'Müll rausbringen']);
+
+        foreach (['2026-10-19', '2026-10-20'] as $day) {
+            TaskCompletion::factory()->create(['household_id' => $this->household->id, 'task_id' => $task->id, 'person_id' => $child->id, 'occurred_on' => $day]);
+        }
+
+        $result = $this->tool($this->token(write: false), 'task-statistics', ['from' => '2026-10-01', 'to' => '2026-10-20']);
+
+        $this->assertFalse($result['error']);
+        $this->assertSame(['task_id' => $task->id, 'title' => 'Müll rausbringen', 'total' => 2, 'done_by' => ['Lena' => 2]], $result['data']['tasks'][0]);
+        $this->assertSame(1, $result['data']['weekdays']['Lena']['Monday']);
+        $this->assertContains('Lena', array_column($result['data']['people'], 'name'));
+    }
+
+    public function test_a_childs_assistant_gets_no_statistics(): void
+    {
+        $child = $this->account(Person::factory()->child()->for($this->household)->create());
+
+        $this->assertSame(
+            ['error' => true, 'data' => __('This account may not do that.')],
+            $this->tool($this->token(write: false, user: $child), 'task-statistics'),
+        );
     }
 
     public function test_the_assistant_can_do_no_more_than_its_account(): void

@@ -19,6 +19,7 @@ use App\Http\Controllers\Api\PreferenceController;
 use App\Http\Controllers\Api\PushSubscriptionController;
 use App\Http\Controllers\Api\RealtimeController;
 use App\Http\Controllers\Api\SessionController;
+use App\Http\Controllers\Api\StatisticsController;
 use App\Http\Controllers\Api\ThemeController;
 use App\Http\Controllers\Api\WallAgendaController;
 use App\Http\Controllers\Api\WallDashboardController;
@@ -180,6 +181,13 @@ Route::middleware(['device.cookie', 'user.cookie', 'auth:sanctum', 'household'])
          * who ticked what is on the wall anyway.
          */
         Route::get('/wall/history', WallHistoryController::class);
+
+        /*
+         * How often whom, how reliably, how many stars. Parents only: it
+         * compares children, which the wall does not do in passing.
+         */
+        Route::get('/statistics', StatisticsController::class)
+            ->middleware('permission:household.manage');
 
         Route::get('/wall/tasks', [WallTaskController::class, 'index']);
         Route::get('/wall/tasks/progress', [WallTaskController::class, 'progress']);

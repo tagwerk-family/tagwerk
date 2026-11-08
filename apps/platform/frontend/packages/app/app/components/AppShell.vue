@@ -637,7 +637,7 @@ watch(ringing, (now) => {
 
 function rest(): void {
   // Someone left a dialog open: that is unfinished work, not idleness.
-  if (pinGateOpen.value || themeOpen.value || dialog.value !== null || managingPhotos.value || lessonOpen.value !== null || clockTool.value !== null || cooking.value !== null) {
+  if (pinGateOpen.value || themeOpen.value || dialog.value !== null || managingPhotos.value || viewingStatistics.value || lessonOpen.value !== null || clockTool.value !== null || cooking.value !== null) {
     armRest()
 
     return
@@ -897,6 +897,15 @@ watch(() => cast.value?.key, (key) => {
 const managingPhotos = ref(false)
 useEscape(() => { managingPhotos.value = false }, () => managingPhotos.value)
 
+/* The statistics for whoever runs the household; an account only, never the wall. */
+const viewingStatistics = ref(false)
+useEscape(() => { viewingStatistics.value = false }, () => viewingStatistics.value)
+
+function openStatistics(): void {
+  drawer.value = false
+  viewingStatistics.value = true
+}
+
 async function leave(): Promise<void> {
   // Before signing out: afterwards the cookie that authorized the channel
   // is gone, and the connection would keep running into nothing.
@@ -1018,6 +1027,17 @@ function completeItem(item: ListItemDto): void {
             {{ entry.label }}
           </button>
         </div>
+
+        <button
+          v-if="!device && can('household.manage')"
+          type="button"
+          data-testid="statistics-link"
+          :aria-label="$t('menu.statistics')"
+          class="mx-auto mt-2 flex size-12 shrink-0 items-center justify-center rounded-full text-ink-3 transition-colors hover:bg-surface-2 hover:text-ink"
+          @click="openStatistics"
+        >
+          <TwIcon name="statistics" :size="22" />
+        </button>
 
         <!-- The admin under the same sign-in; it leads back with "Zur App". -->
         <a
@@ -1439,6 +1459,17 @@ function completeItem(item: ListItemDto): void {
             </button>
           </div>
 
+          <button
+            v-if="!device && can('household.manage')"
+            type="button"
+            data-testid="statistics-link"
+            class="mt-2 flex min-h-12 shrink-0 items-center gap-3 rounded-2xl px-3 text-left text-base font-semibold text-ink-2 transition-colors hover:bg-surface-2 hover:text-ink"
+            @click="openStatistics"
+          >
+            <TwIcon name="statistics" :size="22" class="text-ink-3" />
+            {{ $t('menu.statistics') }}
+          </button>
+
           <a
             v-if="!device && can('household.manage')"
             href="/admin"
@@ -1492,6 +1523,34 @@ function completeItem(item: ListItemDto): void {
 
         <div class="min-h-0 flex-1 overflow-y-auto">
           <PhotoManager class="mx-auto max-w-5xl" />
+        </div>
+      </div>
+
+      <div
+        v-if="viewingStatistics"
+        role="dialog"
+        aria-modal="true"
+        :aria-label="$t('statistics.title')"
+        data-testid="statistics-view"
+        class="fixed inset-0 z-30 flex flex-col bg-canvas"
+      >
+        <div class="flex shrink-0 items-center gap-2 px-3 pt-[calc(env(safe-area-inset-top)+0.75rem)] pb-2">
+          <button
+            type="button"
+            data-testid="statistics-close"
+            :aria-label="$t('common.back')"
+            class="flex size-11 items-center justify-center rounded-full text-ink-2 hover:bg-surface-2"
+            @click="viewingStatistics = false"
+          >
+            <TwIcon name="back" :size="24" />
+          </button>
+          <h2 class="font-display text-3xl font-semibold">
+            {{ $t('statistics.title') }}
+          </h2>
+        </div>
+
+        <div class="min-h-0 flex-1 overflow-y-auto">
+          <StatisticsView class="mx-auto max-w-5xl" />
         </div>
       </div>
 

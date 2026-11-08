@@ -37,6 +37,7 @@ GET /api/preferences
 GET /api/push/key
 GET /api/realtime/config
 GET /api/session
+GET /api/statistics
 GET /api/theme
 GET /api/wall/agenda
 GET /api/wall/dashboard

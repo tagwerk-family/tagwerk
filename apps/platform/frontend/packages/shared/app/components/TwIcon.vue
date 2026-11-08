@@ -15,6 +15,7 @@ import {
   BookOpen,
   Calendar,
   Camera,
+  ChartColumn,
   Cast,
   Check,
   ChefHat,
@@ -136,6 +137,7 @@ const ICONS = {
   cast: Cast,
   memories: Sparkles,
   upload: ImagePlus,
+  statistics: ChartColumn,
 } satisfies Record<string, Component>
 
 export type IconName = keyof typeof ICONS

@@ -325,7 +325,7 @@ prüft, was nginx unter `https://tagwerk.test` ausliefert — vorher also
 
 ## Stand
 
-**Version 0.1.0** (2026-11-04) — alles, was eine Familie im Alltag braucht,
+**Version 0.1.1** (2026-11-08) — alles, was eine Familie im Alltag braucht,
 ist da, an der Wand wie am Handy:
 
 - **Kalender** — eingebaut oder Google in beide Richtungen; Tag, drei Tage,
@@ -335,6 +335,9 @@ ist da, an der Wand wie am Handy:
   zum Zurückschauen.
 - **Sterne und Belohnungen** — Tagesbonus, Extrasterne mit Grund,
   Abzeichen, Belohnungswünsche; die Eltern-PIN schützt die Wand.
+- **Statistik** für Eltern — wer welche Aufgabe wie oft macht, eigene
+  Aufgaben erledigt, Wochentage, Sterne; in der Verwaltung, der App, über
+  die API und für einen Assistenten, mit CSV-Download.
 - **Listen** — Einkaufslisten in Tagwerk, mit Bring in beide Richtungen
   abgeglichen oder an Google Tasks geschickt.
 - **Essen und Rezepte** — ein Wochenplan, Portionen danach, wer mitisst, das
