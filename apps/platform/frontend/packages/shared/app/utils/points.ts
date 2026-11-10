@@ -36,6 +36,7 @@ export interface RewardDto {
 
 export interface PendingDto {
   id: number
+  reward_id: number
   reward: string | null
   person_id: number
   person: string | null

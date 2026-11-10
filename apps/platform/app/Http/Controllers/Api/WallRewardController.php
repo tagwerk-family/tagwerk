@@ -61,6 +61,7 @@ final class WallRewardController extends Controller
             ->get()
             ->map(fn (RewardRedemption $redemption): array => [
                 'id' => $redemption->id,
+                'reward_id' => $redemption->reward_id,
                 'reward' => $redemption->reward?->name,
                 'person_id' => $redemption->person_id,
                 'person' => $redemption->person?->name,

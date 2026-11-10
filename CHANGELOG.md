@@ -7,6 +7,14 @@ tokens; such a change is named here.
 
 ## [Unreleased]
 
+### Changed
+
+- **The tapped reward card says it was requested** (“Angefragt – die Eltern
+  entscheiden”, framed in the child's colour). The hourglass beside the
+  balance sat above the cards, where nobody looked after tapping one below;
+  the open requests' list further down was out of sight on the tablet.
+  `/api/wall/rewards` adds `reward_id` to each open request for it.
+
 ## [0.2.0] — 2026-11-08
 
 A minor release because the HTTP contract grows by `GET /api/statistics`

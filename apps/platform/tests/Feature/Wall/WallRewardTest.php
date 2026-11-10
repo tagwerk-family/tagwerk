@@ -175,6 +175,12 @@ final class WallRewardTest extends TestCase
 
         $this->assertSame(50, (int) PointEntry::query()->sum('points'));
         $this->assertSame(1, RewardRedemption::query()->count());
+
+        // The card that was tapped finds its request by the reward's id.
+        $this->withToken($this->token)
+            ->getJson('/api/wall/rewards')
+            ->assertJsonPath('pending.0.reward_id', $reward->id)
+            ->assertJsonPath('pending.0.person_id', $this->child->id);
     }
 
     /**

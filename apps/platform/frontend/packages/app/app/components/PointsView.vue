@@ -120,6 +120,11 @@ const requested = computed(() => {
 
   return sums
 })
+
+/* The cards the chosen person has asked for: the answer shows where the tap was. */
+const askedFor = computed(() => new Set(
+  pending.value.filter(entry => entry.person_id === who.value).map(entry => entry.reward_id),
+))
 const { armed, tap } = useTwoStep()
 
 function submitRequest(rewardId: number): void {
@@ -400,6 +405,7 @@ const filtered = computed(() => filter.value.person !== null || filter.value.sig
           type="button"
           data-testid="reward"
           class="tw-press flex flex-col items-start rounded-3xl bg-surface p-6 text-left shadow-card transition enabled:hover:-translate-y-0.5"
+          :style="selected && askedFor.has(reward.id) ? { boxShadow: `inset 0 0 0 3px ${color(selected.color)}` } : undefined"
           :disabled="who === null || !affordable(selected?.balance ?? 0, reward.cost) || decidingBusy"
           @click="submitRequest(reward.id)"
         >
@@ -432,9 +438,19 @@ const filtered = computed(() => filter.value.person !== null || filter.value.sig
             {{ reward.description }}
           </span>
 
+          <span
+            v-if="selected && askedFor.has(reward.id)"
+            data-testid="reward-requested"
+            class="tw-pop mt-auto flex w-full items-center justify-center gap-2 rounded-full px-3 py-2 text-base font-bold text-ink"
+            :style="{ backgroundColor: color(selected.color) + '2e' }"
+          >
+            <TwIcon name="timer" :size="18" />
+            {{ $t('points.requestedCard') }}
+          </span>
+
           <!-- With a child chosen: how far their stars already reach, in
                their colour. Full means the card can be tapped. -->
-          <span v-if="selected" data-testid="reward-progress" class="mt-auto block w-full pt-4">
+          <span v-else-if="selected" data-testid="reward-progress" class="mt-auto block w-full pt-4">
             <span class="relative block h-7 overflow-hidden rounded-full" :style="{ backgroundColor: color(selected.color) + '2e' }">
               <span
                 class="block h-full rounded-full transition-[width] duration-700 ease-out"

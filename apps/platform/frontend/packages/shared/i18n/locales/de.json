@@ -348,6 +348,7 @@
     "noChildren": "Noch keine Kinder angelegt.",
     "ranking": "Rangliste",
     "range": "Zeitraum",
+    "requestedCard": "Angefragt – die Eltern entscheiden",
     "requested": "{n} Stern angefragt | {n} Sterne angefragt",
     "requests": "Offene Anfragen",
     "wants": "{name} möchte „{reward}“",
