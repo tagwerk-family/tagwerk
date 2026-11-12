@@ -327,7 +327,7 @@ prüft, was nginx unter `https://fahoba.test` ausliefert — vorher also
 
 ## Stand
 
-**Version 0.2.0** (2026-11-08) — alles, was eine Familie im Alltag braucht,
+**Version 0.3.0** (2026-11-12) — alles, was eine Familie im Alltag braucht,
 ist da, an der Wand wie am Handy:
 
 - **Kalender** — eingebaut oder Google in beide Richtungen; Tag, drei Tage,

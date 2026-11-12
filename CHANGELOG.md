@@ -7,6 +7,8 @@ tokens; such a change is named here.
 
 ## [Unreleased]
 
+## [0.3.0] — 2026-11-12
+
 ### Renamed: Tagwerk is now Fahoba
 
 For trademark reasons. The name is an acronym: **Fa**mily · **Ho**me ·
