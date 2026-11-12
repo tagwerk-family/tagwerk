@@ -9,14 +9,14 @@ use App\Integrations\ProviderRegistry;
 use App\Models\Checklist;
 use App\Models\ListItem;
 use App\Models\ProviderAccount;
+use Fahoba\PluginApi\Lists\ListItemDraft;
+use Fahoba\PluginApi\Lists\ListProvider;
+use Fahoba\PluginApi\Lists\RemoteListItem;
+use Fahoba\PluginApi\Lists\SyncsItems;
 use Illuminate\Support\Carbon;
-use Tagwerk\PluginApi\Lists\ListItemDraft;
-use Tagwerk\PluginApi\Lists\ListProvider;
-use Tagwerk\PluginApi\Lists\RemoteListItem;
-use Tagwerk\PluginApi\Lists\SyncsItems;
 
 /**
- * Brings what changed at a two-way provider into a Tagwerk list.
+ * Brings what changed at a two-way provider into a Fahoba list.
  *
  * The provider wins for every item it holds: something re-added there by
  * voice opens again here. What it does not hold stays untouched — it may be

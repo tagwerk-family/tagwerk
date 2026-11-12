@@ -1,8 +1,8 @@
 blank_issues_enabled: false
 contact_links:
   - name: Question or idea
-    url: https://github.com/tagwerk-family/tagwerk/discussions
+    url: https://github.com/fahoba/fahoba/discussions
     about: Ask, propose a feature or a plugin, show what you built.
   - name: Security problem
-    url: https://github.com/tagwerk-family/tagwerk/security/policy
+    url: https://github.com/fahoba/fahoba/security/policy
     about: Never in an issue — see SECURITY.md.

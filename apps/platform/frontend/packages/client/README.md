@@ -1,37 +1,37 @@
-# @tagwerk/client
+# @fahoba/client
 
-Build your own frontend for [Tagwerk](https://github.com/tagwerk-family/tagwerk), the
+Build your own frontend for [Fahoba](https://github.com/fahoba/fahoba), the
 family calendar for wall tablets and phones. This package talks to the
 server and carries the rules the official app applies, without a framework:
 use it from Vue, React, Svelte or plain TypeScript.
 
 ```bash
-npm install @tagwerk/client
+npm install @fahoba/client
 ```
 
 ```ts
-import { createClient, TagwerkError } from '@tagwerk/client'
+import { createClient, FahobaError } from '@fahoba/client'
 
-const tagwerk = createClient()
+const fahoba = createClient()
 
 try {
-  const { kind } = await tagwerk.session()          // 'device' (wall) or 'user' (account)
-  const agenda = await tagwerk.agenda('2026-11-02', '2026-11-08')
-  await tagwerk.realtime(areas => reload(areas))    // 'tasks', 'lists', … or 'all'
+  const { kind } = await fahoba.session()          // 'device' (wall) or 'user' (account)
+  const agenda = await fahoba.agenda('2026-11-02', '2026-11-08')
+  await fahoba.realtime(areas => reload(areas))    // 'tasks', 'lists', … or 'all'
 }
 catch (error) {
-  if (error instanceof TagwerkError && error.kind === 'unauthenticated') {
-    showPairingOrSignIn()                           // tagwerk.pair(code) / tagwerk.login(…)
+  if (error instanceof FahobaError && error.kind === 'unauthenticated') {
+    showPairingOrSignIn()                           // fahoba.pair(code) / fahoba.login(…)
   }
 }
 ```
 
-- **Served by the Tagwerk server.** The sign-in lives in httpOnly cookies;
+- **Served by the Fahoba server.** The sign-in lives in httpOnly cookies;
   your frontend never sees a token and must run on the server's origin. An
   operator installs it in place of the official app (see the guide).
-- **Every other route** goes through `tagwerk.request(path, { method, body,
+- **Every other route** goes through `fahoba.request(path, { method, body,
   query })`; the server describes them at `/api/openapi.json` (plugin
-  `tagwerk/openapi`).
+  `fahoba/openapi`).
 - **Refusals carry a `kind`:** `pin` (a wall needs the parent PIN — ask,
   then repeat), `read-only` (the message explains why), `not-found` (also
   an area switched off), `forbidden`, `invalid` (`firstMessage` for a form),
@@ -50,7 +50,7 @@ catch (error) {
   never with the device's own.
 
 Starting point: the
-[`tagwerk-frontend-template`](https://github.com/tagwerk-family/tagwerk-frontend-template).
-The guide is `docs/frontends.md` in the Tagwerk repository.
+[`fahoba-frontend-template`](https://github.com/fahoba/fahoba-frontend-template).
+The guide is `docs/frontends.md` in the Fahoba repository.
 
 MIT licensed.

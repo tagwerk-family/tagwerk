@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace Tagwerk\SocialLogin;
+namespace Fahoba\SocialLogin;
 
+use Fahoba\PluginApi\Plugins\Catalog;
+use Fahoba\PluginApi\Plugins\Plugin;
 use Illuminate\Cache\RateLimiting\Limit;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\RateLimiter;
-use Tagwerk\PluginApi\Plugins\Catalog;
-use Tagwerk\PluginApi\Plugins\Plugin;
 
 final class SocialLoginServiceProvider extends Plugin
 {

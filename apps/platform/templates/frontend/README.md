@@ -1,8 +1,8 @@
-# A Tagwerk frontend
+# A Fahoba frontend
 
-A starting point for your own interface to [Tagwerk](https://github.com/tagwerk-family/tagwerk)
+A starting point for your own interface to [Fahoba](https://github.com/fahoba/fahoba)
 — for a wall tablet, a phone, an e-ink display, whatever your family needs.
-It is a plain Vite + TypeScript app on [`@tagwerk/client`](https://www.npmjs.com/package/@tagwerk/client):
+It is a plain Vite + TypeScript app on [`@fahoba/client`](https://www.npmjs.com/package/@fahoba/client):
 pair a wall or sign in, then the coming week, reloaded when something changes.
 Swap in Vue, React or Svelte as you like.
 
@@ -10,12 +10,12 @@ Swap in Vue, React or Svelte as you like.
 
 ```bash
 npm install
-TAGWERK_URL=https://tagwerk.test npm run dev    # your Tagwerk server
+FAHOBA_URL=https://fahoba.test npm run dev    # your Fahoba server
 ```
 
 Vite passes `/api` and `/broadcasting` on to the server, so the sign-in
-cookie belongs to the dev server's origin — exactly as it will when Tagwerk
-serves your files. Pair with a code from Tagwerk's admin (Setup → Devices).
+cookie belongs to the dev server's origin — exactly as it will when Fahoba
+serves your files. Pair with a code from Fahoba's admin (Setup → Devices).
 
 ## Ship
 
@@ -24,20 +24,20 @@ npm run build      # writes dist/, which you commit
 git tag v1.0.0 && git push --tags
 ```
 
-Rename `acme/tagwerk-frontend` in `composer.json` and publish the repository
-on Packagist (or name it in `TAGWERK_COMPOSER_REPOSITORIES`). An operator
-then sets in Tagwerk's `deploy/.env`:
+Rename `acme/fahoba-frontend` in `composer.json` and publish the repository
+on Packagist (or name it in `FAHOBA_COMPOSER_REPOSITORIES`). An operator
+then sets in Fahoba's `deploy/.env`:
 
 ```
-TAGWERK_FRONTEND=acme/tagwerk-frontend:^1.0
+FAHOBA_FRONTEND=acme/fahoba-frontend:^1.0
 ```
 
 The container installs it at start and serves `dist/` at `/` instead of the
-official app; `/api`, `/admin` and the rest stay Tagwerk's.
+official app; `/api`, `/admin` and the rest stay Fahoba's.
 
 ## The rules
 
-- **`dist/index.html` plus `dist/assets/`.** Tagwerk serves `index.html` at
+- **`dist/index.html` plus `dist/assets/`.** Fahoba serves `index.html` at
   `/` and everything else from `/assets/`. A `sw.js`, `manifest.webmanifest`,
   `icon.svg`, `icon-192.png`, `icon-512.png` beside `index.html` are served
   too, if you have them.
@@ -50,7 +50,7 @@ official app; `/api`, `/admin` and the rest stay Tagwerk's.
   then repeat). Hide what is not allowed — the server refuses it anyway.
 - **Days are the household's** (`agenda.household.timezone`), never the
   device's.
-- **The contract** is the route list in Tagwerk's
+- **The contract** is the route list in Fahoba's
   `apps/platform/routes/api-contract.txt` and the guide `docs/frontends.md`.
 
 MIT licensed — make it yours.

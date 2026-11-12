@@ -1,21 +1,21 @@
 {
-    "name": "tagwerk/bring",
-    "description": "Bring! shopping lists for Tagwerk, synced both ways",
+    "name": "fahoba/bring",
+    "description": "Bring! shopping lists for Fahoba, synced both ways",
     "type": "library",
     "version": "0.1.0",
     "license": "PolyForm-Shield-1.0.0",
     "require": {
         "php": "^8.5",
-        "tagwerk/plugin-api": "^0.1"
+        "fahoba/plugin-api": "^0.1"
     },
     "autoload": {
         "psr-4": {
-            "Tagwerk\\Bring\\": "src/"
+            "Fahoba\\Bring\\": "src/"
         }
     },
     "extra": {
-        "tagwerk": {
-            "provider": "Tagwerk\\Bring\\BringServiceProvider"
+        "fahoba": {
+            "provider": "Fahoba\\Bring\\BringServiceProvider"
         }
     }
 }

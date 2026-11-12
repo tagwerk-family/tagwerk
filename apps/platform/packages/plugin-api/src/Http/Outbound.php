@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Tagwerk\PluginApi\Http;
+namespace Fahoba\PluginApi\Http;
 
 use Illuminate\Http\Client\PendingRequest;
 use Illuminate\Http\Client\Response;
@@ -10,7 +10,7 @@ use Illuminate\Http\Client\Response;
 /**
  * Outbound HTTP for plugins, bound by the core.
  *
- * Every request carries Tagwerk's limits (20 s, 5 s to connect) and a
+ * Every request carries Fahoba's limits (20 s, 5 s to connect) and a
  * User-Agent naming the server, so a service can tell who asks.
  */
 interface Outbound

@@ -18,7 +18,7 @@ final class CreateHouseholdCommandTest extends TestCase
 
     public function test_creates_household_with_its_first_parent(): void
     {
-        $this->artisan('tagwerk:create-household', ['name' => 'Familie Muster', 'parent' => 'Alex', 'email' => 'alex@example.test'])
+        $this->artisan('fahoba:create-household', ['name' => 'Familie Muster', 'parent' => 'Alex', 'email' => 'alex@example.test'])
             ->expectsQuestion('Password', 'long-enough-1')
             ->assertSuccessful();
 
@@ -29,7 +29,7 @@ final class CreateHouseholdCommandTest extends TestCase
 
     public function test_refuses_a_short_password(): void
     {
-        $this->artisan('tagwerk:create-household', ['name' => 'Familie Muster', 'parent' => 'Alex', 'email' => 'alex@example.test'])
+        $this->artisan('fahoba:create-household', ['name' => 'Familie Muster', 'parent' => 'Alex', 'email' => 'alex@example.test'])
             ->expectsQuestion('Password', 'short')
             ->assertFailed();
 

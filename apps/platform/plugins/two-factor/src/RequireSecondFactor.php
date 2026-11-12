@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Tagwerk\TwoFactor;
+namespace Fahoba\TwoFactor;
 
 use App\Models\User;
 use Closure;

@@ -10,9 +10,9 @@ use App\Models\Calendar;
 use App\Models\Household;
 use App\Services\Calendar\PushChannelService;
 use App\Support\HouseholdContext;
+use Fahoba\PluginApi\Calendar\WatchesChanges;
 use Illuminate\Console\Command;
 use Illuminate\Contracts\Database\Eloquent\Builder;
-use Tagwerk\PluginApi\Calendar\WatchesChanges;
 
 /**
  * Renews expiring push channels.
@@ -22,7 +22,7 @@ use Tagwerk\PluginApi\Calendar\WatchesChanges;
  */
 final class RenewPushChannelsCommand extends Command
 {
-    protected $signature = 'tagwerk:renew-push-channels';
+    protected $signature = 'fahoba:renew-push-channels';
 
     protected $description = 'Creates new Google channels before the old ones expire';
 

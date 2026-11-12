@@ -16,6 +16,6 @@ final class HouseholdArchiveController
 
         abort_unless(Storage::disk('local')->exists($path), 404);
 
-        return Storage::disk('local')->download($path, 'tagwerk-household-'.$household.'.zip');
+        return Storage::disk('local')->download($path, 'fahoba-household-'.$household.'.zip');
     }
 }

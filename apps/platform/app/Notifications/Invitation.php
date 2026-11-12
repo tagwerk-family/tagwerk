@@ -32,14 +32,14 @@ final class Invitation extends Notification implements ShouldQueue
         $household = Household::query()->whereKey($user->defaultMembership()?->household_id ?? $user->memberships()->value('household_id'))->value('name');
 
         return (new MailMessage)
-            ->subject(__('Invitation to Tagwerk'))
+            ->subject(__('Invitation to Fahoba'))
             ->greeting(__('Hello :name,', ['name' => $user->name]))
             ->line($household !== null
                 ? __('you now have an account in the family calendar “:household”.', ['household' => $household])
-                : __('you now have an account with Tagwerk.'))
+                : __('you now have an account with Fahoba.'))
             ->line(__('Set your password with the button — you are signed in right after.'))
             ->action(__('Set password'), $url)
-            ->line(__('The link is valid for seven days. On the phone you can then keep Tagwerk as an app via “Add to Home Screen”.'))
-            ->salutation(__('Your Tagwerk'));
+            ->line(__('The link is valid for seven days. On the phone you can then keep Fahoba as an app via “Add to Home Screen”.'))
+            ->salutation(__('Your Fahoba'));
     }
 }

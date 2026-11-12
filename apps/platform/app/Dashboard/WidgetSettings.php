@@ -5,12 +5,12 @@ declare(strict_types=1);
 namespace App\Dashboard;
 
 use Closure;
+use Fahoba\PluginApi\Dashboard\SettingField;
 use Illuminate\Contracts\Encryption\DecryptException;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
 use Illuminate\Validation\ValidationException;
-use Tagwerk\PluginApi\Dashboard\SettingField;
 
 /**
  * A plugin tile's settings, held to the widget's fields.

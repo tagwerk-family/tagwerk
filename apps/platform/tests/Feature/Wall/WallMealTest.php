@@ -75,7 +75,7 @@ final class WallMealTest extends TestCase
             'household_id' => $this->household->id,
             'name' => 'Einkauf',
             'kind' => ListKind::Shopping,
-            'list_provider' => $pushToBring ? 'tagwerk/bring' : null,
+            'list_provider' => $pushToBring ? 'fahoba/bring' : null,
             'position' => 0,
         ]);
     }

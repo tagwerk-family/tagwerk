@@ -10,8 +10,8 @@ use App\Models\Household;
 use App\Models\ProviderAccount;
 use App\Support\HouseholdContext;
 use Carbon\CarbonImmutable;
+use Fahoba\PluginApi\Calendar\ConnectedCalendar;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Tagwerk\PluginApi\Calendar\ConnectedCalendar;
 use Tests\TestCase;
 
 final class ConnectedCalendarTest extends TestCase

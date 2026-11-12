@@ -8,10 +8,10 @@ use Illuminate\Support\Facades\File;
 use Throwable;
 
 /**
- * The installed Tagwerk plugins, read from Composer's `installed.json`: every
- * package with `extra.tagwerk`.
+ * The installed Fahoba plugins, read from Composer's `installed.json`: every
+ * package with `extra.fahoba`.
  *
- * Kept in `bootstrap/cache/tagwerk-plugins.php` and rebuilt when Composer
+ * Kept in `bootstrap/cache/fahoba-plugins.php` and rebuilt when Composer
  * changed something (the file's modification time), as Laravel does with its
  * own package manifest — the app reads this on every request.
  */
@@ -20,7 +20,7 @@ final class PluginManifest
     /** Raised when a package entry gains a field: a cache of the old shape is read again. */
     private const SHAPE = 4;
 
-    /** Stands in for an `extra.tagwerk.csp` that is no map of host lists. */
+    /** Stands in for an `extra.fahoba.csp` that is no map of host lists. */
     public const MALFORMED = ['malformed' => []];
 
     private readonly string $installed;
@@ -33,7 +33,7 @@ final class PluginManifest
     public function __construct(?string $installed = null, ?string $cache = null)
     {
         $this->installed = $installed ?? base_path('vendor/composer/installed.json');
-        $this->cache = $cache ?? base_path('bootstrap/cache/tagwerk-plugins.php');
+        $this->cache = $cache ?? base_path('bootstrap/cache/fahoba-plugins.php');
     }
 
     /** @return list<array{name: string, version: string, license: list<string>, provider: ?string, frontend: bool, locales: ?string, complete_for: ?string, csp: array<string, list<string>>}> */
@@ -69,7 +69,7 @@ final class PluginManifest
         $packages = [];
 
         foreach ((array) ($installed['packages'] ?? $installed) as $package) {
-            $extra = $package['extra']['tagwerk'] ?? null;
+            $extra = $package['extra']['fahoba'] ?? null;
 
             if (! is_array($extra)) {
                 continue;

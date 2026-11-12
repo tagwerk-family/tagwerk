@@ -284,7 +284,7 @@ final class AdminResourcesTest extends TestCase
 
         Livewire::test(ListRecipes::class)
             ->callAction('export')
-            ->assertFileDownloaded('tagwerk-recipes.zip');
+            ->assertFileDownloaded('fahoba-recipes.zip');
 
         // A private address is refused before anything is fetched.
         $this->app->instance(PublicAddressResolver::class, new FakeResolver(['intern.test' => ['10.0.0.5']]));

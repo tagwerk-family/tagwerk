@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Tagwerk\IcsFeed;
+namespace Fahoba\IcsFeed;
 
+use Fahoba\PluginApi\Plugins\Catalog;
+use Fahoba\PluginApi\Plugins\Plugin;
 use Illuminate\Support\Facades\Route;
-use Tagwerk\PluginApi\Plugins\Catalog;
-use Tagwerk\PluginApi\Plugins\Plugin;
 
 final class IcsFeedServiceProvider extends Plugin
 {

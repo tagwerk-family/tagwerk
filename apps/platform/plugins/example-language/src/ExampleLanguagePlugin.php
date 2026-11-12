@@ -2,18 +2,18 @@
 
 declare(strict_types=1);
 
-namespace Tagwerk\ExampleLanguage;
+namespace Fahoba\ExampleLanguage;
 
-use Tagwerk\PluginApi\Plugins\Catalog;
-use Tagwerk\PluginApi\Plugins\Plugin;
+use Fahoba\PluginApi\Plugins\Catalog;
+use Fahoba\PluginApi\Plugins\Plugin;
 
 /**
  * Only in development (`require-dev`): a server installs language packs
- * through `TAGWERK_PLUGINS` like any other plugin.
+ * through `FAHOBA_PLUGINS` like any other plugin.
  */
 final class ExampleLanguagePlugin extends Plugin
 {
-    public const KEY = 'tagwerk/example-language';
+    public const KEY = 'fahoba/example-language';
 
     protected function registerPlugin(): void
     {

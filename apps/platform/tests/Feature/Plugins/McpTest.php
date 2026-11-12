@@ -16,10 +16,10 @@ use App\Models\Task;
 use App\Models\TaskCompletion;
 use App\Models\User;
 use Carbon\CarbonImmutable;
+use Fahoba\Mcp\McpArea;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Testing\TestResponse;
-use Tagwerk\Mcp\McpArea;
 use Tests\TestCase;
 
 /**

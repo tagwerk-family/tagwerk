@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace Tests\Fixtures\Plugins;
 
+use Fahoba\PluginApi\Plugins\Catalog;
+use Fahoba\PluginApi\Plugins\Plugin;
 use RuntimeException;
-use Tagwerk\PluginApi\Plugins\Catalog;
-use Tagwerk\PluginApi\Plugins\Plugin;
 
 final class FailsInBoot extends Plugin
 {

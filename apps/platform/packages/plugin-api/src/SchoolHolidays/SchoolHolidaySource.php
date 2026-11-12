@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Tagwerk\PluginApi\SchoolHolidays;
+namespace Fahoba\PluginApi\SchoolHolidays;
 
-use Tagwerk\PluginApi\Connections\ConnectedAccount;
+use Fahoba\PluginApi\Connections\ConnectedAccount;
 
 /**
  * Where school holiday suggestions for a school year come from.

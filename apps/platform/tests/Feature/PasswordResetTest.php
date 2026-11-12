@@ -96,7 +96,7 @@ final class PasswordResetTest extends TestCase
     {
         $mail = (new PasswordResetLink('token'))->toMail($this->user);
 
-        $this->assertSame('Neues Passwort für Tagwerk', $mail->subject);
+        $this->assertSame('Neues Passwort für Fahoba', $mail->subject);
         $this->assertStringContainsString('kopiere diese Adresse', (string) $mail->render());
     }
 

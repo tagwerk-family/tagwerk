@@ -1,5 +1,5 @@
 {{--
-    Classes live in public/css/tagwerk-admin.css: Filament's stylesheet only
+    Classes live in public/css/fahoba-admin.css: Filament's stylesheet only
     carries the classes it uses itself. The cell's tint is one hue, light to
     dark with the count; the number is always written, so the colour never
     carries the meaning alone.

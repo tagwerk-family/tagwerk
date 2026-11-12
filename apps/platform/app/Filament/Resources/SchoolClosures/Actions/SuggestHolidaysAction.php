@@ -11,14 +11,14 @@ use App\Models\ProviderAccount;
 use App\Models\SchoolClosure;
 use App\Support\HouseholdContext;
 use Carbon\CarbonImmutable;
+use Fahoba\PluginApi\SchoolHolidays\SchoolHolidaySource;
+use Fahoba\PluginApi\SchoolHolidays\SchoolHolidaySuggestion;
 use Filament\Actions\Action;
 use Filament\Forms\Components\CheckboxList;
 use Filament\Forms\Components\Select;
 use Filament\Notifications\Notification;
 use Filament\Schemas\Components\Utilities\Get;
 use Filament\Support\Icons\Heroicon;
-use Tagwerk\PluginApi\SchoolHolidays\SchoolHolidaySource;
-use Tagwerk\PluginApi\SchoolHolidays\SchoolHolidaySuggestion;
 
 /**
  * Suggests school holidays — from every source that knows something for the

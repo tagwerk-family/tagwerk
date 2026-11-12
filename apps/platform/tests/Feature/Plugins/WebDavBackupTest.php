@@ -8,6 +8,7 @@ use App\Filament\Pages\Extensions as ExtensionsPage;
 use App\Integrations\Plugins\Extensions;
 use App\Models\User;
 use Carbon\CarbonImmutable;
+use Fahoba\WebDavBackup\BackupExtension;
 use Filament\Facades\Filament;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\Client\Request;
@@ -17,7 +18,6 @@ use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Process;
 use Livewire\Livewire;
-use Tagwerk\WebDavBackup\BackupExtension;
 use Tests\TestCase;
 
 /**
@@ -70,7 +70,7 @@ final class WebDavBackupTest extends TestCase
 
     public function test_off_nothing_happens(): void
     {
-        $this->artisan('tagwerk:webdav-backup')->assertSuccessful();
+        $this->artisan('fahoba:webdav-backup')->assertSuccessful();
 
         Http::assertNothingSent();
         Process::assertNothingRan();
@@ -81,7 +81,7 @@ final class WebDavBackupTest extends TestCase
         $this->enable();
         $this->travelTo(CarbonImmutable::parse('2026-10-20 03:00'));
 
-        $this->artisan('tagwerk:webdav-backup')->assertSuccessful();
+        $this->artisan('fahoba:webdav-backup')->assertSuccessful();
 
         Http::assertNothingSent();
     }
@@ -91,7 +91,7 @@ final class WebDavBackupTest extends TestCase
         $this->enable();
         $this->travelTo(CarbonImmutable::parse('2026-10-20 03:30'));
 
-        $this->artisan('tagwerk:webdav-backup')->assertSuccessful();
+        $this->artisan('fahoba:webdav-backup')->assertSuccessful();
 
         Http::assertSent(fn (Request $request): bool => $request->method() === 'PUT'
             && $request->url() === self::FOLDER.'db_2026-10-20_0330.dump'
@@ -110,10 +110,10 @@ final class WebDavBackupTest extends TestCase
     {
         $this->enable();
         $this->travelTo(CarbonImmutable::parse('2026-10-20 03:30'));
-        $this->artisan('tagwerk:webdav-backup')->assertSuccessful();
+        $this->artisan('fahoba:webdav-backup')->assertSuccessful();
 
         $this->travelTo(CarbonImmutable::parse('2026-10-20 03:45'));
-        $this->artisan('tagwerk:webdav-backup')->assertSuccessful();
+        $this->artisan('fahoba:webdav-backup')->assertSuccessful();
 
         Http::assertSentCount(5); // MKCOL, two PUTs, PROPFIND, one DELETE — once
     }
@@ -123,7 +123,7 @@ final class WebDavBackupTest extends TestCase
         $this->refusing = true;
         $this->enable();
 
-        $this->artisan('tagwerk:webdav-backup', ['--now' => true])->assertFailed();
+        $this->artisan('fahoba:webdav-backup', ['--now' => true])->assertFailed();
 
         $last = Cache::get(BackupExtension::LAST_RUN);
         $this->assertFalse($last['ok']);
@@ -138,12 +138,12 @@ final class WebDavBackupTest extends TestCase
         Filament::setCurrentPanel('admin');
 
         $save = fn (string $password) => Livewire::test(ExtensionsPage::class)
-            ->set('data.tagwerk_webdav_backup.enabled', true)
-            ->set('data.tagwerk_webdav_backup.settings.url', self::FOLDER)
-            ->set('data.tagwerk_webdav_backup.settings.username', 'backup')
-            ->set('data.tagwerk_webdav_backup.settings.password', $password)
-            ->set('data.tagwerk_webdav_backup.settings.time', '03:17')
-            ->set('data.tagwerk_webdav_backup.settings.keep', 14)
+            ->set('data.fahoba_webdav_backup.enabled', true)
+            ->set('data.fahoba_webdav_backup.settings.url', self::FOLDER)
+            ->set('data.fahoba_webdav_backup.settings.username', 'backup')
+            ->set('data.fahoba_webdav_backup.settings.password', $password)
+            ->set('data.fahoba_webdav_backup.settings.time', '03:17')
+            ->set('data.fahoba_webdav_backup.settings.keep', 14)
             ->call('save')
             ->assertHasNoFormErrors();
 

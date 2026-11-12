@@ -25,11 +25,11 @@ use App\Support\Abilities;
 use App\Support\HouseholdContext;
 use App\Support\Locale;
 use Carbon\CarbonImmutable;
+use Fahoba\PluginApi\Households\Notice;
 use Illuminate\Contracts\Database\Eloquent\Builder;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Validation\ValidationException;
-use Tagwerk\PluginApi\Households\Notice;
 
 /**
  * Everything the wall needs to show for a period, in one response.

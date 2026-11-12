@@ -7,8 +7,8 @@ namespace Tests\Feature\Plugins;
 use App\Integrations\Plugins\PluginCatalog;
 use App\Integrations\Plugins\PluginLoader;
 use App\Integrations\Plugins\PluginManifest;
+use Fahoba\PluginApi\Plugins\LoadReport;
 use Illuminate\Support\Facades\File;
-use Tagwerk\PluginApi\Plugins\LoadReport;
 use Tests\Fixtures\Plugins\FailsInBoot;
 use Tests\Fixtures\Plugins\FailsInRegister;
 use Tests\Fixtures\Plugins\GoodPlugin;
@@ -79,7 +79,7 @@ final class PluginLoaderTest extends TestCase
     {
         $this->app->register(new GoodPlugin($this->app));
 
-        $this->assertStringContainsString('not loaded by Tagwerk', app(LoadReport::class)->failures()[GoodPlugin::class] ?? '');
+        $this->assertStringContainsString('not loaded by Fahoba', app(LoadReport::class)->failures()[GoodPlugin::class] ?? '');
         $this->assertArrayNotHasKey('acme/good', app(PluginCatalog::class)->offered('photo_rules'));
     }
 
@@ -87,13 +87,13 @@ final class PluginLoaderTest extends TestCase
     {
         $names = array_column(app(PluginManifest::class)->packages(), 'name');
 
-        $this->assertContains('tagwerk/bring', $names);
+        $this->assertContains('fahoba/bring', $names);
         $this->assertNotContains('laravel/framework', $names);
         $this->assertSame([], app(LoadReport::class)->failures());
-        $this->assertArrayHasKey('tagwerk/bring', app(PluginCatalog::class)->offered('lists'));
+        $this->assertArrayHasKey('fahoba/bring', app(PluginCatalog::class)->offered('lists'));
     }
 
-    public function test_the_manifest_lists_packages_with_a_tagwerk_provider(): void
+    public function test_the_manifest_lists_packages_with_a_fahoba_provider(): void
     {
         $installed = $this->directory.'/installed.json';
         $this->writeInstalled($installed, ['acme/a' => GoodPlugin::class]);
@@ -117,7 +117,7 @@ final class PluginLoaderTest extends TestCase
         file_put_contents($installed, json_encode(['packages' => [[
             'name' => 'acme/map',
             'version' => '1.0.0',
-            'extra' => ['tagwerk' => ['provider' => GoodPlugin::class, 'csp' => ['img-src' => ['https://tiles.example.org']]]],
+            'extra' => ['fahoba' => ['provider' => GoodPlugin::class, 'csp' => ['img-src' => ['https://tiles.example.org']]]],
         ]]]));
 
         $packages = (new PluginManifest($installed, $this->directory.'/cache.php'))->packages();
@@ -125,20 +125,20 @@ final class PluginLoaderTest extends TestCase
         $this->assertSame(['img-src' => ['https://tiles.example.org']], $packages[0]['csp']);
     }
 
-    /** A malformed entry is the plugin's mistake: it is left out, Tagwerk keeps running. */
+    /** A malformed entry is the plugin's mistake: it is left out, Fahoba keeps running. */
     public function test_a_malformed_csp_entry_leaves_only_that_plugin_out(): void
     {
         $installed = $this->directory.'/installed.json';
         file_put_contents($installed, json_encode(['packages' => [
-            ['name' => 'acme/odd', 'version' => '1.0.0', 'extra' => ['tagwerk' => ['provider' => GoodPlugin::class, 'csp' => ['img-src' => [['https://a.example.org']]]]]],
-            ['name' => 'acme/flat', 'version' => '1.0.0', 'extra' => ['tagwerk' => ['provider' => GoodPlugin::class, 'csp' => 'https://a.example.org']]],
+            ['name' => 'acme/odd', 'version' => '1.0.0', 'extra' => ['fahoba' => ['provider' => GoodPlugin::class, 'csp' => ['img-src' => [['https://a.example.org']]]]]],
+            ['name' => 'acme/flat', 'version' => '1.0.0', 'extra' => ['fahoba' => ['provider' => GoodPlugin::class, 'csp' => 'https://a.example.org']]],
         ]]));
 
         $packages = (new PluginManifest($installed, $this->directory.'/cache.php'))->packages();
         app(PluginLoader::class)->load($this->app, $packages);
 
-        $this->assertStringContainsString('extra.tagwerk.csp', app(LoadReport::class)->failures()['acme/odd'] ?? '');
-        $this->assertStringContainsString('extra.tagwerk.csp', app(LoadReport::class)->failures()['acme/flat'] ?? '');
+        $this->assertStringContainsString('extra.fahoba.csp', app(LoadReport::class)->failures()['acme/odd'] ?? '');
+        $this->assertStringContainsString('extra.fahoba.csp', app(LoadReport::class)->failures()['acme/flat'] ?? '');
     }
 
     /** A cache written by an older release lacks fields; it is read again, not trusted. */
@@ -184,7 +184,7 @@ final class PluginLoaderTest extends TestCase
         $packages = [['name' => 'laravel/framework', 'version' => '13.0.0', 'license' => ['MIT']]];
 
         foreach ($providers as $name => $provider) {
-            $packages[] = ['name' => $name, 'version' => '1.2.3', 'license' => ['MIT'], 'extra' => ['tagwerk' => ['provider' => $provider]]];
+            $packages[] = ['name' => $name, 'version' => '1.2.3', 'license' => ['MIT'], 'extra' => ['fahoba' => ['provider' => $provider]]];
         }
 
         file_put_contents($path, json_encode(['packages' => $packages]));

@@ -8,14 +8,14 @@ use App\Models\Concerns\BelongsToHousehold;
 use App\Models\Concerns\HasZonedTimestamps;
 use Carbon\CarbonImmutable;
 use Database\Factories\CalendarFactory;
+use Fahoba\PluginApi\Calendar\ConnectedCalendar;
+use Fahoba\PluginApi\Connections\ConnectedAccount;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use LogicException;
-use Tagwerk\PluginApi\Calendar\ConnectedCalendar;
-use Tagwerk\PluginApi\Connections\ConnectedAccount;
 
 final class Calendar extends Model implements ConnectedCalendar
 {
@@ -45,7 +45,7 @@ final class Calendar extends Model implements ConnectedCalendar
     }
 
     /**
-     * Who the calendar belongs to in Tagwerk. None: a family calendar.
+     * Who the calendar belongs to in Fahoba. None: a family calendar.
      *
      * @return BelongsToMany<Person, $this>
      */

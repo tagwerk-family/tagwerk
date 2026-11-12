@@ -7,6 +7,7 @@ use App\Http\Middleware\EnsureFeature;
 use App\Http\Middleware\EnsureMail;
 use App\Http\Middleware\EnsurePermission;
 use App\Http\Middleware\EnsureWritable;
+use App\Http\Middleware\RenamedCookies;
 use App\Http\Middleware\ResolveHousehold;
 use App\Http\Middleware\SetContentSecurityPolicy;
 use App\Http\Middleware\TrustConfiguredProxies;
@@ -49,6 +50,8 @@ return Application::configure(basePath: dirname(__DIR__))
         // Every response of Laravel, the admin's included; the app gets its
         // header from nginx (see ContentSecurityPolicy).
         $middleware->append(SetContentSecurityPolicy::class);
+
+        $middleware->prepend(RenamedCookies::class);
 
         $middleware->alias([
             'household' => ResolveHousehold::class,

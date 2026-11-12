@@ -7,7 +7,7 @@ namespace {{ namespace }}\Tests;
 use PHPUnit\Framework\TestCase;
 use {{ namespace }}\{{ class }}Plugin;
 use {{ namespace }}\{{ tested }};
-use Tagwerk\PluginApi\Testing\PluginAssertions;
+use Fahoba\PluginApi\Testing\PluginAssertions;
 
 final class {{ class }}Test extends TestCase
 {

@@ -13,12 +13,12 @@ use App\Models\Household;
 use App\Models\Person;
 use App\Models\User;
 use App\Support\HouseholdContext;
+use Fahoba\IcsFeed\IcsFeedArea;
+use Fahoba\Mcp\McpArea;
+use Fahoba\Webhooks\WebhooksArea;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Livewire;
-use Tagwerk\IcsFeed\IcsFeedArea;
-use Tagwerk\Mcp\McpArea;
-use Tagwerk\Webhooks\WebhooksArea;
 use Tests\TestCase;
 
 /**

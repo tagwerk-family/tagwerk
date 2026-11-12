@@ -1,6 +1,6 @@
 # Security policy
 
-Tagwerk holds a family's calendar, photos, children's timetables and the
+Fahoba holds a family's calendar, photos, children's timetables and the
 credentials of connected services. A weakness there matters, so thank you
 for reporting it privately.
 
@@ -8,7 +8,7 @@ for reporting it privately.
 
 - **Preferred:** GitHub's private reporting — *Security → Report a
   vulnerability* in this repository.
-- **Or by mail** to office@copex.io, subject “Tagwerk security”.
+- **Or by mail** to office@copex.io, subject “Fahoba security”.
 
 Please do not open a public issue. Include the version or image tag, the
 steps to reproduce and what an attacker gains. You get an answer within

@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App\Models\Concerns;
 
-use Tagwerk\PluginApi\Recipes\Ingredient;
-use Tagwerk\PluginApi\Recipes\RecipeDetail;
+use Fahoba\PluginApi\Recipes\Ingredient;
+use Fahoba\PluginApi\Recipes\RecipeDetail;
 
 /**
  * What an own recipe and a catalog recipe have in common: the columns, and

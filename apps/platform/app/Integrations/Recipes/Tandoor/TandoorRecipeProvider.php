@@ -8,17 +8,17 @@ use App\Enums\ConnectionStatus;
 use App\Enums\ProviderArea;
 use App\Models\ProviderAccount;
 use App\Support\OutboundHttp;
+use Fahoba\PluginApi\Connections\CredentialField;
+use Fahoba\PluginApi\Connections\DescribesSetup;
+use Fahoba\PluginApi\Connections\UsesCredentials;
+use Fahoba\PluginApi\Recipes\RecipeProvider;
 use Illuminate\Http\Client\PendingRequest;
 use Illuminate\Support\Facades\Http;
-use Tagwerk\PluginApi\Connections\CredentialField;
-use Tagwerk\PluginApi\Connections\DescribesSetup;
-use Tagwerk\PluginApi\Connections\UsesCredentials;
-use Tagwerk\PluginApi\Recipes\RecipeProvider;
 
 /**
  * Reads recipes from Tandoor.
  *
- * Read-only: the weekly plan belongs to Tagwerk. Tandoor does have a meal plan
+ * Read-only: the weekly plan belongs to Fahoba. Tandoor does have a meal plan
  * API of its own, but then there would be two answers to "what's for dinner
  * on Monday".
  *
@@ -61,7 +61,7 @@ final class TandoorRecipeProvider implements DescribesSetup, RecipeProvider, Use
     {
         return [
             __('The token is in Tandoor under Settings → API. It does not expire.'),
-            __('Tagwerk only reads; the weekly plan stays in Tagwerk.'),
+            __('Fahoba only reads; the weekly plan stays in Fahoba.'),
         ];
     }
 

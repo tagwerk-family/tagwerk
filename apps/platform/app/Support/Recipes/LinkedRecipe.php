@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Support\Recipes;
 
 use DateInterval;
-use Tagwerk\PluginApi\Recipes\Ingredient;
+use Fahoba\PluginApi\Recipes\Ingredient;
 use Throwable;
 
 /**

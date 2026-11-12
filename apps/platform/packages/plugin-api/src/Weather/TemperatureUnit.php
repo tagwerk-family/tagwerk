@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Tagwerk\PluginApi\Weather;
+namespace Fahoba\PluginApi\Weather;
 
 use DateTimeZone;
 use Throwable;

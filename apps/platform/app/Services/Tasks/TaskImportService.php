@@ -9,12 +9,12 @@ use App\Models\ProviderAccount;
 use App\Models\Task;
 use App\Models\TaskCompletion;
 use App\Support\HouseholdContext;
-use Tagwerk\PluginApi\Connections\ConnectedAccount;
-use Tagwerk\PluginApi\Connections\FinishesConnection;
-use Tagwerk\PluginApi\Lists\RemoteList;
-use Tagwerk\PluginApi\Tasks\ImportsTasks;
-use Tagwerk\PluginApi\Tasks\ListsTaskLists;
-use Tagwerk\PluginApi\Tasks\RemoteTask;
+use Fahoba\PluginApi\Connections\ConnectedAccount;
+use Fahoba\PluginApi\Connections\FinishesConnection;
+use Fahoba\PluginApi\Lists\RemoteList;
+use Fahoba\PluginApi\Tasks\ImportsTasks;
+use Fahoba\PluginApi\Tasks\ListsTaskLists;
+use Fahoba\PluginApi\Tasks\RemoteTask;
 
 /**
  * Pulls in the tasks of a connected account.

@@ -15,7 +15,7 @@ use Illuminate\Support\Carbon;
  */
 final class PurgePhotoTrashCommand extends Command
 {
-    protected $signature = 'tagwerk:purge-photo-trash';
+    protected $signature = 'fahoba:purge-photo-trash';
 
     protected $description = 'Removes photos that have been in the trash for thirty days';
 

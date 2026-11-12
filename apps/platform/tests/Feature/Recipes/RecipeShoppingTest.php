@@ -14,8 +14,8 @@ use App\Models\Recipe;
 use App\Models\User;
 use App\Services\Recipes\RecipeShopping;
 use App\Support\HouseholdContext;
+use Fahoba\PluginApi\Recipes\Ingredient;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Tagwerk\PluginApi\Recipes\Ingredient;
 use Tests\TestCase;
 
 /**

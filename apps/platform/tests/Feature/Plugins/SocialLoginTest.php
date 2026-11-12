@@ -9,6 +9,9 @@ use App\Integrations\Plugins\Extensions;
 use App\Models\Household;
 use App\Models\Person;
 use App\Models\User;
+use Fahoba\SocialLogin\SocialIdentity;
+use Fahoba\SocialLogin\SocialLoginExtension;
+use Fahoba\TwoFactor\TwoFactorExtension;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
@@ -18,9 +21,6 @@ use Laravel\Socialite\Two\InvalidStateException;
 use Laravel\Socialite\Two\User as RemoteUser;
 use Mockery;
 use PragmaRX\Google2FA\Google2FA;
-use Tagwerk\SocialLogin\SocialIdentity;
-use Tagwerk\SocialLogin\SocialLoginExtension;
-use Tagwerk\TwoFactor\TwoFactorExtension;
 use Tests\TestCase;
 
 /**

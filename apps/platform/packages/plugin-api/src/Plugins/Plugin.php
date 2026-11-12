@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Tagwerk\PluginApi\Plugins;
+namespace Fahoba\PluginApi\Plugins;
 
 use Closure;
 use Illuminate\Support\ServiceProvider;
@@ -10,8 +10,8 @@ use LogicException;
 use Throwable;
 
 /**
- * The service provider of a Tagwerk plugin. Name it in the package's
- * `composer.json` under `extra.tagwerk.provider` — Tagwerk loads it itself,
+ * The service provider of a Fahoba plugin. Name it in the package's
+ * `composer.json` under `extra.fahoba.provider` — Fahoba loads it itself,
  * not through Laravel's package discovery.
  *
  * Put what Laravel's `register()` and `boot()` would do into
@@ -41,10 +41,10 @@ abstract class Plugin extends ServiceProvider
     /** The Composer package this provider belongs to, e.g. `acme/waste`. */
     final public function package(): string
     {
-        return $this->package ?? throw new LogicException(static::class.' was not loaded by Tagwerk.');
+        return $this->package ?? throw new LogicException(static::class.' was not loaded by Fahoba.');
     }
 
-    /** @internal Called by Tagwerk's loader. */
+    /** @internal Called by Fahoba's loader. */
     final public function forPackage(string $package): static
     {
         $this->package = $package;
@@ -61,7 +61,7 @@ abstract class Plugin extends ServiceProvider
         // Laravel's package discovery registers a provider still named in
         // `extra.laravel`; it has no package and would throw on every request.
         if ($this->package === null) {
-            $report->fail(static::class, static::class.' was not loaded by Tagwerk: name it in extra.tagwerk.provider, not extra.laravel.');
+            $report->fail(static::class, static::class.' was not loaded by Fahoba: name it in extra.fahoba.provider, not extra.laravel.');
 
             return;
         }

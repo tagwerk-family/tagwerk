@@ -31,7 +31,7 @@
     x-effect="apply($wire.theme, $wire.nextChange)"
     role="radiogroup"
     aria-label="{{ __('Appearance') }}"
-    class="tagwerk-theme"
+    class="fahoba-theme"
 >
     @foreach ($options as $value => [$icon, $label])
         <button
@@ -41,7 +41,7 @@
             aria-label="{{ $label }}"
             title="{{ $label }}"
             wire:click="choose('{{ $value }}')"
-            @class(['tagwerk-theme-button', 'is-selected' => $preference === $value])
+            @class(['fahoba-theme-button', 'is-selected' => $preference === $value])
         >
             <x-filament::icon :icon="$icon" />
         </button>

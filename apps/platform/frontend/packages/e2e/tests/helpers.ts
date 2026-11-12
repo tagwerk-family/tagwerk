@@ -58,7 +58,7 @@ export function pairingCode(household?: number): string {
 export async function pair(page: Page, household?: number): Promise<void> {
   await page.goto('/')
 
-  await expect(page.getByRole('heading', { name: 'Willkommen bei Tagwerk' })).toBeVisible()
+  await expect(page.getByRole('heading', { name: 'Willkommen bei Fahoba' })).toBeVisible()
   await page.getByRole('button', { name: /Wandtablet einrichten/ }).click()
 
   await page.getByPlaceholder('ABCD1234').fill(pairingCode(household))
@@ -90,7 +90,7 @@ export async function pair(page: Page, household?: number): Promise<void> {
  */
 export function createAccount(role: 'adult' | 'child' = 'adult'): Account {
   const account: Account = {
-    email: `e2e-${randomBytes(6).toString('hex')}@tagwerk.test`,
+    email: `e2e-${randomBytes(6).toString('hex')}@fahoba.test`,
     password: randomBytes(16).toString('hex'),
   }
 
@@ -123,9 +123,9 @@ export async function adminSession(page: Page): Promise<void> {
   }
 
   await page.context().addCookies([{
-    name: 'tagwerk_user_token',
+    name: 'fahoba_user_token',
     value: token,
-    url: 'https://tagwerk.test',
+    url: 'https://fahoba.test',
     secure: true,
     httpOnly: true,
     sameSite: 'Lax',
@@ -143,7 +143,7 @@ export async function adminSession(page: Page): Promise<void> {
 export function ownHousehold(child: string): number {
   const output = tinker(
     '$parent = app(App\\Services\\HouseholdOnboarding::class)->create('
-    + `"E2E ${randomBytes(4).toString('hex')}", "Europe/Vienna", "E2E Elternteil", "e2e-${randomBytes(6).toString('hex')}@tagwerk.test", "${randomBytes(16).toString('hex')}");`
+    + `"E2E ${randomBytes(4).toString('hex')}", "Europe/Vienna", "E2E Elternteil", "e2e-${randomBytes(6).toString('hex')}@fahoba.test", "${randomBytes(16).toString('hex')}");`
     + ' app(App\\Services\\ParentPin::class)->set($parent, "1234");'
     + ' $household = $parent->memberships()->sole()->household_id;'
     + ` App\\Models\\Person::create(["household_id" => $household, "name" => "${child}", "role" => "child", "birthday" => "2018-03-01", "color" => "#e11d48"]);`

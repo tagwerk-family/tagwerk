@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Tagwerk\ExampleLanguage;
+namespace Fahoba\ExampleLanguage;
 
-use Tagwerk\PluginApi\Languages\LanguagePack;
+use Fahoba\PluginApi\Languages\LanguagePack;
 
 /**
  * French for the screens a new tablet or phone shows first. Everything

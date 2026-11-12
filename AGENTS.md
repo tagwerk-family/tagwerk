@@ -1,8 +1,11 @@
-# Tagwerk Project AGENTS.md
+# Fahoba Project AGENTS.md
 
-<!-- Last updated: 2026-11-02 -->
+<!-- Last updated: 2026-11-11 -->
 
 ## OVERVIEW
+
+The name is an acronym: **Fa**mily · **Ho**me · **Ba**se. Written
+“Fahoba” in prose, `fahoba` in code.
 
 Self-hosted family calendar for a wall-mounted Android tablet, as a replacement
 for commercial devices such as Dæly Calendar or Hearth Display.
@@ -16,16 +19,16 @@ substantive work. This file holds the rules; that one the reasons.
 ## STRUCTURE
 
 ```
-tagwerk/
+fahoba/
 ├── apps/platform/    — Laravel 13 API + Filament 5
 │   ├── app/Integrations/ — providers: contracts, data objects, implementations
-│   ├── app/Services/     — what Tagwerk computes itself, without the outside world
-│   ├── plugins/          — Composer path packages, e.g. `bring` (tagwerk/bring)
+│   ├── app/Services/     — what Fahoba computes itself, without the outside world
+│   ├── plugins/          — Composer path packages, e.g. `bring` (fahoba/bring)
 │   └── frontend/     — pnpm workspace
 │       └── packages/
 │           ├── app/    — Nuxt 4, the one app for wall and phone, built under /, dev server port 3000
 │           ├── shared/ — Nuxt layer: design, theme, realtime, translations (i18n/)
-│           └── e2e/    — Playwright against https://tagwerk.test, runs from the host
+│           └── e2e/    — Playwright against https://fahoba.test, runs from the host
 ├── .github/workflows/ — tests on every push, image on a release tag
 ├── deploy/           — production image, compose.yaml (Traefik), compose.standalone.yaml (Caddy), nginx, backup
 ├── docs/
@@ -48,7 +51,7 @@ Filament 3. Here the respective current major versions are used on purpose, beca
 
 ## CRITICAL RULES (always loaded)
 
-- **NEVER SQLite** — tests run against real PostgreSQL (`tagwerk_test`)
+- **NEVER SQLite** — tests run against real PostgreSQL (`fahoba_test`)
 - Every domain table has `household_id` and uses `BelongsToHousehold`
 - **Nothing is visible without a set `HouseholdContext`** — intended, so that
   a forgotten context yields empty results instead of someone else's data
@@ -111,7 +114,7 @@ Filament 3. Here the respective current major versions are used on purpose, beca
   Vitest deliberately runs with `TZ=UTC`: If `Europe/Vienna` were set there, the
   tests would pass even with wrong code
 - **Vite only lets known hosts through.** The development server is reached via
-  DDEV's router at `tagwerk.test` and, without
+  DDEV's router at `fahoba.test` and, without
   `vite.server.allowedHosts`, answers with `403 Blocked request` — on *every* URL, including
   the proxy paths. Looks like a broken proxy, but is Vite
 - **The pnpm store needs a destination.** In the container there is no
@@ -233,14 +236,14 @@ Filament 3. Here the respective current major versions are used on purpose, beca
 ### UI
 
 - **Colours only via the tokens** from
-  `packages/shared/app/assets/css/tagwerk.css`: `bg-canvas`, `bg-surface`,
+  `packages/shared/app/assets/css/fahoba.css`: `bg-canvas`, `bg-surface`,
   `text-ink-2`, `border-line`, `bg-accent` and so on. Never `bg-white` or
   `text-slate-*` — in the dark theme exactly that spot would stay light. Only
   person and list colours come as hex from the database and are set inline.
 - **The glass look is tokens, not components.** `<html data-look>` comes
   from the `look` preference (per device/account, `classic` while resting),
   `data-backdrop` from `/api/theme` (`households.backdrop`, enum `Backdrop`,
-  colours in `tagwerk.css`; a device's or account's `backdrop` preference
+  colours in `fahoba.css`; a device's or account's `backdrop` preference
   wins unless it is `household` — resolved by `ThemeController`, so the app
   reloads the theme after choosing). Glass redefines `--surface`, `--line` etc. as
   translucent; blur sits only on `.shadow-floating` and `.sticky`. A new
@@ -251,9 +254,9 @@ Filament 3. Here the respective current major versions are used on purpose, beca
   gradient. Calendar entries (events, lessons
   in the grid, month bars) pass `solid`; everything else stays `soft`.
 - **Design packs set tokens, never components** (`offer('themes', …)`,
-  contract `Tagwerk\PluginApi\Themes\Theme`, rules in `Stylesheet`).
-  - **The token list is a contract.** `tagwerk:design-reference` writes
-    every custom property of the `:root` rules in `tagwerk.css` into
+  contract `Fahoba\PluginApi\Themes\Theme`, rules in `Stylesheet`).
+  - **The token list is a contract.** `fahoba:design-reference` writes
+    every custom property of the `:root` rules in `fahoba.css` into
     `plugin-api/resources/reference/design.json`; `DesignReferenceTest`
     fails while stale. A new token is a minor API change, a renamed one a
     major — add, never rename. Font and corners are tokens too
@@ -274,9 +277,9 @@ Filament 3. Here the respective current major versions are used on purpose, beca
     hidden while none is installed), the `design` preference (`household`,
     `core`, or a key) wins; `ThemeController` resolves it into `design`
     (`{key, name, url}` or null) plus `designs`. A removed package is
-    Tagwerk's own. `useTheme` appends `<link id="tagwerk-design">` and sets
+    Fahoba's own. `useTheme` appends `<link id="fahoba-design">` and sets
     `<html data-design>`; `public/theme.js` does it before the first paint
-    from `localStorage` (`tagwerk-design`, only an `/api/design/` URL —
+    from `localStorage` (`fahoba-design`, only an `/api/design/` URL —
     `utils/design.ts` holds the same check).
 - **A horizontal scroller needs `relative`.** An absolutely placed child
   (`sr-only` included) takes its containing block from outside the scroller
@@ -293,7 +296,7 @@ Filament 3. Here the respective current major versions are used on purpose, beca
   the including app, not to that of the layer. Composables and components of the
   layer are auto-imported; its `utils` via `../utils/…`.
 - **Classes that occur only in the layer need `@source`.** Tailwind
-  scans only the app by itself; `tagwerk.css` therefore carries
+  scans only the app by itself; `fahoba.css` therefore carries
   `@source "../.."`. Check after `pnpm build`: A class used only in the layer
   must appear in the app's CSS.
 - **No straight `"` in Vue attribute expressions.** In
@@ -326,17 +329,21 @@ Filament 3. Here the respective current major versions are used on purpose, beca
 - **The server computes the theme** (`App\Services\ThemeSchedule`). The
   UI does not compare with times of day itself, but sets an
   alarm for `next_change` and then asks again.
-- **The mark exists four times**: `TwLogo.vue` in the layer, `icon.svg` in `wall`
-  and `mobile`, `public/logo.svg` in Laravel. Adjust all of them on changes.
-  The mark with wordmark exists twice (`public/logo-light.svg`,
-  `logo-dark.svg`, for the admin). The wordmark is Outfit (OFL) as a
-  path, not as text; swapping the UI font does not change it.
-  The app also ships PNGs rendered from its `icon.svg` (`icon-192.png`,
-  `icon-512.png`) and a white-on-transparent `badge-96.png` for the
-  notification status bar — Android ignores SVG there and reads the badge by
-  alpha only. Re-render after a change, e.g.
-  `ddev exec 'cd apps/platform/frontend/packages/app/public && magick -background none -density 384 icon.svg -resize 192x192 icon-192.png'`
-  (the badge from the mark's shapes alone, filled white, no background).
+- **The mark** is the family's home base: a tick inside a house on a
+  terracotta tile (`#ea580c` → `#b93a0a`). It lives in `TwLogo.vue` (layer,
+  gradient id from `useId()` — several logos share a page) and
+  `app/public/icon.svg`. `public/favicon.svg` (Laravel, linked by app and
+  admin) is a bold variant — filled house, cut-out tick — because the
+  outline blurs at 16 px. The lockup exists twice (`public/logo-light.svg`,
+  `logo-dark.svg`, for the admin); its wordmark is Plus Jakarta Sans 800 as
+  a path, not as text, so swapping the UI font does not change it.
+  The app also ships `icon-192.png`, `icon-512.png`, `favicon.ico` and a
+  white-on-transparent `badge-96.png` (source `resources/brand/badge.svg`)
+  for the notification status bar — Android ignores SVG there and reads the
+  badge by alpha only. **Render them through Chromium, never `magick` on
+  the SVG:** its built-in renderer drops gradients and strokes and paints
+  the tile black. `node scripts/render-brand.mjs` in `packages/e2e`, then
+  pack `favicon.ico` as its header says.
 - **Admin groups** (`NavigationGroup`): Family (people, accounts),
   Everyday (tasks, rewards, star history, lists, recipes, photos),
   Calendar & school (calendars, timetable, school closures), Setup,
@@ -365,7 +372,7 @@ Filament 3. Here the respective current major versions are used on purpose, beca
   - `__('Period')` is the school period (“Stunde”); a time span is
     `__('Time span')`. Check `de.json` before reusing a short English key.
 - **Admin (Filament):** colours in `AdminPanelProvider::colors()`,
-  everything else in `public/css/tagwerk-admin.css` via the `fi-` classes. Primary
+  everything else in `public/css/fahoba-admin.css` via the `fi-` classes. Primary
   shade 500 must carry light text (contrast AA), otherwise Filament picks
   the pale 400 for all filled buttons.
 - **`ResolveHousehold` runs persistently in Filament** (`authMiddleware(…,
@@ -407,7 +414,7 @@ app/Support/PackTexts.php                a pack's texts without broken ones; ser
 app/Support/LocalDates.php               admin and rule dates; ICU patterns for pack languages
 app/Http/Controllers/Api/LanguageController.php   GET /api/language, /api/language/{code}/{hash}.json
 packages/plugin-api/src/Languages/       LanguagePack, Coverage (rules, comparison), Reference
-packages/plugin-api/resources/reference/ English reference, written by tagwerk:language-reference
+packages/plugin-api/resources/reference/ English reference, written by fahoba:language-reference
 app/Http/Middleware/ApplyLocale.php      api, web and Filament
 frontend/packages/shared/i18n/locales/   de.json, en.json (@nuxtjs/i18n)
 frontend/packages/shared/app/composables/useLanguage.ts
@@ -458,7 +465,7 @@ frontend/packages/shared/app/utils/intlLocale.ts
   language when nothing matches, so it is not used). An account's household
   is resolved in the controller: without the `household` middleware there
   is no context, and the membership would be missed. Offline, the last
-  answer, texts included, comes from `localStorage` (`tagwerk-language`);
+  answer, texts included, comes from `localStorage` (`fahoba-language`);
   the browser decides only without both. `@nuxtjs/i18n` runs without
   `detectBrowserLanguage`.
 - **The wall follows every agenda fetch** (`language`, and `locale` for one
@@ -466,7 +473,7 @@ frontend/packages/shared/app/utils/intlLocale.ts
   (null) the account's choice. `useLanguage().apply()` loads first and
   switches once; it never sets a code whose texts it could not load.
 - **Language packs** (`offer('languages', …)`, contract
-  `Tagwerk\PluginApi\Languages\LanguagePack`):
+  `Fahoba\PluginApi\Languages\LanguagePack`):
   - **A pack's files count for its code only.** `PackTranslationLoader`
     wraps Laravel's loader. A pack added as a plain path could bring a
     `de.json` and rewrite the German.
@@ -482,23 +489,23 @@ frontend/packages/shared/app/utils/intlLocale.ts
     `immutable`. A package from Packagist has no sources at build time. A
     plugin layer's own `i18n/locales/<code>.json` is merged in (the
     manifest's `locales`).
-  - **The reference lives in `tagwerk/plugin-api`** (`resources/reference`)
+  - **The reference lives in `fahoba/plugin-api`** (`resources/reference`)
     so the testkit's `assertLanguagePackComplete()` and the server measure
     the same thing. **After adding or changing a text run
-    `php artisan tagwerk:language-reference`**; `LanguageReferenceTest`
+    `php artisan fahoba:language-reference`**; `LanguageReferenceTest`
     fails while it is stale.
   - **Rules and comparison live in `Coverage`** (API package): two
     lower-case letters, never `de`/`en`, a BCP 47 tag starting with the
     code, existing files. A second pack for a code fails its package.
   - **The test fixture is Italian** (`tests/Fixtures/Languages`), because
-    the dev-only `tagwerk/example-language` brings `fr`. A test that needs
+    the dev-only `fahoba/example-language` brings `fr`. A test that needs
     an unsupported code uses `ja`.
   - **No `getLocale() === 'de'` for formats.** `LocalDates` keeps the
     German and English formats and asks ICU (`IntlDatePatternGenerator`)
     for everyone else. Yasumi gets the pack's tag and falls back to English
     names.
   - Operations → Plugins lists missing and broken texts per pack and the
-    pack's `extra.tagwerk.language.complete-for`.
+    pack's `extra.fahoba.language.complete-for`.
 - **`Intl` formats with `intlLocale`, never a literal `'de-AT'`.** It is a
   plain ref so that pure utils (`formatIsoDate`, `weekdayName`) can use it
   and computed values format anew after a switch. German stays `de-AT`.
@@ -542,9 +549,9 @@ connected Google Tasks along with it.
 |---|---|---|
 | `calendar` | `builtin` | created together with the household |
 | `calendar` | `google` | consent, scopes: `calendar.events`, `calendarlist.readonly` |
-| `lists` | `tagwerk/bring` | plugin; email and password per household, via the wizard; sync in both directions |
+| `lists` | `fahoba/bring` | plugin; email and password per household, via the wizard; sync in both directions |
 | `lists` | `google` | consent, scopes: `tasks` |
-| `tasks` | `builtin` | none — Tagwerk's own tasks |
+| `tasks` | `builtin` | none — Fahoba's own tasks |
 | `tasks` | `google` | consent, scopes: `tasks` |
 | `recipes` | `builtin` | none — table `recipes` |
 | `recipes` | `tandoor` | address and token per household, via the wizard |
@@ -558,7 +565,7 @@ areas, two consents, two rows: Whoever pushes their shopping list there
 has not thereby pulled in their tasks.
 
 **Every area runs without a third-party service.** Calendar and recipes have a
-built-in provider, lists live in Tagwerk anyway and only additionally push
+built-in provider, lists live in Fahoba anyway and only additionally push
 outwards. Holidays come from Yasumi (library, no
 service), push talks directly to the browsers' endpoints.
 
@@ -576,7 +583,7 @@ Nothing in the wizard names a provider: The selection comes from
 `ProviderRegistry::connectableProviders()`, icons and explanations from
 `DescribesSetup`, the input fields from `UsesCredentials::credentialFields()`.
 A new service remains one class and one entry in
-`config/tagwerk.php`.
+`config/fahoba.php`.
 
 **Two ways into a connection.** `UsesOAuth` leads to the provider and back;
 `UsesCredentials` asks for fields, validates them once and stores them encrypted
@@ -624,7 +631,7 @@ app/Services/Photos/PhotoLibrary.php                mixes all configured sources
   invented: Before delivery it is resolved (`realpath`) and checked —
   otherwise the source would be a read path onto the whole server.
 - **Every household has its own root folder:**
-  `TAGWERK_PHOTO_FOLDERS/<household_id>/`. In the wizard only a
+  `FAHOBA_PHOTO_FOLDERS/<household_id>/`. In the wizard only a
   subfolder within it is entered; an absolute path or `..` does not lead out of it. Otherwise
   a parent could enter the photo folder of another family.
 - **Uploaded photos are stored privately** (`storage/app/photos`), not under
@@ -647,7 +654,7 @@ app/Services/Photos/PhotoLibrary.php                mixes all configured sources
 - **Deleting a photo is a soft delete** (`photos.deleted_at`,
   `PhotoManageController`, `GET /api/photos`, `/photos/trash`,
   `POST /photos/delete|restore|purge` with `ids`). The trash is emptied by
-  `tagwerk:purge-photo-trash` after `Photo::TRASH_DAYS`; only `forceDelete`
+  `fahoba:purge-photo-trash` after `Photo::TRASH_DAYS`; only `forceDelete`
   removes the files (`Photo::booted`), including the grid's small copy
   (`PhotoImage::thumbnail()`, made on first request under `photos/thumbs/`).
   Upload checks use `withTrashed()` — a trashed fingerprint counts as known.
@@ -733,7 +740,7 @@ Open-Meteo: no key, no login.
 ### Dashboard: tiles on a grid
 
 ```
-config/tagwerk.php  widgets      key → name, area, default size
+config/fahoba.php  widgets      key → name, area, default size
 app/Dashboard/WidgetRegistry     all widgets; forHousehold() filters by area
 app/Dashboard/DashboardDefaults  the first layout on first access
 dashboard_widgets                household_id, device_id | user_id, type, x, y, w, h, settings, position
@@ -794,7 +801,7 @@ app/app/components/widgets/      one component per key
    base contract and exactly the capabilities the service really has.
    **No dummies** — an empty method that means “not supported” („geht nicht“) belongs
    expressed as a missing capability.
-2. Register it in `config/tagwerk.php` under `providers.<fachbereich>`.
+2. Register it in `config/fahoba.php` under `providers.<fachbereich>`.
 3. `config/services.php` holds only what belongs to the server — such as the
    OAuth client ID. What belongs to a household (login, token,
    address) enters the account via `UsesCredentials`. For a service with
@@ -810,13 +817,13 @@ app/app/components/widgets/      one component per key
 
 Design: `docs/architecture.md#plugins`. A Composer
 package brings providers or dashboard widgets without touching the core.
-It depends on **`tagwerk/plugin-api`** only (`apps/platform/packages/plugin-api`,
-namespace `Tagwerk\PluginApi\`, MIT): contracts, data objects, `Plugin`,
+It depends on **`fahoba/plugin-api`** only (`apps/platform/packages/plugin-api`,
+namespace `Fahoba\PluginApi\`, MIT): contracts, data objects, `Plugin`,
 `Catalog`, `CurrentHousehold`, `HouseholdScoped`. The core implements them.
 
 ```php
-// composer.json: "extra": {"tagwerk": {"provider": "Acme\\Waste\\WastePlugin"}}
-final class WastePlugin extends \Tagwerk\PluginApi\Plugins\Plugin
+// composer.json: "extra": {"fahoba": {"provider": "Acme\\Waste\\WastePlugin"}}
+final class WastePlugin extends \Fahoba\PluginApi\Plugins\Plugin
 {
     protected function registerPlugin(): void
     {
@@ -836,9 +843,9 @@ final class WastePlugin extends \Tagwerk\PluginApi\Plugins\Plugin
 - **Interface methods never share a name with a column**
   (`accountId()`, `areaKey()`, not `id()`, `area()`): Eloquent resolves
   attributes through methods of the same name and recursed forever.
-- **Plugins load through `extra.tagwerk.provider`, not `extra.laravel`.**
+- **Plugins load through `extra.fahoba.provider`, not `extra.laravel`.**
   `PluginManifest` reads `vendor/composer/installed.json` (cached in
-  `bootstrap/cache/tagwerk-plugins.php`, keyed by the file's mtime),
+  `bootstrap/cache/fahoba-plugins.php`, keyed by the file's mtime),
   `PluginLoader` registers each provider from `PluginServiceProvider`, the
   first in `bootstrap/providers.php`. The provider extends `Plugin`, whose
   final `register()`/`boot()` wrap `registerPlugin()`/`bootPlugin()`.
@@ -858,8 +865,8 @@ final class WastePlugin extends \Tagwerk\PluginApi\Plugins\Plugin
   - The entrypoint migrates before `optimize`: a plugin that fails while the
     route cache is built stays without routes until the next restart.
 - **Every package carries its licence file.** Core and bundled plugins:
-  PolyForm Shield (a byte copy of the root `LICENSE`); `tagwerk/plugin-api`
-  and `tagwerk/example-area`: MIT, so third parties may build on and copy
+  PolyForm Shield (a byte copy of the root `LICENSE`); `fahoba/plugin-api`
+  and `fahoba/example-area`: MIT, so third parties may build on and copy
   them. `PluginApiBoundaryTest` checks file against `composer.json`.
 - **Installed means enabled** — for providers, widgets, photo rules and CSP
   hosts. Whoever does not want one removes the package. `offer()` only
@@ -873,8 +880,8 @@ final class WastePlugin extends \Tagwerk\PluginApi\Plugins\Plugin
   never. This way no package can claim `google` and receive its tokens.
   Duplicate identifiers, unknown areas and classes without the contract of the
   area (`ProviderContracts::BASE`, for `widgets` `DataWidget`) skip the
-  package at boot (`first_party` in `config/tagwerk.php` lists the packages
-  allowed the `tagwerk/` prefix).
+  package at boot (`first_party` in `config/fahoba.php` lists the packages
+  allowed the `fahoba/` prefix).
 - **No cage.** A plugin runs in the same process with all privileges, including
   `APP_KEY` and thus all credentials. Only packages from a trusted
   source, pin versions in `composer.lock`, run `composer audit`.
@@ -895,7 +902,7 @@ final class WastePlugin extends \Tagwerk\PluginApi\Plugins\Plugin
   `php artisan optimize` caches them at container start. Whatever it sets
   up asks `Extensions::enabled()` per request — a switch in the admin
   must not need a restart.
-- **Two-factor sign-in is the extension `tagwerk/two-factor`** (category
+- **Two-factor sign-in is the extension `fahoba/two-factor`** (category
   security). It uses Filament's authenticator-app factor with recovery
   codes; the columns and Filament's interfaces sit on `User` in the core,
   because a package cannot add an interface to the model.
@@ -913,7 +920,7 @@ final class WastePlugin extends \Tagwerk\PluginApi\Plugins\Plugin
     The operator cannot require it without having set it up (`refuse()`).
   - Switched off, a stored secret stays but nobody is asked
     (`SwitchedAppAuthentication`), and the profile hides the section.
-- **Social sign-in is the extension `tagwerk/social-login`** (category
+- **Social sign-in is the extension `fahoba/social-login`** (category
   security), built on Laravel Socialite.
   - Providers live in the plugin's `config/social-login.php`: a Socialite
     provider class, `client_id`/`client_secret` from the server's `.env`
@@ -929,37 +936,37 @@ final class WastePlugin extends \Tagwerk\PluginApi\Plugins\Plugin
     invitation (`email_verified_at`). The table belongs to the account, so
     `HouseholdExport` lists it under `SYSTEM`.
   - `/social/{provider}/redirect|callback` are web routes, **not** behind
-    `TAGWERK_ADMIN_ALLOWED_IPS`. `?to=admin` (the Filament login page's
+    `FAHOBA_ADMIN_ALLOWED_IPS`. `?to=admin` (the Filament login page's
     button, `AUTH_LOGIN_FORM_AFTER`) ends in the web session like
     `/login-link`; otherwise the app's cookie from `App\Auth\AppToken`, which
     the password login uses too. A second factor still applies: the app gets
     `/?two-factor=<ticket>`, the admin is sent to its password page. Refusals
     come back as `/?social=<reason>`; `LoginScreen` maps the reason to a
     sentence and strips it from the address.
-  - Google refuses `tagwerk.test` as a redirect; locally the PHPUnit tests
+  - Google refuses `fahoba.test` as a redirect; locally the PHPUnit tests
     (`SocialLoginTest`, Socialite mocked) stand in for it.
 - **Plugin author conveniences** (guide `docs/plugins.md`):
-  - `tagwerk:make-plugin vendor/name --widget|--provider=<area>|--area`
+  - `fahoba:make-plugin vendor/name --widget|--provider=<area>|--area`
     (`MakePluginCommand`, stubs in `stubs/plugin/`). A provider's methods
     are written by reflection of `ProviderContracts::BASE[area]`, so a new
     contract method shows up without touching the generator.
     `MakePluginTest` generates every kind, loads it and runs the package's
     own PHPUnit with only the app's autoloader — the generated test must
-    pass outside Tagwerk. The package also gets `phpunit.xml.dist`, CI,
+    pass outside Fahoba. The package also gets `phpunit.xml.dist`, CI,
     `AGENTS.md` and `.gitignore` (stubs `phpunit`, `ci`, `agents`,
     `gitignore`; the CI stub pins the same action SHAs as `tests.yml`).
   - **`templates/plugin` is generator output**, split to
-    `tagwerk-plugin-template` (GitHub template repository, no tag).
+    `fahoba-plugin-template` (GitHub template repository, no tag).
     `MakePluginTest` fails when they differ: after changing a stub, delete
-    the folder and run `tagwerk:make-plugin acme/example --widget
+    the folder and run `fahoba:make-plugin acme/example --widget
     --path=templates/plugin`.
-  - **Testkit** `Tagwerk\PluginApi\Testing\PluginAssertions` (trait for a
+  - **Testkit** `Fahoba\PluginApi\Testing\PluginAssertions` (trait for a
     PHPUnit `TestCase`; the API only *suggests* PHPUnit). A check that
-    Tagwerk enforces at runtime and an author can test alone belongs there
+    Fahoba enforces at runtime and an author can test alone belongs there
     (`PluginTestkitTest`).
   - `Http\Outbound` (`CoreOutbound`): `server()` retries 429/5xx and
     connection errors, `householdGet/Send()` go through `OutboundHttp`.
-  - `extra.tagwerk.csp` is read by `PluginManifest` and checked by
+  - `extra.fahoba.csp` is read by `PluginManifest` and checked by
     `ContentSecurityPolicy` like `ContributesToCsp`; a bad entry fails the
     package. The manifest never casts what a package wrote: a warning there
     runs in `PluginServiceProvider::register()` and stopped every request.
@@ -986,8 +993,8 @@ final class WastePlugin extends \Tagwerk\PluginApi\Plugins\Plugin
     made inside the class.
 - **Split on release** (`.github/workflows/split.yml`,
   `.github/scripts/split-packages.sh`): every `packages/*` and `plugins/*`
-  goes to `<SPLIT_OWNER>/tagwerk-<name>`, every `templates/*` to
-  `tagwerk-<name>-template` without a tag (checkout with
+  goes to `<SPLIT_OWNER>/fahoba-<name>`, every `templates/*` to
+  `fahoba-<name>-template` without a tag (checkout with
   `persist-credentials: false`, or its read token wins over `SPLIT_TOKEN`; variable, defaults to the repo
   owner; secret `SPLIT_TOKEN`), branch `main`, tag `v<version>` from the
   package's `composer.json` when missing there. A new plugin needs its
@@ -999,11 +1006,11 @@ final class WastePlugin extends \Tagwerk\PluginApi\Plugins\Plugin
   - **`routes/api-contract.txt` is the HTTP contract** — every core route
     under `/api` plus `/broadcasting/auth` (`App\Support\ApiContract`,
     plugins' routes left out). `ApiContractTest` fails on a missing and on
-    a new route: after adding one run `php artisan tagwerk:api-contract`;
+    a new route: after adding one run `php artisan fahoba:api-contract`;
     removing or renaming one waits for a major release. Realtime area names
     and the meaning of 401/402/403/404/422/423/429 belong to it too.
-  - **`@tagwerk/client`** (`frontend/packages/client`, MIT, no Vue or Nuxt):
-    `createClient()` (fetch, `credentials: 'same-origin'`, `TagwerkError`
+  - **`@fahoba/client`** (`frontend/packages/client`, MIT, no Vue or Nuxt):
+    `createClient()` (fetch, `credentials: 'same-origin'`, `FahobaError`
     with `kind`), the entry calls, `connectRealtime()`, and the pure rules
     (`rules/`: task keys and ticks, day completion, theme alarm, designs,
     notices, language, announcements). The layer's `utils/<rule>.ts` are
@@ -1013,19 +1020,19 @@ final class WastePlugin extends \Tagwerk\PluginApi\Plugins\Plugin
     points at `src/` in the workspace, `publishConfig.exports` at `dist/`.
     Published by the `npm` job in `split.yml` when its `version` is new,
     via npm's trusted publishing (OIDC, no token; the trusted publisher on
-    npmjs.com names `tagwerk-family/tagwerk` and `split.yml` — renaming the
+    npmjs.com names `fahoba/fahoba` and `split.yml` — renaming the
     file breaks publishing).
-  - **`TAGWERK_FRONTEND`** installs a package with the plugins and
+  - **`FAHOBA_FRONTEND`** installs a package with the plugins and
     `deploy/install-frontend.sh` points `/var/www/app` (a symlink; the
-    official app is `/var/www/tagwerk-app`) at its `extra.tagwerk.app`
-    directory after `php artisan tagwerk:frontend` (`FrontendPackage`)
+    official app is `/var/www/fahoba-app`) at its `extra.fahoba.app`
+    directory after `php artisan fahoba:frontend` (`FrontendPackage`)
     checked it: `index.html` inside the package, no inline script, import
     map or foreign script — the CSP would leave it blank, so the start
     stops instead. nginx serves `/assets/` from it (prod and DDEV).
-  - **`templates/frontend`** is split to `tagwerk-frontend-template`:
+  - **`templates/frontend`** is split to `fahoba-frontend-template`:
     Vite + TypeScript, `dist/` committed (Composer installs it as it is;
     its CI fails on a stale build). Build it against the local client:
-    copy it out, point `@tagwerk/client` at `link:<checkout>/apps/platform/frontend/packages/client`,
+    copy it out, point `@fahoba/client` at `link:<checkout>/apps/platform/frontend/packages/client`,
     `pnpm install --ignore-workspace && pnpm build`, copy `dist/` back.
 - **Community files**: `.github/ISSUE_TEMPLATE/` (bug, plugin API; blank
   issues off, questions to Discussions), `pull_request_template.md`,
@@ -1039,9 +1046,9 @@ final class WastePlugin extends \Tagwerk\PluginApi\Plugins\Plugin
   Composer path packages (`repositories` in `composer.json`, `symlink`). The
   Dockerfile copies `plugins/` and `packages/` before `composer install`, otherwise
   Composer does not find the package. Tests for them live in `tests/` of the application.
-- **Lean by design: the image installs no plugin.** Tagwerk's own are
+- **Lean by design: the image installs no plugin.** Fahoba's own are
   `require-dev` (so DDEV and CI always have them) and their sources ride
-  along in the image. `TAGWERK_PLUGINS` names what to install;
+  along in the image. `FAHOBA_PLUGINS` names what to install;
   `deploy/install-plugins.sh` runs `composer require --update-no-dev` in the
   entrypoint before migrating — own plugins from the path at the image's
   version, their dependencies as the lock pins them, others from Packagist.
@@ -1064,7 +1071,7 @@ and switches off per household like a built-in one. Only the operator
 installs plugins, at build time.
 
 ```php
-$catalog->offer('areas', 'acme/board', BoardArea::class);    // Tagwerk\PluginApi\Areas\Area
+$catalog->offer('areas', 'acme/board', BoardArea::class);    // Fahoba\PluginApi\Areas\Area
 $catalog->offer('export', 'acme/board', BoardExport::class);  // ExportRules: systemTables(), scrubbed()
 $catalog->offer('panel', 'acme/board', BoardPanel::class);    // ConfiguresPanel: resources, pages
 PluginRoutes::api('acme/board', fn () => require __DIR__.'/../routes/api.php'); // /api/acme/board/…
@@ -1074,7 +1081,7 @@ PluginRoutes::api('acme/board', fn () => require __DIR__.'/../routes/api.php'); 
   first, then plugin areas by key. `Household::has()` takes a string; a key
   no installed package offers counts as off, so a removed plugin leaves
   nothing behind. `Feature` stays for the built-in ones.
-- **Interfaces are opt-in** (`Tagwerk\PluginApi\Areas\OptIn`): API access
+- **Interfaces are opt-in** (`Fahoba\PluginApi\Areas\OptIn`): API access
   (core `ApiArea`, key `api`), ICS feed, webhooks, MCP. Off until a parent
   ticks them under Household → Interfaces; stored the other way round, in
   `households.opted_in_features`. A new household opens nothing to the
@@ -1102,10 +1109,10 @@ PluginRoutes::api('acme/board', fn () => require __DIR__.'/../routes/api.php'); 
 - **Translations load in `register()`** (`loadJsonTranslationsFrom`). In
   `boot()` the German texts are already loaded and a later path is ignored.
 - **The frontend is a Nuxt layer** in `plugins/<name>/frontend` with
-  `extra.tagwerk.frontend` in its `composer.json`. `plugin-layers.ts`
+  `extra.fahoba.frontend` in its `composer.json`. `plugin-layers.ts`
   reads `vendor/composer/installed.json` (falling back to `composer.lock`)
   and extends the app with every installed one; a dev-only package
-  (`tagwerk/example-area`) is therefore missing in the production bundle.
+  (`fahoba/example-area`) is therefore missing in the production bundle.
   The view registers itself with `registerAreaView(key, component)`;
   `AppShell` draws it. `main.css` carries `@source` for
   `plugins/*/frontend`. The Dockerfile copies `composer.lock` and
@@ -1119,22 +1126,22 @@ PluginRoutes::api('acme/board', fn () => require __DIR__.'/../routes/api.php'); 
 - **`OutboundHttp::send()`** for any method, without redirects; null
   means refused address or failure. Household addresses only.
 
-### Tagwerk's own plugins
+### Fahoba's own plugins
 
-None is installed in the image; `TAGWERK_PLUGINS` picks them.
+None is installed in the image; `FAHOBA_PLUGINS` picks them.
 
 | Package | What | Notes |
 |---|---|---|
 | core | API tokens (Integrations → API access, `App\Auth\ApiTokens`, area `api`) | `api` + `read` (+ `write`) abilities, one household. `ApiTokenScope`: safe methods need `read`, others `write`; app and device tokens pass. |
-| `tagwerk/openapi` | `/api/openapi.json` (Scramble) | public, throttled. `OpenApiTest` fails on an undescribed api route. |
-| `tagwerk/ics-feed` | secret calendar address per family or person | `/ics/{token}`, only the hash stored, −1/+12 months; all-day as DATE in the household zone. |
-| `tagwerk/webhooks` | signed POSTs on chosen `DomainEvent`s | `OutboundHttp::send`, `X-Tagwerk-Signature: sha256=…`, 3 tries; the job catches everything (see outage rule), sync queue = last try. 50 deliveries kept per hook. |
-| `tagwerk/mcp` | `/mcp` for AI assistants (laravel/mcp) | API tokens only (`RequireApiToken`). Tools call the app's own API (`Tagwerk\Mcp\Api`, kernel sub-request with the caller's token): permissions, PIN rules, areas and validation stay in one place. |
-| `tagwerk/caldav` | calendar provider, both ways | Nextcloud, iCloud, mailbox.org … via `OutboundHttp` (no home-network servers). |
-| `tagwerk/webdav-backup` | extension: nightly dump + uploads to WebDAV | operator's address, so plain `Http` — a NAS at home is allowed. |
-| `tagwerk/example-area` | dev only, the reference for a plugin area and a tile | menu entry “Beispiel”, tile “Zähler” (settings, buttons, a guarded reset), e2e `plugins.spec.ts`. |
-| `tagwerk/example-theme` | dev only, the reference for a design pack | “Fjord”: cool colours, rounder corners, its own glass gradient. |
-| `tagwerk/example-language` | dev only, the reference for a language pack | French for the first screens, English for the rest; e2e `languages.spec.ts`. |
+| `fahoba/openapi` | `/api/openapi.json` (Scramble) | public, throttled. `OpenApiTest` fails on an undescribed api route. |
+| `fahoba/ics-feed` | secret calendar address per family or person | `/ics/{token}`, only the hash stored, −1/+12 months; all-day as DATE in the household zone. |
+| `fahoba/webhooks` | signed POSTs on chosen `DomainEvent`s | `OutboundHttp::send`, `X-Fahoba-Signature: sha256=…`, 3 tries; the job catches everything (see outage rule), sync queue = last try. 50 deliveries kept per hook. |
+| `fahoba/mcp` | `/mcp` for AI assistants (laravel/mcp) | API tokens only (`RequireApiToken`). Tools call the app's own API (`Fahoba\Mcp\Api`, kernel sub-request with the caller's token): permissions, PIN rules, areas and validation stay in one place. |
+| `fahoba/caldav` | calendar provider, both ways | Nextcloud, iCloud, mailbox.org … via `OutboundHttp` (no home-network servers). |
+| `fahoba/webdav-backup` | extension: nightly dump + uploads to WebDAV | operator's address, so plain `Http` — a NAS at home is allowed. |
+| `fahoba/example-area` | dev only, the reference for a plugin area and a tile | menu entry “Beispiel”, tile “Zähler” (settings, buttons, a guarded reset), e2e `plugins.spec.ts`. |
+| `fahoba/example-theme` | dev only, the reference for a design pack | “Fjord”: cool colours, rounder corners, its own glass gradient. |
+| `fahoba/example-language` | dev only, the reference for a language pack | French for the first screens, English for the rest; e2e `languages.spec.ts`. |
 
 - **An MCP route is all POST.** `ApiTokenScope` would demand `write` for
   every call; the route carries the action `checks_token_scope`
@@ -1151,7 +1158,7 @@ None is installed in the image; `TAGWERK_PLUGINS` picks them.
   series is refused for writing (422) — rewriting the series object from a
   wall would be a guess. Plain events: `PUT` with `If-None-Match: *` or
   `If-Match`, 412 → `EventConflict`. People and our revision ride along as
-  `X-TAGWERK-PEOPLE`/`X-TAGWERK-REVISION`, like Google's private
+  `X-FAHOBA-PEOPLE`/`X-FAHOBA-REVISION`, like Google's private
   properties. 401/403 in the background → `InvalidGrant` + `AuthorizationLost`.
 - **The backup is scheduled every quarter hour, not at its time.** The time
   is a setting in the database, and the schedule is built before anything
@@ -1166,7 +1173,7 @@ None is installed in the image; `TAGWERK_PLUGINS` picks them.
 
 - **Migrations are append-only.** `database/migrations.sha256` seals every
   migration, plugins' included; `MigrationsAppendOnlyTest` fails on a
-  changed or removed one. `php artisan tagwerk:seal-migrations` adds new
+  changed or removed one. `php artisan fahoba:seal-migrations` adds new
   ones — run it at release, after which they are history. A migration that
   must change after release is a new migration (rollout rule above).
 - **The history before the first public release is one schema dump**
@@ -1197,7 +1204,7 @@ None is installed in the image; `TAGWERK_PLUGINS` picks them.
 
 ### Lists in both directions (Bring)
 
-`tagwerk/bring` talks directly to the REST interface of the Bring apps
+`fahoba/bring` talks directly to the REST interface of the Bring apps
 (`plugins/bring/src/BringClient.php`, endpoints after the Python library
 `bring-api`). Bring has no official interface and no OAuth:
 email and password are stored encrypted in the account, the token alongside
@@ -1210,7 +1217,7 @@ email and password are stored encrypted in the account, the token alongside
   knows no other key. That is why a rename is mirrored as
   “remove old, create new” — otherwise the next sync would bring the old
   name back.
-- **`tagwerk:sync-lists` every five minutes** (`ListSyncService::pull`): What
+- **`fahoba:sync-lists` every five minutes** (`ListSyncService::pull`): What
   Bring has open is open here; what is ticked off there is ticked off here too. New items
   come only from the open list — Bring's history (“recently”) is not
   our import. What Bring does not know at all stays untouched.
@@ -1218,7 +1225,7 @@ email and password are stored encrypted in the account, the token alongside
   is still sitting in the job would otherwise be reverted by the sync.
 - **The target list:** identifier from the selection, otherwise a list of the same
   name, otherwise Bring's default list (“Zuhause”, i.e. “Home”).
-- **`tagwerk:clear-done-items` clears completed items hourly** once they have
+- **`fahoba:clear-done-items` clears completed items hourly** once they have
   been ticked off for twelve hours — a time span rather than “at night”, because households live in
   different time zones. Bring keeps its history; the sync
   fetches only open items.
@@ -1254,7 +1261,7 @@ shared/app/utils/markdown.ts, TwMarkdown.vue, TwMarkdownEditor.vue
   query scans. No generated column — `HouseholdExport` copies every column,
   and an import would fail on a generated one. Every word is a prefix
   (`word:*`), letters and digits only, plus `title ilike %term%` for compounds.
-- **A provider key may carry a slash** (`tagwerk/kochwiki`): the recipe-book
+- **A provider key may carry a slash** (`fahoba/kochwiki`): the recipe-book
   routes match `{provider}` with `WallRecipeController::PROVIDER`, and the
   `builtin/{recipe}/photo` route is registered before them.
 - **Recipe photos live in `recipes/` on the private disk**, redrawn by
@@ -1371,7 +1378,7 @@ link, import, export); wall and phone: the editor of a new recipe
   from. The recipe is saved at once and opened; correcting happens in the
   editor, not in a preview.
 - **A collection is `recipes.json` plus `photos/<id>.webp` in a ZIP**,
-  `format: tagwerk-recipes`, `version` (`RecipeImport::VERSION`). Raise the
+  `format: fahoba-recipes`, `version` (`RecipeImport::VERSION`). Raise the
   version only for a change an older import would misread; an import refuses
   a newer version. Only the photo names the export writes are read from the
   archive.
@@ -1379,11 +1386,11 @@ link, import, export); wall and phone: the editor of a new recipe
   skipped, not the file. A title the book already has (case-insensitive) is
   skipped too — the same file twice changes nothing. Photos are redrawn
   (`PhotoImage`); one that is no picture costs the photo, not the recipe.
-- **Large collections via the command**: `tagwerk:export-recipes <household>
-  <file>`, `tagwerk:import-recipes <household> <file>`. The admin upload is
+- **Large collections via the command**: `fahoba:export-recipes <household>
+  <file>`, `fahoba:import-recipes <household> <file>`. The admin upload is
   bound by Livewire's temporary upload limit.
 
-### Koch-Wiki (`tagwerk/kochwiki`)
+### Koch-Wiki (`fahoba/kochwiki`)
 
 ```
 plugins/kochwiki/src/KochwikiClient.php     MediaWiki API, one request a second
@@ -1454,7 +1461,7 @@ tests/Fixtures/kochwiki/                    real pages: carbonara, Sachertorte, 
   prompt, so the band explains Safari's share menu; other browsers (Firefox)
   get no band. Never shown when running installed (`display-mode`
   standalone/fullscreen, `navigator.standalone`) or in Fully. “Later” stores
-  a timestamp in `localStorage` (`tagwerk-install-snoozed`) for seven days —
+  a timestamp in `localStorage` (`fahoba-install-snoozed`) for seven days —
   a per-device convenience. On the phone it waits for the push sheet; on
   the wall it hides at rest. Chrome only reports installability with PNG
   icons, which is why the wall's manifest lists `icon-192.png`/`icon-512.png`.
@@ -1463,7 +1470,7 @@ tests/Fixtures/kochwiki/                    real pages: carbonara, Sachertorte, 
 - **Push is offered once per phone after sign-in** (`PushOffer`, `usePush().offered`):
   only when push is configured, the browser has no subscription and
   `Notification.permission` is still `default`. The answer is remembered in
-  `localStorage` (`tagwerk-push-asked`) — a per-phone convenience, not state.
+  `localStorage` (`fahoba-push-asked`) — a per-phone convenience, not state.
   `requestPermission()` needs a tap, so the offer is a sheet, never a call on start.
 - **Switching push runs behind `busy` and ends in `status`** (`usePush().run`),
   shared by offer and settings; errors land in `status`, never as unhandled
@@ -1533,7 +1540,7 @@ tests/Fixtures/kochwiki/                    real pages: carbonara, Sachertorte, 
   become so. Only the transition is celebrated — otherwise confetti would fall on every
   reload.
 - **Animations are switchable per tablet** (`animations` preference). `app.vue`
-  mirrors it to `<html data-motion>`, and one rule in `tagwerk.css` stills
+  mirrors it to `<html data-motion>`, and one rule in `fahoba.css` stills
   every animation and transition — no component checks it itself. Use the
   `tw-pop`/`tw-tada`/`tw-fade-down`/`tw-press` utilities rather than new
   keyframes per component. **No endless loops on big emojis:** they trembled
@@ -1649,7 +1656,7 @@ tests/Fixtures/kochwiki/                    real pages: carbonara, Sachertorte, 
 A foreign task is an ordinary `tasks` row with an origin
 (`provider`, `task_account_id`, `external_id`, `external_version`).
 
-| Belongs to the provider | Belongs to Tagwerk |
+| Belongs to the provider | Belongs to Fahoba |
 |---|---|
 | `title`, `notes`, `due_on` | `points`, `person_id`, `rotation`, `rrule`, `position`, `active` |
 
@@ -1763,7 +1770,7 @@ setting is in the device preferences (`task_view`), the default is **day**.
   `?login=`, `?reset=`, `?invite=` → account); 401 means nobody, which is
   the `PairingScreen` — the start page, whose “Am Handy anmelden” switches
   to `LoginScreen` and back. Without a network the last answer
-  (`localStorage` `tagwerk-entry`, a convenience, not a token) holds, so a
+  (`localStorage` `fahoba-entry`, a convenience, not a token) holds, so a
   kiosk comes up as a kiosk. `<html data-entry>` carries the entry;
   kiosk-only CSS hangs on it.
 - **Whether something appears follows the sign-in, how it is laid out the
@@ -1786,7 +1793,7 @@ setting is in the device preferences (`task_view`), the default is **day**.
   back to the sign-in. `GET /api/wall/pin` answers an account with
   `required: false`: the PIN stands in for a sign-in, an account has one.
 - **An account remembers its area for the session** (`sessionStorage`
-  `tagwerk-tab`), a device never: after a power cut the wall shows its start
+  `fahoba-tab`), a device never: after a power cut the wall shows its start
   area. e2e waits for the menu's slide via `getAnimations()` before tapping
   (`menu()` in `mobile.spec.ts`) — mid-slide taps land on moving elements.
 - **An account reads an event before changing it** (`EventSheet`, edit
@@ -2113,7 +2120,7 @@ app/Services/Memberships.php     invite, accept, remove, isLastManager
   membership's key, never the user's: the ids only coincide while every
   account has exactly one membership, and sequences survive rollbacks.
 - **`migrate:fresh --env=testing` wipes the development database** — there
-  is no `.env.testing`; `phpunit.xml` names `tagwerk_test` only for PHPUnit,
+  is no `.env.testing`; `phpunit.xml` names `fahoba_test` only for PHPUnit,
   which migrates it itself.
 
 ## OPERATIONS
@@ -2123,13 +2130,24 @@ One server, several households, public via HTTPS. Everything for this lives unde
 `realtime`). The comments in `compose.yaml` and `.env.example`
 describe the procedures.
 
+- **Renamed from Tagwerk (0.3.0); the old name that remains is deliberate.**
+  Never “clean it up”:
+  - The Compose project, its network and the database defaults stay
+    `tagwerk`: volumes are named after the project, a new name starts a
+    server on an empty database.
+  - `RenamedCookies` and `theme.js` carry cookies and storage keys over;
+    Google's `tagwerk_*` and CalDAV's `X-TAGWERK-*` are still read;
+    webhooks also send `X-Tagwerk-*`.
+  - Old exports import through `RenamedFromTagwerk` (also `tagwerk-recipes`
+    and `tagwerk_plain_secret`).
+  - The entrypoint bridges `TAGWERK_*` to `FAHOBA_*`.
 - **One panel, `/admin`.** Whoever has `household.manage` may enter
   (`User::canAccessPanel`), and every operator (`users.is_operator`). The latter
   additionally sees **Operations → All households** („Betrieb → Alle Haushalte“) (`ManagedHouseholdResource`):
   create, suspend, open support access. `is_operator` is not fillable
-  and arises only with `tagwerk:create-operator` or via `forceFill`.
+  and arises only with `fahoba:create-operator` or via `forceFill`.
 - **The app's sign-in opens the admin** (`AdminFromAppCookie`, in the panel
-  group after `StartSession`). It reads `tagwerk_user_token`, never the
+  group after `StartSession`). It reads `fahoba_user_token`, never the
   device cookie, signs the web guard in only if `canAccessPanel` agrees,
   and stores the token id in the session (`AdminFromAppCookie::SESSION`):
   once that token is gone the admin session ends. A password session has
@@ -2166,10 +2184,10 @@ describe the procedures.
   user menu → Profile (`->profile()`, Filament's `EditProfile`). Every
   change demands the current password; a new one logs out all phones.
 - **Mail goes via SMTP and the queue** (`MAIL_*` in `deploy/.env`). In
-  development it lands in Mailpit (`https://tagwerk.test:8026`); DDEV has
+  development it lands in Mailpit (`https://fahoba.test:8026`); DDEV has
   no worker, so run `php artisan queue:work --stop-when-empty` by hand.
   Texts of the Laravel mail template live in `lang/de.json`.
-- **`TAGWERK_MAIL=off` runs the server without mail** (`OutgoingMail::enabled()`).
+- **`FAHOBA_MAIL=off` runs the server without mail** (`OutgoingMail::enabled()`).
   The mail routes answer 404 (`mail` middleware, placed before the throttle
   in the priority list — the routes share the login limiter), Filament's
   password reset is not registered (panel built at boot, so a change needs
@@ -2180,7 +2198,7 @@ describe the procedures.
   (`MailOffTest`).
 - **Forgot password leads into the app** (`/?reset=…`,
   `PasswordResetController`), not to `/admin`: The admin can be locked for the family via
-  `TAGWERK_ADMIN_ALLOWED_IPS`, the app never.
+  `FAHOBA_ADMIN_ALLOWED_IPS`, the app never.
   Filament's own `->passwordReset()` remains for the login in `/admin`.
 - **Accounts are invited, not created with a password** (`Invitations`).
   Until acceptance they carry a random password and no
@@ -2253,7 +2271,7 @@ describe the procedures.
   plugins that failed to load. Only a keyed, non-blocking notice closes for
   an account (`POST /api/notices/dismiss`, 404 for a key not showing); the
   app's `HouseholdNoticeBar` closes a wall's once a day
-  (`tagwerk-notice-seen`, a JSON list of today's, per device).
+  (`fahoba-notice-seen`, a JSON list of today's, per device).
 - **Messages are Laravel notifications extending `HouseholdMessage`**
   (`title()`, `body()`, `link()`, `push()` tag, optional `toMail()`). Always
   `HouseholdDatabaseChannel` (sets `notifications.household_id`, announces
@@ -2297,22 +2315,22 @@ describe the procedures.
   move (`HouseholdTransfer`, open while read-only), queued in
   `BuildHouseholdArchiveJob`/`ImportHouseholdArchiveJob`, signed download
   `/export/{household}/{file}`, purged after a week
-  (`tagwerk:purge-household-archives`).
+  (`fahoba:purge-household-archives`).
   - **Passwords only travel when asked** (`export($household, secrets:
     true)`, page toggle, `--with-secrets`): `ExportSecrets` spares the
     movable columns from scrubbing (`provider_accounts` credentials and
     tokens, plugins' `MovesSecrets`, tile `SettingField::secret`), wraps the
-    plain value as `{tagwerk_plain_secret: …}`, and both imports `seal()` it
+    plain value as `{fahoba_plain_secret: …}`, and both imports `seal()` it
     with the target's `APP_KEY`. Server-bound columns (push subscriptions,
     Google channels, remember tokens, second factors) stay scrubbed. A new
     encrypted column that works elsewhere belongs in `ExportSecrets::COLUMNS`
     or the plugin's `MovesSecrets`.
-- **`TAGWERK_ADMIN_ALLOWED_IPS` restricts the admin to networks.** Affected
+- **`FAHOBA_ADMIN_ALLOWED_IPS` restricts the admin to networks.** Affected
   are `/admin`, the household switch `/support/…`, the consent paths
   `/auth/…` and the photo preview. Requests from outside get 404, not 403, because otherwise
   the response itself would reveal that something is there. The API stays
   public, because wall and phone are on the move.
-- **`TAGWERK_TRUSTED_PROXIES` must be right, otherwise the list is worthless.** Without
+- **`FAHOBA_TRUSTED_PROXIES` must be right, otherwise the list is worthless.** Without
   an entry Laravel sees only the proxy's address. With an entry that is too generous
   anyone can choose their own address via `X-Forwarded-For`.
   - It is read at request time in `TrustConfiguredProxies`. `env()` in
@@ -2321,10 +2339,10 @@ describe the procedures.
     (`10.0.0.0/8,172.16.0.0/12,192.168.0.0/16`). Docker picks the subnet
     itself; a fixed one collided on servers with many Compose projects
     (“Pool overlaps”). Safe only because `app` has no host port — only
-    containers in `tagwerk` and in the Traefik network can reach it.
+    containers in `fahoba` and in the Traefik network can reach it.
 - **The server runs behind Traefik**, labels directly in `compose.yaml`; host,
   network, entrypoint and certresolver come from `deploy/.env`
-  (`TAGWERK_HOST`, `TRAEFIK_*`). Reverb needs no labels of its own: the
+  (`FAHOBA_HOST`, `TRAEFIK_*`). Reverb needs no labels of its own: the
   nginx in the `app` container passes `/app` and `/apps` on. **Never put Basic Auth in front:** The
   browser's `Authorization` header displaces the token from the cookie
   (`DeviceTokenFromCookie`), wall and phone would no longer get in.
@@ -2334,16 +2352,16 @@ describe the procedures.
   setting up several tablets is not guessing.
 - **Two setups, one image.** `compose.yaml` builds on the server behind
   Traefik; `compose.standalone.yaml` (the default in `.env.example`) runs
-  `ghcr.io/tagwerk-family/tagwerk` behind Caddy (`deploy/Caddyfile`,
-  `TAGWERK_SITE` a host name for Let's Encrypt or `:80` behind another
+  `ghcr.io/fahoba/fahoba` behind Caddy (`deploy/Caddyfile`,
+  `FAHOBA_SITE` a host name for Let's Encrypt or `:80` behind another
   proxy). `COMPOSE_FILE` in `deploy/.env` picks one, so `backup.sh` and
   `rollout.sh` need no flag; `rollout.sh` pulls an image from `ghcr.io` and
   builds anything else. The app never gets a host port: two of it must run
   side by side during a rollout. Caddy finds them by `dynamic a` with a
   one-second `dial_timeout` — a removed container's address otherwise
   hangs a request until it times out.
-- **The image knows its commit** (`TAGWERK_BUILD`, build arg
-  `TAGWERK_REVISION`); `config('app.version')` uses it when `APP_VERSION`
+- **The image knows its commit** (`FAHOBA_BUILD`, build arg
+  `FAHOBA_REVISION`); `config('app.version')` uses it when `APP_VERSION`
   is empty, so walls reload on a new image by themselves. The frontend
   stage runs on `$BUILDPLATFORM`: its output is static, and Node under
   QEMU made arm64 builds crawl.
@@ -2387,7 +2405,7 @@ describe the procedures.
   Every such block therefore includes `security-headers.conf` again. Otherwise
   HSTS is missing precisely at `sw.js` or the build artefacts.
 - **Content Security Policy from one place** (`App\Security\ContentSecurityPolicy`,
-  `TAGWERK_CSP` = `report-only` (default) | `enforce` | `off`).
+  `FAHOBA_CSP` = `report-only` (default) | `enforce` | `off`).
   - The app runs **no inline script**: `modules/external-scripts.ts` moves
     Nuxt's inline scripts into `/_nuxt/inline-<hash>.js` at generate time
     and fails the build if one remains; the import map is off
@@ -2395,7 +2413,7 @@ describe the procedures.
     theme line is `shared/public/theme.js` — inline in `app.head`, unhead
     inserted it again at runtime and the policy blocked it. So the app's
     header is `script-src 'self'` and does not change per build.
-  - nginx sends the app's header: the entrypoint writes `tagwerk:csp` to
+  - nginx sends the app's header: the entrypoint writes `fahoba:csp` to
     `/etc/nginx/csp.conf`, included in `location = /`; DDEV's post-start
     hook writes `storage/framework/csp-app.conf` (glob include, so nginx
     starts without it). After adding or removing a plugin restart.
@@ -2403,7 +2421,7 @@ describe the procedures.
     `SetContentSecurityPolicy`: Filament writes inline scripts without a
     nonce and Alpine evaluates expressions, so `'unsafe-inline'
     'unsafe-eval'` there. No foreign host: the font is local
-    (`LocalFontProvider` in `TagwerkBrand`), and `User::getFilamentAvatarUrl()`
+    (`LocalFontProvider` in `FahobaBrand`), and `User::getFilamentAvatarUrl()`
     returns the person's face or an initial as a `data:` URI — Filament's
     default would ask ui-avatars.com with the initials on every admin page.
   - Plugins add hosts via `offer('csp', 'vendor/name', ContributesToCsp)`:
@@ -2413,12 +2431,12 @@ describe the procedures.
     “Content security policy violation”). `security.spec.ts` fails on any
     violation in the console — browsers log them in report-only mode too.
 - **The image build keeps npm and pnpm downloads in BuildKit cache mounts**
-  (`tagwerk-npm`, `tagwerk-pnpm`), installing with `--prefer-offline`. The
+  (`fahoba-npm`, `fahoba-pnpm`), installing with `--prefer-offline`. The
   frontend step reruns on every code change; from the server the registry
   was slow enough that downloading all packages again took eight minutes.
   `docker builder prune` empties the store — the next build is slow once.
 - **`composer audit --locked --no-dev` stops the image build**;
-  `TAGWERK_AUDIT=warn` only reports. **`pnpm audit --prod` stops CI, not the
+  `FAHOBA_AUDIT=warn` only reports. **`pnpm audit --prod` stops CI, not the
   image**: the frontend stage holds build tools only (static output), and a
   fresh advisory against nitropack once blocked a rollout that changed
   nothing they ship. The image build still prints it. Advisories without a fixed version that only touch build
@@ -2447,9 +2465,9 @@ describe the procedures.
   `storage/app`. The `.env` with `APP_KEY` must be kept separately alongside, because
   without it the providers' credentials are no longer readable.
 - **One household locally:** `deploy/pull-household.sh <ssh-host> <id>`
-  streams `tagwerk:export-household` through ssh and imports it with
-  `tagwerk:import-household` into a database of its own,
-  `tagwerk_household_<id>` (`DB_DATABASE` overrides `.env`). For looking at a
+  streams `fahoba:export-household` through ssh and imports it with
+  `fahoba:import-household` into a database of its own,
+  `fahoba_household_<id>` (`DB_DATABASE` overrides `.env`). For looking at a
   family's data, never as a backup.
   - `HouseholdExport` reads the tables with `household_id` from the schema;
     pivots without one are listed in `PIVOTS`, server tables in `SYSTEM`. A
@@ -2464,7 +2482,7 @@ describe the procedures.
 ```bash
 # first account on an empty server, password is prompted;
 # households afterwards in /admin under Operations
-docker compose exec app su-exec www-data php artisan tagwerk:create-operator Betrieb betrieb@example.org
+docker compose exec app su-exec www-data php artisan fahoba:create-operator Betrieb betrieb@example.org
 ```
 
 ## COMMANDS
@@ -2475,14 +2493,14 @@ ddev exec 'cd apps/platform && php artisan test'    # PHPUnit
 ddev exec 'cd apps/platform && php artisan migrate:fresh --seed'
 ddev launch /admin                                  # Filament administration
 ddev exec 'cd apps/platform && ./vendor/bin/pint --dirty'   # style, changed files only
-ddev exec 'cd apps/platform && php artisan tagwerk:sync-calendars'
-ddev exec 'cd apps/platform && php artisan tagwerk:renew-push-channels'
-ddev exec 'cd apps/platform && php artisan tagwerk:sync-lists'   # pull Bring & co.
+ddev exec 'cd apps/platform && php artisan fahoba:sync-calendars'
+ddev exec 'cd apps/platform && php artisan fahoba:renew-push-channels'
+ddev exec 'cd apps/platform && php artisan fahoba:sync-lists'   # pull Bring & co.
 
 ddev exec 'cd apps/platform/frontend && pnpm install'
-ddev exec 'cd apps/platform/frontend && pnpm dev'   # app, https://tagwerk.test:3000
+ddev exec 'cd apps/platform/frontend && pnpm dev'   # app, https://fahoba.test:3000
 ddev exec 'cd apps/platform/frontend && pnpm build'   # static; nginx: app at /
-ddev exec 'cd apps/platform && php artisan tagwerk:vapid-keys'   # web push keys
+ddev exec 'cd apps/platform && php artisan fahoba:vapid-keys'   # web push keys
 ddev exec 'cd apps/platform && php artisan reverb:start'   # WebSocket, port 8080
 ddev exec 'cd apps/platform/frontend && pnpm test'  # Vitest
 ddev exec 'cd apps/platform/frontend && pnpm typecheck'  # vue-tsc
@@ -2498,7 +2516,7 @@ state behind nginx, not the development server — run `pnpm build` beforehand, 
 the test runs against the previous build. Throwaway accounts and paired devices
 “E2E” are removed by the teardown.
 
-**Serving:** nginx rules in `.ddev/nginx/tagwerk-apps.conf` — the app under
+**Serving:** nginx rules in `.ddev/nginx/fahoba-apps.conf` — the app under
 `/`, everything else Laravel. Not in `nginx_full/`: That directory
 is generated by DDEV and ignored by Git. After changes run
 `ddev exec 'sudo nginx -t && sudo nginx -s reload'`.
@@ -2532,7 +2550,7 @@ lie there, but `ddev exec` starts in the repo root directory.
 - **Type check, build and development server write the same `.nuxt/`** — do not
   run them at the same time.
 - **After a pull, also migrate the development database**
-  (`php artisan migrate`). The tests migrate `tagwerk_test` themselves; without a migration the wall
+  (`php artisan migrate`). The tests migrate `fahoba_test` themselves; without a migration the wall
   gets 500s, for instance from `/api/theme`.
 - **App and admin share one origin.** The service worker applies to `/` and
   thus to every page below it; it handles only navigations to `/` itself,

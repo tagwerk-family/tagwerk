@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Tagwerk\Kochwiki;
+namespace Fahoba\Kochwiki;
 
 use App\Enums\ConnectionStatus;
 use App\Enums\ProviderArea;
@@ -20,7 +20,7 @@ use Illuminate\Support\Facades\Cache;
  */
 final class KochwikiSyncCommand extends Command
 {
-    protected $signature = 'tagwerk:kochwiki-sync {--force : Sync now, used or not}';
+    protected $signature = 'fahoba:kochwiki-sync {--force : Sync now, used or not}';
 
     protected $description = 'Mirror the Koch-Wiki recipes for every household that connected them';
 

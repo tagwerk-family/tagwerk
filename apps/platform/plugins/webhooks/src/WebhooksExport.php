@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Tagwerk\Webhooks;
+namespace Fahoba\Webhooks;
 
-use Tagwerk\PluginApi\Plugins\ExportRules;
-use Tagwerk\PluginApi\Plugins\MovesSecrets;
+use Fahoba\PluginApi\Plugins\ExportRules;
+use Fahoba\PluginApi\Plugins\MovesSecrets;
 
 /**
  * A local copy must not sign requests in the family's name. A move with its

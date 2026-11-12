@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Tagwerk\CalDav;
+namespace Fahoba\CalDav;
 
-use Tagwerk\PluginApi\Plugins\Catalog;
-use Tagwerk\PluginApi\Plugins\Plugin;
+use Fahoba\PluginApi\Plugins\Catalog;
+use Fahoba\PluginApi\Plugins\Plugin;
 
 final class CalDavServiceProvider extends Plugin
 {

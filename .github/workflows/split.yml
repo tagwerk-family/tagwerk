@@ -2,11 +2,11 @@ name: Split
 
 # A release tag (v1.2.3) pushes every package under apps/platform/packages
 # and apps/platform/plugins to its own read-only repository,
-# <SPLIT_OWNER>/tagwerk-<name>, and tags it with the package's version.
+# <SPLIT_OWNER>/fahoba-<name>, and tags it with the package's version.
 # Packagist follows those repositories. Needs the repository variable
 # SPLIT_OWNER (defaults to this repository's owner) and the secret
 # SPLIT_TOKEN (contents: write on the split repositories). The npm job
-# publishes @tagwerk/client (packages/client) through npm's trusted
+# publishes @fahoba/client (packages/client) through npm's trusted
 # publishing: no token, npmjs.com trusts this workflow file.
 on:
   push:
@@ -41,7 +41,7 @@ jobs:
         run: .github/scripts/split-packages.sh
 
   npm:
-    name: Publish @tagwerk/client
+    name: Publish @fahoba/client
     needs: tests
     # Also by hand from master: it publishes only a version npm lacks.
     if: startsWith(github.ref, 'refs/tags/v') || (github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/master')
@@ -65,8 +65,8 @@ jobs:
           node-version: 24
           registry-url: https://registry.npmjs.org
       # .npmrc points the store at DDEV's cache volume, which is not here.
-      - run: rm .npmrc && pnpm install --frozen-lockfile --filter @tagwerk/client
-      - run: pnpm --filter @tagwerk/client build
+      - run: rm .npmrc && pnpm install --frozen-lockfile --filter @fahoba/client
+      - run: pnpm --filter @fahoba/client build
       # Like the split: a version npm has already is left alone, so raise
       # packages/client/package.json's version to publish anew. pnpm packs
       # (it applies publishConfig.exports, npm would not); npm publishes,
@@ -75,9 +75,9 @@ jobs:
         working-directory: apps/platform/frontend/packages/client
         run: |
           version="$(node -p "require('./package.json').version")"
-          if npm view "@tagwerk/client@$version" version >/dev/null 2>&1; then
-            echo "@tagwerk/client $version is published already."
+          if npm view "@fahoba/client@$version" version >/dev/null 2>&1; then
+            echo "@fahoba/client $version is published already."
           else
             pnpm pack --pack-destination "$RUNNER_TEMP"
-            npm publish "$RUNNER_TEMP"/tagwerk-client-"$version".tgz --access public
+            npm publish "$RUNNER_TEMP"/fahoba-client-"$version".tgz --access public
           fi

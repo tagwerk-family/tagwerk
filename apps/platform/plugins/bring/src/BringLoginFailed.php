@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Tagwerk\Bring;
+namespace Fahoba\Bring;
 
 use RuntimeException;
 

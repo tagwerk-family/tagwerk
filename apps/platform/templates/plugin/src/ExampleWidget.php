@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace Acme\Example;
 
-use Tagwerk\PluginApi\Dashboard\DataWidget;
-use Tagwerk\PluginApi\Dashboard\WidgetContent;
-use Tagwerk\PluginApi\Dashboard\WidgetContext;
+use Fahoba\PluginApi\Dashboard\DataWidget;
+use Fahoba\PluginApi\Dashboard\WidgetContent;
+use Fahoba\PluginApi\Dashboard\WidgetContext;
 
 /**
  * A dashboard tile. It returns data — metric, list, table, progress, pairs,

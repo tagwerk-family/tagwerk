@@ -10,7 +10,7 @@ This guide covers both: pairing and permanent kiosk operation.
 
 ---
 
-## 1. Create the device in Tagwerk
+## 1. Create the device in Fahoba
 
 1. Open the admin (`/admin`), **Devices → New device** („Geräte → Erstellen“)
 2. Enter a **Title** („Bezeichnung“) — where it hangs, e.g. “Kitchen” or “Hallway”
@@ -32,8 +32,8 @@ tablet or when replacing a device — the entry including its label is kept.
 
 ## 3. Pair on the tablet
 
-Open the Tagwerk address in the tablet's browser. **“Welcome to Tagwerk”**
-(„Willkommen bei Tagwerk“) appears with three options; choose **“Set up a wall
+Open the Fahoba address in the tablet's browser. **“Welcome to Fahoba”**
+(„Willkommen bei Fahoba“) appears with three options; choose **“Set up a wall
 tablet”** („Wandtablet einrichten“), enter the code, **Connect** („Verbinden“).
 Anyone who scans the QR code skips the selection.
 
@@ -58,7 +58,7 @@ for years. Paid items are marked.
 
 | Setting | Value | Why |
 |---|---|---|
-| Start URL | the Tagwerk address | |
+| Start URL | the Fahoba address | |
 | Enable JavaScript | on | |
 | Enable Cookies | **on** | Without cookies there is no device token |
 | Enable DOM Storage | on | |
@@ -99,7 +99,7 @@ back into the settings.
 The tablet is permanently connected to power. The screen should be dark at
 night, but the device must not sleep.
 
-Tagwerk has its own **resting mode** (see section 5). With it, the carousel
+Fahoba has its own **resting mode** (see section 5). With it, the carousel
 runs during the day, and Fully only switches off at night: screensaver timer
 long or off, *Time to Turn Screen Off* for the night. A short Fully screensaver
 would otherwise lie over the carousel.
@@ -107,7 +107,7 @@ would otherwise lie over the carousel.
 | Setting | Value |
 |---|---|
 | Screen Off Timer | 0 (never switch off based on time) |
-| Screensaver Timer | e.g. 1800 seconds — or 0 if Tagwerk's resting mode is running |
+| Screensaver Timer | e.g. 1800 seconds — or 0 if Fahoba's resting mode is running |
 | Screensaver Brightness | low, about 0–10 |
 | Screensaver Wallpaper URL | empty (black) |
 | Time to Turn Screen Off | e.g. 22:00–06:00 |
@@ -127,7 +127,7 @@ wanted, the alternative is **Touch to Wake** — then a touch wakes the device.
 
 ---
 
-## 5. What Tagwerk handles itself
+## 5. What Fahoba handles itself
 
 Six things that in kiosk setups are otherwise solved through Fully and that you
 do **not** have to configure here:
@@ -139,7 +139,7 @@ do **not** have to configure here:
   school area shows each child for one interval. Photos fill the whole screen
   there, with the time in a corner and a blurred copy of the picture instead
   of black bars. A black layer additionally
-  dims the screen (only lightly over photos); if *Enable JavaScript Interface* is on in Fully, Tagwerk
+  dims the screen (only lightly over photos); if *Enable JavaScript Interface* is on in Fully, Fahoba
   also lowers the real brightness by the same share and restores it on waking.
   How dark is set with two sliders in steps of 5 %, 0–90 %: “Darken by day”
   („Abdunkeln am Tag“, 50 % by default) and “Darken at night” („Abdunkeln in
@@ -181,7 +181,7 @@ do **not** have to configure here:
 
 ## 6. When something gets stuck
 
-**After a restart “Welcome to Tagwerk” shows again.**
+**After a restart “Welcome to Fahoba” shows again.**
 Fully deletes the cookies. Turn *Clear Cookies on Restart* off, then pair again.
 
 **The page stays white.**

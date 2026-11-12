@@ -9,10 +9,10 @@ use App\Integrations\ProviderRegistry;
 use App\Jobs\SyncCalendarJob;
 use App\Models\Calendar;
 use App\Models\Household;
+use Fahoba\PluginApi\Calendar\InvalidNotification;
+use Fahoba\PluginApi\Calendar\WatchesChanges;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-use Tagwerk\PluginApi\Calendar\InvalidNotification;
-use Tagwerk\PluginApi\Calendar\WatchesChanges;
 
 /**
  * Receives the providers' change notifications.

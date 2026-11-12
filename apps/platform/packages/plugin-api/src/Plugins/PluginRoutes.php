@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Tagwerk\PluginApi\Plugins;
+namespace Fahoba\PluginApi\Plugins;
 
 use Closure;
 use Illuminate\Support\Facades\Route;

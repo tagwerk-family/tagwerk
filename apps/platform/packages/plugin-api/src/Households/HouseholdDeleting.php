@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Tagwerk\PluginApi\Households;
+namespace Fahoba\PluginApi\Households;
 
 /**
  * Dispatched before a household and everything it owns are deleted.

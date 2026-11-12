@@ -1,6 +1,6 @@
 name: Image
 
-# A release tag (v1.2.3) publishes ghcr.io/tagwerk-family/tagwerk as 1.2.3, 1.2 and
+# A release tag (v1.2.3) publishes ghcr.io/fahoba/fahoba as 1.2.3, 1.2 and
 # latest, for amd64 and arm64. Not on every push: an arm64 build compiles the
 # PHP extensions under emulation and takes a while. Run it by hand for a
 # preview image (tagged with the commit).
@@ -50,7 +50,7 @@ jobs:
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
           build-args: |
-            TAGWERK_REVISION=${{ github.sha }}
-            TAGWERK_RELEASE=${{ github.ref_name }}
+            FAHOBA_REVISION=${{ github.sha }}
+            FAHOBA_RELEASE=${{ github.ref_name }}
           cache-from: type=gha
           cache-to: type=gha,mode=max

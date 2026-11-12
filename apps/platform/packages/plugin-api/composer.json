@@ -1,6 +1,6 @@
 {
-    "name": "tagwerk/plugin-api",
-    "description": "Contracts and helpers for Tagwerk plugins",
+    "name": "fahoba/plugin-api",
+    "description": "Contracts and helpers for Fahoba plugins",
     "type": "library",
     "version": "0.1.0",
     "license": "MIT",
@@ -14,16 +14,16 @@
     },
     "autoload": {
         "psr-4": {
-            "Tagwerk\\PluginApi\\": "src/"
+            "Fahoba\\PluginApi\\": "src/"
         }
     },
     "suggest": {
-        "phpunit/phpunit": "for Tagwerk\\PluginApi\\Testing, the assertions a plugin's own tests use"
+        "phpunit/phpunit": "for Fahoba\\PluginApi\\Testing, the assertions a plugin's own tests use"
     },
-    "homepage": "https://github.com/tagwerk-family/tagwerk",
+    "homepage": "https://github.com/fahoba/fahoba",
     "support": {
-        "issues": "https://github.com/tagwerk-family/tagwerk/issues",
-        "source": "https://github.com/tagwerk-family/tagwerk/tree/master/apps/platform/packages/plugin-api",
-        "docs": "https://github.com/tagwerk-family/tagwerk/blob/master/docs/plugins.md"
+        "issues": "https://github.com/fahoba/fahoba/issues",
+        "source": "https://github.com/fahoba/fahoba/tree/master/apps/platform/packages/plugin-api",
+        "docs": "https://github.com/fahoba/fahoba/blob/master/docs/plugins.md"
     }
 }

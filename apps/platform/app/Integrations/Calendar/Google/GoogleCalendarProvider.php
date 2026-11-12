@@ -7,24 +7,24 @@ namespace App\Integrations\Calendar\Google;
 use App\Integrations\Google\GoogleOAuth;
 use App\Models\Calendar;
 use Carbon\CarbonImmutable;
+use Fahoba\PluginApi\Calendar\CalendarProvider;
+use Fahoba\PluginApi\Calendar\ChangePage;
+use Fahoba\PluginApi\Calendar\ConnectedCalendar;
+use Fahoba\PluginApi\Calendar\EventDraft;
+use Fahoba\PluginApi\Calendar\InvalidNotification;
+use Fahoba\PluginApi\Calendar\ListsCalendars;
+use Fahoba\PluginApi\Calendar\PushChannel;
+use Fahoba\PluginApi\Calendar\RemoteCalendar;
+use Fahoba\PluginApi\Calendar\RemoteEvent;
+use Fahoba\PluginApi\Calendar\SyncsEvents;
+use Fahoba\PluginApi\Calendar\WatchesChanges;
+use Fahoba\PluginApi\Calendar\WritesEvents;
+use Fahoba\PluginApi\Connections\ConnectedAccount;
+use Fahoba\PluginApi\Connections\DescribesSetup;
+use Fahoba\PluginApi\Connections\TokenSet;
+use Fahoba\PluginApi\Connections\UsesOAuth;
 use Illuminate\Http\Request;
 use RuntimeException;
-use Tagwerk\PluginApi\Calendar\CalendarProvider;
-use Tagwerk\PluginApi\Calendar\ChangePage;
-use Tagwerk\PluginApi\Calendar\ConnectedCalendar;
-use Tagwerk\PluginApi\Calendar\EventDraft;
-use Tagwerk\PluginApi\Calendar\InvalidNotification;
-use Tagwerk\PluginApi\Calendar\ListsCalendars;
-use Tagwerk\PluginApi\Calendar\PushChannel;
-use Tagwerk\PluginApi\Calendar\RemoteCalendar;
-use Tagwerk\PluginApi\Calendar\RemoteEvent;
-use Tagwerk\PluginApi\Calendar\SyncsEvents;
-use Tagwerk\PluginApi\Calendar\WatchesChanges;
-use Tagwerk\PluginApi\Calendar\WritesEvents;
-use Tagwerk\PluginApi\Connections\ConnectedAccount;
-use Tagwerk\PluginApi\Connections\DescribesSetup;
-use Tagwerk\PluginApi\Connections\TokenSet;
-use Tagwerk\PluginApi\Connections\UsesOAuth;
 
 /**
  * Google Calendar as a provider.
@@ -69,7 +69,7 @@ final class GoogleCalendarProvider implements CalendarProvider, DescribesSetup, 
     public function setupNotes(): array
     {
         return [
-            __('Google will ask which permissions Tagwerk gets — read and write calendars.'),
+            __('Google will ask which permissions Fahoba gets — read and write calendars.'),
             __('You choose afterwards in the calendar settings which calendars appear.'),
             __('This approval only covers events. Tasks and lists stay untouched.'),
         ];
@@ -351,7 +351,8 @@ final class GoogleCalendarProvider implements CalendarProvider, DescribesSetup, 
     /** @param  array<string, mixed>  $item */
     private function privateProperty(array $item, string $key): ?string
     {
-        $value = data_get($item, 'extendedProperties.private.'.$key);
+        $value = data_get($item, 'extendedProperties.private.'.$key)
+            ?? data_get($item, 'extendedProperties.private.'.(EventProperties::LEGACY[$key] ?? $key));
 
         return is_string($value) ? $value : null;
     }

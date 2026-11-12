@@ -9,7 +9,7 @@
   "dependencies": {
     "@fontsource-variable/plus-jakarta-sans": "^5.3.0",
     "@nuxtjs/i18n": "10.5.0",
-    "@tagwerk/client": "workspace:*",
+    "@fahoba/client": "workspace:*",
     "lucide-vue-next": "^1.0.0",
     "vue": "^3.5.44"
   },

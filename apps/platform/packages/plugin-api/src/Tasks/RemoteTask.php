@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Tagwerk\PluginApi\Tasks;
+namespace Fahoba\PluginApi\Tasks;
 
 use Carbon\CarbonImmutable;
 
 /**
  * A task as it comes in from outside.
  *
- * Deliberately narrow: title, note, due date, done. What Tagwerk makes of it
+ * Deliberately narrow: title, note, due date, done. What Fahoba makes of it
  * — points, assignee, rotation — is not here, because no external service
  * has it. The household lays these fields on top, and a sync never touches
  * them.

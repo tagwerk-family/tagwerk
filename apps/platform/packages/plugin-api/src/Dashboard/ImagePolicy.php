@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Tagwerk\PluginApi\Dashboard;
+namespace Fahoba\PluginApi\Dashboard;
 
 /** Which image URLs a widget may hand to the wall — the host's content security policy. */
 interface ImagePolicy

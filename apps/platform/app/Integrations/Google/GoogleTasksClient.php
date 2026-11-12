@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace App\Integrations\Google;
 
+use Fahoba\PluginApi\Connections\ConnectedAccount;
 use Illuminate\Http\Client\PendingRequest;
 use Illuminate\Support\Facades\Http;
-use Tagwerk\PluginApi\Connections\ConnectedAccount;
 
 /**
  * Thin wrapper around the Tasks API.

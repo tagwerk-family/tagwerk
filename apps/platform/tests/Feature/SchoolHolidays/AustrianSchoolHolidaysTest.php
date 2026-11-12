@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Tests\Feature\SchoolHolidays;
 
 use App\Integrations\SchoolHolidays\Austria\AustrianSchoolHolidays;
-use Tagwerk\PluginApi\SchoolHolidays\SchoolHolidaySuggestion;
+use Fahoba\PluginApi\SchoolHolidays\SchoolHolidaySuggestion;
 use Tests\TestCase;
 
 /**

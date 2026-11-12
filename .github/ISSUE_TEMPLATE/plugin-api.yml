@@ -19,4 +19,4 @@ body:
   - type: input
     id: version
     attributes:
-      label: tagwerk/plugin-api version
+      label: fahoba/plugin-api version

@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace App\Console\Commands;
 
 use App\Integrations\ProviderContracts;
+use Fahoba\PluginApi\Languages\Coverage;
+use Fahoba\PluginApi\Languages\Reference;
 use Illuminate\Console\Command;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\File;
@@ -17,19 +19,17 @@ use ReflectionNamedType;
 use ReflectionParameter;
 use ReflectionType;
 use ReflectionUnionType;
-use Tagwerk\PluginApi\Languages\Coverage;
-use Tagwerk\PluginApi\Languages\Reference;
 use UnitEnum;
 
 /**
  * Writes a plugin package that loads as it is: composer.json with
- * `extra.tagwerk`, the plugin class, one widget, provider or area, a PHPUnit
+ * `extra.fahoba`, the plugin class, one widget, provider or area, a PHPUnit
  * test and a README. A provider's methods come from its area's contract, so
  * the stub never drifts from the API.
  */
 final class MakePluginCommand extends Command
 {
-    protected $signature = 'tagwerk:make-plugin
+    protected $signature = 'fahoba:make-plugin
         {name : vendor/name, e.g. acme/waste}
         {--widget : A dashboard widget}
         {--provider= : A provider for an area: '.'calendar, lists, tasks, recipes, photos, geocoding, weather, holidays, school_holidays}
@@ -38,7 +38,7 @@ final class MakePluginCommand extends Command
         {--theme : A design pack: colours, font and corners}
         {--path= : Where to write it (default: plugins/<name>)}';
 
-    protected $description = 'Writes a new Tagwerk plugin package';
+    protected $description = 'Writes a new Fahoba plugin package';
 
     public function handle(): int
     {
@@ -50,8 +50,8 @@ final class MakePluginCommand extends Command
             return self::FAILURE;
         }
 
-        if (str_starts_with($name, 'tagwerk/')) {
-            $this->error('The vendor tagwerk/ is reserved for the bundled plugins. Use your own.');
+        if (str_starts_with($name, 'fahoba/')) {
+            $this->error('The vendor fahoba/ is reserved for the bundled plugins. Use your own.');
 
             return self::FAILURE;
         }
@@ -115,7 +115,7 @@ final class MakePluginCommand extends Command
 
         $files["src/{$class}Plugin.php"] = str_replace(
             ['{{ uses }}', '{{ boot }}', '{{ area }}', '{{ offered }}'],
-            [$boot === '' ? '' : "use Tagwerk\\PluginApi\\Plugins\\PluginRoutes;\n", $boot, $area, $offered],
+            [$boot === '' ? '' : "use Fahoba\\PluginApi\\Plugins\\PluginRoutes;\n", $boot, $area, $offered],
             $this->stub('plugin'),
         );
         $files["tests/{$class}Test.php"] = str_replace(['{{ checks }}', '{{ tested }}'], [$this->checks($area), $offered], $this->stub('test'));
@@ -190,29 +190,29 @@ final class MakePluginCommand extends Command
 
     private function composer(string $name, string $namespace, string $class, bool $language = false, bool $theme = false): string
     {
-        $tagwerk = ['provider' => $namespace.'\\'.$class.'Plugin'];
+        $fahoba = ['provider' => $namespace.'\\'.$class.'Plugin'];
 
         if ($language) {
             // Shown next to the running version under Operations → Plugins.
-            $tagwerk['language'] = ['complete-for' => (string) config('app.version')];
+            $fahoba['language'] = ['complete-for' => (string) config('app.version')];
         }
 
         return json_encode([
             'name' => $name,
             'description' => match (true) {
-                $language => 'A language for Tagwerk',
-                $theme => 'A design for Tagwerk',
-                default => 'A Tagwerk plugin',
+                $language => 'A language for Fahoba',
+                $theme => 'A design for Fahoba',
+                default => 'A Fahoba plugin',
             },
             'type' => 'library',
             'version' => '0.1.0',
             // A pack is texts or tokens only, MIT keeps it open; otherwise left for the author (README).
             'license' => $language || $theme ? 'MIT' : 'proprietary',
-            'require' => ['php' => '^8.5', 'tagwerk/plugin-api' => '^0.1'],
+            'require' => ['php' => '^8.5', 'fahoba/plugin-api' => '^0.1'],
             'require-dev' => ['phpunit/phpunit' => '^12.0'],
             'autoload' => ['psr-4' => [$namespace.'\\' => 'src/']],
             'autoload-dev' => ['psr-4' => [$namespace.'\\Tests\\' => 'tests/']],
-            'extra' => ['tagwerk' => $tagwerk],
+            'extra' => ['fahoba' => $fahoba],
         ], JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES | JSON_THROW_ON_ERROR).PHP_EOL;
     }
 
@@ -228,9 +228,9 @@ final class MakePluginCommand extends Command
             $body = match ($method->getName()) {
                 'key' => '        return {{ class }}Plugin::KEY;',
                 'label' => "        return '{{ title }}';",
-                // Installed means enabled: Tagwerk asks these of every
+                // Installed means enabled: Fahoba asks these of every
                 // provider, so a stub answers “not ready” instead of throwing.
-                'isConfigured', 'supports', 'isAvailable' => "        // Not ready: Tagwerk does not call the rest yet.\n        return false;",
+                'isConfigured', 'supports', 'isAvailable' => "        // Not ready: Fahoba does not call the rest yet.\n        return false;",
                 default => "        throw new \\LogicException('Not written yet: '.__METHOD__);",
             };
 
@@ -246,7 +246,7 @@ final class MakePluginCommand extends Command
 
         return "<?php\n\ndeclare(strict_types=1);\n\nnamespace {{ namespace }};\n\n"
             ."final class {$class} implements \\{$contract}\n{\n"
-            ."    // Nothing in the constructor: Tagwerk creates providers on demand, and\n"
+            ."    // Nothing in the constructor: Fahoba creates providers on demand, and\n"
             ."    // a constructor must touch neither database nor network.\n\n"
             .implode("\n\n", $methods)."\n}\n";
     }

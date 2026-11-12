@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Tagwerk\PluginApi\Weather;
+namespace Fahoba\PluginApi\Weather;
 
 /** One day: a line under the tile's temperature, a tab in the weather window. */
 final readonly class DayForecast

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Tagwerk\PluginApi\Plugins;
+namespace Fahoba\PluginApi\Plugins;
 
 /**
  * Next to `ExportRules`: encrypted columns (Laravel's `encrypted` casts)

@@ -13,11 +13,11 @@ use App\Models\Household;
 use App\Models\ProviderAccount;
 use App\Models\User;
 use App\Support\HouseholdContext;
+use Fahoba\PluginApi\Connections\DescribesSetup;
 use Filament\Actions\Testing\TestAction;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Http;
 use Livewire\Livewire;
-use Tagwerk\PluginApi\Connections\DescribesSetup;
 use Tests\TestCase;
 
 /**
@@ -85,8 +85,8 @@ final class ConnectionWizardTest extends TestCase
         Livewire::test(ListConnections::class)
             ->callAction(TestAction::make('connectService'), [
                 'area' => ProviderArea::Lists->value,
-                'provider' => 'tagwerk/bring',
-                'credentials' => ['lists' => ['tagwerk/bring' => [
+                'provider' => 'fahoba/bring',
+                'credentials' => ['lists' => ['fahoba/bring' => [
                     'email' => 'familie@example.org',
                     'password' => 'secret',
                 ]]],
@@ -95,7 +95,7 @@ final class ConnectionWizardTest extends TestCase
 
         $account = ProviderAccount::query()
             ->where('area', ProviderArea::Lists)
-            ->where('provider', 'tagwerk/bring')
+            ->where('provider', 'fahoba/bring')
             ->sole();
 
         $this->assertSame('Bring! – familie@example.org', $account->account_label);
@@ -112,14 +112,14 @@ final class ConnectionWizardTest extends TestCase
         Livewire::test(ListConnections::class)
             ->callAction(TestAction::make('connectService'), [
                 'area' => ProviderArea::Lists->value,
-                'provider' => 'tagwerk/bring',
-                'credentials' => ['lists' => ['tagwerk/bring' => [
+                'provider' => 'fahoba/bring',
+                'credentials' => ['lists' => ['fahoba/bring' => [
                     'email' => 'familie@example.org',
                     'password' => 'wrong',
                 ]]],
             ]);
 
-        $this->assertSame(0, ProviderAccount::query()->where('provider', 'tagwerk/bring')->count());
+        $this->assertSame(0, ProviderAccount::query()->where('provider', 'fahoba/bring')->count());
     }
 
     /**
@@ -162,7 +162,7 @@ final class ConnectionWizardTest extends TestCase
         $bring = ProviderAccount::factory()->create([
             'household_id' => $this->household->id,
             'area' => ProviderArea::Lists,
-            'provider' => 'tagwerk/bring',
+            'provider' => 'fahoba/bring',
             'settings' => ['targets' => [
                 ['id' => 'a', 'name' => 'Zuhause'],
                 ['id' => 'b', 'name' => 'Baumarkt'],

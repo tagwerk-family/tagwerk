@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace Tagwerk\ExampleArea;
+namespace Fahoba\ExampleArea;
 
-use Tagwerk\PluginApi\Areas\Area;
+use Fahoba\PluginApi\Areas\Area;
 
 final class ExampleArea implements Area
 {
-    public const KEY = 'tagwerk/example-area';
+    public const KEY = 'fahoba/example-area';
 
     public function label(): string
     {

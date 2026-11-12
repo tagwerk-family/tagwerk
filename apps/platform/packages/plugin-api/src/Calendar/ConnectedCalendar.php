@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace Tagwerk\PluginApi\Calendar;
+namespace Fahoba\PluginApi\Calendar;
 
 use Carbon\CarbonImmutable;
-use Tagwerk\PluginApi\Connections\ConnectedAccount;
+use Fahoba\PluginApi\Connections\ConnectedAccount;
 
 /**
- * One calendar of a connected account, as Tagwerk keeps it — what a calendar
+ * One calendar of a connected account, as Fahoba keeps it — what a calendar
  * provider receives instead of a database row.
  *
  * Like `ConnectedAccount`, no method shares a name with a column (PHP method
@@ -28,7 +28,7 @@ interface ConnectedCalendar
     public function account(): ConnectedAccount;
 
     /**
-     * The service ids of the events Tagwerk holds for this calendar that
+     * The service ids of the events Fahoba holds for this calendar that
      * overlap `[$from, $to)` — what a sync without a delta compares against
      * to find the ones deleted at the service.
      *

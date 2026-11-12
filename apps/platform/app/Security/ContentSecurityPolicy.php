@@ -6,25 +6,25 @@ namespace App\Security;
 
 use App\Integrations\Plugins\PluginCatalog;
 use App\Integrations\Plugins\PluginManifest;
+use Fahoba\PluginApi\Dashboard\ImagePolicy;
+use Fahoba\PluginApi\Plugins\LoadReport;
+use Fahoba\PluginApi\Security\ContributesToCsp;
 use Illuminate\Contracts\Container\Container;
-use Tagwerk\PluginApi\Dashboard\ImagePolicy;
-use Tagwerk\PluginApi\Plugins\LoadReport;
-use Tagwerk\PluginApi\Security\ContributesToCsp;
 
 /**
- * The one place that says what a page of Tagwerk may load.
+ * The one place that says what a page of Fahoba may load.
  *
  * Two variants of the same policy. The app (wall and phone) is static and
  * runs no inline script at all (modules/external-scripts.ts moves Nuxt's
  * into files), so `script-src 'self'` holds there; nginx sends it, written
- * by `tagwerk:csp` at container start. Everything Laravel renders — the
+ * by `fahoba:csp` at container start. Everything Laravel renders — the
  * admin above all — gets the second variant from SetContentSecurityPolicy:
  * Filament writes inline scripts without a nonce and Alpine evaluates its
  * expressions, so scripts there need 'unsafe-inline' and 'unsafe-eval'. The
  * rest still holds: no plugins, no foreign forms, no framing, no data sent
  * anywhere but here.
  *
- * Plugins add hosts in their composer.json (`extra.tagwerk.csp`) or, for
+ * Plugins add hosts in their composer.json (`extra.fahoba.csp`) or, for
  * hosts known only at runtime, through ContributesToCsp. The policy is built
  * each time, so a removed or failed package takes its hosts along.
  */
@@ -47,7 +47,7 @@ final class ContentSecurityPolicy implements ImagePolicy
     /** `off`, `report-only` (the default) or `enforce`. */
     public function mode(): string
     {
-        $mode = (string) config('tagwerk.csp');
+        $mode = (string) config('fahoba.csp');
 
         return in_array($mode, ['off', 'enforce'], true) ? $mode : 'report-only';
     }
@@ -135,7 +135,7 @@ final class ContentSecurityPolicy implements ImagePolicy
             }
         }
 
-        // Hosts a plugin declares in its composer.json (`extra.tagwerk.csp`).
+        // Hosts a plugin declares in its composer.json (`extra.fahoba.csp`).
         foreach ($this->manifest->packages() as $package) {
             if ($package['csp'] === [] || $this->report->failed($package['name'])) {
                 continue;

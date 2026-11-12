@@ -10,11 +10,11 @@ use App\Enums\Feature;
 use App\Models\Device;
 use App\Models\Household;
 use App\Support\HouseholdContext;
+use Fahoba\PluginApi\Areas\Area;
+use Fahoba\PluginApi\Plugins\Catalog;
+use Fahoba\PluginApi\Plugins\PluginRoutes;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Route;
-use Tagwerk\PluginApi\Areas\Area;
-use Tagwerk\PluginApi\Plugins\Catalog;
-use Tagwerk\PluginApi\Plugins\PluginRoutes;
 use Tests\TestCase;
 
 /**

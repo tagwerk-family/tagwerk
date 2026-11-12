@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Tagwerk\Webhooks\Filament;
+namespace Fahoba\Webhooks\Filament;
 
 use App\Filament\Concerns\BelongsToArea;
 use App\Filament\NavigationGroup;
@@ -10,6 +10,11 @@ use App\Support\HouseholdTimezone;
 use App\Support\OutboundHttp;
 use BackedEnum;
 use Closure;
+use Fahoba\PluginApi\Events\DomainEvent;
+use Fahoba\Webhooks\DeliverWebhookJob;
+use Fahoba\Webhooks\Webhook;
+use Fahoba\Webhooks\WebhookDelivery;
+use Fahoba\Webhooks\WebhooksArea;
 use Filament\Actions\Action;
 use Filament\Actions\DeleteAction;
 use Filament\Actions\EditAction;
@@ -23,16 +28,11 @@ use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
-use Tagwerk\PluginApi\Events\DomainEvent;
-use Tagwerk\Webhooks\DeliverWebhookJob;
-use Tagwerk\Webhooks\Webhook;
-use Tagwerk\Webhooks\WebhookDelivery;
-use Tagwerk\Webhooks\WebhooksArea;
 use UnitEnum;
 
 /**
  * Integrations → Webhooks. The signing secret is shown once; the receiver
- * checks `X-Tagwerk-Signature` (HMAC-SHA256 of the body) with it.
+ * checks `X-Fahoba-Signature` (HMAC-SHA256 of the body) with it.
  */
 class WebhookResource extends Resource
 {

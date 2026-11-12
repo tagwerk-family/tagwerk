@@ -43,7 +43,7 @@ final class MailOffTest extends TestCase
     protected function setUp(): void
     {
         // $_SERVER and $_ENV take precedence over putenv(); see RealtimeTest.
-        $this->setEnvironment(['TAGWERK_MAIL' => 'off']);
+        $this->setEnvironment(['FAHOBA_MAIL' => 'off']);
 
         parent::setUp();
 

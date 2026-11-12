@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Tagwerk\PluginApi\Calendar;
+namespace Fahoba\PluginApi\Calendar;
 
 use Carbon\CarbonImmutable;
 
@@ -11,7 +11,7 @@ use Carbon\CarbonImmutable;
  *
  * The translation lies with the provider, not with the sync: a cancellation
  * arrives differently everywhere (Google reports `status: cancelled`, CalDAV
- * answers with 404), and Tagwerk mirrors the person mapping into a field
+ * answers with 404), and Fahoba mirrors the person mapping into a field
  * every provider names differently.
  */
 final readonly class RemoteEvent

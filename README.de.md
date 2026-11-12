@@ -1,6 +1,8 @@
-# Tagwerk
+# Fahoba
 
 *English version: [`README.md`](README.md)*
+
+**Fa**mily · **Ho**me · **Ba**se — die Zentrale, in der der Familienalltag zusammenläuft.
 
 Selbst gehosteter Familienkalender für ein wandmontiertes Tablet und die
 Handys der Familie — Kalender, Aufgaben mit Sternen und Belohnungen, Listen,
@@ -26,65 +28,65 @@ Es braucht nur Docker mit Compose, keinen Checkout. In einem leeren Ordner:
 cat > compose.yaml <<'EOF'
 services:
   app:
-    image: ghcr.io/tagwerk-family/tagwerk:latest
+    image: ghcr.io/fahoba/fahoba:latest
     restart: unless-stopped
     depends_on: { db: { condition: service_healthy } }
     environment:
-      APP_NAME: Tagwerk
-      APP_URL: https://${TAGWERK_HOST}
+      APP_NAME: Fahoba
+      APP_URL: https://${FAHOBA_HOST}
       APP_KEY: ${APP_KEY}
       LOG_CHANNEL: stderr
       DB_CONNECTION: pgsql
       DB_HOST: db
-      DB_DATABASE: tagwerk
-      DB_USERNAME: tagwerk
+      DB_DATABASE: fahoba
+      DB_USERNAME: fahoba
       DB_PASSWORD: ${DB_PASSWORD}
       SESSION_DRIVER: database
       SESSION_ENCRYPT: "true"
       SESSION_SECURE_COOKIE: "true"
-      TAGWERK_TRUSTED_PROXIES: 10.0.0.0/8,172.16.0.0/12,192.168.0.0/16
-      TAGWERK_MAIL: "off"
+      FAHOBA_TRUSTED_PROXIES: 10.0.0.0/8,172.16.0.0/12,192.168.0.0/16
+      FAHOBA_MAIL: "off"
     volumes: [storage:/var/www/html/storage]
   db:
     image: postgres:16-alpine
     restart: unless-stopped
     environment:
-      POSTGRES_DB: tagwerk
-      POSTGRES_USER: tagwerk
+      POSTGRES_DB: fahoba
+      POSTGRES_USER: fahoba
       POSTGRES_PASSWORD: ${DB_PASSWORD}
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U tagwerk -d tagwerk"]
+      test: ["CMD-SHELL", "pg_isready -U fahoba -d fahoba"]
       interval: 5s
       retries: 20
     volumes: [db:/var/lib/postgresql/data]
   caddy:
     image: caddy:2-alpine
     restart: unless-stopped
-    command: caddy reverse-proxy --from ${TAGWERK_HOST} --to app:8080
+    command: caddy reverse-proxy --from ${FAHOBA_HOST} --to app:8080
     ports: ["80:80", "443:443"]
     volumes: [caddy:/data]
 volumes: { storage: {}, db: {}, caddy: {} }
 EOF
 
 cat > .env <<EOF
-TAGWERK_HOST=tagwerk.example.org
+FAHOBA_HOST=fahoba.example.org
 APP_KEY=base64:$(openssl rand -base64 32)
 DB_PASSWORD=$(openssl rand -hex 24)
 EOF
 
 docker compose up -d
-docker compose exec app su-exec www-data php artisan tagwerk:create-operator Admin du@example.org
+docker compose exec app su-exec www-data php artisan fahoba:create-operator Admin du@example.org
 ```
 
-`TAGWERK_HOST` ist der öffentliche Name deines Servers: Ports 80 und 443
+`FAHOBA_HOST` ist der öffentliche Name deines Servers: Ports 80 und 443
 müssen ihn erreichen, Caddy holt das HTTPS-Zertifikat selbst. Danach
 `https://<host>/admin` öffnen, mit dem Betriebskonto anmelden und den ersten
 Haushalt anlegen. Die `.env` gut aufheben: Ohne `APP_KEY` sind die
 gespeicherten Zugangsdaten nicht mehr lesbar.
 
-Das Image `ghcr.io/tagwerk-family/tagwerk` läuft auf amd64 und arm64
+Das Image `ghcr.io/fahoba/fahoba` läuft auf amd64 und arm64
 (Raspberry Pi 4/5); `:latest` ist der neueste Release. So läuft
-Tagwerk ohne Mail (Konten bekommen ihr Passwort im Admin) und ohne
+Fahoba ohne Mail (Konten bekommen ihr Passwort im Admin) und ohne
 Echtzeit. Mail, Plugins, Traefik oder ein Proxy, den du schon betreibst,
 Aktualisieren ohne Ausfall, Sicherung und Fehlersuche:
 **[`docs/installation.de.md`](docs/installation.de.md)**.
@@ -101,15 +103,15 @@ Der Seeder füllt einen Beispielhaushalt; dessen Eltern melden sich als
 `alex@example.test` oder `sam@example.test` mit dem Passwort `password` an.
 Einen Betreiber ohne Haushalt, der unter **Betrieb** weitere Haushalte
 anlegt, erzeugt
-`ddev exec 'cd apps/platform && php artisan tagwerk:create-operator <Name> <E-Mail>'`.
+`ddev exec 'cd apps/platform && php artisan fahoba:create-operator <Name> <E-Mail>'`.
 
 Wand und Handy sind eine App, gebaut und von nginx unter derselben Adresse
 wie die Verwaltung ausgeliefert:
 
 | Adresse | Inhalt |
 |---|---|
-| `https://tagwerk.test/` | App — Wandtablet oder Handy |
-| `https://tagwerk.test/admin` | Verwaltung |
+| `https://fahoba.test/` | App — Wandtablet oder Handy |
+| `https://fahoba.test/admin` | Verwaltung |
 
 ```bash
 ddev exec 'cd apps/platform/frontend && pnpm install && pnpm build'
@@ -119,7 +121,7 @@ Ausgeliefert wird der Stand des letzten Builds. Zum Arbeiten an der Oberfläche
 gibt es die Entwicklungsserver mit sofortigem Neuladen:
 
 ```bash
-ddev exec 'cd apps/platform/frontend && pnpm dev'         # https://tagwerk.test:3000
+ddev exec 'cd apps/platform/frontend && pnpm dev'         # https://fahoba.test:3000
 ddev exec 'cd apps/platform && php artisan reverb:start'  # WebSocket, Port 8080
 ```
 
@@ -152,7 +154,7 @@ Benachrichtigungen brauchen ein VAPID-Schlüsselpaar. Einmalig erzeugen und in
 `apps/platform/.env` eintragen:
 
 ```bash
-ddev exec 'cd apps/platform && php artisan tagwerk:vapid-keys'
+ddev exec 'cd apps/platform && php artisan fahoba:vapid-keys'
 ```
 
 Ein Wechsel des öffentlichen Schlüssels macht alle bestehenden Anmeldungen
@@ -190,14 +192,14 @@ Konto).
 
 ## Sprache
 
-Tagwerk spricht Deutsch und Englisch. Der Haushalt legt in der Verwaltung die
+Fahoba spricht Deutsch und Englisch. Der Haushalt legt in der Verwaltung die
 Vorgabe fest; jede und jeder wählt die eigene im Profil der Verwaltung oder in
 den Einstellungen am Handy, jedes Wandtablet im Geräteformular. Die Texte
 liegen in `apps/platform/lang/de.json` (Backend) und
 `apps/platform/frontend/packages/shared/i18n/locales/` (Wand und Handy).
 
 Weitere Sprachen kommen als Pakete. Ein Sprachpaket wird wie jedes Plugin
-installiert (`TAGWERK_PLUGINS`) und steht danach in jeder Sprachauswahl. Was
+installiert (`FAHOBA_PLUGINS`) und steht danach in jeder Sprachauswahl. Was
 ein Paket noch nicht übersetzt, erscheint auf Englisch; Betrieb → Plugins
 zeigt, was fehlt. Selbst eines schreiben:
 [`docs/plugins.md`](docs/plugins.md#language-packs).
@@ -216,12 +218,12 @@ Die Weiterleitungs-URI im Cloud-Projekt muss auf
 `/auth/calendar/google/callback` unter der eigenen Adresse zeigen. Danach in
 der Verwaltung unter **Verbindungen** verbinden.
 
-Ohne verbundenes Konto ist Tagwerk vollständig benutzbar: Jeder Haushalt hat
+Ohne verbundenes Konto ist Fahoba vollständig benutzbar: Jeder Haushalt hat
 einen eingebauten Kalender, dessen Termine nur hier liegen.
 
 ## Mit Google anmelden
 
-Das Plugin `tagwerk/social-login` bringt „Mit Google anmelden“ in die App und
+Das Plugin `fahoba/social-login` bringt „Mit Google anmelden“ in die App und
 nach `/admin`. Es meldet nur **bestehende** Konten an: beim ersten Mal über
 die E-Mail-Adresse, die Google bestätigt, danach über Googles eigene Kennung.
 Haushalte und Konten legen weiterhin Betreiber und Einladung an; eine offene
@@ -229,7 +231,7 @@ Einladung gilt damit als angenommen. Ein zweiter Faktor wird weiterhin
 abgefragt.
 
 1. In der [Google Cloud Console](https://console.cloud.google.com/) ein
-   eigenes Projekt anlegen, z. B. „Tagwerk Login“. Mit nur `openid`, `email`
+   eigenes Projekt anlegen, z. B. „Fahoba Login“. Mit nur `openid`, `email`
    und `profile` darf es ohne Googles Prüfung in Produktion — das Projekt des
    Kalenders bliebe im Testmodus.
 2. **Google Auth Platform → Branding**: App-Name, Support-Adresse, die eigene
@@ -250,33 +252,33 @@ abgefragt.
    einschalten.
 
 Google nimmt als Weiterleitung nur öffentliche Domains und `localhost`, nicht
-`tagwerk.test`; lokal stehen die PHPUnit-Tests für Google. Weitere Anbieter
+`fahoba.test`; lokal stehen die PHPUnit-Tests für Google. Weitere Anbieter
 (Microsoft, Apple, Keycloak, …) sind eine Socialite-Anbieterklasse in
 `plugins/social-login/config/social-login.php`.
 
 ## Plugins und Schnittstellen
 
 Das Image bringt kein Plugin eingeschaltet mit. Der Betreiber nennt die
-gewünschten in `TAGWERK_PLUGINS` in `deploy/.env`, etwa
-`TAGWERK_PLUGINS="tagwerk/caldav tagwerk/two-factor"`; der Container
-installiert sie beim Start (die von Tagwerk in der Version des Images,
+gewünschten in `FAHOBA_PLUGINS` in `deploy/.env`, etwa
+`FAHOBA_PLUGINS="fahoba/caldav fahoba/two-factor"`; der Container
+installiert sie beim Start (die von Fahoba in der Version des Images,
 andere von Packagist). Jeder Haushalt schaltet ihre Bereiche dann unter
 Haushalt → Bereiche ein und aus. Was den Haushalt für andere Programme
 öffnet – API-Zugang, Kalender-Abos, Webhooks, MCP – ist aus, bis ein
-Elternteil es unter Haushalt → Schnittstellen einschaltet. Die von Tagwerk:
+Elternteil es unter Haushalt → Schnittstellen einschaltet. Die von Fahoba:
 
 | Paket | Was es tut | Wo es eingerichtet wird |
 |---|---|---|
-| `tagwerk/caldav` | Kalender aus Nextcloud, iCloud, mailbox.org oder jedem CalDAV-Server, in beide Richtungen | Verbindungen → CalDAV |
-| `tagwerk/ics-feed` | Eine geheime Kalenderadresse je Familie oder Person für andere Kalender-Apps | Integrationen → Kalender-Abos |
-| `tagwerk/webhooks` | Signierte POSTs bei gewählten Ereignissen, etwa an Home Assistant | Integrationen → Webhooks |
-| `tagwerk/mcp` | `/mcp` für KI-Assistenten (Model Context Protocol) | ein API-Token, siehe unten |
-| `tagwerk/openapi` | Die API beschrieben unter `/api/openapi.json` | — |
-| `tagwerk/webdav-backup` | Nächtliche Sicherung von Datenbank und Uploads in einen WebDAV-Ordner | Betrieb → Erweiterungen |
-| `tagwerk/bring` | Einkaufslisten mit Bring in beide Richtungen | Verbindungen → Bring |
-| `tagwerk/kochwiki` | Rezepte aus dem Koch-Wiki, einmal je Server gespiegelt | Verbindungen → Koch-Wiki |
-| `tagwerk/two-factor` | Authenticator-App als zweiter Faktor | Betrieb → Erweiterungen |
-| `tagwerk/social-login` | Anmelden mit Google (und anderen Socialite-Anbietern) | Betrieb → Erweiterungen |
+| `fahoba/caldav` | Kalender aus Nextcloud, iCloud, mailbox.org oder jedem CalDAV-Server, in beide Richtungen | Verbindungen → CalDAV |
+| `fahoba/ics-feed` | Eine geheime Kalenderadresse je Familie oder Person für andere Kalender-Apps | Integrationen → Kalender-Abos |
+| `fahoba/webhooks` | Signierte POSTs bei gewählten Ereignissen, etwa an Home Assistant | Integrationen → Webhooks |
+| `fahoba/mcp` | `/mcp` für KI-Assistenten (Model Context Protocol) | ein API-Token, siehe unten |
+| `fahoba/openapi` | Die API beschrieben unter `/api/openapi.json` | — |
+| `fahoba/webdav-backup` | Nächtliche Sicherung von Datenbank und Uploads in einen WebDAV-Ordner | Betrieb → Erweiterungen |
+| `fahoba/bring` | Einkaufslisten mit Bring in beide Richtungen | Verbindungen → Bring |
+| `fahoba/kochwiki` | Rezepte aus dem Koch-Wiki, einmal je Server gespiegelt | Verbindungen → Koch-Wiki |
+| `fahoba/two-factor` | Authenticator-App als zweiter Faktor | Betrieb → Erweiterungen |
+| `fahoba/social-login` | Anmelden mit Google (und anderen Socialite-Anbietern) | Betrieb → Erweiterungen |
 
 **API-Tokens** (Integrationen → API-Zugang) lassen Skripte und Assistenten
 herein: nur lesend oder mit Schreiben, für einen Haushalt, nie mehr, als das
@@ -284,15 +286,15 @@ Konto selbst darf. Ein MCP-Client verbindet sich mit `https://<host>/mcp`
 und dem Header `Authorization: Bearer <token>`. CalDAV-Server und
 Webhook-Ziele müssen aus dem Internet erreichbar sein; Adressen im Heimnetz
 werden abgelehnt. Ein Plugin schreiben: [`docs/plugins.md`](docs/plugins.md)
-(auf Englisch; `php artisan tagwerk:make-plugin acme/name --widget` legt ein
+(auf Englisch; `php artisan fahoba:make-plugin acme/name --widget` legt ein
 lauffähiges Grundgerüst an).
 
 **Eigenes Aussehen oder eigene Oberfläche.** Ein Design-Paket ändert
-Farben, Schrift und Ecken (`tagwerk:make-plugin acme/name --theme`); der
-Haushalt wählt es, ein Tablet kann beim Tagwerk-eigenen bleiben. Eine ganz
+Farben, Schrift und Ecken (`fahoba:make-plugin acme/name --theme`); der
+Haushalt wählt es, ein Tablet kann beim Fahoba-eigenen bleiben. Eine ganz
 andere Oberfläche — etwa für eine E-Ink-Wand — ersetzt die App unter `/`:
-gebaut auf [`@tagwerk/client`](apps/platform/frontend/packages/client),
-begonnen mit der Frontend-Vorlage, gewählt mit `TAGWERK_FRONTEND`.
+gebaut auf [`@fahoba/client`](apps/platform/frontend/packages/client),
+begonnen mit der Frontend-Vorlage, gewählt mit `FAHOBA_FRONTEND`.
 Anleitung: [`docs/frontends.md`](docs/frontends.md) (auf Englisch).
 
 ## Tests
@@ -306,9 +308,9 @@ cd apps/platform/frontend/packages/e2e && pnpm run e2e                # Playwrig
 GitHub Actions führt PHPUnit, Pint, Vitest und die Typprüfung bei jedem Push
 aus; ein Release-Tag (`v1.2.3`) baut und veröffentlicht das Image.
 
-Backend-Tests laufen gegen eine echte PostgreSQL-Datenbank (`tagwerk_test`), nie
+Backend-Tests laufen gegen eine echte PostgreSQL-Datenbank (`fahoba_test`), nie
 gegen SQLite. Playwright läuft bewusst vom Wirt statt aus dem Container und
-prüft, was nginx unter `https://tagwerk.test` ausliefert — vorher also
+prüft, was nginx unter `https://fahoba.test` ausliefert — vorher also
 `pnpm build`. Begründung in `AGENTS.md`.
 
 ## Dokumentation
@@ -338,7 +340,7 @@ ist da, an der Wand wie am Handy:
 - **Statistik** für Eltern — wer welche Aufgabe wie oft macht, eigene
   Aufgaben erledigt, Wochentage, Sterne; in der Verwaltung, der App, über
   die API und für einen Assistenten, mit CSV-Download.
-- **Listen** — Einkaufslisten in Tagwerk, mit Bring in beide Richtungen
+- **Listen** — Einkaufslisten in Fahoba, mit Bring in beide Richtungen
   abgeglichen oder an Google Tasks geschickt.
 - **Essen und Rezepte** — ein Wochenplan, Portionen danach, wer mitisst, das
   eigene Rezeptbuch (getippt, von einem Link, fotografiert, als Sammlung),
@@ -361,17 +363,17 @@ limitations“ („Bekannte Einschränkungen“).
 
 ## Lizenz
 
-Tagwerk ist **quelloffen einsehbar** unter der
+Fahoba ist **quelloffen einsehbar** unter der
 [PolyForm Shield License 1.0.0](LICENSE). Familien, Schulen, Vereine,
 Kitas und Betriebe dürfen es für sich selbst betreiben, untersuchen,
 verändern und weitergeben — auch für Verwandte und Freunde, die sie selbst
 einladen. Allen anderen anbieten — als gehosteten Dienst oder als Produkt,
-das mit Tagwerk konkurriert — darf nur der Lizenzgeber, Andreas Pointner,
+das mit Fahoba konkurriert — darf nur der Lizenzgeber, Andreas Pointner,
 **auch gratis nicht**; das Ende der [`LICENSE`](LICENSE) hält das fest. Für eine kommerzielle Lizenz ein
 Issue eröffnen oder an office@copex.io schreiben.
 
 Jedes Paket bringt seine eigene `LICENSE` mit. Die mitgelieferten Plugins
-teilen die Lizenz von Tagwerk; die Plugin-Schnittstelle (`tagwerk/plugin-api`)
-und das Beispiel-Plugin (`tagwerk/example-area`) stehen unter MIT — ein
+teilen die Lizenz von Fahoba; die Plugin-Schnittstelle (`fahoba/plugin-api`)
+und das Beispiel-Plugin (`fahoba/example-area`) stehen unter MIT — ein
 Plugin, das darauf aufbaut, darf unter jeder Lizenz erscheinen, die sein
 Autor wählt.

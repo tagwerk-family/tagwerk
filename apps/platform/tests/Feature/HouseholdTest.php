@@ -35,7 +35,7 @@ final class HouseholdTest extends TestCase
          * never SQLite and never the development database.
          */
         $this->assertStringStartsWith(
-            'tagwerk_test',
+            'fahoba_test',
             Household::query()->getConnection()->getDatabaseName(),
         );
     }

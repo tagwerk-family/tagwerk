@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Tagwerk\IcsFeed;
+namespace Fahoba\IcsFeed;
 
-use Tagwerk\PluginApi\Plugins\ExportRules;
+use Fahoba\PluginApi\Plugins\ExportRules;
 
 /** A local copy must not carry a working subscription address. */
 final class IcsFeedExport implements ExportRules

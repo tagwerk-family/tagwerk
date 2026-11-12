@@ -12,12 +12,12 @@ use function Laravel\Prompts\password;
 
 /**
  * Sets up a household from the shell. Usually households are created in the
- * admin panel by the operator (`tagwerk:create-operator`); this is the way
+ * admin panel by the operator (`fahoba:create-operator`); this is the way
  * without one.
  */
 final class CreateHouseholdCommand extends Command
 {
-    protected $signature = 'tagwerk:create-household
+    protected $signature = 'fahoba:create-household
         {name : Name of the household, e.g. "Familie Muster"}
         {parent : Name of the first parent}
         {email : Login of the first parent}

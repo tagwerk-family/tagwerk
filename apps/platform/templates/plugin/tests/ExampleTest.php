@@ -7,7 +7,7 @@ namespace Acme\Example\Tests;
 use PHPUnit\Framework\TestCase;
 use Acme\Example\ExamplePlugin;
 use Acme\Example\ExampleWidget;
-use Tagwerk\PluginApi\Testing\PluginAssertions;
+use Fahoba\PluginApi\Testing\PluginAssertions;
 
 final class ExampleTest extends TestCase
 {

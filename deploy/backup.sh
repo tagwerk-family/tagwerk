@@ -1,6 +1,6 @@
 #!/bin/sh
 # Nightly backup of database and uploads, run on the host, e.g. by cron:
-#   17 3 * * * /opt/tagwerk/deploy/backup.sh /srv/backup/tagwerk
+#   17 3 * * * /opt/fahoba/deploy/backup.sh /srv/backup/fahoba
 #
 # Keeps KEEP_DAYS days (default 14). Copy the target off this server — a
 # backup on the same disk survives a mistake, not a broken disk. The .env is

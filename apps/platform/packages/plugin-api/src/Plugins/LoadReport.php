@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Tagwerk\PluginApi\Plugins;
+namespace Fahoba\PluginApi\Plugins;
 
 use Illuminate\Container\Attributes\Singleton;
 use Illuminate\Support\Facades\Cache;

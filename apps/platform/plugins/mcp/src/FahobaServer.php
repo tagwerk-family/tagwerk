@@ -2,26 +2,26 @@
 
 declare(strict_types=1);
 
-namespace Tagwerk\Mcp;
+namespace Fahoba\Mcp;
 
 use Laravel\Mcp\Server;
 use Laravel\Mcp\Server\Attributes\Instructions;
 use Laravel\Mcp\Server\Attributes\Name;
 use Laravel\Mcp\Server\Attributes\Version;
-use Tagwerk\Mcp\Tools\AddListItem;
-use Tagwerk\Mcp\Tools\CompleteListItem;
-use Tagwerk\Mcp\Tools\CompleteTask;
-use Tagwerk\Mcp\Tools\CreateEvent;
-use Tagwerk\Mcp\Tools\ListEvents;
-use Tagwerk\Mcp\Tools\ListLists;
-use Tagwerk\Mcp\Tools\ListTasks;
-use Tagwerk\Mcp\Tools\MealPlan;
-use Tagwerk\Mcp\Tools\TaskStatistics;
+use Fahoba\Mcp\Tools\AddListItem;
+use Fahoba\Mcp\Tools\CompleteListItem;
+use Fahoba\Mcp\Tools\CompleteTask;
+use Fahoba\Mcp\Tools\CreateEvent;
+use Fahoba\Mcp\Tools\ListEvents;
+use Fahoba\Mcp\Tools\ListLists;
+use Fahoba\Mcp\Tools\ListTasks;
+use Fahoba\Mcp\Tools\MealPlan;
+use Fahoba\Mcp\Tools\TaskStatistics;
 
-#[Name('Tagwerk')]
+#[Name('Fahoba')]
 #[Version('1.0.0')]
 #[Instructions('A family calendar: events, tasks with stars for children, lists and a meal plan of one household. Dates are calendar days in the household\'s time zone. Look ids up with the list tools before writing. A read-only token offers no writing tools.')]
-final class TagwerkServer extends Server
+final class FahobaServer extends Server
 {
     protected array $tools = [
         ListEvents::class,

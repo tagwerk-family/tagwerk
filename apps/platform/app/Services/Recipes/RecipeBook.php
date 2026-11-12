@@ -9,11 +9,11 @@ use App\Models\MealPlanEntry;
 use App\Models\RecipeFavorite;
 use App\Support\HouseholdTimezone;
 use Carbon\CarbonImmutable;
+use Fahoba\PluginApi\Recipes\DescribesRecipes;
+use Fahoba\PluginApi\Recipes\RecipeQuery;
 use Illuminate\Database\Eloquent\Builder;
 use Random\Engine\Mt19937;
 use Random\Randomizer;
-use Tagwerk\PluginApi\Recipes\DescribesRecipes;
-use Tagwerk\PluginApi\Recipes\RecipeQuery;
 
 /**
  * What the household itself knows about recipes, across every source:
@@ -22,7 +22,7 @@ use Tagwerk\PluginApi\Recipes\RecipeQuery;
  *
  * A recipe is addressed as `provider:id`, like a planned meal. The sources
  * fill in what a card looks like; a source that cannot look up by id shows
- * the name Tagwerk remembered.
+ * the name Fahoba remembered.
  *
  * @phpstan-type Card array{id: string, name: string, minutes: int|null, difficulty: string|null, vegetarian: bool|null, photo: string|null, provider: string, provider_label: string}
  * @phpstan-type Ref array{provider: string, id: string, title: string}

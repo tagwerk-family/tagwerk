@@ -15,7 +15,7 @@ use App\Models\ProviderAccount;
  * Makes sure every household has a calendar that works without a third-party
  * service.
  *
- * Without it a freshly set up Tagwerk would be empty and stay that way until
+ * Without it a freshly set up Fahoba would be empty and stay that way until
  * someone connects a foreign account — the wall would show a calendar nothing
  * can be entered into.
  *
@@ -25,7 +25,7 @@ use App\Models\ProviderAccount;
 final class BuiltinCalendar
 {
     /** External ID of the built-in calendar — there is only one per household. */
-    private const EXTERNAL_ID = 'tagwerk';
+    private const EXTERNAL_ID = 'fahoba';
 
     public function ensureFor(Household $household): Calendar
     {
@@ -41,7 +41,7 @@ final class BuiltinCalendar
                 'provider' => BuiltinCalendarProvider::KEY,
             ],
             [
-                'account_label' => 'Tagwerk',
+                'account_label' => 'Fahoba',
                 'status' => ConnectionStatus::Active,
             ],
         );

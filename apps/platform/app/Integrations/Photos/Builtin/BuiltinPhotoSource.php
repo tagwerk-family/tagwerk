@@ -5,12 +5,12 @@ declare(strict_types=1);
 namespace App\Integrations\Photos\Builtin;
 
 use App\Models\Photo as PhotoRow;
+use Fahoba\PluginApi\Connections\ConnectedAccount;
+use Fahoba\PluginApi\Photos\ListsPhotos;
+use Fahoba\PluginApi\Photos\Photo;
+use Fahoba\PluginApi\Photos\PhotoFile;
+use Fahoba\PluginApi\Photos\PhotoSource;
 use Illuminate\Support\Facades\Storage;
-use Tagwerk\PluginApi\Connections\ConnectedAccount;
-use Tagwerk\PluginApi\Photos\ListsPhotos;
-use Tagwerk\PluginApi\Photos\Photo;
-use Tagwerk\PluginApi\Photos\PhotoFile;
-use Tagwerk\PluginApi\Photos\PhotoSource;
 
 /**
  * The photos the household uploaded itself.

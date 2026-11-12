@@ -10,10 +10,10 @@ use App\Models\Calendar;
 use App\Models\Event;
 use App\Models\Person;
 use Carbon\CarbonImmutable;
+use Fahoba\PluginApi\Calendar\EventDraft;
+use Fahoba\PluginApi\Calendar\RemoteEvent;
+use Fahoba\PluginApi\Calendar\WritesEvents;
 use Illuminate\Support\Str;
-use Tagwerk\PluginApi\Calendar\EventDraft;
-use Tagwerk\PluginApi\Calendar\RemoteEvent;
-use Tagwerk\PluginApi\Calendar\WritesEvents;
 
 /**
  * Creates, changes and deletes events from the tablet.

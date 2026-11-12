@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Tagwerk\IcsFeed\Filament;
+namespace Fahoba\IcsFeed\Filament;
 
+use Fahoba\IcsFeed\IcsFeed;
 use Filament\Actions\CreateAction;
 use Filament\Resources\Pages\ManageRecords;
-use Tagwerk\IcsFeed\IcsFeed;
 
 class ManageIcsFeeds extends ManageRecords
 {

@@ -10,14 +10,14 @@ use App\Models\User;
 use App\Support\Languages;
 use App\Support\PackTexts;
 use BackedEnum;
+use Fahoba\PluginApi\Languages\LanguagePack;
+use Fahoba\PluginApi\Plugins\LoadReport;
 use Filament\Pages\Page;
 use Filament\Support\Icons\Heroicon;
-use Tagwerk\PluginApi\Languages\LanguagePack;
-use Tagwerk\PluginApi\Plugins\LoadReport;
 use UnitEnum;
 
 /**
- * Operations → Plugins: every installed package with a Tagwerk provider,
+ * Operations → Plugins: every installed package with a Fahoba provider,
  * and whether it loaded. A broken plugin is skipped, not fatal — this is
  * where the operator learns why.
  */

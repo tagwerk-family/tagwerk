@@ -1,21 +1,21 @@
 {
-    "name": "tagwerk/kochwiki",
-    "description": "Koch-Wiki recipes for Tagwerk, mirrored once per server",
+    "name": "fahoba/kochwiki",
+    "description": "Koch-Wiki recipes for Fahoba, mirrored once per server",
     "type": "library",
     "version": "0.1.0",
     "license": "PolyForm-Shield-1.0.0",
     "require": {
         "php": "^8.5",
-        "tagwerk/plugin-api": "^0.1"
+        "fahoba/plugin-api": "^0.1"
     },
     "autoload": {
         "psr-4": {
-            "Tagwerk\\Kochwiki\\": "src/"
+            "Fahoba\\Kochwiki\\": "src/"
         }
     },
     "extra": {
-        "tagwerk": {
-            "provider": "Tagwerk\\Kochwiki\\KochwikiServiceProvider"
+        "fahoba": {
+            "provider": "Fahoba\\Kochwiki\\KochwikiServiceProvider"
         }
     }
 }

@@ -2,15 +2,15 @@
 
 declare(strict_types=1);
 
-namespace Tagwerk\PluginApi\Themes;
+namespace Fahoba\PluginApi\Themes;
 
 use JsonException;
 use RuntimeException;
 
 /**
  * The design tokens a theme may set, with the core's own values, shipped
- * with this package so Tagwerk and a designer's tests check the same list.
- * Tagwerk writes it (`php artisan tagwerk:design-reference`).
+ * with this package so Fahoba and a designer's tests check the same list.
+ * Fahoba writes it (`php artisan fahoba:design-reference`).
  *
  * A token in this list is a promise: renaming one breaks every theme.
  */

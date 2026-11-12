@@ -22,6 +22,9 @@ use App\Models\User;
 use App\Security\ContentSecurityPolicy;
 use App\Support\Abilities;
 use App\Support\HouseholdContext;
+use Fahoba\PluginApi\Dashboard\ImagePolicy;
+use Fahoba\PluginApi\Households\CurrentHousehold;
+use Fahoba\PluginApi\Http\Outbound;
 use Filament\Auth\Http\Responses\Contracts\LogoutResponse;
 use Illuminate\Auth\Events\PasswordReset;
 use Illuminate\Cache\RateLimiting\Limit;
@@ -33,9 +36,6 @@ use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\ServiceProvider;
 use Laravel\Sanctum\Sanctum;
 use Symfony\Component\HttpFoundation\Response;
-use Tagwerk\PluginApi\Dashboard\ImagePolicy;
-use Tagwerk\PluginApi\Households\CurrentHousehold;
-use Tagwerk\PluginApi\Http\Outbound;
 
 class AppServiceProvider extends ServiceProvider
 {

@@ -1,6 +1,6 @@
 name: Build
 
-# Tagwerk serves dist/ as it is, so the committed build must match the
+# Fahoba serves dist/ as it is, so the committed build must match the
 # sources: this fails when someone changed src/ and forgot `npm run build`.
 
 on:

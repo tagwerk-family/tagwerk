@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Tagwerk\WebDavBackup;
+namespace Fahoba\WebDavBackup;
 
+use Fahoba\PluginApi\Plugins\Catalog;
+use Fahoba\PluginApi\Plugins\Plugin;
 use Illuminate\Console\Scheduling\Schedule;
-use Tagwerk\PluginApi\Plugins\Catalog;
-use Tagwerk\PluginApi\Plugins\Plugin;
 
 final class WebDavBackupServiceProvider extends Plugin
 {
@@ -30,7 +30,7 @@ final class WebDavBackupServiceProvider extends Plugin
          * read it. The command decides whether today's backup is due.
          */
         $this->callAfterResolving(Schedule::class, static function (Schedule $schedule): void {
-            $schedule->command('tagwerk:webdav-backup')
+            $schedule->command('fahoba:webdav-backup')
                 ->everyFifteenMinutes()
                 ->withoutOverlapping(60)
                 ->onOneServer();

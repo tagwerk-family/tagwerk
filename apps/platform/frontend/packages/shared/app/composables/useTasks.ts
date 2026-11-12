@@ -3,7 +3,7 @@ import { keepDayBonus, keepTicks, occurrenceKey, occurrenceSlot, withDayBonus } 
 import { isOffline } from '../utils/network'
 import { holdAnnouncements } from '../utils/announcements'
 
-import type { BonusDto, OccurrenceDto } from '@tagwerk/client'
+import type { BonusDto, OccurrenceDto } from '@fahoba/client'
 
 // The payloads live in the client SDK; re-exported so the layer's imports stay.
 export type { BonusDto, OccurrenceDto }

@@ -8,8 +8,8 @@ use App\Models\DashboardWidget;
 use App\Models\Household;
 use App\Services\DevicePairingService;
 use App\Support\HouseholdContext;
+use Fahoba\ExampleArea\ExampleCounter;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Tagwerk\ExampleArea\ExampleCounter;
 use Tests\TestCase;
 
 /** The example plugin's tile: settings and buttons through the API only. */

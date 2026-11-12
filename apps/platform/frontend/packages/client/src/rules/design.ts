@@ -6,7 +6,7 @@ export interface Design {
 }
 
 /** The same key as in `public/theme.js`, which loads it before the first paint. */
-export const DESIGN_STORAGE = 'tagwerk-design'
+export const DESIGN_STORAGE = 'fahoba-design'
 
 const KEY = /^[a-z0-9][a-z0-9-]*\/[a-z0-9][a-z0-9-]*$/
 const URL = /^\/api\/design\/[a-z0-9][a-z0-9-]*\/[a-z0-9][a-z0-9-]*\/[0-9a-f]{12}\.css$/

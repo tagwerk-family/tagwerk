@@ -12,10 +12,10 @@ use App\Models\Photo as PhotoRow;
 use App\Models\ProviderAccount;
 use App\Support\HouseholdContext;
 use Carbon\CarbonImmutable;
-use Tagwerk\PluginApi\Photos\ListsPhotos;
-use Tagwerk\PluginApi\Photos\Photo;
-use Tagwerk\PluginApi\Photos\PhotoFile;
-use Tagwerk\PluginApi\Photos\PhotoSource;
+use Fahoba\PluginApi\Photos\ListsPhotos;
+use Fahoba\PluginApi\Photos\Photo;
+use Fahoba\PluginApi\Photos\PhotoFile;
+use Fahoba\PluginApi\Photos\PhotoSource;
 
 /**
  * All of the household's pictures, wherever they come from.

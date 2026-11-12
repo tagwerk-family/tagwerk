@@ -20,9 +20,9 @@ function platform(files: Record<string, unknown>, layers: string[]): string {
   return root
 }
 
-const board = { name: 'acme/board', dist: { type: 'path', url: 'plugins/board' }, extra: { tagwerk: { frontend: 'frontend' } } }
+const board = { name: 'acme/board', dist: { type: 'path', url: 'plugins/board' }, extra: { fahoba: { frontend: 'frontend' } } }
 const hooks = { name: 'acme/hooks', dist: { type: 'path', url: 'plugins/hooks' } }
-const remote = { name: 'acme/remote', dist: { type: 'zip', url: 'https://example.org/remote.zip' }, extra: { tagwerk: { frontend: 'frontend' } } }
+const remote = { name: 'acme/remote', dist: { type: 'zip', url: 'https://example.org/remote.zip' }, extra: { fahoba: { frontend: 'frontend' } } }
 
 describe('pluginLayers', () => {
   it('takes installed path packages that bring a layer', () => {

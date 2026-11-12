@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\Fixtures\Languages;
 
-use Tagwerk\PluginApi\Languages\LanguagePack;
+use Fahoba\PluginApi\Languages\LanguagePack;
 
 /**
  * A deliberately incomplete pack: a few texts, one with a broken

@@ -21,13 +21,13 @@ use App\Services\Photos\PhotoRules;
 use App\Services\Photos\TakenOn;
 use App\Support\HouseholdContext;
 use Carbon\CarbonImmutable;
+use Fahoba\PluginApi\Photos\Photo;
+use Fahoba\PluginApi\Plugins\Catalog;
+use Fahoba\PluginApi\Plugins\LoadReport;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Cache;
 use Livewire\Livewire;
 use stdClass;
-use Tagwerk\PluginApi\Photos\Photo;
-use Tagwerk\PluginApi\Plugins\Catalog;
-use Tagwerk\PluginApi\Plugins\LoadReport;
 use Tests\TestCase;
 
 /**
@@ -147,7 +147,7 @@ final class PhotoRulesTest extends TestCase
     /** A download carries the day of the download — that is no date to go by. */
     public function test_the_modification_time_is_never_taken(): void
     {
-        $file = sys_get_temp_dir().'/tagwerk-'.bin2hex(random_bytes(4)).'.jpg';
+        $file = sys_get_temp_dir().'/fahoba-'.bin2hex(random_bytes(4)).'.jpg';
         $this->writeJpeg($file);
 
         $this->assertNull(TakenOn::read($file));
@@ -234,10 +234,10 @@ final class PhotoRulesTest extends TestCase
     /** @return array{0: string, 1: string} */
     private function folder(): array
     {
-        $root = sys_get_temp_dir().'/tagwerk-rules-'.bin2hex(random_bytes(4));
+        $root = sys_get_temp_dir().'/fahoba-rules-'.bin2hex(random_bytes(4));
         $folder = $root.'/'.$this->household->id;
         mkdir($folder, 0700, true);
-        config(['tagwerk.photo_folders' => $root]);
+        config(['fahoba.photo_folders' => $root]);
 
         return [$root, $folder];
     }

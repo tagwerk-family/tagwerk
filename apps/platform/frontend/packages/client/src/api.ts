@@ -89,8 +89,8 @@ export interface Agenda {
   [key: string]: unknown
 }
 
-export interface TagwerkClient extends Http {
-  /** 401 (as `TagwerkError`) means nobody: show pairing or sign-in. */
+export interface FahobaClient extends Http {
+  /** 401 (as `FahobaError`) means nobody: show pairing or sign-in. */
   session: () => Promise<{ kind: Viewer }>
   /** Redeems a pairing code; the server sets the device cookie. */
   pair: (code: string) => Promise<PairedDevice>
@@ -107,19 +107,19 @@ export interface TagwerkClient extends Http {
 }
 
 /**
- * The client for a frontend served by a Tagwerk server.
+ * The client for a frontend served by a Fahoba server.
  *
  * ```ts
- * const tagwerk = createClient()
- * const { kind } = await tagwerk.session()   // 'device' | 'user', or 401
- * const agenda = await tagwerk.agenda('2026-11-02', '2026-11-08')
- * await tagwerk.realtime(areas => reload(areas))
+ * const fahoba = createClient()
+ * const { kind } = await fahoba.session()   // 'device' | 'user', or 401
+ * const agenda = await fahoba.agenda('2026-11-02', '2026-11-08')
+ * await fahoba.realtime(areas => reload(areas))
  * ```
  *
- * Everything else is `tagwerk.request(path, options)` against the routes in
- * `/api/openapi.json`; refusals throw `TagwerkError` with a `kind`.
+ * Everything else is `fahoba.request(path, options)` against the routes in
+ * `/api/openapi.json`; refusals throw `FahobaError` with a `kind`.
  */
-export function createClient(options: ClientOptions = {}): TagwerkClient {
+export function createClient(options: ClientOptions = {}): FahobaClient {
   const http = createHttp(options)
   const { request } = http
 

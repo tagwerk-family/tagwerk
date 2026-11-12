@@ -2,30 +2,30 @@
 
 declare(strict_types=1);
 
-namespace Tagwerk\CalDav;
+namespace Fahoba\CalDav;
 
 use Carbon\CarbonImmutable;
 use Closure;
 use DateTimeZone;
+use Fahoba\PluginApi\Calendar\CalendarProvider;
+use Fahoba\PluginApi\Calendar\ChangePage;
+use Fahoba\PluginApi\Calendar\ConnectedCalendar;
+use Fahoba\PluginApi\Calendar\EventDraft;
+use Fahoba\PluginApi\Calendar\ListsCalendars;
+use Fahoba\PluginApi\Calendar\RemoteCalendar;
+use Fahoba\PluginApi\Calendar\RemoteEvent;
+use Fahoba\PluginApi\Calendar\SyncsEvents;
+use Fahoba\PluginApi\Calendar\WritesEvents;
+use Fahoba\PluginApi\Connections\AuthorizationLost;
+use Fahoba\PluginApi\Connections\ConnectedAccount;
+use Fahoba\PluginApi\Connections\CredentialField;
+use Fahoba\PluginApi\Connections\DescribesSetup;
+use Fahoba\PluginApi\Connections\UsesCredentials;
 use Illuminate\Support\Str;
 use Illuminate\Validation\ValidationException;
 use Sabre\VObject\Component\VCalendar;
 use Sabre\VObject\Component\VEvent;
 use Sabre\VObject\Reader;
-use Tagwerk\PluginApi\Calendar\CalendarProvider;
-use Tagwerk\PluginApi\Calendar\ChangePage;
-use Tagwerk\PluginApi\Calendar\ConnectedCalendar;
-use Tagwerk\PluginApi\Calendar\EventDraft;
-use Tagwerk\PluginApi\Calendar\ListsCalendars;
-use Tagwerk\PluginApi\Calendar\RemoteCalendar;
-use Tagwerk\PluginApi\Calendar\RemoteEvent;
-use Tagwerk\PluginApi\Calendar\SyncsEvents;
-use Tagwerk\PluginApi\Calendar\WritesEvents;
-use Tagwerk\PluginApi\Connections\AuthorizationLost;
-use Tagwerk\PluginApi\Connections\ConnectedAccount;
-use Tagwerk\PluginApi\Connections\CredentialField;
-use Tagwerk\PluginApi\Connections\DescribesSetup;
-use Tagwerk\PluginApi\Connections\UsesCredentials;
 use Throwable;
 
 /**
@@ -39,16 +39,22 @@ use Throwable;
  */
 final class CalDavCalendarProvider implements CalendarProvider, DescribesSetup, ListsCalendars, SyncsEvents, UsesCredentials, WritesEvents
 {
-    public const KEY = 'tagwerk/caldav';
+    public const KEY = 'fahoba/caldav';
 
     public const PAST_MONTHS = 3;
 
     public const FUTURE_MONTHS = 12;
 
     /** Mirrors `EventProperties` of the Google provider, as iCalendar extensions. */
-    private const REVISION = 'X-TAGWERK-REVISION';
+    private const REVISION = 'X-FAHOBA-REVISION';
 
-    private const PEOPLE = 'X-TAGWERK-PEOPLE';
+    private const PEOPLE = 'X-FAHOBA-PEOPLE';
+
+    /** Written before the rename to Fahoba; still read, dropped on our next write. */
+    private const LEGACY = [
+        self::REVISION => 'X-TAGWERK-REVISION',
+        self::PEOPLE => 'X-TAGWERK-PEOPLE',
+    ];
 
     public function __construct(private readonly CalDavClient $client) {}
 
@@ -272,7 +278,7 @@ final class CalDavCalendarProvider implements CalendarProvider, DescribesSetup, 
             default => $startsAt->addHour(),
         };
 
-        $people = isset($vevent->{self::PEOPLE}) ? (string) $vevent->{self::PEOPLE} : null;
+        $people = $this->own($vevent, self::PEOPLE);
 
         return new RemoteEvent(
             externalId: $id,
@@ -285,16 +291,27 @@ final class CalDavCalendarProvider implements CalendarProvider, DescribesSetup, 
             version: $etag,
             updatedAt: isset($vevent->{'LAST-MODIFIED'}) ? CarbonImmutable::instance($vevent->{'LAST-MODIFIED'}->getDateTime()) : null,
             recurringEventId: $series,
-            revisionMarker: isset($vevent->{self::REVISION}) ? (string) $vevent->{self::REVISION} : null,
+            revisionMarker: $this->own($vevent, self::REVISION),
             personIds: $people === null ? null : array_values(array_filter(array_map(intval(...), explode(',', $people)))),
         );
+    }
+
+    private function own(VEvent $vevent, string $property): ?string
+    {
+        foreach ([$property, self::LEGACY[$property]] as $name) {
+            if (isset($vevent->{$name})) {
+                return (string) $vevent->{$name};
+            }
+        }
+
+        return null;
     }
 
     private function fill(VEvent $vevent, EventDraft $draft, ConnectedCalendar $calendar): void
     {
         $zone = $calendar->zoneName();
 
-        foreach (['DTSTART', 'DTEND', 'DURATION', 'SUMMARY', 'DESCRIPTION', 'LOCATION', self::REVISION, self::PEOPLE] as $property) {
+        foreach (['DTSTART', 'DTEND', 'DURATION', 'SUMMARY', 'DESCRIPTION', 'LOCATION', self::REVISION, self::PEOPLE, ...self::LEGACY] as $property) {
             $vevent->remove($property);
         }
 

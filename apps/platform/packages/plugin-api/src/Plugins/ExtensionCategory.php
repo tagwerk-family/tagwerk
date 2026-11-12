@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Tagwerk\PluginApi\Plugins;
+namespace Fahoba\PluginApi\Plugins;
 
 /** How the extensions page groups what is installed. */
 enum ExtensionCategory: string

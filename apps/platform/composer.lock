@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "279ddf7510049e49545b3cee5ef5f8ac",
+    "content-hash": "0f32569c310aa1e461fe9707999c773d",
     "packages": [
         {
             "name": "anourvalar/eloquent-serialize",
@@ -1493,6 +1493,46 @@
                 "source": "https://github.com/igorw/evenement/tree/v3.0.2"
             },
             "time": "2023-08-08T05:53:35+00:00"
+        },
+        {
+            "name": "fahoba/plugin-api",
+            "version": "0.1.0",
+            "dist": {
+                "type": "path",
+                "url": "packages/plugin-api",
+                "reference": "974068ba31debaccd280f31ef4a102552b406f69"
+            },
+            "require": {
+                "filament/filament": "^5.10.1",
+                "illuminate/database": "^13.17",
+                "illuminate/http": "^13.17",
+                "illuminate/support": "^13.17",
+                "nesbot/carbon": "^3.15",
+                "php": "^8.5"
+            },
+            "suggest": {
+                "phpunit/phpunit": "for Fahoba\\PluginApi\\Testing, the assertions a plugin's own tests use"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Fahoba\\PluginApi\\": "src/"
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "description": "Contracts and helpers for Fahoba plugins",
+            "homepage": "https://github.com/fahoba/fahoba",
+            "support": {
+                "issues": "https://github.com/fahoba/fahoba/issues",
+                "source": "https://github.com/fahoba/fahoba/tree/master/apps/platform/packages/plugin-api",
+                "docs": "https://github.com/fahoba/fahoba/blob/master/docs/plugins.md"
+            },
+            "transport-options": {
+                "symlink": true,
+                "relative": true
+            }
         },
         {
             "name": "filament/actions",
@@ -9618,46 +9658,6 @@
             "time": "2026-10-26T21:55:04+00:00"
         },
         {
-            "name": "tagwerk/plugin-api",
-            "version": "0.1.0",
-            "dist": {
-                "type": "path",
-                "url": "packages/plugin-api",
-                "reference": "a1a07ad0b9a93fa1dcf190ec19e7a4811aa36ede"
-            },
-            "require": {
-                "filament/filament": "^5.10.1",
-                "illuminate/database": "^13.17",
-                "illuminate/http": "^13.17",
-                "illuminate/support": "^13.17",
-                "nesbot/carbon": "^3.15",
-                "php": "^8.5"
-            },
-            "suggest": {
-                "phpunit/phpunit": "for Tagwerk\\PluginApi\\Testing, the assertions a plugin's own tests use"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Tagwerk\\PluginApi\\": "src/"
-                }
-            },
-            "license": [
-                "MIT"
-            ],
-            "description": "Contracts and helpers for Tagwerk plugins",
-            "homepage": "https://github.com/tagwerk-family/tagwerk",
-            "support": {
-                "issues": "https://github.com/tagwerk-family/tagwerk/issues",
-                "source": "https://github.com/tagwerk-family/tagwerk/tree/master/apps/platform/packages/plugin-api",
-                "docs": "https://github.com/tagwerk-family/tagwerk/blob/master/docs/plugins.md"
-            },
-            "transport-options": {
-                "symlink": true,
-                "relative": true
-            }
-        },
-        {
             "name": "tijsverkoyen/css-to-inline-styles",
             "version": "v2.4.0",
             "source": {
@@ -10111,6 +10111,431 @@
                 }
             ],
             "time": "2026-10-25T17:40:39+00:00"
+        },
+        {
+            "name": "fahoba/bring",
+            "version": "0.1.0",
+            "dist": {
+                "type": "path",
+                "url": "plugins/bring",
+                "reference": "b5fbfad14a41741b30f333262166f91ff32b634f"
+            },
+            "require": {
+                "fahoba/plugin-api": "^0.1",
+                "php": "^8.5"
+            },
+            "type": "library",
+            "extra": {
+                "fahoba": {
+                    "provider": "Fahoba\\Bring\\BringServiceProvider"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Fahoba\\Bring\\": "src/"
+                }
+            },
+            "license": [
+                "PolyForm-Shield-1.0.0"
+            ],
+            "description": "Bring! shopping lists for Fahoba, synced both ways",
+            "transport-options": {
+                "symlink": true,
+                "relative": true
+            }
+        },
+        {
+            "name": "fahoba/caldav",
+            "version": "0.1.0",
+            "dist": {
+                "type": "path",
+                "url": "plugins/caldav",
+                "reference": "110d88ca46aff0c705a537ca6b49793560cb3ecd"
+            },
+            "require": {
+                "fahoba/plugin-api": "^0.1",
+                "php": "^8.5",
+                "sabre/vobject": "^4.6"
+            },
+            "type": "library",
+            "extra": {
+                "fahoba": {
+                    "provider": "Fahoba\\CalDav\\CalDavServiceProvider"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Fahoba\\CalDav\\": "src/"
+                }
+            },
+            "license": [
+                "PolyForm-Shield-1.0.0"
+            ],
+            "description": "Calendars from any CalDAV server — Nextcloud, iCloud, mailbox.org, Radicale — in both directions",
+            "transport-options": {
+                "symlink": true,
+                "relative": true
+            }
+        },
+        {
+            "name": "fahoba/example-area",
+            "version": "0.1.0",
+            "dist": {
+                "type": "path",
+                "url": "plugins/example-area",
+                "reference": "6f3c0a5c63b04265b2e77ce5becb8bbc85667474"
+            },
+            "require": {
+                "fahoba/plugin-api": "^0.1",
+                "php": "^8.5"
+            },
+            "type": "library",
+            "extra": {
+                "fahoba": {
+                    "provider": "Fahoba\\ExampleArea\\ExampleAreaServiceProvider",
+                    "frontend": "frontend"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Fahoba\\ExampleArea\\": "src/"
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "description": "A household area from a plugin, with menu entry, view, route and translations — template and test bed",
+            "transport-options": {
+                "symlink": true,
+                "relative": true
+            }
+        },
+        {
+            "name": "fahoba/example-language",
+            "version": "0.1.0",
+            "dist": {
+                "type": "path",
+                "url": "plugins/example-language",
+                "reference": "8cde3f13bf61ace4cf36fea9022e294203d5fec2"
+            },
+            "require": {
+                "fahoba/plugin-api": "^0.1",
+                "php": "^8.5"
+            },
+            "type": "library",
+            "extra": {
+                "fahoba": {
+                    "provider": "Fahoba\\ExampleLanguage\\ExampleLanguagePlugin",
+                    "language": {
+                        "complete-for": "never — an example"
+                    }
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Fahoba\\ExampleLanguage\\": "src/"
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "description": "A language pack, deliberately incomplete: French for the first screens, English for the rest — template and test bed",
+            "transport-options": {
+                "symlink": true,
+                "relative": true
+            }
+        },
+        {
+            "name": "fahoba/example-theme",
+            "version": "0.1.0",
+            "dist": {
+                "type": "path",
+                "url": "plugins/example-theme",
+                "reference": "0b4d24f857dfaeac7ba3942d4798948936b34bf3"
+            },
+            "require": {
+                "fahoba/plugin-api": "^0.1",
+                "php": "^8.5"
+            },
+            "type": "library",
+            "extra": {
+                "fahoba": {
+                    "provider": "Fahoba\\ExampleTheme\\ExampleThemePlugin"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Fahoba\\ExampleTheme\\": "src/"
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "description": "A design pack: cool colours and rounder corners for wall and phone — template and test bed",
+            "transport-options": {
+                "symlink": true,
+                "relative": true
+            }
+        },
+        {
+            "name": "fahoba/ics-feed",
+            "version": "0.1.0",
+            "dist": {
+                "type": "path",
+                "url": "plugins/ics-feed",
+                "reference": "c831575bf08c777681afc9dbe58ab97efe31485e"
+            },
+            "require": {
+                "fahoba/plugin-api": "^0.1",
+                "php": "^8.5",
+                "sabre/vobject": "^4.6"
+            },
+            "type": "library",
+            "extra": {
+                "fahoba": {
+                    "provider": "Fahoba\\IcsFeed\\IcsFeedServiceProvider"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Fahoba\\IcsFeed\\": "src/"
+                }
+            },
+            "license": [
+                "PolyForm-Shield-1.0.0"
+            ],
+            "description": "Secret calendar subscription addresses for other calendar apps, read-only",
+            "transport-options": {
+                "symlink": true,
+                "relative": true
+            }
+        },
+        {
+            "name": "fahoba/kochwiki",
+            "version": "0.1.0",
+            "dist": {
+                "type": "path",
+                "url": "plugins/kochwiki",
+                "reference": "901dde7744ce19b1e830c40208a32d9937fd1508"
+            },
+            "require": {
+                "fahoba/plugin-api": "^0.1",
+                "php": "^8.5"
+            },
+            "type": "library",
+            "extra": {
+                "fahoba": {
+                    "provider": "Fahoba\\Kochwiki\\KochwikiServiceProvider"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Fahoba\\Kochwiki\\": "src/"
+                }
+            },
+            "license": [
+                "PolyForm-Shield-1.0.0"
+            ],
+            "description": "Koch-Wiki recipes for Fahoba, mirrored once per server",
+            "transport-options": {
+                "symlink": true,
+                "relative": true
+            }
+        },
+        {
+            "name": "fahoba/mcp",
+            "version": "0.1.0",
+            "dist": {
+                "type": "path",
+                "url": "plugins/mcp",
+                "reference": "799110e56f480eb679104172b7057a21920fb49e"
+            },
+            "require": {
+                "fahoba/plugin-api": "^0.1",
+                "laravel/mcp": "^1.1",
+                "php": "^8.5"
+            },
+            "type": "library",
+            "extra": {
+                "fahoba": {
+                    "provider": "Fahoba\\Mcp\\McpServiceProvider"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Fahoba\\Mcp\\": "src/"
+                }
+            },
+            "license": [
+                "PolyForm-Shield-1.0.0"
+            ],
+            "description": "Lets an AI assistant read and change a household through the Model Context Protocol, with an API token",
+            "transport-options": {
+                "symlink": true,
+                "relative": true
+            }
+        },
+        {
+            "name": "fahoba/openapi",
+            "version": "0.1.0",
+            "dist": {
+                "type": "path",
+                "url": "plugins/openapi",
+                "reference": "60bc744847a71f30789d9922f62e919fd973b86b"
+            },
+            "require": {
+                "dedoc/scramble": "^0.13.50",
+                "fahoba/plugin-api": "^0.1",
+                "php": "^8.5"
+            },
+            "type": "library",
+            "extra": {
+                "fahoba": {
+                    "provider": "Fahoba\\OpenApi\\OpenApiServiceProvider"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Fahoba\\OpenApi\\": "src/"
+                }
+            },
+            "license": [
+                "PolyForm-Shield-1.0.0"
+            ],
+            "description": "OpenAPI description of Fahoba's API, generated from the routes",
+            "transport-options": {
+                "symlink": true,
+                "relative": true
+            }
+        },
+        {
+            "name": "fahoba/social-login",
+            "version": "0.1.0",
+            "dist": {
+                "type": "path",
+                "url": "plugins/social-login",
+                "reference": "b90f243585dcbbda936b6e83e6103c164d5e0ce2"
+            },
+            "require": {
+                "fahoba/plugin-api": "^0.1",
+                "laravel/socialite": "^5.23",
+                "php": "^8.5"
+            },
+            "type": "library",
+            "extra": {
+                "fahoba": {
+                    "provider": "Fahoba\\SocialLogin\\SocialLoginServiceProvider"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Fahoba\\SocialLogin\\": "src/"
+                }
+            },
+            "license": [
+                "PolyForm-Shield-1.0.0"
+            ],
+            "description": "Sign in with Google and other OAuth providers for existing Fahoba accounts, switched on by the operator",
+            "transport-options": {
+                "symlink": true,
+                "relative": true
+            }
+        },
+        {
+            "name": "fahoba/two-factor",
+            "version": "0.1.0",
+            "dist": {
+                "type": "path",
+                "url": "plugins/two-factor",
+                "reference": "5115701f6e2d8f6538e567fc4cd64048e59d3a52"
+            },
+            "require": {
+                "fahoba/plugin-api": "^0.1",
+                "php": "^8.5"
+            },
+            "type": "library",
+            "extra": {
+                "fahoba": {
+                    "provider": "Fahoba\\TwoFactor\\TwoFactorServiceProvider"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Fahoba\\TwoFactor\\": "src/"
+                }
+            },
+            "license": [
+                "PolyForm-Shield-1.0.0"
+            ],
+            "description": "Two-factor sign-in for Fahoba: authenticator app and recovery codes, switched on by the operator",
+            "transport-options": {
+                "symlink": true,
+                "relative": true
+            }
+        },
+        {
+            "name": "fahoba/webdav-backup",
+            "version": "0.1.0",
+            "dist": {
+                "type": "path",
+                "url": "plugins/webdav-backup",
+                "reference": "44a3f9c2a8601945b978bb6114b292643236d7e7"
+            },
+            "require": {
+                "fahoba/plugin-api": "^0.1",
+                "php": "^8.5"
+            },
+            "type": "library",
+            "extra": {
+                "fahoba": {
+                    "provider": "Fahoba\\WebDavBackup\\WebDavBackupServiceProvider"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Fahoba\\WebDavBackup\\": "src/"
+                }
+            },
+            "license": [
+                "PolyForm-Shield-1.0.0"
+            ],
+            "description": "Nightly backup of database and uploads to a WebDAV folder — Nextcloud, a NAS, a storage box",
+            "transport-options": {
+                "symlink": true,
+                "relative": true
+            }
+        },
+        {
+            "name": "fahoba/webhooks",
+            "version": "0.1.0",
+            "dist": {
+                "type": "path",
+                "url": "plugins/webhooks",
+                "reference": "1d2fb74cf002467d9b95d651d8264fba0b172bf3"
+            },
+            "require": {
+                "fahoba/plugin-api": "^0.1",
+                "php": "^8.5"
+            },
+            "type": "library",
+            "extra": {
+                "fahoba": {
+                    "provider": "Fahoba\\Webhooks\\WebhooksServiceProvider"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Fahoba\\Webhooks\\": "src/"
+                }
+            },
+            "license": [
+                "PolyForm-Shield-1.0.0"
+            ],
+            "description": "Tells other services what happens in a household: signed POST requests on chosen events",
+            "transport-options": {
+                "symlink": true,
+                "relative": true
+            }
         },
         {
             "name": "fakerphp/faker",
@@ -13372,431 +13797,6 @@
                 }
             ],
             "time": "2026-09-25T15:50:05+00:00"
-        },
-        {
-            "name": "tagwerk/bring",
-            "version": "0.1.0",
-            "dist": {
-                "type": "path",
-                "url": "plugins/bring",
-                "reference": "f6b7d79e9bd6c0ae4b0f97754db1d175e5f5f338"
-            },
-            "require": {
-                "php": "^8.5",
-                "tagwerk/plugin-api": "^0.1"
-            },
-            "type": "library",
-            "extra": {
-                "tagwerk": {
-                    "provider": "Tagwerk\\Bring\\BringServiceProvider"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Tagwerk\\Bring\\": "src/"
-                }
-            },
-            "license": [
-                "PolyForm-Shield-1.0.0"
-            ],
-            "description": "Bring! shopping lists for Tagwerk, synced both ways",
-            "transport-options": {
-                "symlink": true,
-                "relative": true
-            }
-        },
-        {
-            "name": "tagwerk/caldav",
-            "version": "0.1.0",
-            "dist": {
-                "type": "path",
-                "url": "plugins/caldav",
-                "reference": "d5cab779e596d17ca04418b67c0f1d5f0ca6e7ed"
-            },
-            "require": {
-                "php": "^8.5",
-                "sabre/vobject": "^4.6",
-                "tagwerk/plugin-api": "^0.1"
-            },
-            "type": "library",
-            "extra": {
-                "tagwerk": {
-                    "provider": "Tagwerk\\CalDav\\CalDavServiceProvider"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Tagwerk\\CalDav\\": "src/"
-                }
-            },
-            "license": [
-                "PolyForm-Shield-1.0.0"
-            ],
-            "description": "Calendars from any CalDAV server — Nextcloud, iCloud, mailbox.org, Radicale — in both directions",
-            "transport-options": {
-                "symlink": true,
-                "relative": true
-            }
-        },
-        {
-            "name": "tagwerk/example-area",
-            "version": "0.1.0",
-            "dist": {
-                "type": "path",
-                "url": "plugins/example-area",
-                "reference": "1465da3e072c0a183adffdc49767ea86376bc5d8"
-            },
-            "require": {
-                "php": "^8.5",
-                "tagwerk/plugin-api": "^0.1"
-            },
-            "type": "library",
-            "extra": {
-                "tagwerk": {
-                    "provider": "Tagwerk\\ExampleArea\\ExampleAreaServiceProvider",
-                    "frontend": "frontend"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Tagwerk\\ExampleArea\\": "src/"
-                }
-            },
-            "license": [
-                "MIT"
-            ],
-            "description": "A household area from a plugin, with menu entry, view, route and translations — template and test bed",
-            "transport-options": {
-                "symlink": true,
-                "relative": true
-            }
-        },
-        {
-            "name": "tagwerk/example-language",
-            "version": "0.1.0",
-            "dist": {
-                "type": "path",
-                "url": "plugins/example-language",
-                "reference": "fe48fa0ec7da109a8f16ae860ee8305255cc469a"
-            },
-            "require": {
-                "php": "^8.5",
-                "tagwerk/plugin-api": "^0.1"
-            },
-            "type": "library",
-            "extra": {
-                "tagwerk": {
-                    "provider": "Tagwerk\\ExampleLanguage\\ExampleLanguagePlugin",
-                    "language": {
-                        "complete-for": "never — an example"
-                    }
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Tagwerk\\ExampleLanguage\\": "src/"
-                }
-            },
-            "license": [
-                "MIT"
-            ],
-            "description": "A language pack, deliberately incomplete: French for the first screens, English for the rest — template and test bed",
-            "transport-options": {
-                "symlink": true,
-                "relative": true
-            }
-        },
-        {
-            "name": "tagwerk/example-theme",
-            "version": "0.1.0",
-            "dist": {
-                "type": "path",
-                "url": "plugins/example-theme",
-                "reference": "1930d5121b877c76a84d71efdd6220f75addb086"
-            },
-            "require": {
-                "php": "^8.5",
-                "tagwerk/plugin-api": "^0.1"
-            },
-            "type": "library",
-            "extra": {
-                "tagwerk": {
-                    "provider": "Tagwerk\\ExampleTheme\\ExampleThemePlugin"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Tagwerk\\ExampleTheme\\": "src/"
-                }
-            },
-            "license": [
-                "MIT"
-            ],
-            "description": "A design pack: cool colours and rounder corners for wall and phone — template and test bed",
-            "transport-options": {
-                "symlink": true,
-                "relative": true
-            }
-        },
-        {
-            "name": "tagwerk/ics-feed",
-            "version": "0.1.0",
-            "dist": {
-                "type": "path",
-                "url": "plugins/ics-feed",
-                "reference": "2bf6597313c7488580812232c8b87bca82484565"
-            },
-            "require": {
-                "php": "^8.5",
-                "sabre/vobject": "^4.6",
-                "tagwerk/plugin-api": "^0.1"
-            },
-            "type": "library",
-            "extra": {
-                "tagwerk": {
-                    "provider": "Tagwerk\\IcsFeed\\IcsFeedServiceProvider"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Tagwerk\\IcsFeed\\": "src/"
-                }
-            },
-            "license": [
-                "PolyForm-Shield-1.0.0"
-            ],
-            "description": "Secret calendar subscription addresses for other calendar apps, read-only",
-            "transport-options": {
-                "symlink": true,
-                "relative": true
-            }
-        },
-        {
-            "name": "tagwerk/kochwiki",
-            "version": "0.1.0",
-            "dist": {
-                "type": "path",
-                "url": "plugins/kochwiki",
-                "reference": "ba22f70a7965b023f35d3d3077100ccf4917f30d"
-            },
-            "require": {
-                "php": "^8.5",
-                "tagwerk/plugin-api": "^0.1"
-            },
-            "type": "library",
-            "extra": {
-                "tagwerk": {
-                    "provider": "Tagwerk\\Kochwiki\\KochwikiServiceProvider"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Tagwerk\\Kochwiki\\": "src/"
-                }
-            },
-            "license": [
-                "PolyForm-Shield-1.0.0"
-            ],
-            "description": "Koch-Wiki recipes for Tagwerk, mirrored once per server",
-            "transport-options": {
-                "symlink": true,
-                "relative": true
-            }
-        },
-        {
-            "name": "tagwerk/mcp",
-            "version": "0.1.0",
-            "dist": {
-                "type": "path",
-                "url": "plugins/mcp",
-                "reference": "87766c90711e448e46e3b32fa7e5484415e90353"
-            },
-            "require": {
-                "laravel/mcp": "^1.1",
-                "php": "^8.5",
-                "tagwerk/plugin-api": "^0.1"
-            },
-            "type": "library",
-            "extra": {
-                "tagwerk": {
-                    "provider": "Tagwerk\\Mcp\\McpServiceProvider"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Tagwerk\\Mcp\\": "src/"
-                }
-            },
-            "license": [
-                "PolyForm-Shield-1.0.0"
-            ],
-            "description": "Lets an AI assistant read and change a household through the Model Context Protocol, with an API token",
-            "transport-options": {
-                "symlink": true,
-                "relative": true
-            }
-        },
-        {
-            "name": "tagwerk/openapi",
-            "version": "0.1.0",
-            "dist": {
-                "type": "path",
-                "url": "plugins/openapi",
-                "reference": "7d450fbe70c191f810b07d9447a6632c4e321740"
-            },
-            "require": {
-                "dedoc/scramble": "^0.13.50",
-                "php": "^8.5",
-                "tagwerk/plugin-api": "^0.1"
-            },
-            "type": "library",
-            "extra": {
-                "tagwerk": {
-                    "provider": "Tagwerk\\OpenApi\\OpenApiServiceProvider"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Tagwerk\\OpenApi\\": "src/"
-                }
-            },
-            "license": [
-                "PolyForm-Shield-1.0.0"
-            ],
-            "description": "OpenAPI description of Tagwerk's API, generated from the routes",
-            "transport-options": {
-                "symlink": true,
-                "relative": true
-            }
-        },
-        {
-            "name": "tagwerk/social-login",
-            "version": "0.1.0",
-            "dist": {
-                "type": "path",
-                "url": "plugins/social-login",
-                "reference": "040163af8ef88faee02e5925a811e7e0692389fd"
-            },
-            "require": {
-                "laravel/socialite": "^5.23",
-                "php": "^8.5",
-                "tagwerk/plugin-api": "^0.1"
-            },
-            "type": "library",
-            "extra": {
-                "tagwerk": {
-                    "provider": "Tagwerk\\SocialLogin\\SocialLoginServiceProvider"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Tagwerk\\SocialLogin\\": "src/"
-                }
-            },
-            "license": [
-                "PolyForm-Shield-1.0.0"
-            ],
-            "description": "Sign in with Google and other OAuth providers for existing Tagwerk accounts, switched on by the operator",
-            "transport-options": {
-                "symlink": true,
-                "relative": true
-            }
-        },
-        {
-            "name": "tagwerk/two-factor",
-            "version": "0.1.0",
-            "dist": {
-                "type": "path",
-                "url": "plugins/two-factor",
-                "reference": "36ec3306602448d6ef227265d82ba5844cf83346"
-            },
-            "require": {
-                "php": "^8.5",
-                "tagwerk/plugin-api": "^0.1"
-            },
-            "type": "library",
-            "extra": {
-                "tagwerk": {
-                    "provider": "Tagwerk\\TwoFactor\\TwoFactorServiceProvider"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Tagwerk\\TwoFactor\\": "src/"
-                }
-            },
-            "license": [
-                "PolyForm-Shield-1.0.0"
-            ],
-            "description": "Two-factor sign-in for Tagwerk: authenticator app and recovery codes, switched on by the operator",
-            "transport-options": {
-                "symlink": true,
-                "relative": true
-            }
-        },
-        {
-            "name": "tagwerk/webdav-backup",
-            "version": "0.1.0",
-            "dist": {
-                "type": "path",
-                "url": "plugins/webdav-backup",
-                "reference": "5a9021b17f7cd51bbd3ede1a77a19c518a050677"
-            },
-            "require": {
-                "php": "^8.5",
-                "tagwerk/plugin-api": "^0.1"
-            },
-            "type": "library",
-            "extra": {
-                "tagwerk": {
-                    "provider": "Tagwerk\\WebDavBackup\\WebDavBackupServiceProvider"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Tagwerk\\WebDavBackup\\": "src/"
-                }
-            },
-            "license": [
-                "PolyForm-Shield-1.0.0"
-            ],
-            "description": "Nightly backup of database and uploads to a WebDAV folder — Nextcloud, a NAS, a storage box",
-            "transport-options": {
-                "symlink": true,
-                "relative": true
-            }
-        },
-        {
-            "name": "tagwerk/webhooks",
-            "version": "0.1.0",
-            "dist": {
-                "type": "path",
-                "url": "plugins/webhooks",
-                "reference": "ec33b3c82bcd3c416276d9f9b4bc438082b535b0"
-            },
-            "require": {
-                "php": "^8.5",
-                "tagwerk/plugin-api": "^0.1"
-            },
-            "type": "library",
-            "extra": {
-                "tagwerk": {
-                    "provider": "Tagwerk\\Webhooks\\WebhooksServiceProvider"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Tagwerk\\Webhooks\\": "src/"
-                }
-            },
-            "license": [
-                "PolyForm-Shield-1.0.0"
-            ],
-            "description": "Tells other services what happens in a household: signed POST requests on chosen events",
-            "transport-options": {
-                "symlink": true,
-                "relative": true
-            }
         },
         {
             "name": "theseer/tokenizer",

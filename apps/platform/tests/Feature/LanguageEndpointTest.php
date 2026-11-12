@@ -10,9 +10,9 @@ use App\Models\Device;
 use App\Models\Household;
 use App\Models\User;
 use App\Support\HouseholdContext;
+use Fahoba\PluginApi\Plugins\Catalog;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Auth;
-use Tagwerk\PluginApi\Plugins\Catalog;
 use Tests\Fixtures\Languages\Italian;
 use Tests\TestCase;
 

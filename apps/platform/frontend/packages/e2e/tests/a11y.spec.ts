@@ -31,7 +31,7 @@ async function findings(page: Page, where: string): Promise<string[]> {
 
 test('the start page', async ({ page }) => {
   await page.goto('/')
-  await expect(page.getByRole('heading', { name: 'Willkommen bei Tagwerk' })).toBeVisible()
+  await expect(page.getByRole('heading', { name: 'Willkommen bei Fahoba' })).toBeVisible()
 
   expect(await findings(page, 'start page')).toEqual([])
 })

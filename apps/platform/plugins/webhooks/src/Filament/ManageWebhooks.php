@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Tagwerk\Webhooks\Filament;
+namespace Fahoba\Webhooks\Filament;
 
+use Fahoba\Webhooks\Webhook;
 use Filament\Actions\CreateAction;
 use Filament\Resources\Pages\ManageRecords;
-use Tagwerk\Webhooks\Webhook;
 
 class ManageWebhooks extends ManageRecords
 {

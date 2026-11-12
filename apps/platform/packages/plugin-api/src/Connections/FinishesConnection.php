@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Tagwerk\PluginApi\Connections;
+namespace Fahoba\PluginApi\Connections;
 
 /**
  * What to fetch after a freshly granted consent.

@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Tagwerk\Webhooks;
+namespace Fahoba\Webhooks;
 
+use Fahoba\PluginApi\Events\DomainEvent;
+use Fahoba\PluginApi\Plugins\Catalog;
+use Fahoba\PluginApi\Plugins\Plugin;
 use Illuminate\Support\Facades\Event;
-use Tagwerk\PluginApi\Events\DomainEvent;
-use Tagwerk\PluginApi\Plugins\Catalog;
-use Tagwerk\PluginApi\Plugins\Plugin;
 
 final class WebhooksServiceProvider extends Plugin
 {

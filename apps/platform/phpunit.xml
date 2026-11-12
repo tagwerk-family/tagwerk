@@ -28,7 +28,7 @@
         <env name="DB_PORT" value="5432"/>
         <env name="DB_USERNAME" value="db"/>
         <env name="DB_PASSWORD" value="db"/>
-        <env name="DB_DATABASE" value="tagwerk_test"/>
+        <env name="DB_DATABASE" value="fahoba_test"/>
         <env name="DB_URL" value=""/>
         <env name="MAIL_MAILER" value="array"/>
         <env name="QUEUE_CONNECTION" value="sync"/>

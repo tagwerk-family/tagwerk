@@ -7,9 +7,9 @@ namespace Tests\Feature\Plugins;
 use App\Models\Household;
 use App\Models\Person;
 use App\Models\User;
+use Fahoba\PluginApi\Plugins\Catalog;
+use Fahoba\PluginApi\Plugins\LoadReport;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Tagwerk\PluginApi\Plugins\Catalog;
-use Tagwerk\PluginApi\Plugins\LoadReport;
 use Tests\Fixtures\Languages\Italian;
 use Tests\TestCase;
 
@@ -22,14 +22,14 @@ final class PluginsPageTest extends TestCase
     {
         $this->actingAs($this->operator())->get('/admin/operator/plugins')
             ->assertOk()
-            ->assertSee('tagwerk/bring')
+            ->assertSee('fahoba/bring')
             ->assertSee('PolyForm-Shield-1.0.0')
             ->assertSee('Geladen');
     }
 
     public function test_a_plugin_that_did_not_load_shows_its_reason(): void
     {
-        app(LoadReport::class)->fail('tagwerk/bring', 'Cannot reach the service.');
+        app(LoadReport::class)->fail('fahoba/bring', 'Cannot reach the service.');
 
         $this->actingAs($this->operator())->get('/admin/operator/plugins')
             ->assertOk()

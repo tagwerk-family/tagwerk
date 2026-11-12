@@ -7,7 +7,7 @@
  * Laravel has no Node toolchain of its own, and a few rules do not justify
  * one.
  *
- * The font sits next to this file under fonts/tagwerk (SIL OFL 1.1, licence
+ * The font sits next to this file under fonts/fahoba (SIL OFL 1.1, licence
  * text there) and comes from the frontend's @fontsource package.
  */
 
@@ -16,7 +16,7 @@
     font-style: normal;
     font-display: swap;
     font-weight: 200 800;
-    src: url("../fonts/tagwerk/plus-jakarta-sans-latin-wght-normal.woff2") format("woff2-variations");
+    src: url("../fonts/fahoba/plus-jakarta-sans-latin-wght-normal.woff2") format("woff2-variations");
 }
 
 /* Headings set tighter, as on the wall. */
@@ -43,7 +43,7 @@
 }
 
 /* Light/dark switch in the top bar, a segmented control as on the wall. */
-.tagwerk-theme {
+.fahoba-theme {
     display: inline-flex;
     gap: 0.125rem;
     padding: 0.1875rem;
@@ -52,11 +52,11 @@
     background: var(--gray-100);
 }
 
-.dark .tagwerk-theme {
+.dark .fahoba-theme {
     background: var(--gray-800);
 }
 
-.tagwerk-theme-button {
+.fahoba-theme-button {
     display: grid;
     place-items: center;
     width: 2.25rem;
@@ -66,41 +66,41 @@
     transition: background-color 0.15s, color 0.15s;
 }
 
-.tagwerk-theme-button svg {
+.fahoba-theme-button svg {
     width: 1.25rem;
     height: 1.25rem;
 }
 
-.tagwerk-theme-button:hover {
+.fahoba-theme-button:hover {
     color: var(--gray-900);
 }
 
-.dark .tagwerk-theme-button {
+.dark .fahoba-theme-button {
     color: var(--gray-400);
 }
 
-.dark .tagwerk-theme-button:hover {
+.dark .fahoba-theme-button:hover {
     color: var(--gray-100);
 }
 
-.tagwerk-theme-button.is-selected {
+.fahoba-theme-button.is-selected {
     background: var(--color-white);
     color: var(--primary-600);
     box-shadow: 0 1px 2px rgb(0 0 0 / 0.1);
 }
 
-.dark .tagwerk-theme-button.is-selected {
+.dark .fahoba-theme-button.is-selected {
     background: var(--gray-700);
     color: var(--primary-300);
 }
 
-.tagwerk-theme-button:focus-visible {
+.fahoba-theme-button:focus-visible {
     outline: 2px solid var(--primary-500);
     outline-offset: 2px;
 }
 
 /* A household notice: trial, read-only, whatever a plugin says. */
-.tagwerk-household-notice {
+.fahoba-household-notice {
     display: flex;
     flex-wrap: wrap;
     align-items: center;
@@ -112,18 +112,18 @@
     font-size: 0.875rem;
 }
 
-.tagwerk-household-notice[data-level="blocking"] {
+.fahoba-household-notice[data-level="blocking"] {
     background: var(--danger-600);
 }
 
-.tagwerk-household-notice a,
-.tagwerk-household-notice button {
+.fahoba-household-notice a,
+.fahoba-household-notice button {
     text-decoration: underline;
     font-weight: 600;
 }
 
 /* Support access: the operator inside another household. */
-.tagwerk-support-banner {
+.fahoba-support-banner {
     display: flex;
     flex-wrap: wrap;
     align-items: center;
@@ -135,12 +135,12 @@
     font-size: 0.875rem;
 }
 
-.tagwerk-support-banner button {
+.fahoba-support-banner button {
     text-decoration: underline;
     font-weight: 600;
 }
 
-.tagwerk-support-switcher select {
+.fahoba-support-switcher select {
     border: 1px solid var(--gray-300);
     border-radius: 0.5rem;
     background: transparent;
@@ -148,12 +148,12 @@
     font-size: 0.875rem;
 }
 
-.dark .tagwerk-support-switcher select {
+.dark .fahoba-support-switcher select {
     border-color: var(--gray-700);
 }
 
 /* "Zur App" in the header: the way back to the family app. */
-.tagwerk-to-app {
+.fahoba-to-app {
     display: inline-flex;
     align-items: center;
     min-height: 2.75rem;
@@ -165,15 +165,15 @@
     white-space: nowrap;
 }
 
-.tagwerk-to-app:hover {
+.fahoba-to-app:hover {
     background: var(--gray-100);
 }
 
-.dark .tagwerk-to-app {
+.dark .fahoba-to-app {
     color: var(--primary-400);
 }
 
-.dark .tagwerk-to-app:hover {
+.dark .fahoba-to-app:hover {
     background: var(--gray-800);
 }
 

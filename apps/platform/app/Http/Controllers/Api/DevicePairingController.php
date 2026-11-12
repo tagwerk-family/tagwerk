@@ -34,16 +34,7 @@ final class DevicePairingController extends Controller
         $result = $this->pairing->redeem($validated['code']);
         $device = $result['device'];
 
-        $cookie = cookie()->forever(
-            DeviceTokenFromCookie::COOKIE,
-            $result['token'],
-            path: '/',
-            domain: null,
-            secure: $request->isSecure(),
-            httpOnly: true,
-            raw: false,
-            sameSite: 'lax',
-        );
+        $cookie = DeviceTokenFromCookie::cookie($result['token'], $request->isSecure());
 
         return response()->json([
             'household_id' => $device->household_id,

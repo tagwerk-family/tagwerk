@@ -75,7 +75,7 @@ class ListRecipes extends ListRecords
                     ->label(__('Export collection'))
                     ->icon('heroicon-o-arrow-down-tray')
                     ->action(fn (RecipeImport $import): BinaryFileResponse => response()
-                        ->download($import->export(), 'tagwerk-recipes.zip', ['Content-Type' => 'application/zip'])
+                        ->download($import->export(), 'fahoba-recipes.zip', ['Content-Type' => 'application/zip'])
                         ->deleteFileAfterSend()),
             ])
                 ->label(__('Collection'))

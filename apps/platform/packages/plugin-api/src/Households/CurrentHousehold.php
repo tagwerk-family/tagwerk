@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Tagwerk\PluginApi\Households;
+namespace Fahoba\PluginApi\Households;
 
 /**
  * The household the current request or job works for. Null everywhere

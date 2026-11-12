@@ -8,15 +8,15 @@ use App\Models\DashboardWidget;
 use App\Models\Household;
 use App\Services\DevicePairingService;
 use App\Support\HouseholdContext;
+use Fahoba\PluginApi\Dashboard\DataWidget;
+use Fahoba\PluginApi\Dashboard\HasSettings;
+use Fahoba\PluginApi\Dashboard\SettingField;
+use Fahoba\PluginApi\Dashboard\WidgetContent;
+use Fahoba\PluginApi\Dashboard\WidgetContext;
+use Fahoba\PluginApi\Plugins\Catalog;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Testing\TestResponse;
-use Tagwerk\PluginApi\Dashboard\DataWidget;
-use Tagwerk\PluginApi\Dashboard\HasSettings;
-use Tagwerk\PluginApi\Dashboard\SettingField;
-use Tagwerk\PluginApi\Dashboard\WidgetContent;
-use Tagwerk\PluginApi\Dashboard\WidgetContext;
-use Tagwerk\PluginApi\Plugins\Catalog;
 use Tests\TestCase;
 
 /** A plugin widget's settings: a form from its fields, checked and stored by the server. */

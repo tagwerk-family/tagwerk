@@ -2,16 +2,16 @@
 
 declare(strict_types=1);
 
-namespace Tagwerk\TwoFactor;
+namespace Fahoba\TwoFactor;
 
 use App\Auth\Contracts\SecondFactor;
 use App\Integrations\Plugins\Extensions;
 use App\Models\User;
+use Fahoba\PluginApi\Plugins\Extension;
+use Fahoba\PluginApi\Plugins\ExtensionCategory;
 use Filament\Forms\Components\Radio;
 use Filament\Panel;
 use Illuminate\Contracts\Auth\Authenticatable;
-use Tagwerk\PluginApi\Plugins\Extension;
-use Tagwerk\PluginApi\Plugins\ExtensionCategory;
 
 /**
  * A code from an authenticator app after the password — in the admin by
@@ -24,7 +24,7 @@ use Tagwerk\PluginApi\Plugins\ExtensionCategory;
  */
 final class TwoFactorExtension implements Extension, SecondFactor
 {
-    public const KEY = 'tagwerk/two-factor';
+    public const KEY = 'fahoba/two-factor';
 
     public function __construct(private readonly Extensions $extensions) {}
 

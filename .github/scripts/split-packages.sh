@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
 # Splits every package of the monorepo into its own read-only repository:
 # apps/platform/packages/<x> and apps/platform/plugins/<x> go to
-# <owner>/tagwerk-<name>, branch main, plus a tag v<version> from the
+# <owner>/fahoba-<name>, branch main, plus a tag v<version> from the
 # package's composer.json if that tag is missing there. Packagist reads the
 # tags. Development stays here; the split repos only receive.
-# apps/platform/templates/<x> goes to <owner>/tagwerk-<x>-template, main
+# apps/platform/templates/<x> goes to <owner>/fahoba-<x>-template, main
 # only: a GitHub template repository, not a package.
 #
 #   SPLIT_OWNER   GitHub owner of the split repositories
@@ -20,11 +20,11 @@ for dir in apps/platform/packages/*/ apps/platform/plugins/*/ apps/platform/temp
   if [[ "$dir" == apps/platform/templates/* ]]; then
     name="${dir##*/} template"
     version=""
-    repo="$owner/tagwerk-${dir##*/}-template"
+    repo="$owner/fahoba-${dir##*/}-template"
   else
     name="$(jq -r .name "$dir/composer.json")"
     version="$(jq -r '.version // empty' "$dir/composer.json")"
-    repo="$owner/tagwerk-${name#*/}"
+    repo="$owner/fahoba-${name#*/}"
   fi
   sha="$(git subtree split --quiet --prefix="$dir" HEAD)"
 

@@ -6,20 +6,20 @@ namespace App\Integrations\Photos\Folder;
 
 use App\Services\Photos\PhotoDateIndex;
 use App\Support\HouseholdContext;
+use Fahoba\PluginApi\Connections\ConnectedAccount;
+use Fahoba\PluginApi\Connections\CredentialField;
+use Fahoba\PluginApi\Connections\DescribesSetup;
+use Fahoba\PluginApi\Connections\UsesCredentials;
+use Fahoba\PluginApi\Photos\ListsPhotos;
+use Fahoba\PluginApi\Photos\Photo;
+use Fahoba\PluginApi\Photos\PhotoFile;
+use Fahoba\PluginApi\Photos\PhotoSource;
 use FilesystemIterator;
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\Facades\Cache;
 use RecursiveDirectoryIterator;
 use RecursiveIteratorIterator;
 use SplFileInfo;
-use Tagwerk\PluginApi\Connections\ConnectedAccount;
-use Tagwerk\PluginApi\Connections\CredentialField;
-use Tagwerk\PluginApi\Connections\DescribesSetup;
-use Tagwerk\PluginApi\Connections\UsesCredentials;
-use Tagwerk\PluginApi\Photos\ListsPhotos;
-use Tagwerk\PluginApi\Photos\Photo;
-use Tagwerk\PluginApi\Photos\PhotoFile;
-use Tagwerk\PluginApi\Photos\PhotoSource;
 
 /**
  * A folder on the server, read recursively.
@@ -34,7 +34,7 @@ use Tagwerk\PluginApi\Photos\PhotoSource;
  * the whole server.
  *
  * The household does not pick an arbitrary server path, only a subfolder of
- * its own base `<tagwerk.photo_folders>/<household id>`, which the operator
+ * its own base `<fahoba.photo_folders>/<household id>`, which the operator
  * sets up. Otherwise one family could enter the upload directory — or the
  * folder of another family — and see its pictures.
  */
@@ -170,7 +170,7 @@ class FolderPhotoSource implements DescribesSetup, ListsPhotos, PhotoSource, Use
         }
 
         if (! is_readable($path)) {
-            return __('Tagwerk cannot read the folder.');
+            return __('Fahoba cannot read the folder.');
         }
 
         return null;
@@ -197,7 +197,7 @@ class FolderPhotoSource implements DescribesSetup, ListsPhotos, PhotoSource, Use
     {
         return [
             __('The operator creates the household\'s photo folder on the server — a network share or a sync lands there.'),
-            __('Tagwerk only reads; it moves, changes and deletes nothing.'),
+            __('Fahoba only reads; it moves, changes and deletes nothing.'),
         ];
     }
 
@@ -223,7 +223,7 @@ class FolderPhotoSource implements DescribesSetup, ListsPhotos, PhotoSource, Use
      */
     public static function forget(int $household): void
     {
-        $root = trim((string) config('tagwerk.photo_folders'));
+        $root = trim((string) config('fahoba.photo_folders'));
         $real = $root === '' ? false : realpath($root);
 
         if ($real === false) {
@@ -242,7 +242,7 @@ class FolderPhotoSource implements DescribesSetup, ListsPhotos, PhotoSource, Use
     /** The household's own photo folder on the server — null until the operator creates it. */
     private static function base(?int $household): ?string
     {
-        $root = trim((string) config('tagwerk.photo_folders'));
+        $root = trim((string) config('fahoba.photo_folders'));
 
         if ($root === '' || $household === null) {
             return null;

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Dashboard;
 
-use Tagwerk\PluginApi\Dashboard\SettingField;
+use Fahoba\PluginApi\Dashboard\SettingField;
 
 /**
  * What a widget says about itself.

@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace {{ namespace }};
 
-use Tagwerk\PluginApi\Languages\LanguagePack;
+use Fahoba\PluginApi\Languages\LanguagePack;
 
 /**
- * A language for Tagwerk. The texts start as the English reference:
+ * A language for Fahoba. The texts start as the English reference:
  * translate the values in lang/ and frontend/, never the keys. Whatever
  * stays untranslated or loses a placeholder shows in English.
  */

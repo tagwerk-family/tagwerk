@@ -1,5 +1,5 @@
 {
-    "name": "tagwerk/caldav",
+    "name": "fahoba/caldav",
     "description": "Calendars from any CalDAV server — Nextcloud, iCloud, mailbox.org, Radicale — in both directions",
     "type": "library",
     "version": "0.1.0",
@@ -7,16 +7,16 @@
     "require": {
         "php": "^8.5",
         "sabre/vobject": "^4.6",
-        "tagwerk/plugin-api": "^0.1"
+        "fahoba/plugin-api": "^0.1"
     },
     "autoload": {
         "psr-4": {
-            "Tagwerk\\CalDav\\": "src/"
+            "Fahoba\\CalDav\\": "src/"
         }
     },
     "extra": {
-        "tagwerk": {
-            "provider": "Tagwerk\\CalDav\\CalDavServiceProvider"
+        "fahoba": {
+            "provider": "Fahoba\\CalDav\\CalDavServiceProvider"
         }
     }
 }

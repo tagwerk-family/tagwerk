@@ -9,6 +9,7 @@ use App\Notifications\HouseholdMovedIn;
 use App\Services\HouseholdArchive;
 use App\Services\HouseholdImport;
 use App\Support\OutgoingMail;
+use Fahoba\PluginApi\Households\HouseholdImported;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Filesystem\Filesystem;
@@ -17,7 +18,6 @@ use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Storage;
 use RuntimeException;
-use Tagwerk\PluginApi\Households\HouseholdImported;
 
 /** Moves an uploaded archive in; the account that uploaded it hears how it went. */
 final class ImportHouseholdArchiveJob implements ShouldQueue

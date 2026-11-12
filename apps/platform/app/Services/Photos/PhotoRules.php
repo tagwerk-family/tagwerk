@@ -5,11 +5,11 @@ declare(strict_types=1);
 namespace App\Services\Photos;
 
 use App\Integrations\Plugins\PluginCatalog;
-use Tagwerk\PluginApi\Photos\PhotoRule;
+use Fahoba\PluginApi\Photos\PhotoRule;
 
 /**
  * The rules a household can choose for its photo frame: the built-in ones
- * from `tagwerk.photo_rules`, then those plugins offer.
+ * from `fahoba.photo_rules`, then those plugins offer.
  */
 final class PhotoRules
 {
@@ -19,7 +19,7 @@ final class PhotoRules
     public function all(): array
     {
         /** @var array<string, class-string<PhotoRule>> $classes */
-        $classes = [...config('tagwerk.photo_rules', []), ...$this->plugins->offered('photo_rules')];
+        $classes = [...config('fahoba.photo_rules', []), ...$this->plugins->offered('photo_rules')];
 
         return array_map(static fn (string $class): PhotoRule => app($class), $classes);
     }

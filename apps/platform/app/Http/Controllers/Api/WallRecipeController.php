@@ -17,6 +17,11 @@ use App\Services\Recipes\RecipeImport;
 use App\Services\Recipes\RecipeShopping;
 use App\Support\Abilities;
 use App\Support\Recipes\RecipeInput;
+use Fahoba\PluginApi\Recipes\DescribesRecipes;
+use Fahoba\PluginApi\Recipes\Ingredient;
+use Fahoba\PluginApi\Recipes\RecipeDetail;
+use Fahoba\PluginApi\Recipes\RecipeProvider;
+use Fahoba\PluginApi\Recipes\RecipeQuery;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -24,11 +29,6 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\Rule;
 use Illuminate\Validation\ValidationException;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
-use Tagwerk\PluginApi\Recipes\DescribesRecipes;
-use Tagwerk\PluginApi\Recipes\Ingredient;
-use Tagwerk\PluginApi\Recipes\RecipeDetail;
-use Tagwerk\PluginApi\Recipes\RecipeProvider;
-use Tagwerk\PluginApi\Recipes\RecipeQuery;
 
 /**
  * The recipe book as an area of its own on the wall and the phone.
@@ -39,7 +39,7 @@ use Tagwerk\PluginApi\Recipes\RecipeQuery;
  */
 final class WallRecipeController extends Controller
 {
-    /** A provider key in a path: built in (`tandoor`) or a plugin's (`tagwerk/kochwiki`). */
+    /** A provider key in a path: built in (`tandoor`) or a plugin's (`fahoba/kochwiki`). */
     public const PROVIDER = '[a-z0-9-]+(?:/[a-z0-9-]+)?';
 
     public function __construct(

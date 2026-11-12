@@ -7,6 +7,48 @@ tokens; such a change is named here.
 
 ## [Unreleased]
 
+### Renamed: Tagwerk is now Fahoba
+
+For trademark reasons. The name is an acronym: **Fa**mily · **Ho**me ·
+**Ba**se. The next release is 0.3.0 — still a minor one, as everything
+before 1.0.0: plugin authors must follow the rename, a running server and
+its tablets need not.
+
+- **Breaking for plugins.** `Tagwerk\PluginApi` is `Fahoba\PluginApi`,
+  `tagwerk/plugin-api` is `fahoba/plugin-api`, `@tagwerk/client` is
+  `@fahoba/client`, `extra.tagwerk` in a plugin's `composer.json` is
+  `extra.fahoba`, Artisan commands are `fahoba:*`. No aliases: there are
+  hardly any third-party plugins yet, and a clean cut costs them less than
+  years of two names.
+- **What a server holds is carried over.**
+  - A migration renames the bundled plugins' keys (`tagwerk/bring` →
+    `fahoba/bring`) in every column of the schema, json included —
+    connections, favourites, tiles, designs and extensions' settings
+    stay. It also renames the built-in calendar's id, without which every
+    household would have got a second family calendar.
+  - Exports from before still import (`RenamedFromTagwerk`): household
+    archives, recipe collections (`tagwerk-recipes`) and the marked secrets
+    (`tagwerk_plain_secret`).
+- **Paired tablets and signed-in phones stay signed in.** `RenamedCookies`
+  reads `tagwerk_device_token`/`tagwerk_user_token`, sets the new cookie and
+  clears the old; `theme.js` moves the browser's `tagwerk-*` storage keys
+  before anything reads them.
+- **Calendars written before keep their people and echo protection:**
+  Google's `tagwerk_people`/`tagwerk_revision` and CalDAV's `X-TAGWERK-*`
+  are still read, written anew under the new names.
+- **Webhooks send `X-Fahoba-*` and, for receivers set up before,
+  `X-Tagwerk-*`.**
+- **`deploy/.env` may keep `TAGWERK_*`** — the entrypoint and Compose fall
+  back to them and log a hint. Except `FAHOBA_HOST` and `FAHOBA_SITE`:
+  Compose cannot fall back for a required variable, the start names the old
+  one. `TAGWERK_PLUGINS="tagwerk/caldav"` installs `fahoba/caldav`. The
+  Compose project, its network and the database defaults keep the name
+  `tagwerk`: Compose names the volumes after the project, and a new name
+  would have started every server on an empty database.
+- **A new mark: a tick inside a house on the tile** —
+  and the wordmark in Plus Jakarta Sans 800. The browser tab gets a bold
+  variant (`favicon.svg`): the outline blurred at 16 pixels.
+
 ### Changed
 
 - **Symfony 8.1.11.** Advisories of 2026-11-04 against `http-foundation`,

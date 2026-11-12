@@ -2,8 +2,8 @@
 
 declare(strict_types=1);
 
+use Fahoba\SocialLogin\SocialLoginController;
 use Illuminate\Support\Facades\Route;
-use Tagwerk\SocialLogin\SocialLoginController;
 
 Route::middleware('api')->prefix('api')->group(function (): void {
     Route::get('/auth/social', [SocialLoginController::class, 'index']);

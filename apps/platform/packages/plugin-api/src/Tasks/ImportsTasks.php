@@ -2,15 +2,15 @@
 
 declare(strict_types=1);
 
-namespace Tagwerk\PluginApi\Tasks;
+namespace Fahoba\PluginApi\Tasks;
 
-use Tagwerk\PluginApi\Connections\ConnectedAccount;
+use Fahoba\PluginApi\Connections\ConnectedAccount;
 
 /**
  * Capability: the provider can hand out its tasks.
  *
  * That brings Dad's tasks onto the wall, where the household can add what
- * only Tagwerk knows.
+ * only Fahoba knows.
  */
 interface ImportsTasks
 {

@@ -1,30 +1,30 @@
-# Writing a Tagwerk plugin
+# Writing a Fahoba plugin
 
-A plugin is a Composer package that brings Tagwerk something new without
+A plugin is a Composer package that brings Fahoba something new without
 touching the core. It can add a dashboard tile, a provider (a calendar,
 shopping lists, recipes, weather …), a rule for the photo frame, a whole area
 with its own menu entry, routes and tables, or a server extension.
 
-A plugin builds on **`tagwerk/plugin-api`** and nothing else of Tagwerk. The
+A plugin builds on **`fahoba/plugin-api`** and nothing else of Fahoba. The
 API is MIT licensed: a plugin built only on it may carry any licence you
-choose. Tagwerk itself is under PolyForm Shield 1.0.0. Classes under `App\`
+choose. Fahoba itself is under PolyForm Shield 1.0.0. Classes under `App\`
 belong to the core, change without notice and fall under its licence. Do not
 use them.
 
 ## Start in one command
 
-Without a Tagwerk checkout: open
-[`tagwerk-plugin-template`](https://github.com/tagwerk-family/tagwerk-plugin-template),
+Without a Fahoba checkout: open
+[`fahoba-plugin-template`](https://github.com/fahoba/fahoba-plugin-template),
 press **Use this template**, rename `acme/example` and the `Acme\Example`
 namespace to your own, and run `composer install && vendor/bin/phpunit`.
 
-From a Tagwerk checkout (`apps/platform`, inside DDEV):
+From a Fahoba checkout (`apps/platform`, inside DDEV):
 
 ```bash
-php artisan tagwerk:make-plugin acme/waste --widget
-php artisan tagwerk:make-plugin acme/nextcloud --provider=calendar
-php artisan tagwerk:make-plugin acme/board --area
-php artisan tagwerk:make-plugin acme/violet --theme
+php artisan fahoba:make-plugin acme/waste --widget
+php artisan fahoba:make-plugin acme/nextcloud --provider=calendar
+php artisan fahoba:make-plugin acme/board --area
+php artisan fahoba:make-plugin acme/violet --theme
 composer require acme/waste
 ```
 
@@ -45,10 +45,10 @@ the area's base contract. Every method except `key()`, `label()` and
 ```json
 {
     "name": "acme/waste",
-    "require": { "php": "^8.5", "tagwerk/plugin-api": "^0.1" },
+    "require": { "php": "^8.5", "fahoba/plugin-api": "^0.1" },
     "autoload": { "psr-4": { "Acme\\Waste\\": "src/" } },
     "extra": {
-        "tagwerk": {
+        "fahoba": {
             "provider": "Acme\\Waste\\WastePlugin",
             "csp": { "img-src": ["https://cdn.acme.example"] },
             "frontend": "frontend"
@@ -57,9 +57,9 @@ the area's base contract. Every method except `key()`, `label()` and
 }
 ```
 
-- **`provider`** names your plugin class. Tagwerk loads it itself. Do not list
+- **`provider`** names your plugin class. Fahoba loads it itself. Do not list
   it in `extra.laravel`: Laravel's discovery would register it outside
-  Tagwerk, and the plugin is then reported as not loaded.
+  Fahoba, and the plugin is then reported as not loaded.
 - **`csp`** names hosts the wall's browser may load from: `img-src`,
   `media-src`, `connect-src`, `font-src`, only `https://` hosts (`*.` for
   subdomains). Scripts and styles from elsewhere are never allowed. A wrong
@@ -70,11 +70,11 @@ the area's base contract. Every method except `key()`, `label()` and
 ## The plugin class
 
 ```php
-final class WastePlugin extends \Tagwerk\PluginApi\Plugins\Plugin
+final class WastePlugin extends \Fahoba\PluginApi\Plugins\Plugin
 {
     protected function registerPlugin(): void
     {
-        $catalog = $this->app->make(\Tagwerk\PluginApi\Plugins\Catalog::class);
+        $catalog = $this->app->make(\Fahoba\PluginApi\Plugins\Catalog::class);
         $catalog->offer('widgets', 'acme/waste', WasteWidget::class);
     }
 
@@ -88,7 +88,7 @@ final class WastePlugin extends \Tagwerk\PluginApi\Plugins\Plugin
 `registerPlugin()` and `bootPlugin()` take the place of Laravel's `register()`
 and `boot()`. `bootPlugin()` gets its dependencies injected, like `boot()`.
 
-**A broken plugin never stops Tagwerk.** A missing class, an exception in
+**A broken plugin never stops Fahoba.** A missing class, an exception in
 either method or an invalid offer leaves your plugin out. Everything it
 offered is withdrawn, and the log says `Plugin acme/waste not loaded: …` once
 an hour. The operator sees the reason under Operations → Plugins.
@@ -126,8 +126,8 @@ another server with new ids. An admin page that must stay open while the
 household is read-only implements `Households\AvailableWhileReadOnly`.
 
 **Keys carry your vendor** (`acme/waste`), and built-in ones never do. The
-`tagwerk/` prefix is reserved. A key is stored in households' data, so never
-change it once released. `offer()` only records the class; Tagwerk creates
+`fahoba/` prefix is reserved. A key is stored in households' data, so never
+change it once released. `offer()` only records the class; Fahoba creates
 it when needed, once per request. **A constructor must do nothing:** no
 database, no network.
 
@@ -208,12 +208,12 @@ final class WasteWidget implements DataWidget, HasSettings, HandlesActions
 
 A provider implements its area's base contract and **only the capabilities
 the service really has**: `ListsCalendars`, `SyncsEvents`, `WritesEvents`,
-`WatchesChanges` for calendars, `SyncsItems` for lists, and so on. Tagwerk
+`WatchesChanges` for calendars, `SyncsItems` for lists, and so on. Fahoba
 asks for the capability; a method that means "not supported" is a missing
 interface, never an empty method.
 
 - **Connecting**: `UsesCredentials` asks for fields
-  (`credentialFields()`) and checks them once (`verifyCredentials()`). Tagwerk
+  (`credentialFields()`) and checks them once (`verifyCredentials()`). Fahoba
   stores them encrypted per household. `UsesOAuth` leads through a consent
   screen. `DescribesSetup` supplies the wizard's icon and explanation.
 - **The account** arrives as `Connections\ConnectedAccount`: credentials,
@@ -243,12 +243,12 @@ PluginRoutes::api('acme/board', fn () => require __DIR__.'/../routes/api.php'); 
   another program) implement `Areas\OptIn`: off until a parent ticks it.
 - **Admin pages** come through `offer('panel', …)` with `ConfiguresPanel`.
 - **A view on the wall** is a Nuxt layer in `frontend/`; it registers itself
-  with `registerAreaView(key, component)`. See `tagwerk/example-area`.
+  with `registerAreaView(key, component)`. See `fahoba/example-area`.
 
 ## Language packs
 
 ```bash
-php artisan tagwerk:make-plugin acme/tagwerk-fr --language=fr
+php artisan fahoba:make-plugin acme/fahoba-fr --language=fr
 ```
 
 A pack brings a language beyond German and English. It is texts only, so the
@@ -259,7 +259,7 @@ and leave the keys alone.
 lang/fr.json              server texts; the English text is the key
 lang/fr/validation.php    Laravel's groups (validation, auth)
 frontend/fr.json          wall and phone, nested keys like the core's en.json
-src/AcmeTagwerkFrLanguage.php   code, name in the language itself, BCP 47 tag
+src/AcmeFahobaFrLanguage.php   code, name in the language itself, BCP 47 tag
 ```
 
 - **Installed means offered.** Households, accounts and tablets can choose
@@ -275,28 +275,28 @@ src/AcmeTagwerkFrLanguage.php   code, name in the language itself, BCP 47 tag
   the server. A pack therefore needs no frontend build and may come from
   Packagist.
 - **A pack never replaces `de` or `en`,** and two packages offering one code
-  leave the second out. Corrections to German or English go into Tagwerk.
-- **Test:** `assertLanguagePackComplete(new AcmeTagwerkFrLanguage)` lists every
-  text that would show in English. After a Tagwerk update it tells you what
-  is new. Set `extra.tagwerk.language.complete-for` in `composer.json` to the
-  Tagwerk version you translated against; the Plugins page shows it next to
+  leave the second out. Corrections to German or English go into Fahoba.
+- **Test:** `assertLanguagePackComplete(new AcmeFahobaFrLanguage)` lists every
+  text that would show in English. After a Fahoba update it tells you what
+  is new. Set `extra.fahoba.language.complete-for` in `composer.json` to the
+  Fahoba version you translated against; the Plugins page shows it next to
   the running one.
-- The reference lives in `tagwerk/plugin-api` (`resources/reference`).
-  Inside Tagwerk, `php artisan tagwerk:language-reference` rewrites it after
+- The reference lives in `fahoba/plugin-api` (`resources/reference`).
+  Inside Fahoba, `php artisan fahoba:language-reference` rewrites it after
   texts change; a test fails while it is stale.
-- `tagwerk/example-language` (development only) is a deliberately incomplete
+- `fahoba/example-language` (development only) is a deliberately incomplete
   French pack.
 - Right-to-left languages are not supported yet.
 
 ## Design packs
 
 ```bash
-php artisan tagwerk:make-plugin acme/violet --theme
+php artisan fahoba:make-plugin acme/violet --theme
 ```
 
 A design changes how wall and phone look — colours, font, corners, the glass
 gradient — without touching a component. It is one stylesheet that sets
-Tagwerk's design tokens, so the generator sets MIT like for a language.
+Fahoba's design tokens, so the generator sets MIT like for a language.
 
 ```
 resources/theme.css         the tokens, light and dark
@@ -320,7 +320,7 @@ src/AcmeVioletTheme.php     name() and stylesheet()
 
 - **Only tokens.** Selectors are `:root[data-design]`, narrowed by
   `data-theme`, `data-look` and `data-backdrop`; properties are the tokens in
-  `tagwerk/plugin-api`'s `resources/reference/design.json` (with the core's
+  `fahoba/plugin-api`'s `resources/reference/design.json` (with the core's
   values). No classes, no `@import`, no `@media`, no `!important`. A design
   that styled components would break with the next release; a token is a
   promise (see “What stays stable”).
@@ -341,16 +341,16 @@ src/AcmeVioletTheme.php     name() and stylesheet()
   Packagist. A stylesheet that breaks a rule withdraws the package
   (Operations → Plugins says why).
 - **Installed means offered.** The household picks one under Household →
-  Light and dark theme; a tablet or account may pick its own or Tagwerk's (Settings →
-  Appearance). A removed package falls back to Tagwerk's own.
+  Light and dark theme; a tablet or account may pick its own or Fahoba's (Settings →
+  Appearance). A removed package falls back to Fahoba's own.
 - **Test:** `assertThemeValid(new AcmeVioletTheme)` checks what the server
   checks.
-- `tagwerk/example-theme` (development only) is “Fjord”.
+- `fahoba/example-theme` (development only) is “Fjord”.
 
 ## HTTP, caching, translations
 
 - **`Http\Outbound`** (inject it): `server()` for an API with a fixed host
-  (limits, a `Tagwerk/<version>` User-Agent, retries on 429 and 5xx);
+  (limits, a `Fahoba/<version>` User-Agent, retries on 429 and 5xx);
   `householdGet()`/`householdSend()` for **any address a household typed
   in**. Those refuse the server's private network, which a plain `Http::`
   call would happily reach.
@@ -362,8 +362,8 @@ src/AcmeVioletTheme.php     name() and stylesheet()
 
 ## Testing
 
-- **In your own repository**, `use Tagwerk\PluginApi\Testing\PluginAssertions;`
-  in a PHPUnit `TestCase`. It needs no Tagwerk checkout and checks what would
+- **In your own repository**, `use Fahoba\PluginApi\Testing\PluginAssertions;`
+  in a PHPUnit `TestCase`. It needs no Fahoba checkout and checks what would
   otherwise only show on a wall:
   - `assertWidgetWorks($widget, $settings = [])`: a label, a settings form
     without a key twice, content for **empty** settings (a new tile starts
@@ -371,24 +371,24 @@ src/AcmeVioletTheme.php     name() and stylesheet()
     button name that is guarded or refused.
   - `assertLanguagePackComplete($pack)`, `assertThemeValid($theme)`: see
     the sections above.
-  - `assertPluginKey('acme/waste')`: vendor/name, lower case, not `tagwerk/`.
+  - `assertPluginKey('acme/waste')`: vendor/name, lower case, not `fahoba/`.
   - `widgetContext(timezone: …, locale: …, areas: [...])` builds the
     household a tile sees.
 - The generated `.github/workflows/tests.yml` runs them on every push.
-- `WidgetContent::image()` without Tagwerk allows only local paths.
-- **Inside a Tagwerk checkout**, feature tests live in the app's `tests/`.
+- `WidgetContent::image()` without Fahoba allows only local paths.
+- **Inside a Fahoba checkout**, feature tests live in the app's `tests/`.
   `ProviderContractTest` checks every installed provider: contract, key, a
   constructor that does nothing, a complete wizard description.
 
 ## Security
 
-A plugin runs in Tagwerk's process with every right, including `APP_KEY` and
+A plugin runs in Fahoba's process with every right, including `APP_KEY` and
 so every household's credentials. There is no sandbox. Operators install
 only plugins from sources they trust and pin versions in `composer.lock`.
 
 ## What stays stable
 
-- **The contract is `tagwerk/plugin-api` and `extra.tagwerk`, nothing else.**
+- **The contract is `fahoba/plugin-api` and `extra.fahoba`, nothing else.**
   Anything under `App\`, database tables, routes and the frontend's
   internals may change in any release.
 - **`0.x` until plugins outside this repository have been built against
@@ -408,51 +408,51 @@ only plugins from sources they trust and pin versions in `composer.lock`.
 ## Installing a plugin
 
 The image ships with no plugin enabled. An operator names the ones wanted in
-`TAGWERK_PLUGINS` (`deploy/.env`), separated by spaces:
+`FAHOBA_PLUGINS` (`deploy/.env`), separated by spaces:
 
 ```bash
-TAGWERK_PLUGINS="tagwerk/caldav tagwerk/two-factor acme/waste:^1.2"
+FAHOBA_PLUGINS="fahoba/caldav fahoba/two-factor acme/waste:^1.2"
 ```
 
 - The container runs `composer require` for them on every start, before it
-  migrates (`deploy/install-plugins.sh`). Tagwerk's own come from the
+  migrates (`deploy/install-plugins.sh`). Fahoba's own come from the
   sources in the image, at its version; their dependencies at the versions
   `composer.lock` pins. Anything else comes from Packagist; a private
   repository needs `COMPOSER_AUTH`.
 - One that cannot be installed — a typo, no network, a dependency that
-  conflicts with Tagwerk's — stops the start, and the log says why.
-- **A plugin with a frontend layer** (`extra.tagwerk.frontend`) is built into
+  conflicts with Fahoba's — stops the start, and the log says why.
+- **A plugin with a frontend layer** (`extra.fahoba.frontend`) is built into
   the app and needs an image of its own: add it with `composer require` in a
-  Tagwerk checkout and build `deploy/Dockerfile`. The start refuses one
+  Fahoba checkout and build `deploy/Dockerfile`. The start refuses one
   otherwise. Providers, widgets, extensions and areas without screens need
   no build.
-- In development (DDEV) Tagwerk's own plugins are dev dependencies and always
+- In development (DDEV) Fahoba's own plugins are dev dependencies and always
   installed, so the tests cover them.
 
 ## Versions and publishing
 
 - Publish your plugin on Packagist like any Composer package.
 - The bundled plugins, the API and the template are developed in the
-  Tagwerk repository and split into read-only repositories
-  (`tagwerk-<name>`) on every release. Issues and pull requests go to the
+  Fahoba repository and split into read-only repositories
+  (`fahoba-<name>`) on every release. Issues and pull requests go to the
   main repository.
 
 ## Directory
 
 | Package | What |
 |---|---|
-| `tagwerk/bring` | Bring! shopping lists, both ways |
-| `tagwerk/caldav` | CalDAV calendars (Nextcloud, iCloud, mailbox.org …) |
-| `tagwerk/ics-feed` | a secret calendar address per family or person |
-| `tagwerk/kochwiki` | recipes from Koch-Wiki |
-| `tagwerk/mcp` | Model Context Protocol for AI assistants |
-| `tagwerk/openapi` | `/api/openapi.json` |
-| `tagwerk/social-login` | sign-in with Google and others |
-| `tagwerk/two-factor` | a second factor for sign-in |
-| `tagwerk/webdav-backup` | nightly backup to WebDAV |
-| `tagwerk/webhooks` | signed POSTs on household events |
-| `tagwerk/example-area` | reference: an area and a tile with settings and buttons |
-| `tagwerk/example-language` | reference: a language pack, French for the first screens |
+| `fahoba/bring` | Bring! shopping lists, both ways |
+| `fahoba/caldav` | CalDAV calendars (Nextcloud, iCloud, mailbox.org …) |
+| `fahoba/ics-feed` | a secret calendar address per family or person |
+| `fahoba/kochwiki` | recipes from Koch-Wiki |
+| `fahoba/mcp` | Model Context Protocol for AI assistants |
+| `fahoba/openapi` | `/api/openapi.json` |
+| `fahoba/social-login` | sign-in with Google and others |
+| `fahoba/two-factor` | a second factor for sign-in |
+| `fahoba/webdav-backup` | nightly backup to WebDAV |
+| `fahoba/webhooks` | signed POSTs on household events |
+| `fahoba/example-area` | reference: an area and a tile with settings and buttons |
+| `fahoba/example-language` | reference: a language pack, French for the first screens |
 
 Built one? Open a pull request that adds a row below — package name, one
 line, a link. Listed are plugins with a licence, a README and passing
@@ -464,7 +464,7 @@ tests; the list is no review of their code (see *Security*).
 ## Good first plugins
 
 Ideas that fit the API as it is, smallest first. Say in
-[Discussions](https://github.com/tagwerk-family/tagwerk/discussions) which one you
+[Discussions](https://github.com/fahoba/fahoba/discussions) which one you
 take, so two people do not build the same.
 
 - **Your language** — `--language=<code>` writes the pack; translating
@@ -488,9 +488,9 @@ take, so two people do not build the same.
 ## Help
 
 - Questions, ideas and showing what you built:
-  [Discussions](https://github.com/tagwerk-family/tagwerk/discussions).
+  [Discussions](https://github.com/fahoba/fahoba/discussions).
 - A bug in the API or the guide: an
-  [issue](https://github.com/tagwerk-family/tagwerk/issues/new/choose).
+  [issue](https://github.com/fahoba/fahoba/issues/new/choose).
 - A security problem: never an issue — see
   [`SECURITY.md`](../SECURITY.md).
 - [`/llms.txt`](../llms.txt) points coding assistants at what they need.

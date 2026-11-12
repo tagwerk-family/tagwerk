@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Tagwerk\OpenApi;
+namespace Fahoba\OpenApi;
 
 use Dedoc\Scramble\Scramble;
+use Fahoba\PluginApi\Plugins\Plugin;
 use Illuminate\Routing\Route;
-use Tagwerk\PluginApi\Plugins\Plugin;
 
 /**
  * `GET /api/openapi.json`: the description of every `/api` route, generated
@@ -31,7 +31,7 @@ final class OpenApiServiceProvider extends Plugin
                 'api_path' => 'api',
                 'info' => [
                     'version' => (string) config('app.version', '1'),
-                    'description' => 'Tagwerk API. Authenticate with an API token (Settings → API access) as Bearer token; '
+                    'description' => 'Fahoba API. Authenticate with an API token (Settings → API access) as Bearer token; '
                         .'read-only tokens may only send GET requests.',
                 ],
                 'middleware' => ['throttle:30,1'],

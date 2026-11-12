@@ -7,11 +7,11 @@ namespace Tests\Feature\Plugins;
 use App\Enums\ProviderArea;
 use App\Integrations\Plugins\PluginCatalog;
 use App\Integrations\ProviderRegistry;
+use Fahoba\PluginApi\Calendar\CalendarProvider;
+use Fahoba\PluginApi\Plugins\Catalog;
+use Fahoba\PluginApi\Plugins\LoadReport;
 use Illuminate\Support\Facades\Log;
 use Mockery;
-use Tagwerk\PluginApi\Calendar\CalendarProvider;
-use Tagwerk\PluginApi\Plugins\Catalog;
-use Tagwerk\PluginApi\Plugins\LoadReport;
 use Tests\TestCase;
 
 /**
@@ -73,13 +73,13 @@ final class PluginCatalogTest extends TestCase
         $this->assertRejected('magic', 'acme/calendar', CountingCalendar::class);
     }
 
-    public function test_a_third_party_cannot_claim_a_tagwerk_key(): void
+    public function test_a_third_party_cannot_claim_a_fahoba_key(): void
     {
-        $this->assertRejected('calendar', 'tagwerk/calendar', CountingCalendar::class, 'acme/evil');
+        $this->assertRejected('calendar', 'fahoba/calendar', CountingCalendar::class, 'acme/evil');
 
-        config(['tagwerk.first_party' => ['tagwerk/calendar']]);
-        $this->offerAs('tagwerk/calendar', 'calendar', 'tagwerk/calendar', CountingCalendar::class);
-        $this->assertArrayHasKey('tagwerk/calendar', $this->catalog()->offered('calendar'));
+        config(['fahoba.first_party' => ['fahoba/calendar']]);
+        $this->offerAs('fahoba/calendar', 'calendar', 'fahoba/calendar', CountingCalendar::class);
+        $this->assertArrayHasKey('fahoba/calendar', $this->catalog()->offered('calendar'));
     }
 
     /** A late callback offers without a package; its failure must not hit the key's owner. */
@@ -93,11 +93,11 @@ final class PluginCatalogTest extends TestCase
         $this->assertNotSame([], app(LoadReport::class)->failures());
     }
 
-    public function test_an_offer_outside_a_plugin_cannot_claim_a_tagwerk_key(): void
+    public function test_an_offer_outside_a_plugin_cannot_claim_a_fahoba_key(): void
     {
-        app(Catalog::class)->offer('calendar', 'tagwerk/calendar', CountingCalendar::class);
+        app(Catalog::class)->offer('calendar', 'fahoba/calendar', CountingCalendar::class);
 
-        $this->assertArrayNotHasKey('tagwerk/calendar', $this->catalog()->offered('calendar'));
+        $this->assertArrayNotHasKey('fahoba/calendar', $this->catalog()->offered('calendar'));
     }
 
     public function test_one_invalid_offer_withdraws_everything_its_package_offered(): void

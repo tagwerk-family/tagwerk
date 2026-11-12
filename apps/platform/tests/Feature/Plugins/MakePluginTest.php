@@ -9,11 +9,11 @@ use App\Integrations\Plugins\PluginLoader;
 use App\Support\Designs;
 use App\Support\Locale;
 use Composer\Autoload\ClassLoader;
+use Fahoba\PluginApi\Plugins\LoadReport;
 use Illuminate\Support\Facades\File;
-use Tagwerk\PluginApi\Plugins\LoadReport;
 use Tests\TestCase;
 
-/** `tagwerk:make-plugin` writes a package that loads as it is. */
+/** `fahoba:make-plugin` writes a package that loads as it is. */
 final class MakePluginTest extends TestCase
 {
     private string $directory;
@@ -74,7 +74,7 @@ final class MakePluginTest extends TestCase
 
         $composer = json_decode((string) file_get_contents($this->directory.'/composer.json'), true, flags: JSON_THROW_ON_ERROR);
         $this->assertSame('MIT', $composer['license']);
-        $this->assertArrayHasKey('complete-for', $composer['extra']['tagwerk']['language']);
+        $this->assertArrayHasKey('complete-for', $composer['extra']['fahoba']['language']);
     }
 
     public function test_a_theme_plugin_passes_the_checks_it_ships_with(): void
@@ -90,19 +90,19 @@ final class MakePluginTest extends TestCase
 
     public function test_names_and_kinds_are_checked(): void
     {
-        $this->artisan('tagwerk:make-plugin', ['name' => 'acme/german', '--language' => 'de', '--path' => $this->directory])->assertFailed();
-        $this->artisan('tagwerk:make-plugin', ['name' => 'acme/french', '--language' => 'french', '--path' => $this->directory])->assertFailed();
-        $this->artisan('tagwerk:make-plugin', ['name' => 'Waste', '--widget' => true, '--path' => $this->directory])->assertFailed();
-        $this->artisan('tagwerk:make-plugin', ['name' => 'tagwerk/waste', '--widget' => true, '--path' => $this->directory])->assertFailed();
-        $this->artisan('tagwerk:make-plugin', ['name' => 'acme/waste', '--widget' => true, '--area' => true, '--path' => $this->directory])->assertFailed();
-        $this->artisan('tagwerk:make-plugin', ['name' => 'acme/waste', '--provider' => 'pets', '--path' => $this->directory])->assertFailed();
+        $this->artisan('fahoba:make-plugin', ['name' => 'acme/german', '--language' => 'de', '--path' => $this->directory])->assertFailed();
+        $this->artisan('fahoba:make-plugin', ['name' => 'acme/french', '--language' => 'french', '--path' => $this->directory])->assertFailed();
+        $this->artisan('fahoba:make-plugin', ['name' => 'Waste', '--widget' => true, '--path' => $this->directory])->assertFailed();
+        $this->artisan('fahoba:make-plugin', ['name' => 'fahoba/waste', '--widget' => true, '--path' => $this->directory])->assertFailed();
+        $this->artisan('fahoba:make-plugin', ['name' => 'acme/waste', '--widget' => true, '--area' => true, '--path' => $this->directory])->assertFailed();
+        $this->artisan('fahoba:make-plugin', ['name' => 'acme/waste', '--provider' => 'pets', '--path' => $this->directory])->assertFailed();
 
         $this->assertDirectoryDoesNotExist($this->directory);
     }
 
     /**
      * Installed means enabled: a fresh stub must answer “not ready” where
-     * Tagwerk asks every installed provider, never throw there.
+     * Fahoba asks every installed provider, never throw there.
      */
     private function assertInert(object $provider, string $area): void
     {
@@ -126,7 +126,7 @@ final class MakePluginTest extends TestCase
     {
         foreach (['acme/waste' => ['--widget' => true], 'acme/board' => ['--area' => true], 'acme/cal' => ['--provider' => 'calendar'], 'acme/french' => ['--language' => 'fr'], 'acme/violet' => ['--theme' => true]] as $name => $options) {
             $this->directory = storage_path('framework/testing/make-plugin-own-'.uniqid());
-            $this->artisan('tagwerk:make-plugin', ['name' => $name, '--path' => $this->directory, ...$options])->assertSuccessful();
+            $this->artisan('fahoba:make-plugin', ['name' => $name, '--path' => $this->directory, ...$options])->assertSuccessful();
 
             foreach (['.github/workflows/tests.yml', 'phpunit.xml.dist', 'AGENTS.md', '.gitignore'] as $file) {
                 $this->assertFileExists($this->directory.'/'.$file, "{$name}: {$file}");
@@ -154,11 +154,11 @@ final class MakePluginTest extends TestCase
     /**
      * `templates/plugin` becomes the GitHub template repository on release.
      * It is the generator's output, so it never drifts from it. To refresh:
-     * delete it and run `tagwerk:make-plugin acme/example --widget --path=templates/plugin`.
+     * delete it and run `fahoba:make-plugin acme/example --widget --path=templates/plugin`.
      */
     public function test_the_template_repository_is_what_the_generator_writes(): void
     {
-        $this->artisan('tagwerk:make-plugin', ['name' => 'acme/example', '--widget' => true, '--path' => $this->directory])->assertSuccessful();
+        $this->artisan('fahoba:make-plugin', ['name' => 'acme/example', '--widget' => true, '--path' => $this->directory])->assertSuccessful();
 
         $files = fn (string $root): array => collect(File::allFiles($root, hidden: true))
             ->mapWithKeys(fn (\SplFileInfo $file): array => [str_replace($root.'/', '', $file->getPathname()) => File::get($file->getPathname())])
@@ -170,18 +170,18 @@ final class MakePluginTest extends TestCase
 
     public function test_a_segment_must_start_with_a_letter(): void
     {
-        $this->artisan('tagwerk:make-plugin', ['name' => 'acme/2fa', '--widget' => true, '--path' => $this->directory])->assertFailed();
+        $this->artisan('fahoba:make-plugin', ['name' => 'acme/2fa', '--widget' => true, '--path' => $this->directory])->assertFailed();
     }
 
     /** @param  array<string, mixed>  $options */
     private function generate(string $name, array $options): void
     {
-        $this->artisan('tagwerk:make-plugin', ['name' => $name, '--path' => $this->directory, ...$options])
+        $this->artisan('fahoba:make-plugin', ['name' => $name, '--path' => $this->directory, ...$options])
             ->expectsOutputToContain("composer require {$name}")
             ->assertSuccessful();
 
         $composer = json_decode((string) file_get_contents($this->directory.'/composer.json'), true, flags: JSON_THROW_ON_ERROR);
-        $this->assertSame('^0.1', $composer['require']['tagwerk/plugin-api']);
+        $this->assertSame('^0.1', $composer['require']['fahoba/plugin-api']);
 
         $loader = new ClassLoader;
         foreach ($composer['autoload']['psr-4'] as $namespace => $path) {
@@ -191,7 +191,7 @@ final class MakePluginTest extends TestCase
 
         app(PluginLoader::class)->load($this->app, [[
             'name' => $name,
-            'provider' => $composer['extra']['tagwerk']['provider'],
+            'provider' => $composer['extra']['fahoba']['provider'],
         ]]);
 
         $this->assertSame([], app(LoadReport::class)->failures());

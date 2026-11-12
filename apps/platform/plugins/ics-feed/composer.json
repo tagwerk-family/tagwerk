@@ -1,5 +1,5 @@
 {
-    "name": "tagwerk/ics-feed",
+    "name": "fahoba/ics-feed",
     "description": "Secret calendar subscription addresses for other calendar apps, read-only",
     "type": "library",
     "version": "0.1.0",
@@ -7,16 +7,16 @@
     "require": {
         "php": "^8.5",
         "sabre/vobject": "^4.6",
-        "tagwerk/plugin-api": "^0.1"
+        "fahoba/plugin-api": "^0.1"
     },
     "autoload": {
         "psr-4": {
-            "Tagwerk\\IcsFeed\\": "src/"
+            "Fahoba\\IcsFeed\\": "src/"
         }
     },
     "extra": {
-        "tagwerk": {
-            "provider": "Tagwerk\\IcsFeed\\IcsFeedServiceProvider"
+        "fahoba": {
+            "provider": "Fahoba\\IcsFeed\\IcsFeedServiceProvider"
         }
     }
 }

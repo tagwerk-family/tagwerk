@@ -14,6 +14,7 @@ use App\Support\HouseholdContext;
 use App\Support\OutgoingMail;
 use App\Support\ReadOnlyAdmin;
 use BackedEnum;
+use Fahoba\PluginApi\Households\AvailableWhileReadOnly;
 use Filament\Actions\Action;
 use Filament\Facades\Filament;
 use Filament\Forms\Components\Checkbox;
@@ -29,12 +30,11 @@ use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\HtmlString;
-use Tagwerk\PluginApi\Households\AvailableWhileReadOnly;
 use UnitEnum;
 
 /**
  * The family's own copy of everything (GDPR Art. 20), and the way to take
- * the household to another Tagwerk server — or to bring one here.
+ * the household to another Fahoba server — or to bring one here.
  * Open while read-only: the data stays the family's either way.
  */
 class HouseholdTransfer extends Page implements AvailableWhileReadOnly
@@ -66,11 +66,11 @@ class HouseholdTransfer extends Page implements AvailableWhileReadOnly
     {
         $archive = Cache::get(BuildHouseholdArchiveJob::cacheKey(self::householdId()));
         $import = Cache::get(ImportHouseholdArchiveJob::cacheKey((int) self::user()?->id));
-        $hosted = (string) config('tagwerk.hosted_url');
+        $hosted = (string) config('fahoba.hosted_url');
 
         return $schema->components([
             Section::make(__('Export'))
-                ->description(__('Everything of this household in one file: calendars, tasks, stars, lists, recipes, photos. Another Tagwerk server imports it. Paired tablets do not travel; connections only with their passwords.'))
+                ->description(__('Everything of this household in one file: calendars, tasks, stars, lists, recipes, photos. Another Fahoba server imports it. Paired tablets do not travel; connections only with their passwords.'))
                 ->schema([
                     Text::make(__('This export contains passwords in plain text. Do not forward it; delete it after the move.'))
                         ->color('danger')
@@ -110,11 +110,11 @@ class HouseholdTransfer extends Page implements AvailableWhileReadOnly
                     ]),
                     // One line, only on self-hosted servers that name the service.
                     Text::make(fn () => $hosted === '' ? '' : new HtmlString(
-                        e(__('Rather not run a server?')).' <a class="underline" href="'.e($hosted).'">'.e(__('Move to Tagwerk Cloud')).'</a>'
+                        e(__('Rather not run a server?')).' <a class="underline" href="'.e($hosted).'">'.e(__('Move to Fahoba Cloud')).'</a>'
                     ))->visible($hosted !== ''),
                 ]),
             Section::make(__('Move a household here'))
-                ->description(__('Upload the export of another Tagwerk server. It arrives as a new household next to this one; you need the same address there and here. Tablets pair again, connections are set up again.'))
+                ->description(__('Upload the export of another Fahoba server. It arrives as a new household next to this one; you need the same address there and here. Tablets pair again, connections are set up again.'))
                 ->visible(! app(ReadOnlyAdmin::class)->applies())
                 ->schema([
                     Text::make(match (true) {
@@ -132,8 +132,8 @@ class HouseholdTransfer extends Page implements AvailableWhileReadOnly
                                     ->disk('local')
                                     ->directory('imports')
                                     ->acceptedFileTypes(['application/zip', 'application/x-zip-compressed'])
-                                    ->maxSize((int) config('tagwerk.import_max_mb', 12) * 1024)
-                                    ->helperText(__('Up to :mb MB here; whoever runs this server imports bigger ones by command.', ['mb' => (int) config('tagwerk.import_max_mb', 12)]))
+                                    ->maxSize((int) config('fahoba.import_max_mb', 12) * 1024)
+                                    ->helperText(__('Up to :mb MB here; whoever runs this server imports bigger ones by command.', ['mb' => (int) config('fahoba.import_max_mb', 12)]))
                                     ->required(),
                             ])
                             ->action(function (array $data): void {

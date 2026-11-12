@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Tagwerk\PluginApi\Areas;
+namespace Fahoba\PluginApi\Areas;
 
 /**
  * An area that opens the household to the outside — other programs, feeds,

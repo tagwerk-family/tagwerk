@@ -9,7 +9,7 @@ namespace App\Enums;
  *
  * Presets rather than free colours: text sits on translucent glass above
  * it, and only a gradient that was checked in light and dark keeps it
- * readable. The colours live in the layer's `tagwerk.css`.
+ * readable. The colours live in the layer's `fahoba.css`.
  */
 enum Backdrop: string
 {

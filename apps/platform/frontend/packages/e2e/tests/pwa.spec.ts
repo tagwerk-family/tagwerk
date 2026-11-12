@@ -38,13 +38,13 @@ test('a wall that starts without network comes up as a kiosk with its last state
   /*
    * A power cut with the router still down: the page loads anew, with
    * neither server nor network. Shell and agenda come from the worker, the
-   * entry from `tagwerk-entry` — otherwise the tablet would start on the
+   * entry from `fahoba-entry` — otherwise the tablet would start on the
    * pairing screen and look unpaired.
    */
   await page.context().setOffline(true)
   await page.reload()
 
-  await expect(page.getByRole('heading', { name: 'Willkommen bei Tagwerk' })).toBeHidden()
+  await expect(page.getByRole('heading', { name: 'Willkommen bei Fahoba' })).toBeHidden()
   await page.getByRole('button', { name: 'Kalender', exact: true }).click()
 
   await expect(page.getByTestId('event').first()).toBeVisible()
@@ -64,13 +64,13 @@ test('a wall that starts without network comes up as a kiosk with its last state
  */
 async function pushChannel(page: Page): Promise<(data: string) => Promise<void>> {
   const context = page.context()
-  await context.grantPermissions(['notifications'], { origin: 'https://tagwerk.test' })
+  await context.grantPermissions(['notifications'], { origin: 'https://fahoba.test' })
   await pairWithCache(page)
 
   const cdp = await context.newCDPSession(page)
   const registration = new Promise<string>((resolve) => {
     cdp.on('ServiceWorker.workerRegistrationUpdated', ({ registrations }) => {
-      const ours = registrations.find(entry => entry.scopeURL === 'https://tagwerk.test/' && !entry.isDeleted)
+      const ours = registrations.find(entry => entry.scopeURL === 'https://fahoba.test/' && !entry.isDeleted)
 
       if (ours) {
         resolve(ours.registrationId)
@@ -81,7 +81,7 @@ async function pushChannel(page: Page): Promise<(data: string) => Promise<void>>
   const registrationId = await registration
 
   return async (data: string) => {
-    await cdp.send('ServiceWorker.deliverPushMessage', { origin: 'https://tagwerk.test', registrationId, data })
+    await cdp.send('ServiceWorker.deliverPushMessage', { origin: 'https://fahoba.test', registrationId, data })
   }
 }
 
@@ -132,9 +132,9 @@ test('a push message without JSON still shows a notification', async ({ page }) 
   await push('Es gibt Neuigkeiten in der Einkaufsliste.')
 
   await expect.poll(() => shown(page)).toEqual([{
-    title: 'Tagwerk',
+    title: 'Fahoba',
     body: 'Es gibt Neuigkeiten in der Einkaufsliste.',
-    tag: 'tagwerk',
+    tag: 'fahoba',
     icon: '/icon-192.png',
     badge: '/badge-96.png',
     url: '/',

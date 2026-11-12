@@ -1,12 +1,12 @@
 {
-  "name": "tagwerk-frontend",
+  "name": "fahoba-frontend",
   "private": true,
   "type": "module",
   "scripts": {
     "dev": "pnpm --filter app dev",
     "build": "pnpm --filter app build",
     "test": "pnpm -r --if-present test",
-    "typecheck": "pnpm --filter app exec nuxi typecheck && pnpm --filter @tagwerk/client typecheck"
+    "typecheck": "pnpm --filter app exec nuxi typecheck && pnpm --filter @fahoba/client typecheck"
   },
   "pnpm": {
     "onlyBuiltDependencies": [

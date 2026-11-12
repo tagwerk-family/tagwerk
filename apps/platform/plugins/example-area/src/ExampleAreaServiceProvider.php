@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Tagwerk\ExampleArea;
+namespace Fahoba\ExampleArea;
 
-use Tagwerk\PluginApi\Plugins\Catalog;
-use Tagwerk\PluginApi\Plugins\Plugin;
-use Tagwerk\PluginApi\Plugins\PluginRoutes;
+use Fahoba\PluginApi\Plugins\Catalog;
+use Fahoba\PluginApi\Plugins\Plugin;
+use Fahoba\PluginApi\Plugins\PluginRoutes;
 
 /**
  * Only in development (`require-dev`): the image's build leaves it out, and

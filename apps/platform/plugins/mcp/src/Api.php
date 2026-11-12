@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Tagwerk\Mcp;
+namespace Fahoba\Mcp;
 
 use Illuminate\Contracts\Http\Kernel;
 use Illuminate\Http\Request;

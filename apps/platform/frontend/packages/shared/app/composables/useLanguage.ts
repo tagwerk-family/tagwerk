@@ -2,7 +2,7 @@ import { intlLocale } from '../utils/intlLocale'
 import { bundled, isBundled, isLanguage, keptTexts, type StoredLanguage } from '../utils/language'
 
 // A convenience for starting without a network, not state: the server decides.
-const STORED = 'tagwerk-language'
+const STORED = 'fahoba-language'
 
 let latest = 0
 

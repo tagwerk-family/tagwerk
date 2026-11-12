@@ -17,7 +17,7 @@ use Tests\Support\FakeResolver;
 use Tests\TestCase;
 
 /**
- * Holidays from an ICS calendar — the route for every country Tagwerk has no
+ * Holidays from an ICS calendar — the route for every country Fahoba has no
  * builtin rule for.
  */
 final class IcsSchoolHolidaysTest extends TestCase

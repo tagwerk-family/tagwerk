@@ -10,7 +10,7 @@ use Illuminate\Console\Command;
 /** Writes the routes frontends may rely on into `routes/api-contract.txt`. */
 final class ApiContractCommand extends Command
 {
-    protected $signature = 'tagwerk:api-contract';
+    protected $signature = 'fahoba:api-contract';
 
     protected $description = 'Writes the API routes community frontends may rely on';
 

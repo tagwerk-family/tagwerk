@@ -21,7 +21,7 @@ final class FrontendPackageTest extends TestCase
     {
         parent::setUp();
 
-        $this->package = sys_get_temp_dir().'/tagwerk-frontend-'.uniqid();
+        $this->package = sys_get_temp_dir().'/fahoba-frontend-'.uniqid();
         File::copyDirectory(base_path('tests/Fixtures/Frontend'), $this->package);
     }
 
@@ -66,19 +66,19 @@ final class FrontendPackageTest extends TestCase
     public function test_the_app_must_be_named_and_inside_the_package(): void
     {
         file_put_contents($this->package.'/composer.json', '{"name": "acme/frontend"}');
-        $this->assertStringContainsString('extra.tagwerk.app', FrontendPackage::check('acme/frontend', $this->package));
+        $this->assertStringContainsString('extra.fahoba.app', FrontendPackage::check('acme/frontend', $this->package));
 
-        file_put_contents($this->package.'/composer.json', '{"extra": {"tagwerk": {"app": "../.."}}}');
+        file_put_contents($this->package.'/composer.json', '{"extra": {"fahoba": {"app": "../.."}}}');
         $this->assertStringContainsString('does not exist inside the package', FrontendPackage::check('acme/frontend', $this->package));
 
-        file_put_contents($this->package.'/composer.json', '{"extra": {"tagwerk": {"app": "dist"}}}');
+        file_put_contents($this->package.'/composer.json', '{"extra": {"fahoba": {"app": "dist"}}}');
         unlink($this->package.'/dist/index.html');
         $this->assertStringContainsString('does not exist', FrontendPackage::check('acme/frontend', $this->package));
     }
 
     public function test_the_command_fails_for_a_package_that_is_not_installed(): void
     {
-        $this->artisan('tagwerk:frontend', ['package' => 'acme/nowhere'])
+        $this->artisan('fahoba:frontend', ['package' => 'acme/nowhere'])
             ->expectsOutputToContain('not installed')
             ->assertFailed();
     }

@@ -1,10 +1,10 @@
-# Tagwerk on a server. From this directory:
+# Fahoba on a server. From this directory:
 #
 #   cp .env.example .env         # fill in, see comments there
 #   # Traefik must run with a network named "web" (TRAEFIK_NETWORK otherwise)
 #   docker compose build
 #   docker compose up -d
-#   docker compose exec app su-exec www-data php artisan tagwerk:create-operator Betrieb betrieb@example.org
+#   docker compose exec app su-exec www-data php artisan fahoba:create-operator Betrieb betrieb@example.org
 #   # then create households in /admin under Betrieb
 #
 # Updates without downtime (the old container serves until the new is healthy):
@@ -15,6 +15,10 @@
 #
 # `docker compose down -v` removes everything, database and uploads included.
 
+# Kept from before the rename to Fahoba: Compose names the volumes after
+# the project, and a new name would start an existing server on an empty
+# database. The same holds for the internal network (a rollout keeps the
+# running database container) and the database defaults below.
 name: tagwerk
 
 services:
@@ -23,29 +27,29 @@ services:
       context: ..
       dockerfile: deploy/Dockerfile
       args:
-        TAGWERK_AUDIT: ${TAGWERK_AUDIT:-strict}
-    image: ${TAGWERK_IMAGE:-tagwerk-app}
+        FAHOBA_AUDIT: ${FAHOBA_AUDIT:-${TAGWERK_AUDIT:-strict}}
+    image: ${FAHOBA_IMAGE:-${TAGWERK_IMAGE:-fahoba-app}}
     restart: unless-stopped
     env_file: .env
     environment:
-      TAGWERK_PHOTO_FOLDERS: /srv/photos
+      FAHOBA_PHOTO_FOLDERS: /srv/photos
       # Traefik arrives from its network, whatever range Docker picked. No
       # host port: only containers on these networks reach the app at all.
-      TAGWERK_TRUSTED_PROXIES: ${TAGWERK_TRUSTED_PROXIES:-10.0.0.0/8,172.16.0.0/12,192.168.0.0/16}
+      FAHOBA_TRUSTED_PROXIES: ${FAHOBA_TRUSTED_PROXIES:-${TAGWERK_TRUSTED_PROXIES:-10.0.0.0/8,172.16.0.0/12,192.168.0.0/16}}
     # No basic auth in front: the browser's Authorization header would replace
     # the token from the cookie, and neither wall nor phone could sign in.
     labels:
       - "traefik.enable=true"
       - "traefik.docker.network=${TRAEFIK_NETWORK:-web}"
-      - "traefik.http.services.tagwerk.loadbalancer.server.port=8080"
-      - "traefik.http.routers.tagwerk.rule=Host(`${TAGWERK_HOST:?TAGWERK_HOST missing in .env}`)"
-      - "traefik.http.routers.tagwerk.entrypoints=${TRAEFIK_ENTRYPOINT:-websecure}"
-      - "traefik.http.routers.tagwerk.tls=true"
-      - "traefik.http.routers.tagwerk.tls.certresolver=${TRAEFIK_CERTRESOLVER:-letsencrypt}"
+      - "traefik.http.services.fahoba.loadbalancer.server.port=8080"
+      - "traefik.http.routers.fahoba.rule=Host(`${FAHOBA_HOST:?FAHOBA_HOST missing in .env (formerly TAGWERK_HOST)}`)"
+      - "traefik.http.routers.fahoba.entrypoints=${TRAEFIK_ENTRYPOINT:-websecure}"
+      - "traefik.http.routers.fahoba.tls=true"
+      - "traefik.http.routers.fahoba.tls.certresolver=${TRAEFIK_CERTRESOLVER:-letsencrypt}"
     volumes:
       - storage:/var/www/html/storage
-      # One folder per household id; read only, Tagwerk never writes there.
-      - ${TAGWERK_PHOTO_FOLDERS_HOST:-./photos}:/srv/photos:ro
+      # One folder per household id; read only, Fahoba never writes there.
+      - ${FAHOBA_PHOTO_FOLDERS_HOST:-${TAGWERK_PHOTO_FOLDERS_HOST:-./photos}}:/srv/photos:ro
     # Traefik routes only to a healthy container. With the image's 30-second
     # interval the first check came half a minute after start, and every
     # deploy stood that long on 404 although the app was long ready. During
@@ -79,7 +83,7 @@ services:
 
   reverb:
     profiles: [realtime]
-    image: ${TAGWERK_IMAGE:-tagwerk-app}
+    image: ${FAHOBA_IMAGE:-${TAGWERK_IMAGE:-fahoba-app}}
     restart: unless-stopped
     env_file: .env
     command: ["su-exec", "www-data", "php", "artisan", "reverb:start", "--host=0.0.0.0", "--port=8080"]

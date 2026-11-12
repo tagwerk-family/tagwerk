@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Tagwerk\PluginApi\Dashboard;
+namespace Fahoba\PluginApi\Dashboard;
 
 /**
  * A data widget whose buttons (`WidgetContent::actions()`) do something.

@@ -15,7 +15,7 @@ export interface InstallPromptEvent extends Event {
  * "Later" is a per-device convenience in `localStorage`, not state: after
  * seven days the band comes back as long as the app is still not installed.
  */
-const SNOOZE_KEY = 'tagwerk-install-snoozed'
+const SNOOZE_KEY = 'fahoba-install-snoozed'
 
 export function useInstallOffer() {
   const held = useState<InstallPromptEvent | null>('install-prompt', () => null)

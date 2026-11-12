@@ -3,7 +3,7 @@ import { expect, test, type Page } from '@playwright/test'
 import { dropHousehold, ownHousehold, pair, tinker } from './helpers'
 
 /*
- * A language from a package (tagwerk/example-language, development only):
+ * A language from a package (fahoba/example-language, development only):
  * the first text on screen is already in it. What the pack lacks shows in
  * English, so the check is that nothing German slipped in before — that
  * would be the flash of the default language this is all about.
@@ -57,7 +57,7 @@ test.describe('a language from a pack', () => {
     await recordTexts(page)
     await page.goto('/')
 
-    await expect(page.getByRole('heading', { name: 'Bienvenue sur Tagwerk' })).toBeVisible()
+    await expect(page.getByRole('heading', { name: 'Bienvenue sur Fahoba' })).toBeVisible()
     await expect(page.locator('html')).toHaveAttribute('lang', 'fr')
     expect(await germanShown(page)).toEqual([])
   })

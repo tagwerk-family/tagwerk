@@ -10,10 +10,10 @@ use App\Models\Calendar;
 use App\Models\Event;
 use App\Models\Person;
 use App\Support\HouseholdContext;
+use Fahoba\PluginApi\Calendar\RemoteEvent;
+use Fahoba\PluginApi\Calendar\SyncCursorExpired;
+use Fahoba\PluginApi\Calendar\SyncsEvents;
 use Illuminate\Support\Collection;
-use Tagwerk\PluginApi\Calendar\RemoteEvent;
-use Tagwerk\PluginApi\Calendar\SyncCursorExpired;
-use Tagwerk\PluginApi\Calendar\SyncsEvents;
 
 /**
  * Syncs a calendar with its provider.
@@ -197,7 +197,7 @@ final class CalendarSyncService
      * Preparation for the full resync.
      *
      * Only events that came from outside are cleared — those created in
-     * Tagwerk survive, because the provider cannot return them as long as
+     * Fahoba survive, because the provider cannot return them as long as
      * they have not been written there yet.
      */
     private function reset(Calendar $calendar): void

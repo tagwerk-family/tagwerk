@@ -16,7 +16,7 @@ FROM --platform=$BUILDPLATFORM node:24-alpine AS frontend
 # The repo's layout below /build: plugin layers are found relative to the
 # frontend (plugin-layers.ts), next to the PHP of their package.
 WORKDIR /build/apps/platform/frontend
-RUN --mount=type=cache,id=tagwerk-npm,target=/root/.npm \
+RUN --mount=type=cache,id=fahoba-npm,target=/root/.npm \
     npm install --global pnpm@10
 
 # Packages come from a store that outlives the build: the registry can be
@@ -28,7 +28,7 @@ COPY apps/platform/frontend/ ./
 COPY apps/platform/composer.lock ../composer.lock
 COPY apps/platform/plugins/ ../plugins/
 # The .npmrc points the store at DDEV's cache volume; irrelevant here.
-RUN --mount=type=cache,id=tagwerk-pnpm,target=/pnpm-store \
+RUN --mount=type=cache,id=fahoba-pnpm,target=/pnpm-store \
     rm -f .npmrc \
  && pnpm install --frozen-lockfile --prefer-offline --store-dir /pnpm-store \
  && { pnpm audit --prod || true; } \
@@ -38,14 +38,14 @@ RUN --mount=type=cache,id=tagwerk-pnpm,target=/pnpm-store \
 FROM php:8.5-fpm-alpine AS app
 
 # Set by CI (.github/workflows/image.yml); a local build keeps "dev".
-ARG TAGWERK_REVISION=dev
-ARG TAGWERK_RELEASE=dev
-LABEL org.opencontainers.image.title="Tagwerk" \
+ARG FAHOBA_REVISION=dev
+ARG FAHOBA_RELEASE=dev
+LABEL org.opencontainers.image.title="Fahoba" \
       org.opencontainers.image.description="Self-hosted family calendar for a wall tablet and the family's phones" \
-      org.opencontainers.image.source="https://github.com/tagwerk-family/tagwerk" \
+      org.opencontainers.image.source="https://github.com/fahoba/fahoba" \
       org.opencontainers.image.licenses="PolyForm-Shield-1.0.0" \
-      org.opencontainers.image.revision="$TAGWERK_REVISION" \
-      org.opencontainers.image.version="$TAGWERK_RELEASE"
+      org.opencontainers.image.revision="$FAHOBA_REVISION" \
+      org.opencontainers.image.version="$FAHOBA_RELEASE"
 
 RUN apk add --no-cache nginx supervisor su-exec icu-libs libpng libjpeg-turbo libwebp freetype libzip postgresql-libs postgresql16-client \
  && apk add --no-cache --virtual .build-deps $PHPIZE_DEPS linux-headers icu-dev libpng-dev libjpeg-turbo-dev libwebp-dev freetype-dev libzip-dev postgresql-dev \
@@ -55,18 +55,18 @@ RUN apk add --no-cache nginx supervisor su-exec icu-libs libpng libjpeg-turbo li
 
 COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 
-ARG TAGWERK_AUDIT=strict
+ARG FAHOBA_AUDIT=strict
 
 WORKDIR /var/www/html
 
 # Dependencies first: they change far less often than the code. The plugin API
 # is a path package; the plugins are too, installed by none but present for
-# TAGWERK_PLUGINS (install-plugins.sh), at this release's version.
+# FAHOBA_PLUGINS (install-plugins.sh), at this release's version.
 COPY apps/platform/composer.json apps/platform/composer.lock ./
 COPY apps/platform/plugins/ ./plugins/
 COPY apps/platform/packages/ ./packages/
 RUN composer install --no-dev --no-scripts --no-autoloader --prefer-dist --no-interaction \
- && { composer audit --locked --no-dev --abandoned=report || [ "$TAGWERK_AUDIT" = warn ]; } \
+ && { composer audit --locked --no-dev --abandoned=report || [ "$FAHOBA_AUDIT" = warn ]; } \
  && cp composer.lock composer.built.lock
 
 COPY apps/platform/ ./
@@ -76,31 +76,31 @@ RUN composer dump-autoload --optimize --no-dev \
  && php artisan storage:link \
  && rm -rf frontend
 
-# The official app; /var/www/app points at it unless TAGWERK_FRONTEND names
+# The official app; /var/www/app points at it unless FAHOBA_FRONTEND names
 # another (install-frontend.sh, at every start).
-COPY --from=frontend /build/apps/platform/frontend/packages/app/.output/public /var/www/tagwerk-app
-RUN ln -s /var/www/tagwerk-app /var/www/app
+COPY --from=frontend /build/apps/platform/frontend/packages/app/.output/public /var/www/fahoba-app
+RUN ln -s /var/www/fahoba-app /var/www/app
 
 COPY deploy/nginx.conf /etc/nginx/http.d/default.conf
 COPY deploy/security-headers.conf /etc/nginx/security-headers.conf
-COPY deploy/php.ini /usr/local/etc/php/conf.d/zz-tagwerk.ini
-COPY deploy/php-fpm.conf /usr/local/etc/php-fpm.d/zz-tagwerk.conf
+COPY deploy/php.ini /usr/local/etc/php/conf.d/zz-fahoba.ini
+COPY deploy/php-fpm.conf /usr/local/etc/php-fpm.d/zz-fahoba.conf
 COPY deploy/supervisord.conf /etc/supervisord.conf
-COPY deploy/entrypoint.sh /usr/local/bin/tagwerk-entrypoint
-COPY deploy/install-plugins.sh /usr/local/bin/tagwerk-install-plugins
-COPY deploy/install-frontend.sh /usr/local/bin/tagwerk-install-frontend
+COPY deploy/entrypoint.sh /usr/local/bin/fahoba-entrypoint
+COPY deploy/install-plugins.sh /usr/local/bin/fahoba-install-plugins
+COPY deploy/install-frontend.sh /usr/local/bin/fahoba-install-frontend
 
-RUN chmod +x /usr/local/bin/tagwerk-entrypoint /usr/local/bin/tagwerk-install-plugins /usr/local/bin/tagwerk-install-frontend \
+RUN chmod +x /usr/local/bin/fahoba-entrypoint /usr/local/bin/fahoba-install-plugins /usr/local/bin/fahoba-install-frontend \
  && chown -R www-data:www-data storage bootstrap/cache
 
 # Wall tablets reload when this changes (config app.version), so a new image
 # reaches them without APP_VERSION being set by hand.
-ENV TAGWERK_BUILD=$TAGWERK_REVISION
+ENV FAHOBA_BUILD=$FAHOBA_REVISION
 
 EXPOSE 8080
 
 HEALTHCHECK --interval=30s --timeout=5s --start-period=60s \
   CMD wget -qO- http://127.0.0.1:8080/up > /dev/null || exit 1
 
-ENTRYPOINT ["tagwerk-entrypoint"]
+ENTRYPOINT ["fahoba-entrypoint"]
 CMD ["supervisord", "-c", "/etc/supervisord.conf"]

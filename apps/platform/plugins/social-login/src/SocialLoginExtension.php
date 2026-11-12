@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Tagwerk\SocialLogin;
+namespace Fahoba\SocialLogin;
 
 use App\Integrations\Plugins\Extensions;
+use Fahoba\PluginApi\Plugins\Extension;
+use Fahoba\PluginApi\Plugins\ExtensionCategory;
 use Filament\Panel;
 use Filament\View\PanelsRenderHook;
 use Illuminate\Contracts\Auth\Authenticatable;
-use Tagwerk\PluginApi\Plugins\Extension;
-use Tagwerk\PluginApi\Plugins\ExtensionCategory;
 
 /**
  * Signing in with Google and other OAuth providers — for accounts that exist
@@ -19,7 +19,7 @@ use Tagwerk\PluginApi\Plugins\ExtensionCategory;
  */
 final class SocialLoginExtension implements Extension
 {
-    public const KEY = 'tagwerk/social-login';
+    public const KEY = 'fahoba/social-login';
 
     public function __construct(
         private readonly Extensions $extensions,

@@ -22,9 +22,15 @@ final class AppToken
     {
         $token = $user->createToken('mobile', ['*'], now()->addDays(self::DAYS));
 
+        return self::cookie($token->plainTextToken);
+    }
+
+    /** The cookie for a token handed out before; its expiry stays the token's. */
+    public static function cookie(string $plain): Cookie
+    {
         return cookie(
             name: UserTokenFromCookie::COOKIE,
-            value: $token->plainTextToken,
+            value: $plain,
             minutes: self::DAYS * 24 * 60,
             path: '/',
             secure: true,

@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Tagwerk\PluginApi\Languages;
+namespace Fahoba\PluginApi\Languages;
 
 /**
  * The English texts a language pack translates, shipped with this package
- * so Tagwerk and a translator's own tests measure against the same ones.
- * Tagwerk writes them (`php artisan tagwerk:language-reference`).
+ * so Fahoba and a translator's own tests measure against the same ones.
+ * Fahoba writes them (`php artisan fahoba:language-reference`).
  */
 final class Reference
 {

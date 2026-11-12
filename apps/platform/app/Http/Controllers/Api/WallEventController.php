@@ -12,11 +12,11 @@ use App\Models\ProviderAccount;
 use App\Services\Calendar\EventWriteService;
 use App\Support\Abilities;
 use Carbon\CarbonImmutable;
+use Fahoba\PluginApi\Calendar\EventConflict;
+use Fahoba\PluginApi\Connections\AuthorizationLost;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Validation\ValidationException;
-use Tagwerk\PluginApi\Calendar\EventConflict;
-use Tagwerk\PluginApi\Connections\AuthorizationLost;
 
 /**
  * Creates, changes and deletes events on the tablet and the phone.

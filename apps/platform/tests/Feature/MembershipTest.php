@@ -337,7 +337,7 @@ final class MembershipTest extends TestCase
 
         $this->post('/household', ['household_id' => $this->huber->id])->assertNotFound();
 
-        $this->get('/admin')->assertSuccessful()->assertDontSee('id="tagwerk-household"', false);
+        $this->get('/admin')->assertSuccessful()->assertDontSee('id="fahoba-household"', false);
         $this->assertSame($this->mueller->id, session(ActiveHousehold::SESSION_KEY));
 
         // A session pointing at the Hubers by hand falls back to the Müllers.
@@ -350,7 +350,7 @@ final class MembershipTest extends TestCase
         $this->grandma->memberships()->where('household_id', $this->huber->id)->firstOrFail()->person?->update(['role' => PersonRole::Adult]);
         $this->actingAs($this->grandma, 'web');
 
-        $this->get('/admin')->assertSuccessful()->assertSee('id="tagwerk-household"', false);
+        $this->get('/admin')->assertSuccessful()->assertSee('id="fahoba-household"', false);
 
         $this->post('/household', ['household_id' => $this->huber->id])->assertRedirect();
         $this->assertSame($this->huber->id, session(ActiveHousehold::SESSION_KEY));

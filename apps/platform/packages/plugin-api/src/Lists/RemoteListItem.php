@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Tagwerk\PluginApi\Lists;
+namespace Fahoba\PluginApi\Lists;
 
 /** An item as the provider holds it; `done` means ticked off there. */
 final readonly class RemoteListItem

@@ -16,14 +16,14 @@ use App\Models\Household;
 use App\Models\User;
 use App\Support\Abilities;
 use App\Support\HouseholdContext;
+use Fahoba\PluginApi\Dashboard\DataWidget;
+use Fahoba\PluginApi\Dashboard\HandlesActions;
+use Fahoba\PluginApi\Dashboard\HasSettings;
+use Fahoba\PluginApi\Dashboard\WidgetContext;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Validation\ValidationException;
-use Tagwerk\PluginApi\Dashboard\DataWidget;
-use Tagwerk\PluginApi\Dashboard\HandlesActions;
-use Tagwerk\PluginApi\Dashboard\HasSettings;
-use Tagwerk\PluginApi\Dashboard\WidgetContext;
 use Throwable;
 
 /**

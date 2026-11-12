@@ -12,13 +12,13 @@ use ZipArchive;
 /**
  * A household to take along: `household.json` (the export) and its files
  * under `files/<disk>/<path>`. The family's answer to "give me my data",
- * and what another Tagwerk server imports.
+ * and what another Fahoba server imports.
  */
 final class HouseholdArchive
 {
     private const JSON = 'household.json';
 
-    /** Paths as Tagwerk writes them — anything else in an archive is not read. */
+    /** Paths as Fahoba writes them — anything else in an archive is not read. */
     private const PATH = '#^[A-Za-z0-9_-]+(/[A-Za-z0-9_.-]+)*$#';
 
     public function __construct(private readonly HouseholdExport $export) {}
@@ -59,7 +59,7 @@ final class HouseholdArchive
         $archive = new ZipArchive;
 
         if ($archive->open($zip, ZipArchive::RDONLY) !== true) {
-            throw new RuntimeException(__('This is no Tagwerk household export.'));
+            throw new RuntimeException(__('This is no Fahoba household export.'));
         }
 
         $json = $archive->getFromName(self::JSON);
@@ -68,7 +68,7 @@ final class HouseholdArchive
         if (! is_array($data) || ! is_array($data['tables'] ?? null)) {
             $archive->close();
 
-            throw new RuntimeException(__('This is no Tagwerk household export.'));
+            throw new RuntimeException(__('This is no Fahoba household export.'));
         }
 
         foreach (self::files($data['tables']) as [$disk, $path]) {

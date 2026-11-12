@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Tagwerk\PluginApi\Recipes;
+namespace Fahoba\PluginApi\Recipes;
 
 /**
  * One line of a recipe's ingredient list — amount, unit, name, note.

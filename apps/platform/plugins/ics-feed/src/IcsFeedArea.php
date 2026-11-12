@@ -2,15 +2,15 @@
 
 declare(strict_types=1);
 
-namespace Tagwerk\IcsFeed;
+namespace Fahoba\IcsFeed;
 
-use Tagwerk\PluginApi\Areas\Area;
-use Tagwerk\PluginApi\Areas\OptIn;
+use Fahoba\PluginApi\Areas\Area;
+use Fahoba\PluginApi\Areas\OptIn;
 
 /** No view of its own: a switch in the household's list, addresses in the admin. */
 final class IcsFeedArea implements Area, OptIn
 {
-    public const KEY = 'tagwerk/ics-feed';
+    public const KEY = 'fahoba/ics-feed';
 
     public function label(): string
     {

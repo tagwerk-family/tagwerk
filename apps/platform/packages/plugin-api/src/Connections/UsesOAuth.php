@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Tagwerk\PluginApi\Connections;
+namespace Fahoba\PluginApi\Connections;
 
 /**
  * Capability: the connection is made through a consent at the provider.

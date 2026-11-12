@@ -1,4 +1,4 @@
-name: tagwerk
+name: fahoba
 type: laravel
 docroot: apps/platform/public
 php_version: "8.5"
@@ -20,7 +20,7 @@ corepack_enable: true
 # writes it. After installing or removing a plugin: `ddev restart`.
 hooks:
   post-start:
-    - exec: "cd apps/platform && php artisan tagwerk:csp > storage/framework/csp-app.conf && sudo nginx -s reload"
+    - exec: "cd apps/platform && php artisan fahoba:csp > storage/framework/csp-app.conf && sudo nginx -s reload"
 
 # Key features of DDEV's config.yaml:
 
@@ -299,7 +299,7 @@ hooks:
 #hooks:
 
 # Nuxt dev server of the wall, reachable at
-# https://tagwerk.test:3000
+# https://fahoba.test:3000
 web_extra_exposed_ports:
   - name: nuxt
     container_port: 3000

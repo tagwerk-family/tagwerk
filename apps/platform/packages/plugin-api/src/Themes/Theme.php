@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Tagwerk\PluginApi\Themes;
+namespace Fahoba\PluginApi\Themes;
 
 /**
  * A design for wall and phone: colours, fonts and corners, nothing else.
  *
- * Data, not behaviour: one stylesheet that sets Tagwerk's design tokens
+ * Data, not behaviour: one stylesheet that sets Fahoba's design tokens
  * (`Tokens`), checked by `Stylesheet` before anyone sees it. The
  * components stay the core's, so a design survives every release that
  * keeps the tokens.

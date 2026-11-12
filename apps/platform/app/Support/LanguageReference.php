@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace App\Support;
 
-use Tagwerk\PluginApi\Languages\Coverage;
+use Fahoba\PluginApi\Languages\Coverage;
 
 /**
  * The English texts a language pack translates, as files for
- * `tagwerk/plugin-api`.
+ * `fahoba/plugin-api`.
  *
  * Backend: the keys of `lang/de.json` (the English text is the key, so the
  * German file lists every one) and the groups in `lang/de/`, with Laravel's

@@ -6,8 +6,8 @@ namespace App\Integrations\Holidays\Yasumi;
 
 use App\Support\Locale;
 use Carbon\CarbonImmutable;
-use Tagwerk\PluginApi\Holidays\HolidayEntry;
-use Tagwerk\PluginApi\Holidays\HolidaySource;
+use Fahoba\PluginApi\Holidays\HolidayEntry;
+use Fahoba\PluginApi\Holidays\HolidaySource;
 use Throwable;
 use Yasumi\Holiday;
 use Yasumi\Yasumi;

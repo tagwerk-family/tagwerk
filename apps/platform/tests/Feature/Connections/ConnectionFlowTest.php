@@ -112,7 +112,7 @@ final class ConnectionFlowTest extends TestCase
                 'refresh_token' => 'refresh',
                 'expires_in' => 3599,
             ]),
-            'www.googleapis.com/oauth2/v3/userinfo' => Http::response(['email' => 'familie@tagwerk.invalid']),
+            'www.googleapis.com/oauth2/v3/userinfo' => Http::response(['email' => 'familie@fahoba.invalid']),
             '*' => Http::response(['items' => []]),
         ]);
     }

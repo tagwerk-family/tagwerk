@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Tagwerk\PluginApi\Households;
+namespace Fahoba\PluginApi\Households;
 
 use Illuminate\Database\Eloquent\Builder;
 

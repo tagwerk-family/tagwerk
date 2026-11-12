@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Tagwerk\PluginApi\Lists;
+namespace Fahoba\PluginApi\Lists;
 
-use Tagwerk\PluginApi\Connections\ConnectedAccount;
+use Fahoba\PluginApi\Connections\ConnectedAccount;
 
 /**
  * A service that accepts shopping items.
  *
- * One way and without a way back: the list in Tagwerk stays authoritative,
+ * One way and without a way back: the list in Fahoba stays authoritative,
  * so an outage at the provider only costs a convenience. A provider that
  * wrote back would need a contract of its own — and a decision about who
  * wins in a conflict.

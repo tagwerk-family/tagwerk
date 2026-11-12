@@ -6,13 +6,13 @@ namespace App\Integrations\Recipes\Builtin;
 
 use App\Models\Recipe;
 use App\Support\Recipes\RecipeSearch;
-use Tagwerk\PluginApi\Recipes\DescribesRecipes;
-use Tagwerk\PluginApi\Recipes\RecipeDetail;
-use Tagwerk\PluginApi\Recipes\RecipeProvider;
-use Tagwerk\PluginApi\Recipes\RecipeQuery;
+use Fahoba\PluginApi\Recipes\DescribesRecipes;
+use Fahoba\PluginApi\Recipes\RecipeDetail;
+use Fahoba\PluginApi\Recipes\RecipeProvider;
+use Fahoba\PluginApi\Recipes\RecipeQuery;
 
 /**
- * The recipe book Tagwerk keeps itself.
+ * The recipe book Fahoba keeps itself.
  *
  * Always configured and without any third-party service: as with the
  * built-in calendar, this is the default, not the fallback. A household can
@@ -29,7 +29,7 @@ final class BuiltinRecipeProvider implements DescribesRecipes, RecipeProvider
 
     public function label(): string
     {
-        return 'Tagwerk';
+        return 'Fahoba';
     }
 
     /** A book of our own needs no credentials. */

@@ -1,21 +1,21 @@
 {
-    "name": "tagwerk/two-factor",
-    "description": "Two-factor sign-in for Tagwerk: authenticator app and recovery codes, switched on by the operator",
+    "name": "fahoba/two-factor",
+    "description": "Two-factor sign-in for Fahoba: authenticator app and recovery codes, switched on by the operator",
     "type": "library",
     "version": "0.1.0",
     "license": "PolyForm-Shield-1.0.0",
     "require": {
         "php": "^8.5",
-        "tagwerk/plugin-api": "^0.1"
+        "fahoba/plugin-api": "^0.1"
     },
     "autoload": {
         "psr-4": {
-            "Tagwerk\\TwoFactor\\": "src/"
+            "Fahoba\\TwoFactor\\": "src/"
         }
     },
     "extra": {
-        "tagwerk": {
-            "provider": "Tagwerk\\TwoFactor\\TwoFactorServiceProvider"
+        "fahoba": {
+            "provider": "Fahoba\\TwoFactor\\TwoFactorServiceProvider"
         }
     }
 }

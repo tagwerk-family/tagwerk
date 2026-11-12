@@ -7,13 +7,14 @@ namespace App\Services;
 use App\Integrations\ProviderRegistry;
 use App\Models\Household;
 use App\Models\User;
+use App\Support\RenamedFromTagwerk;
+use Fahoba\PluginApi\Connections\UsesCredentials;
+use Fahoba\PluginApi\Connections\UsesOAuth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use RuntimeException;
-use Tagwerk\PluginApi\Connections\UsesCredentials;
-use Tagwerk\PluginApi\Connections\UsesOAuth;
 use Throwable;
 
 /**
@@ -90,11 +91,11 @@ final class HouseholdImport
     public function import(array $data, ?string $files = null, ?User $importer = null): ImportResult
     {
         if (($data['format'] ?? null) !== HouseholdExport::FORMAT || ! is_array($data['tables'] ?? null) || ! is_array($data['tables']['households'][0] ?? null)) {
-            throw new RuntimeException(__('This is no Tagwerk household export.'));
+            throw new RuntimeException(__('This is no Fahoba household export.'));
         }
 
         if (! DB::table('migrations')->where('migration', (string) ($data['migration'] ?? ''))->exists()) {
-            throw new RuntimeException(__('The export comes from a newer Tagwerk. Update this server first.'));
+            throw new RuntimeException(__('The export comes from a newer Fahoba. Update this server first.'));
         }
 
         /** @var array<string, list<array<string, mixed>>> $tables */
@@ -199,7 +200,7 @@ final class HouseholdImport
 
         $row = $this->files($table, $row, $files);
 
-        $row = ExportSecrets::seal($table, $row);
+        $row = ExportSecrets::seal($table, RenamedFromTagwerk::row($table, $row));
         $known = array_flip(Schema::getColumnListing($table));
         $row = array_intersect_key($row, $known);
 

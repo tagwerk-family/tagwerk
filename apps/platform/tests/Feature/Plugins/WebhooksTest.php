@@ -11,16 +11,16 @@ use App\Models\Person;
 use App\Models\User;
 use App\Support\HouseholdContext;
 use App\Support\PublicAddressResolver;
+use Fahoba\Webhooks\DeliverWebhookJob;
+use Fahoba\Webhooks\Filament\ManageWebhooks;
+use Fahoba\Webhooks\Webhook;
+use Fahoba\Webhooks\WebhookDelivery;
+use Fahoba\Webhooks\WebhooksArea;
 use Filament\Actions\Testing\TestAction;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\Client\Request;
 use Illuminate\Support\Facades\Http;
 use Livewire\Livewire;
-use Tagwerk\Webhooks\DeliverWebhookJob;
-use Tagwerk\Webhooks\Filament\ManageWebhooks;
-use Tagwerk\Webhooks\Webhook;
-use Tagwerk\Webhooks\WebhookDelivery;
-use Tagwerk\Webhooks\WebhooksArea;
 use Tests\Support\FakeResolver;
 use Tests\TestCase;
 
@@ -51,7 +51,7 @@ final class WebhooksTest extends TestCase
         $this->list = Checklist::factory()->create(['household_id' => $this->household->id]);
     }
 
-    private function webhook(array $events = ['list_item.added'], string $url = 'https://hooks.example.test/tagwerk'): Webhook
+    private function webhook(array $events = ['list_item.added'], string $url = 'https://hooks.example.test/fahoba'): Webhook
     {
         $webhook = Webhook::query()->create(['household_id' => $this->household->id, 'name' => 'HA', 'url' => $url, 'events' => $events]);
         $webhook->renewSecret();
@@ -74,9 +74,9 @@ final class WebhooksTest extends TestCase
         Http::assertSent(function (Request $request) use ($webhook): bool {
             $body = json_decode($request->body(), true);
 
-            return $request->url() === 'https://hooks.example.test/tagwerk'
-                && $request->header('X-Tagwerk-Event')[0] === 'list_item.added'
-                && $request->header('X-Tagwerk-Signature')[0] === 'sha256='.hash_hmac('sha256', $request->body(), (string) $webhook->fresh()->secret)
+            return $request->url() === 'https://hooks.example.test/fahoba'
+                && $request->header('X-Fahoba-Event')[0] === 'list_item.added'
+                && $request->header('X-Fahoba-Signature')[0] === 'sha256='.hash_hmac('sha256', $request->body(), (string) $webhook->fresh()->secret)
                 && $body['data']['title'] === 'Milch'
                 && $body['household_id'] === $this->household->id;
         });
@@ -182,7 +182,7 @@ final class WebhooksTest extends TestCase
         Livewire::test(ManageWebhooks::class)
             ->callAction(TestAction::make('create'), [
                 'name' => 'HA',
-                'url' => 'https://hooks.example.test/tagwerk',
+                'url' => 'https://hooks.example.test/fahoba',
                 'events' => ['list_item.added'],
             ])
             ->assertHasNoFormErrors()

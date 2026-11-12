@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace App\Support\Recipes;
 
+use Fahoba\PluginApi\Recipes\RecipeQuery;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
-use Tagwerk\PluginApi\Recipes\RecipeQuery;
 
 /**
  * Search and filters over `recipes` and `catalog_recipes` — both carry the

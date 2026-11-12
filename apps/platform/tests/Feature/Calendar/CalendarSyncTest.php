@@ -232,7 +232,7 @@ final class CalendarSyncTest extends TestCase
             'external_id' => 'evt-stale',
         ]);
 
-        // And one created in Tagwerk that Google does not know at all.
+        // And one created in Fahoba that Google does not know at all.
         $own = Event::factory()->fromApp()->create([
             'household_id' => $this->household->id,
             'calendar_id' => $this->calendar->id,
@@ -274,7 +274,7 @@ final class CalendarSyncTest extends TestCase
         Http::fake([
             'www.googleapis.com/*' => Http::response($this->page([[
                 ...$this->event('evt-own', 'Von Google zurückgespielt'),
-                'extendedProperties' => ['private' => ['tagwerk_revision' => 'rev-7']],
+                'extendedProperties' => ['private' => ['fahoba_revision' => 'rev-7']],
             ]])),
         ]);
 
@@ -300,7 +300,7 @@ final class CalendarSyncTest extends TestCase
         Http::fake([
             'www.googleapis.com/*' => Http::response($this->page([[
                 ...$this->event('evt-own', 'Am Handy geändert'),
-                'extendedProperties' => ['private' => ['tagwerk_revision' => 'rev-8']],
+                'extendedProperties' => ['private' => ['fahoba_revision' => 'rev-8']],
             ]])),
         ]);
 

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Tagwerk\PluginApi\Security;
+namespace Fahoba\PluginApi\Security;
 
 /**
  * A plugin that loads something from a foreign host in the browser — the

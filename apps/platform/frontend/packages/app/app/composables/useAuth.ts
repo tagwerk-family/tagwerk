@@ -3,7 +3,7 @@ import type { Language } from '../../../shared/app/utils/language'
 import { areaFromUrl, householdFromUrl, modeKey } from '~/utils/entry'
 
 /** The service worker's cache (`public/sw.js`); emptied when the household changes. */
-const OFFLINE_CACHE = 'tagwerk-wall-v1'
+const OFFLINE_CACHE = 'fahoba-wall-v1'
 
 export interface UserDto {
   id: number

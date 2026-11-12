@@ -1,4 +1,4 @@
-import { connectRealtime, createHttp, type Realtime } from '@tagwerk/client'
+import { connectRealtime, createHttp, type Realtime } from '@fahoba/client'
 
 /**
  * Change notifications, so wall and phone do not wait for the next poll.
@@ -7,7 +7,7 @@ import { connectRealtime, createHttp, type Realtime } from '@tagwerk/client'
  * polling remains the fallback. The message itself carries no data, only the
  * affected area — loading happens with the same request as otherwise.
  * Connecting, gathering bursts and the `all` after a lost socket live in
- * `@tagwerk/client`, which other frontends use as well.
+ * `@fahoba/client`, which other frontends use as well.
  */
 export function useRealtime(onChange: (areas: string[]) => unknown) {
   let realtime: Realtime | null = null

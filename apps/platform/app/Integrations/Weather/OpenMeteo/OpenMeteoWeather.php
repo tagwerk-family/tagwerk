@@ -5,13 +5,13 @@ declare(strict_types=1);
 namespace App\Integrations\Weather\OpenMeteo;
 
 use Carbon\CarbonImmutable;
+use Fahoba\PluginApi\Weather\DayForecast;
+use Fahoba\PluginApi\Weather\HourForecast;
+use Fahoba\PluginApi\Weather\TemperatureUnit;
+use Fahoba\PluginApi\Weather\Weather;
+use Fahoba\PluginApi\Weather\WeatherSource;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Http;
-use Tagwerk\PluginApi\Weather\DayForecast;
-use Tagwerk\PluginApi\Weather\HourForecast;
-use Tagwerk\PluginApi\Weather\TemperatureUnit;
-use Tagwerk\PluginApi\Weather\Weather;
-use Tagwerk\PluginApi\Weather\WeatherSource;
 use Throwable;
 
 /**

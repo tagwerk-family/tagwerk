@@ -5,15 +5,15 @@ declare(strict_types=1);
 namespace App\Integrations\Calendar\Google;
 
 use App\Integrations\Google\GoogleOAuth;
+use Fahoba\PluginApi\Calendar\EventConflict;
+use Fahoba\PluginApi\Calendar\SyncCursorExpired;
+use Fahoba\PluginApi\Connections\ConnectedAccount;
 use Illuminate\Http\Client\PendingRequest;
 use Illuminate\Http\Client\Response;
 use Illuminate\Support\Facades\Http;
-use Tagwerk\PluginApi\Calendar\EventConflict;
-use Tagwerk\PluginApi\Calendar\SyncCursorExpired;
-use Tagwerk\PluginApi\Connections\ConnectedAccount;
 
 /**
- * Thin wrapper around the seven Calendar API endpoints Tagwerk needs.
+ * Thin wrapper around the seven Calendar API endpoints Fahoba needs.
  *
  * Deliberately without google/apiclient: the official package pulls in a
  * large dependency tree and is hard to replace in tests, while the spec

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Tagwerk\PluginApi\Languages;
+namespace Fahoba\PluginApi\Languages;
 
 /**
  * A language beyond German and English.

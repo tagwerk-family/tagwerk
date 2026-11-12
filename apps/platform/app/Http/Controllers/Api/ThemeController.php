@@ -73,7 +73,7 @@ final class ThemeController extends Controller
             // own choice before the household's.
             'backdrop' => $this->backdrop($owner, $household),
 
-            // An installed design pack's stylesheet, null for Tagwerk's own.
+            // An installed design pack's stylesheet, null for Fahoba's own.
             'design' => $this->designs->describe($this->design($owner, $household)),
             'designs' => collect($this->designs->options())
                 ->map(fn (string $name, string $key): array => ['key' => $key, 'name' => $name])
@@ -82,7 +82,7 @@ final class ThemeController extends Controller
         ];
     }
 
-    /** The owner's choice before the household's; a removed package is Tagwerk's own. */
+    /** The owner's choice before the household's; a removed package is Fahoba's own. */
     private function design(Device|User $owner, Household $household): ?string
     {
         $chosen = (string) ($owner->preferences['design'] ?? Preferences::HOUSEHOLD_BACKDROP);

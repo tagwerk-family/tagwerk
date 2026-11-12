@@ -7,9 +7,9 @@ namespace App\Services\Calendar;
 use App\Integrations\ProviderRegistry;
 use App\Models\Calendar;
 use DateInterval;
+use Fahoba\PluginApi\Calendar\WatchesChanges;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
-use Tagwerk\PluginApi\Calendar\WatchesChanges;
 use Throwable;
 
 /**

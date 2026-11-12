@@ -19,12 +19,12 @@ use Illuminate\Support\Facades\Queue;
 use Tests\TestCase;
 
 /**
- * Tagwerk without an external service.
+ * Fahoba without an external service.
  *
  * This shows whether the provider layer holds up: the builtin calendar brings
  * not a single capability. If anywhere in the write path, the sync or the
  * background runs a call comes up that it does not know, one of these tests
- * fails — and not only the household that uses Tagwerk without a connected
+ * fails — and not only the household that uses Fahoba without a connected
  * account.
  */
 final class BuiltinCalendarTest extends TestCase
@@ -118,7 +118,7 @@ final class BuiltinCalendarTest extends TestCase
     {
         Queue::fake();
 
-        $this->artisan('tagwerk:sync-calendars')->assertSuccessful();
+        $this->artisan('fahoba:sync-calendars')->assertSuccessful();
 
         Queue::assertNotPushed(SyncCalendarJob::class);
     }
@@ -127,7 +127,7 @@ final class BuiltinCalendarTest extends TestCase
     {
         Http::preventStrayRequests();
 
-        $this->artisan('tagwerk:renew-push-channels')
+        $this->artisan('fahoba:renew-push-channels')
             ->expectsOutputToContain('Renewed 0 channels.')
             ->assertSuccessful();
     }

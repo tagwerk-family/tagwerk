@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Tagwerk\SocialLogin;
+namespace Fahoba\SocialLogin;
 
 use Laravel\Socialite\Contracts\Provider;
 use Laravel\Socialite\Facades\Socialite;

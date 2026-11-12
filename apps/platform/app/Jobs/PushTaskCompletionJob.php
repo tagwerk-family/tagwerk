@@ -6,10 +6,10 @@ namespace App\Jobs;
 
 use App\Integrations\ProviderRegistry;
 use App\Models\Task;
+use Fahoba\PluginApi\Tasks\WritesTasks;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Queue\Queueable;
 use Illuminate\Support\Facades\Log;
-use Tagwerk\PluginApi\Tasks\WritesTasks;
 use Throwable;
 
 /**
@@ -46,7 +46,7 @@ final class PushTaskCompletionJob implements ShouldQueue
         } catch (Throwable $exception) {
             /*
              * Logged, not rethrown — as with the list provider: the
-             * completion is stored in Tagwerk, and that is the authoritative
+             * completion is stored in Fahoba, and that is the authoritative
              * answer to "is this done?". No retry, because a retry would only
              * be a second chance to miss the same convenience.
              */

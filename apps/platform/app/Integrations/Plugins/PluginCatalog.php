@@ -5,19 +5,19 @@ declare(strict_types=1);
 namespace App\Integrations\Plugins;
 
 use App\Integrations\ProviderContracts;
+use Fahoba\PluginApi\Areas\Area;
+use Fahoba\PluginApi\Dashboard\DataWidget;
+use Fahoba\PluginApi\Households\HouseholdNotice;
+use Fahoba\PluginApi\Languages\LanguagePack;
+use Fahoba\PluginApi\Photos\PhotoRule;
+use Fahoba\PluginApi\Plugins\Catalog;
+use Fahoba\PluginApi\Plugins\ConfiguresPanel;
+use Fahoba\PluginApi\Plugins\ExportRules;
+use Fahoba\PluginApi\Plugins\Extension;
+use Fahoba\PluginApi\Plugins\LoadReport;
+use Fahoba\PluginApi\Security\ContributesToCsp;
+use Fahoba\PluginApi\Themes\Theme;
 use Illuminate\Container\Attributes\Singleton;
-use Tagwerk\PluginApi\Areas\Area;
-use Tagwerk\PluginApi\Dashboard\DataWidget;
-use Tagwerk\PluginApi\Households\HouseholdNotice;
-use Tagwerk\PluginApi\Languages\LanguagePack;
-use Tagwerk\PluginApi\Photos\PhotoRule;
-use Tagwerk\PluginApi\Plugins\Catalog;
-use Tagwerk\PluginApi\Plugins\ConfiguresPanel;
-use Tagwerk\PluginApi\Plugins\ExportRules;
-use Tagwerk\PluginApi\Plugins\Extension;
-use Tagwerk\PluginApi\Plugins\LoadReport;
-use Tagwerk\PluginApi\Security\ContributesToCsp;
-use Tagwerk\PluginApi\Themes\Theme;
 
 /**
  * What installed packages offer, checked — the core's view of the plugin
@@ -26,7 +26,7 @@ use Tagwerk\PluginApi\Themes\Theme;
  * Installed means enabled: there is no second switch. Plugin keys carry a
  * vendor (`acme/nextcloud`); built-in keys never do, so no package can claim
  * a built-in key such as `google` and take over its connections and tokens.
- * `tagwerk/` belongs to the first-party packages in `tagwerk.first_party`.
+ * `fahoba/` belongs to the first-party packages in `fahoba.first_party`.
  *
  * An offer that breaks a rule withdraws everything its package offered and
  * is reported to `LoadReport` — the app keeps running without it. Checked
@@ -142,7 +142,7 @@ final class PluginCatalog
         return match (true) {
             $contract === null => "Unknown area {$area} for {$key}.",
             preg_match(self::KEY_PATTERN, $key) !== 1 => "Plugin key {$key} must look like vendor/name.",
-            str_starts_with($key, 'tagwerk/') && ! in_array($package, (array) config('tagwerk.first_party', []), true) => "Plugin key {$key} is reserved for Tagwerk's own packages.",
+            str_starts_with($key, 'fahoba/') && ! in_array($package, (array) config('fahoba.first_party', []), true) => "Plugin key {$key} is reserved for Fahoba's own packages.",
             isset($accepted[$area][$key]) => "Plugin key {$key} is already taken in area {$area}.",
             ! class_exists($class) => "Class {$class} for {$key} does not exist.",
             ! is_a($class, $contract, true) => "{$class} does not implement {$contract}.",

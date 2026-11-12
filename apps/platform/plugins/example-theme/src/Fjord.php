@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Tagwerk\ExampleTheme;
+namespace Fahoba\ExampleTheme;
 
-use Tagwerk\PluginApi\Themes\Theme;
+use Fahoba\PluginApi\Themes\Theme;
 
 final class Fjord implements Theme
 {

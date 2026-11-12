@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Tagwerk\PluginApi\Weather;
+namespace Fahoba\PluginApi\Weather;
 
 /**
  * The weather at a place: now, today and the next few days.

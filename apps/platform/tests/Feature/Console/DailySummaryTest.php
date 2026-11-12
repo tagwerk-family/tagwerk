@@ -70,7 +70,7 @@ final class DailySummaryTest extends TestCase
         $this->task('Zimmer aufräumen');
 
         $this->inTheEvening();
-        $this->artisan('tagwerk:send-daily-summary')->assertSuccessful();
+        $this->artisan('fahoba:send-daily-summary')->assertSuccessful();
 
         Queue::assertPushed(SendPushNotificationJob::class);
         $this->assertSame('2026-09-17', $this->household->fresh()->summary_sent_on?->toDateString());
@@ -81,7 +81,7 @@ final class DailySummaryTest extends TestCase
         $this->task('Müll rausbringen', 'Lena');
 
         $this->inTheEvening('18:00');
-        $this->artisan('tagwerk:send-daily-summary')->assertSuccessful();
+        $this->artisan('fahoba:send-daily-summary')->assertSuccessful();
 
         Queue::assertNotPushed(SendPushNotificationJob::class);
         $this->assertNull($this->household->fresh()->summary_sent_on);
@@ -92,8 +92,8 @@ final class DailySummaryTest extends TestCase
         $this->task('Müll rausbringen', 'Lena');
 
         $this->inTheEvening();
-        $this->artisan('tagwerk:send-daily-summary')->assertSuccessful();
-        $this->artisan('tagwerk:send-daily-summary')->assertSuccessful();
+        $this->artisan('fahoba:send-daily-summary')->assertSuccessful();
+        $this->artisan('fahoba:send-daily-summary')->assertSuccessful();
 
         Queue::assertPushed(SendPushNotificationJob::class, 1);
     }
@@ -106,7 +106,7 @@ final class DailySummaryTest extends TestCase
     public function test_no_notification_without_tasks(): void
     {
         $this->inTheEvening();
-        $this->artisan('tagwerk:send-daily-summary')->assertSuccessful();
+        $this->artisan('fahoba:send-daily-summary')->assertSuccessful();
 
         Queue::assertNotPushed(SendPushNotificationJob::class);
         $this->assertSame('2026-09-17', $this->household->fresh()->summary_sent_on?->toDateString());
@@ -124,7 +124,7 @@ final class DailySummaryTest extends TestCase
         ]);
 
         $this->inTheEvening();
-        $this->artisan('tagwerk:send-daily-summary')->assertSuccessful();
+        $this->artisan('fahoba:send-daily-summary')->assertSuccessful();
 
         $this->assertSame('2026-09-17', $this->household->fresh()->summary_sent_on?->toDateString());
         $this->assertNull($distant->fresh()->summary_sent_on);

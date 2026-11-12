@@ -5,16 +5,16 @@ declare(strict_types=1);
 namespace App\Console\Commands;
 
 use App\Support\LanguageReference;
+use Fahoba\PluginApi\Languages\Reference;
 use Illuminate\Console\Command;
-use Tagwerk\PluginApi\Languages\Reference;
 
 /**
  * Writes the English reference that language packs are measured against
- * into `tagwerk/plugin-api`. Run it after adding or changing texts.
+ * into `fahoba/plugin-api`. Run it after adding or changing texts.
  */
 final class LanguageReferenceCommand extends Command
 {
-    protected $signature = 'tagwerk:language-reference';
+    protected $signature = 'fahoba:language-reference';
 
     protected $description = 'Writes the reference texts language packs translate into the plugin API package';
 

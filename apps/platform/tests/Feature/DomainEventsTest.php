@@ -14,9 +14,9 @@ use App\Models\RewardRedemption;
 use App\Models\Task;
 use App\Models\TaskCompletion;
 use App\Support\HouseholdContext;
+use Fahoba\PluginApi\Events\DomainEvent;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Event as Events;
-use Tagwerk\PluginApi\Events\DomainEvent;
 use Tests\TestCase;
 
 /**

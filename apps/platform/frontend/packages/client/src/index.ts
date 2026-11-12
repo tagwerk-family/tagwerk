@@ -1,5 +1,5 @@
 /**
- * `@tagwerk/client` — what every Tagwerk frontend needs, without a framework:
+ * `@fahoba/client` — what every Fahoba frontend needs, without a framework:
  * talking to the server, realtime announcements, and the rules the screen
  * must apply the same way the official app does.
  */

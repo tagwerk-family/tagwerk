@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Tagwerk\PluginApi\Photos;
+namespace Fahoba\PluginApi\Photos;
 
 /** An image file, ready to be served. */
 final readonly class PhotoFile

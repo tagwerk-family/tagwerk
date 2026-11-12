@@ -1,6 +1,6 @@
-# Building your own Tagwerk frontend
+# Building your own Fahoba frontend
 
-Tagwerk's server decides everything — who may do what, whose turn it is,
+Fahoba's server decides everything — who may do what, whose turn it is,
 what happens when — and the app at `/` only shows it. That makes the app
 replaceable: a community frontend for an e-ink wall, a reduced view for a
 grandparent's tablet, an interface in another framework. This guide is for
@@ -9,23 +9,23 @@ simpler: a [design pack](plugins.md#design-packs).
 
 ## Start
 
-Open [`tagwerk-frontend-template`](https://github.com/tagwerk-family/tagwerk-frontend-template),
+Open [`fahoba-frontend-template`](https://github.com/fahoba/fahoba-frontend-template),
 press **Use template**, then:
 
 ```bash
 npm install
-TAGWERK_URL=https://tagwerk.test npm run dev
+FAHOBA_URL=https://fahoba.test npm run dev
 ```
 
 The template is plain Vite + TypeScript on
-[`@tagwerk/client`](https://www.npmjs.com/package/@tagwerk/client): pair a
+[`@fahoba/client`](https://www.npmjs.com/package/@fahoba/client): pair a
 wall or sign in, show the coming week, reload when the server announces a
 change. Bring any framework.
 
 ## How a frontend reaches the server
 
-- **Served by Tagwerk, on its origin.** The sign-in is an httpOnly cookie
-  (`tagwerk_device_token` for a wall, `tagwerk_user_token` for an account)
+- **Served by Fahoba, on its origin.** The sign-in is an httpOnly cookie
+  (`fahoba_device_token` for a wall, `fahoba_user_token` for an account)
   that the server sets. JavaScript never sees a token, and from another
   origin the cookie would not travel. In development, Vite's proxy passes
   `/api` and `/broadcasting` to your server, which gives the same picture.
@@ -50,7 +50,7 @@ change. Bring any framework.
 - **Permissions** arrive as the account's `permissions` and per item as
   `can` (`can.edit` on an event, `can.complete` on a task). Hide what is not
   allowed; the server refuses it regardless.
-- **Refusals mean something** (`TagwerkError.kind` in the client):
+- **Refusals mean something** (`FahobaError.kind` in the client):
 
   | Status | `kind` | What the screen does |
   |---|---|---|
@@ -80,12 +80,12 @@ npm run build          # dist/index.html and dist/assets/, committed
 git tag v1.0.0 && git push --tags
 ```
 
-`composer.json` names the build: `"extra": {"tagwerk": {"app": "dist"}}`.
+`composer.json` names the build: `"extra": {"fahoba": {"app": "dist"}}`.
 Publish the repository on Packagist; an operator sets
-`TAGWERK_FRONTEND=vendor/name:^1.0` in `deploy/.env`
+`FAHOBA_FRONTEND=vendor/name:^1.0` in `deploy/.env`
 ([installation](installation.md#designs-and-other-frontends)). The
 container installs the package at start, checks it (`php artisan
-tagwerk:frontend vendor/name`) and serves it at `/`.
+fahoba:frontend vendor/name`) and serves it at `/`.
 
 - **`index.html` at `/`, everything else under `/assets/`** (Vite's
   default). Beside `index.html`, `sw.js`, `manifest.webmanifest`,
@@ -110,10 +110,10 @@ tagwerk:frontend vendor/name`) and serves it at `/`.
   (`/api/<vendor>/<name>/…`) are theirs.
 - **Fields are added, not removed.** An answer may grow; build on the fields
   you use.
-- **Until 1.0.0** Tagwerk is `0.x` and a minor release may still change the
+- **Until 1.0.0** Fahoba is `0.x` and a minor release may still change the
   contract; the CHANGELOG names it. From 1.0.0 on, SemVer applies.
-- **The client** (`@tagwerk/client`) follows the same rule, with its own
+- **The client** (`@fahoba/client`) follows the same rule, with its own
   version.
 
 Details per route: `/api/openapi.json` on a server with the
-`tagwerk/openapi` plugin.
+`fahoba/openapi` plugin.

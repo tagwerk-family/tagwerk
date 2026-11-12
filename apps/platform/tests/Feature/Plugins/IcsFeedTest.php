@@ -12,14 +12,14 @@ use App\Models\SchoolClosure;
 use App\Models\User;
 use App\Support\HouseholdContext;
 use Carbon\CarbonImmutable;
+use Fahoba\IcsFeed\Filament\IcsFeedResource;
+use Fahoba\IcsFeed\Filament\ManageIcsFeeds;
+use Fahoba\IcsFeed\IcsFeed;
+use Fahoba\IcsFeed\IcsFeedArea;
 use Filament\Actions\Testing\TestAction;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Livewire\Livewire;
 use Sabre\VObject\Reader;
-use Tagwerk\IcsFeed\Filament\IcsFeedResource;
-use Tagwerk\IcsFeed\Filament\ManageIcsFeeds;
-use Tagwerk\IcsFeed\IcsFeed;
-use Tagwerk\IcsFeed\IcsFeedArea;
 use Tests\TestCase;
 
 /**

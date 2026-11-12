@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Tagwerk\PluginApi\Calendar;
+namespace Fahoba\PluginApi\Calendar;
 
+use Fahoba\PluginApi\Connections\ConnectedAccount;
 use Illuminate\Http\Request;
-use Tagwerk\PluginApi\Connections\ConnectedAccount;
 
 /**
  * Capability: the provider reports when something has changed.
@@ -15,7 +15,7 @@ use Tagwerk\PluginApi\Connections\ConnectedAccount;
  */
 interface WatchesChanges
 {
-    /** @param  string  $channelId  assigned by Tagwerk so the notification can be matched */
+    /** @param  string  $channelId  assigned by Fahoba so the notification can be matched */
     public function watch(ConnectedCalendar $calendar, string $channelId): PushChannel;
 
     public function unwatch(ConnectedAccount $source, string $channelId, string $resourceId): void;

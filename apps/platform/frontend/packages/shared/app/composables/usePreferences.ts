@@ -22,7 +22,7 @@ export interface Preferences {
   look: string
   /** The gradient behind the glass: `household` or a backdrop of its own. */
   backdrop: string
-  /** A design pack: `household`, `core` (Tagwerk's own) or `vendor/name`. */
+  /** A design pack: `household`, `core` (Fahoba's own) or `vendor/name`. */
   design: string
   /** Menu order and hidden areas: the wall's, then the phone's. Empty means untouched. */
   area_order: string[]

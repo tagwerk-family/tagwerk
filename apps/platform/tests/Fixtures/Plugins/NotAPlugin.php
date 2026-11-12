@@ -6,5 +6,5 @@ namespace Tests\Fixtures\Plugins;
 
 use Illuminate\Support\ServiceProvider;
 
-/** A provider written for Laravel's discovery, not for Tagwerk's loader. */
+/** A provider written for Laravel's discovery, not for Fahoba's loader. */
 final class NotAPlugin extends ServiceProvider {}

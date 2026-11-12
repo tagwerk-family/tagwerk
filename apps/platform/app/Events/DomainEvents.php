@@ -9,7 +9,7 @@ use App\Models\ListItem;
 use App\Models\RewardRedemption;
 use App\Models\TaskCompletion;
 use DateTimeInterface;
-use Tagwerk\PluginApi\Events\DomainEvent;
+use Fahoba\PluginApi\Events\DomainEvent;
 
 /**
  * Turns model events into `DomainEvent`s — at one place, not at every write

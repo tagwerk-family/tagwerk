@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Tagwerk\TwoFactor;
+namespace Fahoba\TwoFactor;
 
-use Tagwerk\PluginApi\Plugins\Catalog;
-use Tagwerk\PluginApi\Plugins\Plugin;
+use Fahoba\PluginApi\Plugins\Catalog;
+use Fahoba\PluginApi\Plugins\Plugin;
 
 final class TwoFactorServiceProvider extends Plugin
 {

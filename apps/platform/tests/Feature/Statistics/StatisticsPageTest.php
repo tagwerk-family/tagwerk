@@ -92,7 +92,7 @@ final class StatisticsPageTest extends TestCase
         Livewire::test(Statistics::class)
             ->set('filters.period', '28')
             ->callAction('export')
-            ->assertFileDownloaded('tagwerk-'.__('statistics').'-2026-08-20-2026-09-16.csv');
+            ->assertFileDownloaded('fahoba-'.__('statistics').'-2026-08-20-2026-09-16.csv');
     }
 
     public function test_the_export_rows(): void

@@ -8,7 +8,7 @@ import { isLanguage, startLanguage } from '../utils/language'
  * still starts in its language and not in the fallback.
  */
 export default defineNuxtPlugin({
-  name: 'tagwerk:language',
+  name: 'fahoba:language',
   dependsOn: ['i18n:plugin'],
   async setup() {
     let answer: unknown = null

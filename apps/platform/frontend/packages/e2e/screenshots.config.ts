@@ -11,7 +11,7 @@ export default defineConfig({
   reporter: [['list']],
   globalTeardown: './tests/cleanup.ts',
   use: {
-    baseURL: 'https://tagwerk.test',
+    baseURL: 'https://fahoba.test',
     ignoreHTTPSErrors: true,
     channel: 'chrome',
     timezoneId: 'Europe/Vienna',

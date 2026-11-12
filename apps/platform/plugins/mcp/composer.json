@@ -1,5 +1,5 @@
 {
-    "name": "tagwerk/mcp",
+    "name": "fahoba/mcp",
     "description": "Lets an AI assistant read and change a household through the Model Context Protocol, with an API token",
     "type": "library",
     "version": "0.1.0",
@@ -7,16 +7,16 @@
     "require": {
         "php": "^8.5",
         "laravel/mcp": "^1.1",
-        "tagwerk/plugin-api": "^0.1"
+        "fahoba/plugin-api": "^0.1"
     },
     "autoload": {
         "psr-4": {
-            "Tagwerk\\Mcp\\": "src/"
+            "Fahoba\\Mcp\\": "src/"
         }
     },
     "extra": {
-        "tagwerk": {
-            "provider": "Tagwerk\\Mcp\\McpServiceProvider"
+        "fahoba": {
+            "provider": "Fahoba\\Mcp\\McpServiceProvider"
         }
     }
 }

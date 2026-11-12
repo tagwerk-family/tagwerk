@@ -9,6 +9,8 @@ use App\Enums\ProviderArea;
 use App\Integrations\ProviderRegistry;
 use App\Models\ProviderAccount;
 use App\Support\HouseholdTimezone;
+use Fahoba\PluginApi\Connections\UsesCredentials;
+use Fahoba\PluginApi\Connections\UsesOAuth;
 use Filament\Actions\Action;
 use Filament\Actions\DeleteAction;
 use Filament\Forms\Components\Select;
@@ -16,8 +18,6 @@ use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Number;
-use Tagwerk\PluginApi\Connections\UsesCredentials;
-use Tagwerk\PluginApi\Connections\UsesOAuth;
 
 class ConnectionsTable
 {
@@ -99,7 +99,7 @@ class ConnectionsTable
                     ->label(__('Disconnect'))
                     ->modalHeading(__('End connection'))
                     ->modalDescription(fn (ProviderAccount $record): string => $record->area === ProviderArea::Lists
-                        ? __('The lists in Tagwerk stay with all their items; only the sync ends.')
+                        ? __('The lists in Fahoba stay with all their items; only the sync ends.')
                         : __('Whatever was brought in from it is removed as well.'))
 
                     /*

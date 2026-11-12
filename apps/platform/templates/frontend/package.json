@@ -1,5 +1,5 @@
 {
-  "name": "acme-tagwerk-frontend",
+  "name": "acme-fahoba-frontend",
   "private": true,
   "type": "module",
   "scripts": {
@@ -8,7 +8,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@tagwerk/client": "^0.1.0"
+    "@fahoba/client": "^0.1.0"
   },
   "devDependencies": {
     "typescript": "^5.9.3",

@@ -13,14 +13,14 @@ use App\Models\ProviderAccount;
 use App\Models\User;
 use App\Security\ContentSecurityPolicy;
 use App\Support\HouseholdContext;
+use Fahoba\Kochwiki\KochwikiRecipeProvider;
+use Fahoba\Kochwiki\Wikitext;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\Client\Factory as HttpFactory;
 use Illuminate\Http\Client\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Sleep;
-use Tagwerk\Kochwiki\KochwikiRecipeProvider;
-use Tagwerk\Kochwiki\Wikitext;
 use Tests\TestCase;
 
 /**
@@ -127,7 +127,7 @@ final class KochwikiTest extends TestCase
     {
         $this->fakeWiki();
 
-        $this->artisan('tagwerk:kochwiki-sync --force')->assertSuccessful();
+        $this->artisan('fahoba:kochwiki-sync --force')->assertSuccessful();
 
         $this->assertSame(2, CatalogRecipe::query()->count());
 
@@ -142,13 +142,13 @@ final class KochwikiTest extends TestCase
 
         // Second run: same revisions — the page list only, no content, not even the main page again.
         $this->fakeWiki();
-        $this->artisan('tagwerk:kochwiki-sync --force')->assertSuccessful();
+        $this->artisan('fahoba:kochwiki-sync --force')->assertSuccessful();
 
         Http::assertSentCount(1);
 
         // A page that is gone takes its recipe along.
         $this->fakeWiki(without: 'Sachertorte');
-        $this->artisan('tagwerk:kochwiki-sync --force')->assertSuccessful();
+        $this->artisan('fahoba:kochwiki-sync --force')->assertSuccessful();
 
         $this->assertSame(['Spaghetti alla carbonara'], CatalogRecipe::query()->pluck('title')->all());
     }
@@ -158,7 +158,7 @@ final class KochwikiTest extends TestCase
     {
         Http::fake();
 
-        $this->artisan('tagwerk:kochwiki-sync')->assertSuccessful();
+        $this->artisan('fahoba:kochwiki-sync')->assertSuccessful();
 
         Http::assertNothingSent();
     }
@@ -166,7 +166,7 @@ final class KochwikiTest extends TestCase
     public function test_a_connected_household_browses_and_opens_it(): void
     {
         $this->fakeWiki();
-        $this->artisan('tagwerk:kochwiki-sync --force')->assertSuccessful();
+        $this->artisan('fahoba:kochwiki-sync --force')->assertSuccessful();
 
         $household = Household::factory()->create();
         $token = $this->phone($household);
@@ -188,7 +188,7 @@ final class KochwikiTest extends TestCase
         $card = $this->withToken($token)->getJson('/api/wall/recipe-book?q=sacher&vegetarian=1')
             ->assertOk()
             ->assertJsonPath('recipes.0.name', 'Sachertorte')
-            ->assertJsonPath('recipes.0.provider', 'tagwerk/kochwiki')
+            ->assertJsonPath('recipes.0.provider', 'fahoba/kochwiki')
             ->json('recipes.0');
 
         // What the family made itself leaves the catalog out.
@@ -196,7 +196,7 @@ final class KochwikiTest extends TestCase
             ->assertOk()
             ->assertJsonCount(0, 'recipes');
 
-        $this->withToken($token)->getJson("/api/wall/recipe-book/tagwerk/kochwiki/{$card['id']}?servings=6")
+        $this->withToken($token)->getJson("/api/wall/recipe-book/fahoba/kochwiki/{$card['id']}?servings=6")
             ->assertOk()
             ->assertJsonPath('recipe.title', 'Sachertorte')
             ->assertJsonPath('recipe.base_servings', 12)
@@ -205,7 +205,7 @@ final class KochwikiTest extends TestCase
             ->assertJsonPath('recipe.license.author', 'Koch-Wiki');
 
         Auth::forgetGuards();
-        $this->withToken($stranger)->getJson("/api/wall/recipe-book/tagwerk/kochwiki/{$card['id']}")->assertNotFound();
+        $this->withToken($stranger)->getJson("/api/wall/recipe-book/fahoba/kochwiki/{$card['id']}")->assertNotFound();
     }
 
     public function test_its_photos_are_allowed_by_the_policy(): void
@@ -234,7 +234,7 @@ final class KochwikiTest extends TestCase
         Http::fake(function (Request $request) use ($pages, $images) {
             parse_str((string) parse_url($request->url(), PHP_URL_QUERY), $query);
 
-            $this->assertStringStartsWith('Tagwerk/1.0 (+', $request->header('User-Agent')[0] ?? '');
+            $this->assertStringStartsWith('Fahoba/1.0 (+', $request->header('User-Agent')[0] ?? '');
             $this->assertSame('5', (string) ($query['maxlag'] ?? ''));
 
             if (($query['generator'] ?? null) === 'allpages') {

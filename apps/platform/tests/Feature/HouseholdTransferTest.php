@@ -12,12 +12,12 @@ use App\Models\User;
 use App\Notifications\HouseholdArchiveReady;
 use App\Notifications\HouseholdMovedIn;
 use App\Services\HouseholdArchive;
+use Fahoba\PluginApi\Households\HouseholdImported;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Facades\Storage;
-use Tagwerk\PluginApi\Households\HouseholdImported;
 use Tests\TestCase;
 
 /** Export & move: the family takes its data along or brings it here. */
@@ -37,9 +37,9 @@ final class HouseholdTransferTest extends TestCase
     {
         $parent = User::factory()->create(['household_id' => Household::factory()->create()->id]);
 
-        $this->actingAs($parent)->get('/admin/export')->assertOk()->assertDontSee('Tagwerk Cloud');
+        $this->actingAs($parent)->get('/admin/export')->assertOk()->assertDontSee('Fahoba Cloud');
 
-        config(['tagwerk.hosted_url' => 'https://cloud.example/signup']);
+        config(['fahoba.hosted_url' => 'https://cloud.example/signup']);
         $this->actingAs($parent)->get('/admin/export')->assertOk()->assertSee('https://cloud.example/signup');
     }
 
@@ -62,7 +62,7 @@ final class HouseholdTransferTest extends TestCase
             return true;
         });
 
-        $this->get((string) $url)->assertOk()->assertDownload('tagwerk-household-'.$household->id.'.zip');
+        $this->get((string) $url)->assertOk()->assertDownload('fahoba-household-'.$household->id.'.zip');
         $this->get(preg_replace('/signature=[^&]+/', 'signature=forged', (string) $url))->assertForbidden();
     }
 

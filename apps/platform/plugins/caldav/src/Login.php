@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Tagwerk\CalDav;
+namespace Fahoba\CalDav;
 
-use Tagwerk\PluginApi\Connections\ConnectedAccount;
+use Fahoba\PluginApi\Connections\ConnectedAccount;
 
 /** Address and sign-in of one CalDAV account, from the wizard or the stored connection. */
 final readonly class Login

@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Enums;
 
 /**
- * An area of Tagwerk that a household can switch off.
+ * An area of Fahoba that a household can switch off.
  *
  * Not every family wants everything: whoever does not hand out stars should
  * not have to look past the tile. Switched off also means switched off for

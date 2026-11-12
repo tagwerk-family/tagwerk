@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Tagwerk\PluginApi\Recipes;
+namespace Fahoba\PluginApi\Recipes;
 
 /**
  * A recipe collection the meal plan draws from.
  *
- * Read-only: recipes are maintained where they live. Tagwerk takes over a
+ * Read-only: recipes are maintained where they live. Fahoba takes over a
  * name and an ingredient list, nothing else.
  *
  * IDs are strings, not numbers: Tandoor counts, Mealie and Paprika use slugs.

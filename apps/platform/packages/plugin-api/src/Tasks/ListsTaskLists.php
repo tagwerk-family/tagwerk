@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Tagwerk\PluginApi\Tasks;
+namespace Fahoba\PluginApi\Tasks;
 
-use Tagwerk\PluginApi\Connections\ConnectedAccount;
-use Tagwerk\PluginApi\Lists\RemoteList;
+use Fahoba\PluginApi\Connections\ConnectedAccount;
+use Fahoba\PluginApi\Lists\RemoteList;
 
 /**
  * Capability: the provider keeps several task lists.

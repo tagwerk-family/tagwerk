@@ -190,9 +190,9 @@ test('keeps the selected theme on the device', async ({ page }) => {
 })
 
 /*
- * A design pack (`tagwerk/example-theme`, dev only) chosen on the device:
+ * A design pack (`fahoba/example-theme`, dev only) chosen on the device:
  * its stylesheet arrives from the server and its tokens win over the
- * core's; Tagwerk's own takes them back.
+ * core's; Fahoba's own takes them back.
  */
 test('a device picks a design pack and back', async ({ page }) => {
   await pair(page)
@@ -201,10 +201,10 @@ test('a device picks a design pack and back', async ({ page }) => {
 
   await Promise.all([
     page.waitForResponse(response => response.url().endsWith('/api/theme') && response.request().method() === 'GET'),
-    dialog.locator('[data-cell="design"][data-value="tagwerk/example-theme"]').click(),
+    dialog.locator('[data-cell="design"][data-value="fahoba/example-theme"]').click(),
   ])
 
-  await expect(page.locator('html')).toHaveAttribute('data-design', 'tagwerk/example-theme')
+  await expect(page.locator('html')).toHaveAttribute('data-design', 'fahoba/example-theme')
   await expect.poll(accent).toMatch(/^#(0a6680|7cc6dc)$/)
 
   await Promise.all([
@@ -1898,7 +1898,7 @@ test('takes the parent PIN from the keyboard', async ({ page }) => {
   await expect(pin.getByTestId('pin-ok')).toBeEnabled()
   await page.keyboard.press('Enter')
 
-  await expect(page.getByRole('heading', { name: 'Willkommen bei Tagwerk' })).toBeVisible()
+  await expect(page.getByRole('heading', { name: 'Willkommen bei Fahoba' })).toBeVisible()
 })
 
 /*
@@ -1923,9 +1923,9 @@ test('unpairs the tablet behind the PIN and shows the start page', async ({ page
 
   await pin.getByRole('button', { name: 'OK' }).click()
 
-  await expect(page.getByRole('heading', { name: 'Willkommen bei Tagwerk' })).toBeVisible()
+  await expect(page.getByRole('heading', { name: 'Willkommen bei Fahoba' })).toBeVisible()
 
   // Still the start page after a reload: the cookie is gone, not just hidden.
   await page.reload()
-  await expect(page.getByRole('heading', { name: 'Willkommen bei Tagwerk' })).toBeVisible()
+  await expect(page.getByRole('heading', { name: 'Willkommen bei Fahoba' })).toBeVisible()
 })

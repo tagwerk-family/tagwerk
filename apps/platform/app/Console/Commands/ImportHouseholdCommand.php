@@ -8,13 +8,13 @@ use App\Models\User;
 use App\Services\HouseholdArchive;
 use App\Services\HouseholdExport;
 use App\Services\HouseholdImport;
+use Fahoba\PluginApi\Households\HouseholdImported;
 use Illuminate\Console\Command;
 use Illuminate\Filesystem\Filesystem;
 use RuntimeException;
-use Tagwerk\PluginApi\Households\HouseholdImported;
 
 /**
- * Two imports. Without --new: an export of `tagwerk:export-household` into
+ * Two imports. Without --new: an export of `fahoba:export-household` into
  * an empty database with the same ids — locally only, to look at a
  * family's data. With --new: a household moving in from another server
  * (ZIP from Export & move, or JSON), with new ids, next to the households
@@ -22,7 +22,7 @@ use Tagwerk\PluginApi\Households\HouseholdImported;
  */
 final class ImportHouseholdCommand extends Command
 {
-    protected $signature = 'tagwerk:import-household
+    protected $signature = 'fahoba:import-household
         {file : ZIP from Export & move, or a JSON export (optionally gzipped)}
         {--new : Move in with new ids, next to existing households}
         {--importer= : With --new: address of the account here that becomes its membership}';
@@ -43,7 +43,7 @@ final class ImportHouseholdCommand extends Command
 
         try {
             if (str_ends_with(strtolower($file), '.zip')) {
-                $folder = sys_get_temp_dir().'/tagwerk-import-'.bin2hex(random_bytes(6));
+                $folder = sys_get_temp_dir().'/fahoba-import-'.bin2hex(random_bytes(6));
                 $data = $archive->read($file, $folder);
             } else {
                 $content = (string) file_get_contents($file);

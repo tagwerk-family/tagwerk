@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Tagwerk\PluginApi\Recipes;
+namespace Fahoba\PluginApi\Recipes;
 
 /**
  * A recipe source that knows more than a name and ingredients: steps, time,

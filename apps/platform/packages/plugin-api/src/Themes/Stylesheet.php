@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace Tagwerk\PluginApi\Themes;
+namespace Fahoba\PluginApi\Themes;
 
 /**
  * What a theme's stylesheet may say, and what the server makes of it.
  *
  * Only tokens: rules on `:root[data-design]`, narrowed by the attributes
- * Tagwerk sets on `<html>` (`data-theme`, `data-look`, `data-backdrop`),
+ * Fahoba sets on `<html>` (`data-theme`, `data-look`, `data-backdrop`),
  * that set custom properties from `Tokens`, plus `@font-face` for fonts
  * that lie beside the file. No class, no element, no `@import` — a theme
  * that styled components directly would break with the next release.
@@ -118,7 +118,7 @@ final class Stylesheet
 
                 foreach (array_keys($declarations) as $name) {
                     if (! array_key_exists($name, $tokens)) {
-                        return "{$name} is not one of Tagwerk's design tokens.";
+                        return "{$name} is not one of Fahoba's design tokens.";
                     }
                 }
 

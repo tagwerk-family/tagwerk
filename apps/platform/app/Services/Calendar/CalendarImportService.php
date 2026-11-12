@@ -7,9 +7,9 @@ namespace App\Services\Calendar;
 use App\Integrations\ProviderRegistry;
 use App\Models\ProviderAccount;
 use App\Support\HouseholdContext;
-use Tagwerk\PluginApi\Calendar\ListsCalendars;
-use Tagwerk\PluginApi\Connections\ConnectedAccount;
-use Tagwerk\PluginApi\Connections\FinishesConnection;
+use Fahoba\PluginApi\Calendar\ListsCalendars;
+use Fahoba\PluginApi\Connections\ConnectedAccount;
+use Fahoba\PluginApi\Connections\FinishesConnection;
 
 /**
  * Takes over the calendar list of a connected source.

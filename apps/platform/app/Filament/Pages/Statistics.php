@@ -21,6 +21,7 @@ use App\Services\Statistics\TaskStatistics;
 use App\Support\HouseholdContext;
 use BackedEnum;
 use Carbon\CarbonImmutable;
+use Fahoba\PluginApi\Households\AvailableWhileReadOnly;
 use Filament\Actions\Action;
 use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\Select;
@@ -32,7 +33,6 @@ use Filament\Schemas\Components\Utilities\Get;
 use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
 use Symfony\Component\HttpFoundation\StreamedResponse;
-use Tagwerk\PluginApi\Households\AvailableWhileReadOnly;
 use UnitEnum;
 
 /**
@@ -141,7 +141,7 @@ class Statistics extends Page implements AvailableWhileReadOnly
         $period = StatisticsPeriod::fromFilters($this->filters, CarbonImmutable::now($household->timezone));
         $statistics = app(TaskStatistics::class);
         $names = Person::query()->pluck('name', 'id');
-        $file = 'tagwerk-'.__('statistics').'-'.$period->from->toDateString().'-'.$period->until->toDateString().'.csv';
+        $file = 'fahoba-'.__('statistics').'-'.$period->from->toDateString().'-'.$period->until->toDateString().'.csv';
 
         return response()->streamDownload(function () use ($statistics, $period, $names): void {
             $out = fopen('php://output', 'wb');

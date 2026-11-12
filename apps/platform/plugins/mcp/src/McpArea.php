@@ -2,16 +2,16 @@
 
 declare(strict_types=1);
 
-namespace Tagwerk\Mcp;
+namespace Fahoba\Mcp;
 
 use App\Areas\ApiArea;
-use Tagwerk\PluginApi\Areas\Area;
-use Tagwerk\PluginApi\Areas\OptIn;
-use Tagwerk\PluginApi\Areas\RequiresArea;
+use Fahoba\PluginApi\Areas\Area;
+use Fahoba\PluginApi\Areas\OptIn;
+use Fahoba\PluginApi\Areas\RequiresArea;
 
 final class McpArea implements Area, OptIn, RequiresArea
 {
-    public const KEY = 'tagwerk/mcp';
+    public const KEY = 'fahoba/mcp';
 
     public function label(): string
     {

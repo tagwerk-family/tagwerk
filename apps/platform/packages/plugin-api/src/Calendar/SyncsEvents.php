@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Tagwerk\PluginApi\Calendar;
+namespace Fahoba\PluginApi\Calendar;
 
 /**
  * Capability: fetch changes from the provider.

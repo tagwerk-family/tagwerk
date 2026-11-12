@@ -2,7 +2,7 @@ import { defineConfig, devices } from '@playwright/test'
 import { PHONE_STATE } from './tests/helpers'
 
 /*
- * Tests Tagwerk the way nginx serves it: the built app (wall and phone) under
+ * Tests Fahoba the way nginx serves it: the built app (wall and phone) under
  * /, Laravel under /api and /admin. So run `pnpm build`
  * first — otherwise the run tests the previous build.
  *
@@ -20,7 +20,7 @@ export default defineConfig({
   globalTeardown: './tests/cleanup.ts',
 
   use: {
-    baseURL: 'https://tagwerk.test',
+    baseURL: 'https://fahoba.test',
 
     // DDEV uses a self-signed certificate.
     ignoreHTTPSErrors: true,

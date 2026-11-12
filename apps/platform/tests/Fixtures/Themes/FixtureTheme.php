@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\Fixtures\Themes;
 
-use Tagwerk\PluginApi\Themes\Theme;
+use Fahoba\PluginApi\Themes\Theme;
 
 /** A design whose stylesheet a test writes, in a folder beside a font. */
 final class FixtureTheme implements Theme
@@ -15,7 +15,7 @@ final class FixtureTheme implements Theme
 
     public static function folder(): string
     {
-        $folder = sys_get_temp_dir().'/tagwerk-theme-fixture';
+        $folder = sys_get_temp_dir().'/fahoba-theme-fixture';
 
         if (! is_dir($folder)) {
             mkdir($folder, 0755, true);

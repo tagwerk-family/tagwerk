@@ -58,10 +58,10 @@ test('login carries the logo, fonts and colours of the wall', async ({ page }) =
   await expect(page.locator('img.fi-logo[src$="/logo-light.svg"]')).toBeVisible()
   await expect(page.locator('img.fi-logo[src$="/logo-dark.svg"]')).toBeHidden()
 
-  await expect(page).toHaveTitle(/Tagwerk/)
-  await expect(page.locator('link[rel=icon]')).toHaveAttribute('href', /\/logo\.svg$/)
+  await expect(page).toHaveTitle(/Fahoba/)
+  await expect(page.locator('link[rel=icon]')).toHaveAttribute('href', /\/favicon\.svg$/)
 
-  const icon = await page.request.get('/logo.svg')
+  const icon = await page.request.get('/favicon.svg')
   expect(icon.headers()['content-type']).toContain('image/svg+xml')
 
   const fonts = await loadedFonts(page)
@@ -100,7 +100,7 @@ test('after login the logo and heading follow the wall style', async ({ page }) 
 
   const heading = page.locator('.fi-header-heading')
   await expect(heading).toBeVisible()
-  await expect(page.getByRole('img', { name: 'Logo von Tagwerk' }).first()).toBeVisible()
+  await expect(page.getByRole('img', { name: 'Logo von Fahoba' }).first()).toBeVisible()
 
   const font = await heading.evaluate(element => getComputedStyle(element).fontFamily)
   expect(font).toContain('Plus Jakarta Sans Variable')
@@ -153,7 +153,7 @@ test('toggle switches light and dark and remembers the choice', async ({ page })
 })
 
 /*
- * Plugin keys carry a slash (`tagwerk/bring`), and so do the wizard's field
+ * Plugin keys carry a slash (`fahoba/bring`), and so do the wizard's field
  * paths. Livewire tests do not render the browser side; this does. Sent
  * without a password on purpose: the email must arrive and pass, only the
  * password is missing — and nothing goes out to Bring.

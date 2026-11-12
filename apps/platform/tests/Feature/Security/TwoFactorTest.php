@@ -13,6 +13,7 @@ use App\Models\User;
 use App\Notifications\LoginLink;
 use App\Services\LoginLinks;
 use App\Support\HouseholdContext;
+use Fahoba\TwoFactor\TwoFactorExtension;
 use Filament\Facades\Filament;
 use Illuminate\Auth\GenericUser;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -21,7 +22,6 @@ use Illuminate\Support\Facades\Notification;
 use Illuminate\Testing\TestResponse;
 use Livewire\Livewire;
 use PragmaRX\Google2FA\Google2FA;
-use Tagwerk\TwoFactor\TwoFactorExtension;
 use Tests\TestCase;
 
 /**
@@ -236,16 +236,16 @@ final class TwoFactorTest extends TestCase
         Filament::setCurrentPanel('admin');
 
         Livewire::test(Extensions::class)
-            ->set('data.tagwerk_two_factor.enabled', true)
-            ->set('data.tagwerk_two_factor.settings.required_for', 'operators')
+            ->set('data.fahoba_two_factor.enabled', true)
+            ->set('data.fahoba_two_factor.settings.required_for', 'operators')
             ->call('save')
             ->assertNotified();
         $this->assertFalse(app(InstalledExtensions::class)->enabled(TwoFactorExtension::KEY));
 
         $this->setUpFactor($operator);
         Livewire::test(Extensions::class)
-            ->set('data.tagwerk_two_factor.enabled', true)
-            ->set('data.tagwerk_two_factor.settings.required_for', 'operators')
+            ->set('data.fahoba_two_factor.enabled', true)
+            ->set('data.fahoba_two_factor.settings.required_for', 'operators')
             ->call('save');
 
         $this->assertTrue(app(InstalledExtensions::class)->enabled(TwoFactorExtension::KEY));

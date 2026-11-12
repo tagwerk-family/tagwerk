@@ -11,9 +11,9 @@ use App\Models\Person;
 use App\Models\Photo;
 use App\Models\Recipe;
 use App\Models\User;
+use Fahoba\PluginApi\Households\HouseholdDeleting;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
-use Tagwerk\PluginApi\Households\HouseholdDeleting;
 
 /**
  * Deletes a household with everything it owns: its rows through the foreign

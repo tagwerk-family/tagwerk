@@ -2,15 +2,15 @@
 
 declare(strict_types=1);
 
-namespace Tagwerk\PluginApi\Calendar;
+namespace Fahoba\PluginApi\Calendar;
 
-use Tagwerk\PluginApi\Connections\ConnectedAccount;
+use Fahoba\PluginApi\Connections\ConnectedAccount;
 
 /**
  * Capability: the provider knows which calendars a source contains.
  *
  * With the built-in calendar there is nothing to take over — its calendars
- * are created in Tagwerk itself.
+ * are created in Fahoba itself.
  */
 interface ListsCalendars
 {

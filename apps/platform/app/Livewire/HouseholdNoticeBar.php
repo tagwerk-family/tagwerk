@@ -7,9 +7,9 @@ namespace App\Livewire;
 use App\Models\User;
 use App\Services\HouseholdNotices;
 use App\Support\HouseholdContext;
+use Fahoba\PluginApi\Households\Notice;
 use Illuminate\Contracts\View\View;
 use Livewire\Component;
-use Tagwerk\PluginApi\Households\Notice;
 
 /**
  * The notices of the household in view, the same ones the app shows, plus

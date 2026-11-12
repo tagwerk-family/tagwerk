@@ -1,22 +1,22 @@
 {
-    "name": "tagwerk/social-login",
-    "description": "Sign in with Google and other OAuth providers for existing Tagwerk accounts, switched on by the operator",
+    "name": "fahoba/social-login",
+    "description": "Sign in with Google and other OAuth providers for existing Fahoba accounts, switched on by the operator",
     "type": "library",
     "version": "0.1.0",
     "license": "PolyForm-Shield-1.0.0",
     "require": {
         "php": "^8.5",
         "laravel/socialite": "^5.23",
-        "tagwerk/plugin-api": "^0.1"
+        "fahoba/plugin-api": "^0.1"
     },
     "autoload": {
         "psr-4": {
-            "Tagwerk\\SocialLogin\\": "src/"
+            "Fahoba\\SocialLogin\\": "src/"
         }
     },
     "extra": {
-        "tagwerk": {
-            "provider": "Tagwerk\\SocialLogin\\SocialLoginServiceProvider"
+        "fahoba": {
+            "provider": "Fahoba\\SocialLogin\\SocialLoginServiceProvider"
         }
     }
 }

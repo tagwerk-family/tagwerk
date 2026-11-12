@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace App\Integrations\Geocoding\Nominatim;
 
 use App\Integrations\Geocoding\TimezoneAtLocation;
+use Fahoba\PluginApi\Geocoding\Coordinates;
+use Fahoba\PluginApi\Geocoding\Geocoder;
 use Illuminate\Support\Facades\Http;
-use Tagwerk\PluginApi\Geocoding\Coordinates;
-use Tagwerk\PluginApi\Geocoding\Geocoder;
 
 /**
  * Address search via Nominatim, the search service of OpenStreetMap.
@@ -69,7 +69,7 @@ final class NominatimGeocoder implements Geocoder
     {
         $response = Http::withHeaders([
             // Without a recognisable sender Nominatim rejects the request.
-            'User-Agent' => 'Tagwerk/1.0 (self-hosted family calendar)',
+            'User-Agent' => 'Fahoba/1.0 (self-hosted family calendar)',
         ])
             ->acceptJson()
             /*
@@ -114,7 +114,7 @@ final class NominatimGeocoder implements Geocoder
 
     /**
      * Street and number in the order of German-speaking countries — where
-     * Tagwerk's families live. Elsewhere the number would come first; the
+     * Fahoba's families live. Elsewhere the number would come first; the
      * field stays editable for that.
      *
      * @param  array<string, mixed>  $hit

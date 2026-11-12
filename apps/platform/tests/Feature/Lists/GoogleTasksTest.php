@@ -11,9 +11,9 @@ use App\Models\Household;
 use App\Models\ProviderAccount;
 use App\Services\Lists\ListImportService;
 use App\Support\HouseholdContext;
+use Fahoba\PluginApi\Lists\ListItemDraft;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Http;
-use Tagwerk\PluginApi\Lists\ListItemDraft;
 use Tests\TestCase;
 
 /**
@@ -57,7 +57,7 @@ final class GoogleTasksTest extends TestCase
     {
         $url = app(GoogleTasksListProvider::class)->authorizationUrl(
             'state-123',
-            'https://tagwerk.test/auth/lists/google/callback',
+            'https://fahoba.test/auth/lists/google/callback',
         );
 
         $this->assertStringContainsString('auth%2Ftasks', $url);

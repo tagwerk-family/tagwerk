@@ -204,7 +204,7 @@ final class PhotoManageTest extends TestCase
         // No household context: the run covers every household.
         app(HouseholdContext::class)->setId(null);
 
-        $this->artisan('tagwerk:purge-photo-trash')->assertSuccessful();
+        $this->artisan('fahoba:purge-photo-trash')->assertSuccessful();
 
         $this->assertDatabaseMissing('photos', ['id' => $old->id]);
         $this->assertDatabaseHas('photos', ['id' => $recent->id]);

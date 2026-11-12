@@ -6,6 +6,13 @@ set -eu
 
 cd /var/www/html
 
+# Renamed from Tagwerk: a deploy/.env from before still says TAGWERK_*. Each
+# one stands in for its FAHOBA_* twin unless that is set.
+for name in $(env | sed -n 's/^TAGWERK_\([A-Z0-9_]*\)=.*/\1/p'); do
+  eval "[ -n \"\${FAHOBA_$name+x}\" ] || export FAHOBA_$name=\"\$TAGWERK_$name\""
+  echo "TAGWERK_$name is deprecated, rename it to FAHOBA_$name in deploy/.env." >&2
+done
+
 mkdir -p storage/app/public storage/app/photos storage/framework/cache storage/framework/sessions \
   storage/framework/views storage/logs
 # Only what is not www-data's yet: a recursive chown rewrote every uploaded
@@ -15,7 +22,7 @@ find storage bootstrap/cache ! -user www-data -exec chown www-data:www-data {} +
 # Plugins before migrating: their tables come with them. Only the main
 # container needs them; Reverb only relays what the app announces.
 if [ "${1:-}" = "supervisord" ]; then
-  tagwerk-install-plugins
+  fahoba-install-plugins
 fi
 
 # Migrate before caching: a plugin that reads its new table while booting
@@ -30,10 +37,10 @@ su-exec www-data php artisan optimize
 
 if [ "${1:-}" = "supervisord" ]; then
   # The app's Content Security Policy, plugins' hosts included, for nginx.
-  su-exec www-data php artisan tagwerk:csp > /etc/nginx/csp.conf
+  su-exec www-data php artisan fahoba:csp > /etc/nginx/csp.conf
 
-  # The official app, or the frontend TAGWERK_FRONTEND names.
-  tagwerk-install-frontend
+  # The official app, or the frontend FAHOBA_FRONTEND names.
+  fahoba-install-frontend
 fi
 
 exec "$@"

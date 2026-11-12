@@ -12,11 +12,11 @@ use App\Services\PhotoImage;
 use App\Services\Recipes\RecipeImport;
 use App\Support\HouseholdContext;
 use App\Support\PublicAddressResolver;
+use Fahoba\PluginApi\Recipes\Ingredient;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\ValidationException;
-use Tagwerk\PluginApi\Recipes\Ingredient;
 use Tests\Support\FakeResolver;
 use Tests\TestCase;
 use ZipArchive;
@@ -213,10 +213,10 @@ final class RecipeImportTest extends TestCase
     {
         Recipe::factory()->create(['household_id' => $this->household->id, 'title' => 'Palatschinken']);
         $other = Household::factory()->create();
-        $file = sys_get_temp_dir().'/tagwerk-recipes-test.zip';
+        $file = sys_get_temp_dir().'/fahoba-recipes-test.zip';
 
-        $this->artisan('tagwerk:export-recipes', ['household' => $this->household->id, 'file' => $file])->assertSuccessful();
-        $this->artisan('tagwerk:import-recipes', ['household' => $other->id, 'file' => $file])
+        $this->artisan('fahoba:export-recipes', ['household' => $this->household->id, 'file' => $file])->assertSuccessful();
+        $this->artisan('fahoba:import-recipes', ['household' => $other->id, 'file' => $file])
             ->expectsOutput('Imported 1 recipes, skipped 0.')
             ->assertSuccessful();
 

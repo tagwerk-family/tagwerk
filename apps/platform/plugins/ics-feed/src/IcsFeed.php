@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Tagwerk\IcsFeed;
+namespace Fahoba\IcsFeed;
 
 use App\Models\Concerns\BelongsToHousehold;
 use App\Models\Concerns\HasZonedTimestamps;

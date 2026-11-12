@@ -13,8 +13,8 @@ use App\Models\Person;
 use App\Models\Recipe;
 use App\Models\Task;
 use App\Support\HouseholdContext;
+use Fahoba\PluginApi\Recipes\Ingredient;
 use Illuminate\Database\Seeder;
-use Tagwerk\PluginApi\Recipes\Ingredient;
 
 /**
  * Lists and tasks of the sample household.
@@ -37,7 +37,7 @@ final class HomeSeeder extends Seeder
             'name' => 'Einkauf',
             'kind' => ListKind::Shopping,
             'color' => '#059669',
-            'list_provider' => 'tagwerk/bring',
+            'list_provider' => 'fahoba/bring',
             'position' => 0,
         ]);
 

@@ -27,7 +27,7 @@ use Symfony\Component\HttpFoundation\BinaryFileResponse;
  * Managing the uploaded photos from the phone: a grid, a trash, restore.
  *
  * Deleting only moves a photo into the trash; the wall stops showing it at
- * once, and `tagwerk:purge-photo-trash` removes file and row after
+ * once, and `fahoba:purge-photo-trash` removes file and row after
  * Photo::TRASH_DAYS. Whoever uploaded a photo may delete it, a parent with
  * `household.manage` any of them. Only uploaded photos — folders on the
  * server are managed where they live.

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Tagwerk\PluginApi\Connections;
+namespace Fahoba\PluginApi\Connections;
 
 /**
  * A field a provider needs for setup.

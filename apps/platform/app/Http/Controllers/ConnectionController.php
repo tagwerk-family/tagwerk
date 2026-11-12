@@ -11,11 +11,11 @@ use App\Filament\Resources\Calendars\CalendarResource;
 use App\Integrations\ProviderRegistry;
 use App\Models\ProviderAccount;
 use App\Support\HouseholdContext;
+use Fahoba\PluginApi\Connections\FinishesConnection;
+use Fahoba\PluginApi\Connections\UsesOAuth;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
-use Tagwerk\PluginApi\Connections\FinishesConnection;
-use Tagwerk\PluginApi\Connections\UsesOAuth;
 
 /**
  * Receives authorizations — the same route for every area.

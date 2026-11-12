@@ -70,10 +70,10 @@ final class PhotoSourcesTest extends TestCase
 
     public function test_a_disconnected_source_returns_nothing(): void
     {
-        $root = sys_get_temp_dir().'/tagwerk-sources-'.bin2hex(random_bytes(4));
+        $root = sys_get_temp_dir().'/fahoba-sources-'.bin2hex(random_bytes(4));
         $folder = $root.'/'.$this->household->id;
         mkdir($folder, 0700, true);
-        config(['tagwerk.photo_folders' => $root]);
+        config(['fahoba.photo_folders' => $root]);
 
         $canvas = imagecreatetruecolor(4, 3);
         ob_start();

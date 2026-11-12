@@ -24,7 +24,7 @@ use Illuminate\Console\Command;
  */
 final class SendDailySummaryCommand extends Command
 {
-    protected $signature = 'tagwerk:send-daily-summary';
+    protected $signature = 'fahoba:send-daily-summary';
 
     protected $description = "Sends the evening summary to the adults' phones";
 

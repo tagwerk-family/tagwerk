@@ -8,10 +8,10 @@ use App\Models\Household;
 use App\Models\User;
 use App\Support\HouseholdContext;
 use App\Support\Locale;
+use Fahoba\PluginApi\Plugins\Catalog;
+use Fahoba\PluginApi\Plugins\LoadReport;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Validator;
-use Tagwerk\PluginApi\Plugins\Catalog;
-use Tagwerk\PluginApi\Plugins\LoadReport;
 use Tests\Fixtures\Languages\Italian;
 use Tests\TestCase;
 

@@ -1,10 +1,10 @@
 /**
- * Talking to a Tagwerk server — from a page on the same origin.
+ * Talking to a Fahoba server — from a page on the same origin.
  *
- * The sign-in lives in httpOnly cookies the server sets (`tagwerk_device_token`,
- * `tagwerk_user_token`), so a frontend never sees a token: it sends
+ * The sign-in lives in httpOnly cookies the server sets (`fahoba_device_token`,
+ * `fahoba_user_token`), so a frontend never sees a token: it sends
  * `credentials: 'same-origin'` and the cookie goes along. That is also why a
- * frontend must be served by the Tagwerk server itself — from another origin
+ * frontend must be served by the Fahoba server itself — from another origin
  * the cookie would not travel.
  */
 
@@ -37,15 +37,15 @@ const KINDS: Record<number, ErrorKind> = {
   429: 'throttled',
 }
 
-export class TagwerkError extends Error {
+export class FahobaError extends Error {
   readonly kind: ErrorKind
 
   constructor(
     readonly status: number,
     readonly data: { message?: string, errors?: Record<string, string[]>, [key: string]: unknown } | null,
   ) {
-    super(data?.message ?? `Tagwerk answered ${status}`)
-    this.name = 'TagwerkError'
+    super(data?.message ?? `Fahoba answered ${status}`)
+    this.name = 'FahobaError'
     this.kind = KINDS[status] ?? 'unavailable'
   }
 
@@ -116,7 +116,7 @@ export function createHttp(options: ClientOptions = {}): Http {
       })
     }
     catch {
-      throw new TagwerkError(0, null)
+      throw new FahobaError(0, null)
     }
 
     const text = await response.text()
@@ -132,7 +132,7 @@ export function createHttp(options: ClientOptions = {}): Http {
     }
 
     if (!response.ok) {
-      throw new TagwerkError(response.status, typeof data === 'object' ? data as TagwerkError['data'] : null)
+      throw new FahobaError(response.status, typeof data === 'object' ? data as FahobaError['data'] : null)
     }
 
     return { status: response.status, data: data as T, headers: response.headers }
@@ -146,5 +146,5 @@ export function createHttp(options: ClientOptions = {}): Http {
 
 /** Whether a failed call means the PIN, with or without the client's error class. */
 export function needsPin(error: unknown): boolean {
-  return error instanceof TagwerkError && error.kind === 'pin'
+  return error instanceof FahobaError && error.kind === 'pin'
 }

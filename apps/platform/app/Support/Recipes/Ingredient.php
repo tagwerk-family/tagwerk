@@ -1,7 +1,7 @@
 <?php
 
 declare(strict_types=1);
-use Tagwerk\PluginApi\Recipes\Ingredient;
+use Fahoba\PluginApi\Recipes\Ingredient;
 
 // The class moved to the plugin API. A released migration still imports the
 // old name, and migrations are sealed (MigrationsAppendOnlyTest) — so the old

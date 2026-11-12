@@ -49,7 +49,7 @@ class TasksTable
 
                 /*
                  * Only for imported tasks: for a household without a
-                 * connection, a column full of "Tagwerk" would say nothing.
+                 * connection, a column full of "Fahoba" would say nothing.
                  */
                 TextColumn::make('provider')
                     ->label(__('Source'))

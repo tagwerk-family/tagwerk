@@ -7,7 +7,7 @@ namespace App\Enums;
 use App\Services\Calendar\CalendarImportService;
 use App\Services\Lists\ListImportService;
 use App\Services\Tasks\TaskImportService;
-use Tagwerk\PluginApi\Connections\FinishesConnection;
+use Fahoba\PluginApi\Connections\FinishesConnection;
 
 /**
  * The domain a connection applies to.

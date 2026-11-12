@@ -55,5 +55,5 @@ export function areaFromUrl(search: string): string | null {
 
 /** Where an account remembers its area for the session, per household. */
 export function modeKey(householdId: number | undefined): string {
-  return `tagwerk-tab-${householdId ?? ''}`
+  return `fahoba-tab-${householdId ?? ''}`
 }

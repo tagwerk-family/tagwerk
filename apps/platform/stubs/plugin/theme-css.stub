@@ -1,8 +1,8 @@
 /*
- * {{ title }} — a design for Tagwerk.
+ * {{ title }} — a design for Fahoba.
  *
- * Only Tagwerk's design tokens, listed with the core's values in
- * vendor/tagwerk/plugin-api/resources/reference/design.json. Light on
+ * Only Fahoba's design tokens, listed with the core's values in
+ * vendor/fahoba/plugin-api/resources/reference/design.json. Light on
  * `:root[data-design]`, dark with `[data-theme="dark"]` — both are required,
  * and text must stay readable on its background (WCAG AA) in both.
  *

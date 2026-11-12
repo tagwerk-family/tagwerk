@@ -152,7 +152,7 @@ export function usePush() {
    * is why this is a sheet with a button and not a call on start. Whatever
    * the answer, the sheet does not come back — the settings keep the switch.
    */
-  const ASKED_KEY = 'tagwerk-push-asked'
+  const ASKED_KEY = 'fahoba-push-asked'
 
   function askedBefore(): boolean {
     try {

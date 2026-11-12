@@ -9,18 +9,18 @@ use App\Integrations\ProviderRegistry;
 use App\Jobs\SyncListJob;
 use App\Models\Checklist;
 use App\Models\ProviderAccount;
+use Fahoba\PluginApi\Connections\ConnectedAccount;
+use Fahoba\PluginApi\Connections\FinishesConnection;
+use Fahoba\PluginApi\Lists\ListsTargets;
+use Fahoba\PluginApi\Lists\RemoteList;
+use Fahoba\PluginApi\Lists\SyncsItems;
 use Illuminate\Database\Eloquent\Builder;
-use Tagwerk\PluginApi\Connections\ConnectedAccount;
-use Tagwerk\PluginApi\Connections\FinishesConnection;
-use Tagwerk\PluginApi\Lists\ListsTargets;
-use Tagwerk\PluginApi\Lists\RemoteList;
-use Tagwerk\PluginApi\Lists\SyncsItems;
 
 /**
  * Remembers which lists exist on the connected account.
  *
  * In the connection's settings instead of a table of their own: the names
- * only serve the picker in the form. The list in Tagwerk stays
+ * only serve the picker in the form. The list in Fahoba stays
  * authoritative, and a table for a few names would also have to be
  * maintained.
  *
@@ -59,7 +59,7 @@ final class ListImportService implements FinishesConnection
     }
 
     /**
-     * One Tagwerk list per remote list: one of the same name, for the
+     * One Fahoba list per remote list: one of the same name, for the
      * default list the household's shopping list, otherwise a new one.
      * Lists already paired with this account stay as they are.
      *

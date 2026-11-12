@@ -226,7 +226,7 @@ class TaskForm
                             ->required()
                             ->rule(fn (): Closure => function (string $attribute, mixed $value, Closure $fail): void {
                                 if (! is_string($value) || ! RecurrenceRule::isValid(strtoupper(trim($value)))) {
-                                    $fail(__('Tagwerk does not understand this rule.'));
+                                    $fail(__('Fahoba does not understand this rule.'));
                                 }
                             })
                             ->visible(fn (Get $get): bool => $get('repeat') === 'custom')

@@ -2,17 +2,17 @@
 
 declare(strict_types=1);
 
-namespace Tagwerk\PluginApi\Languages;
+namespace Fahoba\PluginApi\Languages;
 
 /**
  * How far a language pack covers the reference texts.
  *
- * Plain arithmetic on flat key → text maps, shared by Tagwerk (which falls
+ * Plain arithmetic on flat key → text maps, shared by Fahoba (which falls
  * back to English for what is missing or broken) and the testkit (which
- * tells a translator before Tagwerk does).
+ * tells a translator before Fahoba does).
  *
  * A text whose placeholders differ from the reference counts as broken: it
- * would show `{count}` or swallow a name, so Tagwerk shows English instead.
+ * would show `{count}` or swallow a name, so Fahoba shows English instead.
  * Plural forms are not compared — their number differs between languages.
  */
 final class Coverage
@@ -23,14 +23,14 @@ final class Coverage
     /** vue-i18n's `{name}` (wall and phone) */
     public const FRONTEND = 'frontend';
 
-    /** Languages Tagwerk brings itself; a pack never replaces them. */
+    /** Languages Fahoba brings itself; a pack never replaces them. */
     public const BUILT_IN = ['de', 'en'];
 
     private const CODE = '/^[a-z]{2}$/';
 
     private const TAG = '/^[a-z]{2}(-[A-Z][a-z]{3})?(-[A-Z]{2}|-\d{3})?$/';
 
-    /** What makes Tagwerk refuse the pack, or null. */
+    /** What makes Fahoba refuse the pack, or null. */
     public static function problem(LanguagePack $pack): ?string
     {
         $code = $pack->code();

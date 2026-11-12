@@ -2,9 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Tagwerk\WebDavBackup;
+namespace Fahoba\WebDavBackup;
 
 use App\Integrations\Plugins\Extensions;
+use Fahoba\PluginApi\Plugins\Extension;
+use Fahoba\PluginApi\Plugins\ExtensionCategory;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\TimePicker;
 use Filament\Infolists\Components\TextEntry;
@@ -12,8 +14,6 @@ use Filament\Panel;
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Crypt;
-use Tagwerk\PluginApi\Plugins\Extension;
-use Tagwerk\PluginApi\Plugins\ExtensionCategory;
 
 /**
  * The server's database and uploads, every night, into a WebDAV folder.
@@ -24,7 +24,7 @@ use Tagwerk\PluginApi\Plugins\ExtensionCategory;
  */
 final class BackupExtension implements Extension
 {
-    public const KEY = 'tagwerk/webdav-backup';
+    public const KEY = 'fahoba/webdav-backup';
 
     /** What the last run left: `['at' => ISO time, 'ok' => bool, 'message' => string]`. */
     public const LAST_RUN = 'webdav-backup:last-run';
@@ -53,7 +53,7 @@ final class BackupExtension implements Extension
                 ->label(__('WebDAV folder'))
                 ->url()
                 ->required()
-                ->placeholder('https://cloud.example.org/remote.php/dav/files/backup/tagwerk/'),
+                ->placeholder('https://cloud.example.org/remote.php/dav/files/backup/fahoba/'),
             TextInput::make('username')->label(__('User name'))->required(),
             TextInput::make('password')
                 ->label(__('Password'))

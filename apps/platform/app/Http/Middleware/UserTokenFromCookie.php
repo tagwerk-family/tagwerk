@@ -19,7 +19,7 @@ use Symfony\Component\HttpFoundation\Response;
  */
 final class UserTokenFromCookie
 {
-    public const COOKIE = 'tagwerk_user_token';
+    public const COOKIE = 'fahoba_user_token';
 
     public function handle(Request $request, Closure $next): Response
     {

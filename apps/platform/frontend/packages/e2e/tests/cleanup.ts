@@ -12,12 +12,12 @@ export default function cleanUp(): void {
     // Photos uploaded by throwaway accounts, before the accounts go — the trash included.
     // forceDelete takes file and small copy along (Photo::booted).
     + ' App\\Models\\Photo::withoutGlobalScope("household")->withTrashed()'
-    + '->whereIn("user_id", App\\Models\\User::where("email", "like", "e2e-%@tagwerk.test")->pluck("id"))->get()'
+    + '->whereIn("user_id", App\\Models\\User::where("email", "like", "e2e-%@fahoba.test")->pluck("id"))->get()'
     + '->each(function ($foto) { $foto->forceDelete(); });'
     // Photos a wall test put in directly carry "E2E" in the caption.
     + ' App\\Models\\Photo::withoutGlobalScope("household")->withTrashed()->where("caption", "like", "E2E %")->get()'
     + '->each(function ($foto) { $foto->forceDelete(); });'
-    + ' App\\Models\\User::where("email", "like", "e2e-%@tagwerk.test")->get()'
+    + ' App\\Models\\User::where("email", "like", "e2e-%@fahoba.test")->get()'
     + '->each(function ($benutzer) { $benutzer->tokens()->delete(); $benutzer->delete(); });'
 
     // Devices hang off the household scope, which shows nothing in Tinker without a context.

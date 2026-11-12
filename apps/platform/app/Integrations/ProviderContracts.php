@@ -4,15 +4,15 @@ declare(strict_types=1);
 
 namespace App\Integrations;
 
-use Tagwerk\PluginApi\Calendar\CalendarProvider;
-use Tagwerk\PluginApi\Geocoding\Geocoder;
-use Tagwerk\PluginApi\Holidays\HolidaySource;
-use Tagwerk\PluginApi\Lists\ListProvider;
-use Tagwerk\PluginApi\Photos\PhotoSource;
-use Tagwerk\PluginApi\Recipes\RecipeProvider;
-use Tagwerk\PluginApi\SchoolHolidays\SchoolHolidaySource;
-use Tagwerk\PluginApi\Tasks\TaskProvider;
-use Tagwerk\PluginApi\Weather\WeatherSource;
+use Fahoba\PluginApi\Calendar\CalendarProvider;
+use Fahoba\PluginApi\Geocoding\Geocoder;
+use Fahoba\PluginApi\Holidays\HolidaySource;
+use Fahoba\PluginApi\Lists\ListProvider;
+use Fahoba\PluginApi\Photos\PhotoSource;
+use Fahoba\PluginApi\Recipes\RecipeProvider;
+use Fahoba\PluginApi\SchoolHolidays\SchoolHolidaySource;
+use Fahoba\PluginApi\Tasks\TaskProvider;
+use Fahoba\PluginApi\Weather\WeatherSource;
 
 /**
  * Which contract a provider must fulfil per area.

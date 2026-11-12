@@ -5,11 +5,11 @@ declare(strict_types=1);
 namespace App\Support;
 
 use App\Integrations\Plugins\PluginCatalog;
+use Fahoba\PluginApi\Languages\Coverage;
+use Fahoba\PluginApi\Languages\LanguagePack;
+use Fahoba\PluginApi\Plugins\LoadReport;
 use Illuminate\Container\Attributes\Singleton;
 use Illuminate\Contracts\Container\Container;
-use Tagwerk\PluginApi\Languages\Coverage;
-use Tagwerk\PluginApi\Languages\LanguagePack;
-use Tagwerk\PluginApi\Plugins\LoadReport;
 use Throwable;
 
 /**

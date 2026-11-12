@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace Acme\Example;
 
-use Tagwerk\PluginApi\Plugins\Catalog;
-use Tagwerk\PluginApi\Plugins\Plugin;
+use Fahoba\PluginApi\Plugins\Catalog;
+use Fahoba\PluginApi\Plugins\Plugin;
 
 /**
- * Loaded by Tagwerk through `extra.tagwerk.provider` in composer.json. An
+ * Loaded by Fahoba through `extra.fahoba.provider` in composer.json. An
  * exception in here leaves the plugin out; the app keeps running, and
  * Operations → Plugins shows why.
  */

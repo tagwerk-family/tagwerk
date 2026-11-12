@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Tagwerk\PluginApi\Photos;
+namespace Fahoba\PluginApi\Photos;
 
 /**
  * An image as the photo frame needs it.
  *
  * The ID is internal to the source: the row number for uploaded photos, the
  * encoded path within it for a folder. The URL is built not by the source
- * but by the serving route — so it always points at Tagwerk itself and never
+ * but by the serving route — so it always points at Fahoba itself and never
  * outside.
  */
 final readonly class Photo

@@ -4,7 +4,7 @@ import { join, resolve } from 'node:path'
 interface ComposerPackage {
   name: string
   dist?: { type?: string, url?: string }
-  extra?: { tagwerk?: { frontend?: string } }
+  extra?: { fahoba?: { frontend?: string } }
 }
 
 /*
@@ -19,9 +19,9 @@ interface ComposerPackage {
  */
 export function pluginLayers(platformRoot: string): string[] {
   return installedPackages(platformRoot)
-    .filter(entry => entry.dist?.type === 'path' && entry.dist.url !== undefined && entry.extra?.tagwerk?.frontend !== undefined)
+    .filter(entry => entry.dist?.type === 'path' && entry.dist.url !== undefined && entry.extra?.fahoba?.frontend !== undefined)
     .sort((a, b) => a.name.localeCompare(b.name))
-    .map(entry => resolve(platformRoot, entry.dist!.url!, entry.extra!.tagwerk!.frontend!))
+    .map(entry => resolve(platformRoot, entry.dist!.url!, entry.extra!.fahoba!.frontend!))
     .filter(layer => existsSync(join(layer, 'nuxt.config.ts')))
 }
 

@@ -1,15 +1,15 @@
 # AGENTS.md — {{ name }}
 
-A [Tagwerk](https://github.com/tagwerk-family/tagwerk) plugin. Read the guide before
-changing anything: https://github.com/tagwerk-family/tagwerk/blob/master/docs/plugins.md
+A [Fahoba](https://github.com/fahoba/fahoba) plugin. Read the guide before
+changing anything: https://github.com/fahoba/fahoba/blob/master/docs/plugins.md
 
 ## Rules
 
-- Depend on `tagwerk/plugin-api` only. Never use a class under `App\` — it
-  belongs to Tagwerk's core, changes without notice and falls under its
+- Depend on `fahoba/plugin-api` only. Never use a class under `App\` — it
+  belongs to Fahoba's core, changes without notice and falls under its
   licence.
 - The key `{{ name }}` is stored in households' data. Never change it.
-- Constructors do nothing: no database, no network. Tagwerk creates
+- Constructors do nothing: no database, no network. Fahoba creates
   providers and widgets on demand.
 - Widgets return `WidgetContent` (data), never HTML. `content()` must work
   with empty settings: a tile from the picker starts without them.
@@ -30,5 +30,5 @@ composer install
 vendor/bin/phpunit
 ```
 
-`Tagwerk\PluginApi\Testing\PluginAssertions` holds the checks Tagwerk would
+`Fahoba\PluginApi\Testing\PluginAssertions` holds the checks Fahoba would
 otherwise only find on a wall (`assertWidgetWorks`, `assertPluginKey`).

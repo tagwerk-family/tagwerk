@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Tagwerk\WebDavBackup;
+namespace Fahoba\WebDavBackup;
 
 use Carbon\CarbonImmutable;
 use GuzzleHttp\Psr7\Utils;
@@ -23,7 +23,7 @@ use Throwable;
  */
 final class BackupCommand extends Command
 {
-    protected $signature = 'tagwerk:webdav-backup {--now : Run regardless of time and today\'s run}';
+    protected $signature = 'fahoba:webdav-backup {--now : Run regardless of time and today\'s run}';
 
     protected $description = 'Back up database and uploads to the WebDAV folder set under Operations → Extensions';
 

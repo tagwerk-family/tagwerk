@@ -1,21 +1,21 @@
 {
-    "name": "tagwerk/example-area",
+    "name": "fahoba/example-area",
     "description": "A household area from a plugin, with menu entry, view, route and translations — template and test bed",
     "type": "library",
     "version": "0.1.0",
     "license": "MIT",
     "require": {
         "php": "^8.5",
-        "tagwerk/plugin-api": "^0.1"
+        "fahoba/plugin-api": "^0.1"
     },
     "autoload": {
         "psr-4": {
-            "Tagwerk\\ExampleArea\\": "src/"
+            "Fahoba\\ExampleArea\\": "src/"
         }
     },
     "extra": {
-        "tagwerk": {
-            "provider": "Tagwerk\\ExampleArea\\ExampleAreaServiceProvider",
+        "fahoba": {
+            "provider": "Fahoba\\ExampleArea\\ExampleAreaServiceProvider",
             "frontend": "frontend"
         }
     }

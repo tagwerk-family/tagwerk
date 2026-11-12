@@ -10,8 +10,8 @@ use App\Models\Household;
 use App\Models\ProviderAccount;
 use App\Support\HouseholdContext;
 use Carbon\CarbonImmutable;
+use Fahoba\PluginApi\Connections\ConnectedAccount;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Tagwerk\PluginApi\Connections\ConnectedAccount;
 use Tests\TestCase;
 
 final class ConnectedAccountTest extends TestCase

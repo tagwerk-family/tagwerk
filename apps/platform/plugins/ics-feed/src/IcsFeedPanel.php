@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Tagwerk\IcsFeed;
+namespace Fahoba\IcsFeed;
 
+use Fahoba\IcsFeed\Filament\IcsFeedResource;
+use Fahoba\PluginApi\Plugins\ConfiguresPanel;
 use Filament\Panel;
-use Tagwerk\IcsFeed\Filament\IcsFeedResource;
-use Tagwerk\PluginApi\Plugins\ConfiguresPanel;
 
 final class IcsFeedPanel implements ConfiguresPanel
 {

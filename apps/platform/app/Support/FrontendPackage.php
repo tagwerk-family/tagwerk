@@ -9,8 +9,8 @@ use OutOfBoundsException;
 
 /**
  * A frontend in place of the official app: a Composer package whose
- * `extra.tagwerk.app` names a directory of built files with an
- * `index.html` (`TAGWERK_FRONTEND`, `tagwerk:frontend`).
+ * `extra.fahoba.app` names a directory of built files with an
+ * `index.html` (`FAHOBA_FRONTEND`, `fahoba:frontend`).
  *
  * Checked before nginx serves it, and refused rather than half served:
  * the app's Content Security Policy allows scripts from this origin only,
@@ -40,10 +40,10 @@ final class FrontendPackage
         $composer = $package === false || ! is_file("{$package}/composer.json")
             ? null
             : json_decode((string) file_get_contents("{$package}/composer.json"), true);
-        $app = is_array($composer) ? ($composer['extra']['tagwerk']['app'] ?? null) : null;
+        $app = is_array($composer) ? ($composer['extra']['fahoba']['app'] ?? null) : null;
 
         if (! is_string($app) || $app === '') {
-            return "{$name} names no built app (extra.tagwerk.app in composer.json).";
+            return "{$name} names no built app (extra.fahoba.app in composer.json).";
         }
 
         $directory = realpath("{$package}/{$app}");

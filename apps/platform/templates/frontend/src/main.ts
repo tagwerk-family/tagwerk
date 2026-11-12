@@ -1,4 +1,4 @@
-import { createClient, TagwerkError, type Agenda } from '@tagwerk/client'
+import { createClient, FahobaError, type Agenda } from '@fahoba/client'
 import './style.css'
 
 /*
@@ -7,7 +7,7 @@ import './style.css'
  * the pattern: the server decides, the screen shows, realtime says when to
  * load again.
  */
-const tagwerk = createClient()
+const fahoba = createClient()
 const app = document.querySelector<HTMLElement>('#app')!
 
 function element<K extends keyof HTMLElementTagNameMap>(tag: K, text?: string, attributes: Record<string, string> = {}): HTMLElementTagNameMap[K] {
@@ -39,10 +39,10 @@ function addDays(date: string, days: number): string {
 
 async function start(): Promise<void> {
   try {
-    await tagwerk.session()
+    await fahoba.session()
   }
   catch (error) {
-    if (error instanceof TagwerkError && error.kind === 'unauthenticated') {
+    if (error instanceof FahobaError && error.kind === 'unauthenticated') {
       showEntry()
 
       return
@@ -52,16 +52,16 @@ async function start(): Promise<void> {
   }
 
   // The household's zone comes with the agenda; a first call for today in UTC finds it.
-  const first = await tagwerk.agenda(today('UTC'), today('UTC'))
+  const first = await fahoba.agenda(today('UTC'), today('UTC'))
   const zone = first.household.timezone
   const load = async (): Promise<void> => {
     const from = today(zone)
 
-    showAgenda(await tagwerk.agenda(from, addDays(from, 6)))
+    showAgenda(await fahoba.agenda(from, addDays(from, 6)))
   }
 
   await load()
-  await tagwerk.realtime(() => load())
+  await fahoba.realtime(() => load())
 }
 
 function showEntry(): void {
@@ -77,14 +77,14 @@ function showEntry(): void {
 
   pairing.addEventListener('submit', async (event) => {
     event.preventDefault()
-    await tagwerk.pair(code.value).then(start, (error: TagwerkError) => { message.textContent = error.firstMessage ?? 'Pairing failed.' })
+    await fahoba.pair(code.value).then(start, (error: FahobaError) => { message.textContent = error.firstMessage ?? 'Pairing failed.' })
   })
 
   signIn.addEventListener('submit', async (event) => {
     event.preventDefault()
-    const answer = await tagwerk.login(email.value, password.value).catch((error: TagwerkError) => error)
+    const answer = await fahoba.login(email.value, password.value).catch((error: FahobaError) => error)
 
-    if (answer instanceof TagwerkError) {
+    if (answer instanceof FahobaError) {
       message.textContent = answer.firstMessage ?? 'Sign-in failed.'
     }
     else if ('two_factor' in answer) {
@@ -95,7 +95,7 @@ function showEntry(): void {
     }
   })
 
-  app.replaceChildren(element('h1', 'Tagwerk'), pairing, signIn, message)
+  app.replaceChildren(element('h1', 'Fahoba'), pairing, signIn, message)
 }
 
 function showAgenda(agenda: Agenda): void {
@@ -136,5 +136,5 @@ function showAgenda(agenda: Agenda): void {
 }
 
 start().catch((error: unknown) => {
-  app.replaceChildren(element('p', `Tagwerk is not reachable: ${String(error)}`, { class: 'error' }))
+  app.replaceChildren(element('p', `Fahoba is not reachable: ${String(error)}`, { class: 'error' }))
 })

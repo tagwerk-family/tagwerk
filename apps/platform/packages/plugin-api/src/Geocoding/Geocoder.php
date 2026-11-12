@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Tagwerk\PluginApi\Geocoding;
+namespace Fahoba\PluginApi\Geocoding;
 
 /**
  * Turns an address into coordinates.

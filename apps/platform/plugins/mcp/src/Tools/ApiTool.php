@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Tagwerk\Mcp\Tools;
+namespace Fahoba\Mcp\Tools;
 
 use App\Auth\ApiTokens;
+use Fahoba\Mcp\Api;
 use Illuminate\Http\Request as HttpRequest;
 use Illuminate\Support\Arr;
 use Laravel\Mcp\Response;
 use Laravel\Mcp\Server\Tool;
-use Tagwerk\Mcp\Api;
 
 /** A tool that is one call of the app's API, answered in the assistant's terms. */
 abstract class ApiTool extends Tool

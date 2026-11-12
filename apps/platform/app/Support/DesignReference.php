@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace App\Support;
 
 /**
- * The design tokens a theme may set, read from the shared `tagwerk.css`,
- * as the file `tagwerk/plugin-api` ships (`Tokens`).
+ * The design tokens a theme may set, read from the shared `fahoba.css`,
+ * as the file `fahoba/plugin-api` ships (`Tokens`).
  *
  * Every custom property of the `:root` rules counts, the glass look's
  * included; the values come from the plain light and dark rules, so a
@@ -17,7 +17,7 @@ final class DesignReference
 {
     public static function source(): string
     {
-        return base_path('frontend/packages/shared/app/assets/css/tagwerk.css');
+        return base_path('frontend/packages/shared/app/assets/css/fahoba.css');
     }
 
     public static function build(): string

@@ -1,21 +1,21 @@
 {
-    "name": "tagwerk/example-language",
+    "name": "fahoba/example-language",
     "description": "A language pack, deliberately incomplete: French for the first screens, English for the rest — template and test bed",
     "type": "library",
     "version": "0.1.0",
     "license": "MIT",
     "require": {
         "php": "^8.5",
-        "tagwerk/plugin-api": "^0.1"
+        "fahoba/plugin-api": "^0.1"
     },
     "autoload": {
         "psr-4": {
-            "Tagwerk\\ExampleLanguage\\": "src/"
+            "Fahoba\\ExampleLanguage\\": "src/"
         }
     },
     "extra": {
-        "tagwerk": {
-            "provider": "Tagwerk\\ExampleLanguage\\ExampleLanguagePlugin",
+        "fahoba": {
+            "provider": "Fahoba\\ExampleLanguage\\ExampleLanguagePlugin",
             "language": {
                 "complete-for": "never — an example"
             }

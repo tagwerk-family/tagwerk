@@ -26,11 +26,11 @@ final class PasswordChanged extends Notification implements ShouldQueue
     public function toMail(User $user): MailMessage
     {
         return (new MailMessage)
-            ->subject(__('Your Tagwerk password was changed'))
+            ->subject(__('Your Fahoba password was changed'))
             ->greeting(__('Hello :name,', ['name' => $user->name]))
-            ->line(__('the password of your Tagwerk account was just changed. Every phone with this account is signed out and needs the new password.'))
+            ->line(__('the password of your Fahoba account was just changed. Every phone with this account is signed out and needs the new password.'))
             ->line(__('Was that not you? Then reset your password right away via “Forgot password?” and let your family know.'))
-            ->action(__('Open Tagwerk'), url('/'))
-            ->salutation(__('Your Tagwerk'));
+            ->action(__('Open Fahoba'), url('/'))
+            ->salutation(__('Your Fahoba'));
     }
 }

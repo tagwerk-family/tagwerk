@@ -2,15 +2,15 @@
 
 declare(strict_types=1);
 
-namespace Tagwerk\ExampleArea;
+namespace Fahoba\ExampleArea;
 
+use Fahoba\PluginApi\Dashboard\DataWidget;
+use Fahoba\PluginApi\Dashboard\HandlesActions;
+use Fahoba\PluginApi\Dashboard\HasSettings;
+use Fahoba\PluginApi\Dashboard\SettingField;
+use Fahoba\PluginApi\Dashboard\WidgetContent;
+use Fahoba\PluginApi\Dashboard\WidgetContext;
 use Illuminate\Support\Facades\Cache;
-use Tagwerk\PluginApi\Dashboard\DataWidget;
-use Tagwerk\PluginApi\Dashboard\HandlesActions;
-use Tagwerk\PluginApi\Dashboard\HasSettings;
-use Tagwerk\PluginApi\Dashboard\SettingField;
-use Tagwerk\PluginApi\Dashboard\WidgetContent;
-use Tagwerk\PluginApi\Dashboard\WidgetContext;
 
 /**
  * A dashboard tile with settings and buttons: counts up per household.
@@ -18,7 +18,7 @@ use Tagwerk\PluginApi\Dashboard\WidgetContext;
  */
 final class ExampleCounter implements DataWidget, HandlesActions, HasSettings
 {
-    public const KEY = 'tagwerk/example-counter';
+    public const KEY = 'fahoba/example-counter';
 
     public function label(): string
     {

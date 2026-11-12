@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Tagwerk\TwoFactor;
+namespace Fahoba\TwoFactor;
 
 use Filament\Auth\MultiFactor\App\AppAuthentication;
 use Illuminate\Contracts\Auth\Authenticatable;

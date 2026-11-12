@@ -7,7 +7,7 @@ namespace Tests\Unit;
 use App\Support\LocalDates;
 use App\Support\Locale;
 use Carbon\CarbonImmutable;
-use Tagwerk\PluginApi\Plugins\Catalog;
+use Fahoba\PluginApi\Plugins\Catalog;
 use Tests\Fixtures\Languages\Italian;
 use Tests\TestCase;
 

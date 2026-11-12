@@ -6,9 +6,9 @@ namespace App\Services;
 
 use App\Dashboard\WidgetRegistry;
 use App\Integrations\Plugins\PluginCatalog;
+use Fahoba\PluginApi\Plugins\MovesSecrets;
 use Illuminate\Contracts\Encryption\DecryptException;
 use Illuminate\Support\Facades\Crypt;
-use Tagwerk\PluginApi\Plugins\MovesSecrets;
 
 /**
  * Secrets are encrypted with this server's APP_KEY and unreadable anywhere
@@ -24,7 +24,10 @@ use Tagwerk\PluginApi\Plugins\MovesSecrets;
  */
 final readonly class ExportSecrets
 {
-    public const MARK = 'tagwerk_plain_secret';
+    public const MARK = 'fahoba_plain_secret';
+
+    /** The mark of an export written before the rename to Fahoba. */
+    private const LEGACY_MARK = 'tagwerk_plain_secret';
 
     /** Encrypted columns (Laravel's `encrypted`, `encrypted:array`) that may move. */
     private const COLUMNS = [
@@ -110,8 +113,8 @@ final readonly class ExportSecrets
     public static function seal(string $table, array $row): array
     {
         foreach ($row as $column => $value) {
-            if (self::marked($value)) {
-                $row[$column] = Crypt::encryptString($value[self::MARK]);
+            if (($plain = self::marked($value)) !== null) {
+                $row[$column] = Crypt::encryptString($plain);
             }
         }
 
@@ -120,8 +123,8 @@ final readonly class ExportSecrets
 
             if (is_array($settings)) {
                 foreach ($settings as $key => $value) {
-                    if (self::marked($value)) {
-                        $settings[$key] = Crypt::encryptString($value[self::MARK]);
+                    if (($plain = self::marked($value)) !== null) {
+                        $settings[$key] = Crypt::encryptString($plain);
                     }
                 }
 
@@ -132,7 +135,7 @@ final readonly class ExportSecrets
         return $row;
     }
 
-    /** @return array{tagwerk_plain_secret: string}|null null when unreadable here too — the form asks again there */
+    /** @return array{fahoba_plain_secret: string}|null null when unreadable here too — the form asks again there */
     private function plain(string $encrypted): ?array
     {
         try {
@@ -142,8 +145,15 @@ final readonly class ExportSecrets
         }
     }
 
-    private static function marked(mixed $value): bool
+    /** The plain secret of a marked value, null for anything else. */
+    private static function marked(mixed $value): ?string
     {
-        return is_array($value) && array_keys($value) === [self::MARK] && is_string($value[self::MARK]);
+        foreach ([self::MARK, self::LEGACY_MARK] as $mark) {
+            if (is_array($value) && array_keys($value) === [$mark] && is_string($value[$mark])) {
+                return $value[$mark];
+            }
+        }
+
+        return null;
     }
 }

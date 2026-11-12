@@ -5,12 +5,12 @@ declare(strict_types=1);
 namespace App\Integrations\Plugins;
 
 use App\Support\OutboundHttp;
+use Fahoba\PluginApi\Http\Outbound;
 use Illuminate\Http\Client\ConnectionException;
 use Illuminate\Http\Client\PendingRequest;
 use Illuminate\Http\Client\RequestException;
 use Illuminate\Http\Client\Response;
 use Illuminate\Support\Facades\Http;
-use Tagwerk\PluginApi\Http\Outbound;
 use Throwable;
 
 /** The core's side of the plugins' HTTP helper. */
@@ -43,6 +43,6 @@ final class CoreOutbound implements Outbound
 
     private function userAgent(): string
     {
-        return 'Tagwerk/'.config('app.version').' (+'.config('app.url').')';
+        return 'Fahoba/'.config('app.version').' (+'.config('app.url').')';
     }
 }

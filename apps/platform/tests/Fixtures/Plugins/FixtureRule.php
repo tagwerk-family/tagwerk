@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Tests\Fixtures\Plugins;
 
 use Carbon\CarbonImmutable;
-use Tagwerk\PluginApi\Photos\PhotoRule;
+use Fahoba\PluginApi\Photos\PhotoRule;
 
 final class FixtureRule implements PhotoRule
 {

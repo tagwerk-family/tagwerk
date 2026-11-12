@@ -7,7 +7,7 @@ namespace App\Exceptions;
 use RuntimeException;
 
 /**
- * The database names a provider that config/tagwerk.php does not know.
+ * The database names a provider that config/fahoba.php does not know.
  *
  * Happens when a provider was removed while its sources still exist.
  * Deliberately loud: silently falling back to another provider would write

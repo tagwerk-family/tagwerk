@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Tagwerk\PluginApi\Plugins;
+namespace Fahoba\PluginApi\Plugins;
 
 use Closure;
 use Illuminate\Container\Attributes\Singleton;
@@ -13,7 +13,7 @@ use Illuminate\Container\Attributes\Singleton;
  *     $catalog->offer('widgets', 'acme/waste', WasteWidget::class);
  *
  * Offering only records the class — nothing is built until someone needs
- * it, and Tagwerk checks the offers itself. An invalid one does not stop the
+ * it, and Fahoba checks the offers itself. An invalid one does not stop the
  * app: the offering package is left out and the log says why.
  *
  * A singleton by attribute, not by a binding in a service provider: plugins

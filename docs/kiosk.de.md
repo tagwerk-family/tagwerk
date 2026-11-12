@@ -10,7 +10,7 @@ Diese Anleitung beschreibt beides: das Koppeln und den Dauerbetrieb im Kiosk.
 
 ---
 
-## 1. Gerät in Tagwerk anlegen
+## 1. Gerät in Fahoba anlegen
 
 1. Verwaltung öffnen (`/admin`), **Geräte → Erstellen**
 2. **Bezeichnung** eintragen — wo es hängt, etwa „Küche" oder „Flur"
@@ -32,8 +32,8 @@ Bezeichnung bleibt dabei erhalten.
 
 ## 3. Am Tablet koppeln
 
-Im Browser des Tabletts die Tagwerk-Adresse öffnen. Es erscheint
-**„Willkommen bei Tagwerk"** mit drei Wegen; **„Wandtablet einrichten"** wählen,
+Im Browser des Tabletts die Fahoba-Adresse öffnen. Es erscheint
+**„Willkommen bei Fahoba"** mit drei Wegen; **„Wandtablet einrichten"** wählen,
 Code eingeben, **Verbinden**. Wer den QR-Code scannt, überspringt die Auswahl.
 
 Danach steht der Kalender. Das Token liegt in einem httpOnly-Cookie — es ist für
@@ -58,7 +58,7 @@ Gruppierung ist seit Jahren stabil. Kostenpflichtige Punkte sind vermerkt.
 
 | Einstellung | Wert | Warum |
 |---|---|---|
-| Start URL | die Tagwerk-Adresse | |
+| Start URL | die Fahoba-Adresse | |
 | Enable JavaScript | an | |
 | Enable Cookies | **an** | Ohne Cookies kein Gerätetoken |
 | Enable DOM Storage | an | |
@@ -99,7 +99,7 @@ einzige Weg zurück in die Einstellungen.
 Das Tablet hängt dauerhaft am Netz. Der Bildschirm soll nachts dunkel sein, aber
 das Gerät nicht schlafen.
 
-Tagwerk hat einen eigenen **Ruhemodus** (siehe Abschnitt 5). Mit ihm läuft
+Fahoba hat einen eigenen **Ruhemodus** (siehe Abschnitt 5). Mit ihm läuft
 tagsüber das Karussell, und Fully schaltet nur nachts ab: Screensaver-Timer
 lang oder aus, *Time to Turn Screen Off* für die Nacht. Ein kurzer
 Fully-Screensaver legte sich sonst über das Karussell.
@@ -107,7 +107,7 @@ Fully-Screensaver legte sich sonst über das Karussell.
 | Einstellung | Wert |
 |---|---|
 | Screen Off Timer | 0 (nie über die Zeit abschalten) |
-| Screensaver Timer | z. B. 1800 Sekunden — oder 0, wenn der Ruhemodus von Tagwerk läuft |
+| Screensaver Timer | z. B. 1800 Sekunden — oder 0, wenn der Ruhemodus von Fahoba läuft |
 | Screensaver Brightness | niedrig, etwa 0–10 |
 | Screensaver Wallpaper URL | leer (schwarz) |
 | Time to Turn Screen Off | z. B. 22:00–06:00 |
@@ -128,7 +128,7 @@ Berührung das Gerät.
 
 ---
 
-## 5. Was Tagwerk selbst übernimmt
+## 5. Was Fahoba selbst übernimmt
 
 Sechs Dinge, die man bei Kiosk-Aufbauten sonst über Fully löst und hier **nicht**
 einstellen muss:
@@ -141,7 +141,7 @@ einstellen muss:
   füllen dort den ganzen Bildschirm, mit der Uhrzeit in der Ecke und einer
   unscharfen Kopie des Bildes statt schwarzer Balken. Eine schwarze Schicht
   dunkelt zusätzlich ab (über Fotos nur leicht); ist in Fully *Enable JavaScript
-  Interface* an, senkt Tagwerk auch die echte Helligkeit um denselben Anteil und
+  Interface* an, senkt Fahoba auch die echte Helligkeit um denselben Anteil und
   stellt sie beim Aufwachen wieder her. Wie dunkel, regeln zwei Schieberegler
   in 5-%-Schritten, 0–90 %: „Abdunkeln am Tag“ (Vorgabe 50 %) und „Abdunkeln
   in der Nacht“ (Vorgabe 70 %), der gilt, solange der Haushalt das dunkle
@@ -181,7 +181,7 @@ einstellen muss:
 
 ## 6. Wenn etwas klemmt
 
-**Nach einem Neustart steht wieder „Willkommen bei Tagwerk".**
+**Nach einem Neustart steht wieder „Willkommen bei Fahoba".**
 Fully löscht die Cookies. *Clear Cookies on Restart* aus, danach neu koppeln.
 
 **Die Seite bleibt weiß.**

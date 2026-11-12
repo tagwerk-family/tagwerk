@@ -11,7 +11,7 @@
  * caches are not worth a dependency with a wrong version range.
  */
 
-const CACHE = 'tagwerk-wall-v1'
+const CACHE = 'fahoba-wall-v1'
 const AGENDA = '/api/wall/agenda'
 
 self.addEventListener('install', (event) => {
@@ -86,7 +86,7 @@ async function agenda(request) {
     }
 
     const headers = new Headers(stale.headers)
-    headers.set('X-Tagwerk-Cache', 'hit')
+    headers.set('X-Fahoba-Cache', 'hit')
 
     return new Response(await stale.blob(), { status: 200, headers })
   }
@@ -121,7 +121,7 @@ self.addEventListener('push', (event) => {
    * notifications without content, and a silent push counts as abuse in
    * Chrome and costs the permission.
    */
-  let data = { title: 'Tagwerk', body: 'Es gibt Neuigkeiten.' }
+  let data = { title: 'Fahoba', body: 'Es gibt Neuigkeiten.' }
 
   if (event.data) {
     try {
@@ -150,7 +150,7 @@ self.addEventListener('push', (event) => {
        * it: five times "Einkaufsliste geändert" is no information. Per
        * household, so one family's news does not hide the other's.
        */
-      tag: (data.tag || 'tagwerk') + (data.household_id ? `-${data.household_id}` : ''),
+      tag: (data.tag || 'fahoba') + (data.household_id ? `-${data.household_id}` : ''),
     }),
   )
 })

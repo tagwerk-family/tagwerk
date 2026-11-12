@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Services\Photos;
 
 use Carbon\CarbonImmutable;
-use Tagwerk\PluginApi\Photos\Photo;
+use Fahoba\PluginApi\Photos\Photo;
 
 /**
  * Stories made from the pictures' dates, like the Photos apps' memories.

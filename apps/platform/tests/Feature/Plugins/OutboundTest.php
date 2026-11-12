@@ -5,23 +5,23 @@ declare(strict_types=1);
 namespace Tests\Feature\Plugins;
 
 use App\Support\PublicAddressResolver;
+use Fahoba\PluginApi\Http\Outbound;
 use Illuminate\Http\Client\Request;
 use Illuminate\Support\Facades\Http;
-use Tagwerk\PluginApi\Http\Outbound;
 use Tests\Support\FakeResolver;
 use Tests\TestCase;
 
 /** Outbound calls a plugin makes: limits, a polite name, retries, no private addresses. */
 final class OutboundTest extends TestCase
 {
-    public function test_the_server_client_names_tagwerk(): void
+    public function test_the_server_client_names_fahoba(): void
     {
-        config(['app.version' => '1.2.3', 'app.url' => 'https://tagwerk.example']);
+        config(['app.version' => '1.2.3', 'app.url' => 'https://fahoba.example']);
         Http::fake(['*' => Http::response('ok')]);
 
         app(Outbound::class)->server()->get('https://api.example.org/x');
 
-        Http::assertSent(fn (Request $request): bool => $request->header('User-Agent')[0] === 'Tagwerk/1.2.3 (+https://tagwerk.example)');
+        Http::assertSent(fn (Request $request): bool => $request->header('User-Agent')[0] === 'Fahoba/1.2.3 (+https://fahoba.example)');
     }
 
     public function test_a_busy_service_is_asked_again(): void
@@ -64,6 +64,6 @@ final class OutboundTest extends TestCase
         $this->assertNull(app(Outbound::class)->householdGet('http://intern.example/'));
         $this->assertNull(app(Outbound::class)->householdSend('POST', 'http://127.0.0.1/'));
         $this->assertSame('ok', app(Outbound::class)->householdGet('https://public.example/')?->body());
-        Http::assertSent(fn (Request $request): bool => str_starts_with($request->header('User-Agent')[0], 'Tagwerk/'));
+        Http::assertSent(fn (Request $request): bool => str_starts_with($request->header('User-Agent')[0], 'Fahoba/'));
     }
 }

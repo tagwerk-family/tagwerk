@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Support;
 
 use App\Models\Household;
-use Tagwerk\PluginApi\Households\CurrentHousehold;
+use Fahoba\PluginApi\Households\CurrentHousehold;
 
 /**
  * Holds the active household for the duration of a request or job.

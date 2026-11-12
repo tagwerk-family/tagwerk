@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Tagwerk\CalDav;
+namespace Fahoba\CalDav;
 
 use RuntimeException;
 

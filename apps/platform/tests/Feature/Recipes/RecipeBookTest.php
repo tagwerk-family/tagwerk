@@ -9,11 +9,11 @@ use App\Models\Person;
 use App\Models\Recipe;
 use App\Models\User;
 use App\Support\HouseholdContext;
+use Fahoba\PluginApi\Recipes\Ingredient;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
-use Tagwerk\PluginApi\Recipes\Ingredient;
 use Tests\TestCase;
 
 /**

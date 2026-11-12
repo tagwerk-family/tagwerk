@@ -9,9 +9,9 @@ use App\Integrations\ProviderRegistry;
 use App\Jobs\SyncCalendarJob;
 use App\Models\Calendar;
 use App\Models\Household;
+use Fahoba\PluginApi\Calendar\SyncsEvents;
 use Illuminate\Console\Command;
 use Illuminate\Contracts\Database\Eloquent\Builder;
-use Tagwerk\PluginApi\Calendar\SyncsEvents;
 
 /**
  * Fallback poll for all calendars.
@@ -21,7 +21,7 @@ use Tagwerk\PluginApi\Calendar\SyncsEvents;
  */
 final class SyncCalendarsCommand extends Command
 {
-    protected $signature = 'tagwerk:sync-calendars';
+    protected $signature = 'fahoba:sync-calendars';
 
     protected $description = 'Queues a sync for every active calendar';
 

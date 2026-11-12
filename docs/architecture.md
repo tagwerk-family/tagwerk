@@ -1,12 +1,12 @@
 # Architecture
 
-Why Tagwerk is shaped the way it is. This is the overview with the reasons;
+Why Fahoba is shaped the way it is. This is the overview with the reasons;
 the detailed rulebook (pitfalls, exact names, test hints) is
 [`AGENTS.md`](../AGENTS.md). Plugin authoring has its own guide:
 [`docs/plugins.md`](plugins.md). Where this page and the code disagree, the
 code wins.
 
-Tagwerk is a self-hosted family calendar and household organiser for a
+Fahoba is a self-hosted family calendar and household organiser for a
 wall-mounted Android tablet, with phones as second screens. It belongs to the
 category of commercial wall calendars, but runs on your own server, talks to
 the services a family already uses and does not need a cloud account.
@@ -68,7 +68,7 @@ reduce to one of them.
   covered calendar sync, routines, a stars ledger, meals and a kiosk UI
   together. A third-party component is worth it only when what it stores is
   hard to build. The calendar sync, the task logic, the stars and the wall UI
-  are Tagwerk's own; Google, Bring, Tandoor and similar services sit behind
+  are Fahoba's own; Google, Bring, Tandoor and similar services sit behind
   providers.
 - **Every external service is a provider.** Domain logic never names Google
   or Bring. It asks a registry and checks capabilities. Every area works
@@ -79,7 +79,7 @@ reduce to one of them.
   promise does not depend on the queue driver), an empty setup shows a
   sentence instead of a stack trace, and no font, script or image is loaded
   from a foreign server at runtime.
-- **Tagwerk stays authoritative.** Outward integrations push or mirror; the
+- **Fahoba stays authoritative.** Outward integrations push or mirror; the
   household's own data remains the source of truth, so a provider outage or
   protocol change never takes the family's list or calendar with it.
 - **Derived, not stored.** Task occurrences, whose turn it is, lessons on a
@@ -296,7 +296,7 @@ Depth: [AGENTS.md, Providers](../AGENTS.md#providers).
 
 - **An *area* is a kind of thing a family does** (calendar, lists, tasks,
   recipes, photos, holidays, geocoding, …). A *provider* is one way to serve
-  it. Integration code lives under `app/Integrations`; what Tagwerk computes
+  it. Integration code lives under `app/Integrations`; what Fahoba computes
   itself lives in `app/Services`.
 - **Capabilities instead of one big contract.** The base contract is tiny
   (key, label). Everything else is an optional capability a provider brings:
@@ -335,7 +335,7 @@ Depth: [AGENTS.md, Providers](../AGENTS.md#providers).
 ## Calendar sync
 
 - **Google is one provider among several**, not the system. The built-in
-  calendar lives entirely in Tagwerk, so an installation with no connection is
+  calendar lives entirely in Fahoba, so an installation with no connection is
   fully usable.
 - **Pipeline:** change notification (an empty trigger) → queued job →
   incremental fetch with a sync cursor → upsert with `origin = remote` →
@@ -352,7 +352,7 @@ Depth: [AGENTS.md, Providers](../AGENTS.md#providers).
     becomes a visible "authorization lost" state.
 - **Who an event belongs to is resolved in steps:** explicit people on the
   event, else the people of its calendar (a calendar can belong to several),
-  else nobody (a family event). Google has no concept of this, so Tagwerk
+  else nobody (a family event). Google has no concept of this, so Fahoba
   mirrors it into a private extended property on the remote event so that a
   full resync can restore it.
 - **`personIds: null` means "no information"**, not "nobody": the sync then
@@ -435,7 +435,7 @@ Depth: [AGENTS.md, Timetable](../AGENTS.md#timetable-the-rule-stays-a-rule).
   always available; public catalogs are mirrored once per server; Tandoor is a
   per-household connection. Several recipe sources can be active at once, so
   a planned meal addresses its recipe as `provider:id`.
-- **Tagwerk owns the meal plan.** A recipe service may have its own plan, but
+- **Fahoba owns the meal plan.** A recipe service may have its own plan, but
   two answers to "what is for dinner on Monday?" would be worse than one.
 - **Plans page by calendar week** and use the household's enabled meal kinds.
 - **Portions are computed from who eats**, using age and gender reference
@@ -449,7 +449,7 @@ Depth: [AGENTS.md, Timetable](../AGENTS.md#timetable-the-rule-stays-a-rule).
 - **Shopping list from recipes** sums by name and unit, skips configured pantry
   staples, and is one code path for the recipe book, planned meals and a
   whole week.
-- **Lists are not tasks and not an outward mirror.** Lists live in Tagwerk;
+- **Lists are not tasks and not an outward mirror.** Lists live in Fahoba;
   providers (Bring, Google Tasks) add a two-way sync on top. Matching is by
   name because the services offer no better key. Fresh local changes get a
   short grace period so an in-flight tick is not reverted by the next pull.
@@ -468,7 +468,7 @@ Depth: [AGENTS.md, Photo sources](../AGENTS.md#photo-sources-the-frame-draws-fro
   identifier comes from the device and is freely invented, so it is resolved
   and checked before use. Each household has its own root, so one family can
   never enter another's folder. This is the most important test of the area.
-- **Amazon Photos has no public API.** What Tagwerk reads is the folder the
+- **Amazon Photos has no public API.** What Fahoba reads is the folder the
   Amazon app (or any sync tool) maintains; it is a separate list entry so
   people find it.
 - **Stored images are redrawn**, which drops EXIF including location data and
@@ -581,7 +581,7 @@ and the author guide [`docs/plugins.md`](plugins.md).
 
 - **The licensing boundary is a package.** The core is under PolyForm Shield;
   third parties should not have to build on Shield-licensed classes that
-  change with every core release. `tagwerk/plugin-api` (MIT) holds the
+  change with every core release. `fahoba/plugin-api` (MIT) holds the
   contracts, data objects, catalog and the household scope. The core
   implements it; a third-party plugin depends on it only. A test fails on any
   `App\` reference inside the API package.
@@ -590,7 +590,7 @@ and the author guide [`docs/plugins.md`](plugins.md).
   implements. Interface method names never equal a column name (Eloquent
   would resolve them as attributes).
 - **Loaded through the core, not Laravel discovery.** A plugin names its
-  provider in `extra.tagwerk.provider`. The core registers it inside a
+  provider in `extra.fahoba.provider`. The core registers it inside a
   try/catch.
 - **A broken plugin never stops the app.** A failed package is skipped,
   everything it offered is withdrawn, the reason is logged and shown to the
@@ -600,7 +600,7 @@ and the author guide [`docs/plugins.md`](plugins.md).
 - **Installed means enabled,** except extensions, which change the server for
   every household and so need an explicit operator switch.
 - **Identifiers carry a vendor** (`vendor/name`); built-in ones never do. No
-  package can claim `google` or `tagwerk/bring` and receive their stored data.
+  package can claim `google` or `fahoba/bring` and receive their stored data.
   Offer keys are stored data and never change, even if a package is renamed.
 - **There is no cage.** A plugin runs in the same process with all privileges.
   Install only trusted packages, pin versions, run `composer audit`. Real
@@ -615,29 +615,29 @@ and the author guide [`docs/plugins.md`](plugins.md).
 - **Frontend plugins are Nuxt layers** discovered at build time from installed
   packages; a view registers itself and the shell draws it.
 - **Author ergonomics are part of the design:** a generator
-  (`tagwerk:make-plugin`) writes a working package incl. tests and CI, a
+  (`fahoba:make-plugin`) writes a working package incl. tests and CI, a
   testkit lets authors verify what the core enforces at runtime, and the
   output is published as a template repository.
 
-### Tagwerk's own plugins
+### Fahoba's own plugins
 
 - **Lean by design: the image installs none.** Their sources ride along in
-  the image; `TAGWERK_PLUGINS` names what the container installs when it
+  the image; `FAHOBA_PLUGINS` names what the container installs when it
   starts, at the image's version. A plugin that cannot be installed stops
   the start, because running on without it would quietly drop what it does
   (two-factor sign-in, for one). A plugin with its own screens is part of
   the app build and needs an image built with it.
-- API tokens (core) with `tagwerk/openapi`, `tagwerk/ics-feed`,
-  `tagwerk/webhooks`, `tagwerk/mcp`: ways to let other programs in. All are
+- API tokens (core) with `fahoba/openapi`, `fahoba/ics-feed`,
+  `fahoba/webhooks`, `fahoba/mcp`: ways to let other programs in. All are
   opt-in per household. API tokens can never exceed their account's rights;
   MCP tools call the app's own API with the caller's token, so permissions,
   PIN rules and validation stay in one place.
-- `tagwerk/caldav`, `tagwerk/bring`, `tagwerk/kochwiki`: providers.
-- `tagwerk/webdav-backup`: an extension for the operator.
-- `tagwerk/two-factor` and `tagwerk/social-login`: sign-in extensions.
+- `fahoba/caldav`, `fahoba/bring`, `fahoba/kochwiki`: providers.
+- `fahoba/webdav-backup`: an extension for the operator.
+- `fahoba/two-factor` and `fahoba/social-login`: sign-in extensions.
   Social sign-in matches *existing* accounts only, and only on a verified
   address claim; afterwards the provider's subject counts, not the address.
-- `tagwerk/example-area`: the reference for plugin authors and a development
+- `fahoba/example-area`: the reference for plugin authors and a development
   test fixture; absent from the production image.
 
 ## Designs and frontends
@@ -646,7 +646,7 @@ Three depths, each with its own promise. Guides:
 [design packs](plugins.md#design-packs), [frontends](frontends.md).
 
 - **A design changes tokens, never components.** Colours, font, corners and
-  the glass gradient are custom properties in `tagwerk.css`; a design pack
+  the glass gradient are custom properties in `fahoba.css`; a design pack
   is one stylesheet that sets them, checked and served by the server. A
   stylesheet that styled components would freeze every class name of the
   app into the API. Tokens are few and can be promised: their list ships in
@@ -658,13 +658,13 @@ Three depths, each with its own promise. Guides:
   already decides permissions, occurrences, rotation, the theme schedule and
   notices, so another interface does not rebuild rules; what little the
   screen must apply the same way (keys of occurrences, keeping a fresh tick
-  over a load, celebrating once) lives in `@tagwerk/client`, which the
+  over a load, celebrating once) lives in `@fahoba/client`, which the
   official app uses too — otherwise it would drift. The routes are a file
   and a test (`api-contract.txt`): adding is free, removing waits for a
   major release.
 - **Same origin, by design.** The sign-in stays an httpOnly cookie; a
   frontend on another origin would need tokens in JavaScript. So the server
-  serves the chosen frontend itself (`TAGWERK_FRONTEND`), checked at start
+  serves the chosen frontend itself (`FAHOBA_FRONTEND`), checked at start
   against the app's Content Security Policy — refused rather than shown
   blank.
 
@@ -708,7 +708,7 @@ Depth: [AGENTS.md, Operations](../AGENTS.md#operations),
   the first parent and routines, rewards and a shopping list. Only on
   creation, never retroactively.
 - **Accounts are invited, not created with a password.** Mail can be
-  turned off entirely (`TAGWERK_MAIL=off`), in which case accounts get
+  turned off entirely (`FAHOBA_MAIL=off`), in which case accounts get
   passwords set in the admin and the mail routes answer 404.
 - **Zero-downtime rollouts.** The rollout script starts the new container
   beside the old, waits for health, then removes the old one. That is why
@@ -729,5 +729,5 @@ Depth: [AGENTS.md, Operations](../AGENTS.md#operations),
   separately because credentials are unreadable without it.
 - **Licence:** PolyForm Shield 1.0.0 for the core and bundled plugins
   (anyone may run it for themselves; offering it as a competing hosted product
-  is reserved to the licensor), MIT for `tagwerk/plugin-api`, the example plugin
+  is reserved to the licensor), MIT for `fahoba/plugin-api`, the example plugin
   and generated templates. Contact: CopeX GmbH, office@copex.io.

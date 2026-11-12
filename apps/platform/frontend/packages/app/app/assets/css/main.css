@@ -1,4 +1,4 @@
-@import "../../../../shared/app/assets/css/tagwerk.css";
+@import "../../../../shared/app/assets/css/fahoba.css";
 
 /* The plugins' layers live outside the workspace, next to their PHP. */
 @source "../../../../../../plugins/*/frontend";

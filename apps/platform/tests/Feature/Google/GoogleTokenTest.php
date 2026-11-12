@@ -10,9 +10,9 @@ use App\Integrations\Google\GoogleOAuth;
 use App\Models\Household;
 use App\Models\ProviderAccount;
 use App\Support\HouseholdContext;
+use Fahoba\PluginApi\Connections\AuthorizationLost;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Http;
-use Tagwerk\PluginApi\Connections\AuthorizationLost;
 use Tests\TestCase;
 
 final class GoogleTokenTest extends TestCase
@@ -118,7 +118,7 @@ final class GoogleTokenTest extends TestCase
     {
         $url = app(GoogleCalendarProvider::class)->authorizationUrl(
             'state-123',
-            'https://tagwerk.test/auth/calendar/google/callback',
+            'https://fahoba.test/auth/calendar/google/callback',
         );
 
         // Without these two parameters there is no refresh token.

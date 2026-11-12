@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\Feature;
 
-use App\Filament\Pages\Auth\EditProfile as TagwerkEditProfile;
+use App\Filament\Pages\Auth\EditProfile as FahobaEditProfile;
 use App\Models\Household;
 use App\Models\User;
 use App\Notifications\PasswordChanged;
@@ -69,7 +69,7 @@ final class AdminProfileTest extends TestCase
 
     public function test_the_language_is_chosen_in_the_profile(): void
     {
-        Livewire::test(TagwerkEditProfile::class)
+        Livewire::test(FahobaEditProfile::class)
             ->fillForm(['locale' => 'en', 'currentPassword' => 'old-password-1'])
             ->call('save')
             ->assertHasNoFormErrors();

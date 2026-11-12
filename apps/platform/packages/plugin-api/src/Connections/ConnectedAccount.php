@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Tagwerk\PluginApi\Connections;
+namespace Fahoba\PluginApi\Connections;
 
 use Carbon\CarbonImmutable;
 
@@ -12,7 +12,7 @@ use Carbon\CarbonImmutable;
  *
  * A provider reads its credentials and settings from here and writes back
  * only through the three store methods; everything else about the
- * connection (who made it, when it last synced) belongs to Tagwerk.
+ * connection (who made it, when it last synced) belongs to Fahoba.
  *
  * No method shares a name with a column of the row behind it: Eloquent reads
  * a missing attribute through a same-named method and would loop.

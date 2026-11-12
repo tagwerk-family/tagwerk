@@ -6,14 +6,14 @@ namespace App\Dashboard;
 
 use App\Integrations\Plugins\PluginCatalog;
 use App\Models\Household;
+use Fahoba\PluginApi\Dashboard\DataWidget;
+use Fahoba\PluginApi\Dashboard\HasSettings;
 use Illuminate\Contracts\Container\Container;
-use Tagwerk\PluginApi\Dashboard\DataWidget;
-use Tagwerk\PluginApi\Dashboard\HasSettings;
 
 /**
  * The widgets that exist — and the ones a household may use.
  *
- * Same approach as for providers: the list lives in `config/tagwerk.php`,
+ * Same approach as for providers: the list lives in `config/fahoba.php`,
  * not in code. Adding a widget means an entry there and a component with the
  * same key on the wall.
  *
@@ -33,7 +33,7 @@ final class WidgetRegistry
         $widgets = [];
 
         /** @var array<string, array<string, mixed>> $configured */
-        $configured = (array) config('tagwerk.widgets', []);
+        $configured = (array) config('fahoba.widgets', []);
 
         foreach ($configured as $key => $entry) {
             $widgets[(string) $key] = new WidgetDefinition(

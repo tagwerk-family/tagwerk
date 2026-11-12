@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Tagwerk\Webhooks;
+namespace Fahoba\Webhooks;
 
 use App\Models\Household;
-use Tagwerk\PluginApi\Events\DomainEvent;
+use Fahoba\PluginApi\Events\DomainEvent;
 
 /** Hears every domain event and hands it to the household's targets that chose it. */
 final class QueueWebhooks

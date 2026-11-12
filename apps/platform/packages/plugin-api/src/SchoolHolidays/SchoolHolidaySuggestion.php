@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Tagwerk\PluginApi\SchoolHolidays;
+namespace Fahoba\PluginApi\SchoolHolidays;
 
 use Carbon\CarbonImmutable;
 

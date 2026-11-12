@@ -2,7 +2,7 @@ import { type Theme, type ThemeState, type Choice, withoutServer, alarmIn } from
 import { type Design, DESIGN_STORAGE } from '../utils/design'
 
 /** The same key as in the layer's head script (nuxt.config.ts). */
-const STORAGE = 'tagwerk-theme'
+const STORAGE = 'fahoba-theme'
 
 /*
  * One alarm for the whole application, not one per call: if header and
@@ -51,7 +51,7 @@ export function useTheme() {
    */
   function applyDesign(design: Design | null): void {
     const root = document.documentElement
-    let link = document.getElementById('tagwerk-design') as HTMLLinkElement | null
+    let link = document.getElementById('fahoba-design') as HTMLLinkElement | null
 
     if (design === null) {
       delete root.dataset.design
@@ -60,7 +60,7 @@ export function useTheme() {
     else {
       if (link === null) {
         link = document.createElement('link')
-        link.id = 'tagwerk-design'
+        link.id = 'fahoba-design'
         link.rel = 'stylesheet'
         document.head.appendChild(link)
       }

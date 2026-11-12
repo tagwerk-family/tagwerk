@@ -1,10 +1,10 @@
 {
-    "name": "acme/tagwerk-frontend",
-    "description": "A frontend for Tagwerk, in place of the official app",
+    "name": "acme/fahoba-frontend",
+    "description": "A frontend for Fahoba, in place of the official app",
     "type": "library",
     "license": "MIT",
     "extra": {
-        "tagwerk": {
+        "fahoba": {
             "app": "dist"
         }
     }

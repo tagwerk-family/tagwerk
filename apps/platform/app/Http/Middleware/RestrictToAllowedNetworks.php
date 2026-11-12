@@ -34,7 +34,7 @@ final class RestrictToAllowedNetworks
     {
         return array_values(array_filter(array_map(
             'trim',
-            explode(',', (string) config('tagwerk.admin_allowed_ips')),
+            explode(',', (string) config('fahoba.admin_allowed_ips')),
         )));
     }
 }

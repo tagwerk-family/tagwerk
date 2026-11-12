@@ -6,11 +6,11 @@ namespace App\Areas;
 
 use App\Enums\Feature;
 use App\Integrations\Plugins\PluginCatalog;
+use Fahoba\PluginApi\Areas\Area;
+use Fahoba\PluginApi\Areas\OptIn;
+use Fahoba\PluginApi\Areas\RequiresArea;
 use Illuminate\Container\Attributes\Scoped;
 use Illuminate\Contracts\Container\Container;
-use Tagwerk\PluginApi\Areas\Area;
-use Tagwerk\PluginApi\Areas\OptIn;
-use Tagwerk\PluginApi\Areas\RequiresArea;
 
 /**
  * Every area there is: the built-in `Feature` cases in their order, the

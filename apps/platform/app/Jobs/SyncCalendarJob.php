@@ -7,11 +7,11 @@ namespace App\Jobs;
 use App\Models\Calendar;
 use App\Models\ProviderAccount;
 use App\Services\Calendar\CalendarSyncService;
+use Fahoba\PluginApi\Connections\AuthorizationLost;
 use Illuminate\Contracts\Queue\ShouldBeUnique;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Queue\Queueable;
 use Illuminate\Support\Facades\Log;
-use Tagwerk\PluginApi\Connections\AuthorizationLost;
 
 /**
  * Syncs one calendar.

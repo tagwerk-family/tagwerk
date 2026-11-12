@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Integrations\Photos\Rules;
 
 use Carbon\CarbonImmutable;
-use Tagwerk\PluginApi\Photos\PhotoRule;
+use Fahoba\PluginApi\Photos\PhotoRule;
 
 /**
  * Pictures from periods, in fixed shares, random within each period.

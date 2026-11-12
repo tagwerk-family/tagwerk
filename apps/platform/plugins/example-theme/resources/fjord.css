@@ -1,8 +1,8 @@
 /*
  * Fjord: cool water, rounder corners.
  *
- * A design pack sets Tagwerk's tokens and nothing else — the list is
- * `resources/reference/design.json` in tagwerk/plugin-api. Light on
+ * A design pack sets Fahoba's tokens and nothing else — the list is
+ * `resources/reference/design.json` in fahoba/plugin-api. Light on
  * `:root[data-design]`, dark with `[data-theme="dark"]`; both are required.
  * Each rule weighs what the core's rule with the same attributes weighs and
  * wins by coming later. Fonts and corners need saying only once: the core

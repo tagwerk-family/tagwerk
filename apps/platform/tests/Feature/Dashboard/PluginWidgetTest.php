@@ -11,16 +11,16 @@ use App\Models\Person;
 use App\Models\User;
 use App\Services\DevicePairingService;
 use App\Support\HouseholdContext;
+use Fahoba\PluginApi\Dashboard\DataWidget;
+use Fahoba\PluginApi\Dashboard\HandlesActions;
+use Fahoba\PluginApi\Dashboard\ImagePolicy;
+use Fahoba\PluginApi\Dashboard\WidgetContent;
+use Fahoba\PluginApi\Dashboard\WidgetContext;
+use Fahoba\PluginApi\Plugins\Catalog;
+use Fahoba\PluginApi\Security\ContributesToCsp;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use InvalidArgumentException;
 use RuntimeException;
-use Tagwerk\PluginApi\Dashboard\DataWidget;
-use Tagwerk\PluginApi\Dashboard\HandlesActions;
-use Tagwerk\PluginApi\Dashboard\ImagePolicy;
-use Tagwerk\PluginApi\Dashboard\WidgetContent;
-use Tagwerk\PluginApi\Dashboard\WidgetContext;
-use Tagwerk\PluginApi\Plugins\Catalog;
-use Tagwerk\PluginApi\Security\ContributesToCsp;
 use Tests\TestCase;
 
 /**
@@ -244,7 +244,7 @@ final class PluginWidgetTest extends TestCase
         $this->withToken($this->token)->postJson("/api/wall/dashboard/{$tile->id}/action/empty")->assertStatus(503);
     }
 
-    /** Outside Tagwerk (a plugin's own unit test) there is no policy: only paths pass. */
+    /** Outside Fahoba (a plugin's own unit test) there is no policy: only paths pass. */
     public function test_without_a_policy_only_paths_pass(): void
     {
         $this->app->offsetUnset(ImagePolicy::class);

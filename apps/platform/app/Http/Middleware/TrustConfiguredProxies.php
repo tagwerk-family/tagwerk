@@ -7,7 +7,7 @@ namespace App\Http\Middleware;
 use Illuminate\Http\Middleware\TrustProxies;
 
 /**
- * Trusts the reverse proxy named in `tagwerk.trusted_proxies`.
+ * Trusts the reverse proxy named in `fahoba.trusted_proxies`.
  *
  * Read from config at request time instead of env() in bootstrap/app.php:
  * with a cached config, a value that lives only in .env would be gone there.
@@ -19,7 +19,7 @@ final class TrustConfiguredProxies extends TrustProxies
     {
         $proxies = array_values(array_filter(array_map(
             'trim',
-            explode(',', (string) config('tagwerk.trusted_proxies')),
+            explode(',', (string) config('fahoba.trusted_proxies')),
         )));
 
         return $proxies === [] ? null : $proxies;

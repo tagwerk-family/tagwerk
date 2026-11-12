@@ -8,13 +8,13 @@ use App\Support\FrontendPackage;
 use Illuminate\Console\Command;
 
 /**
- * Prints the directory nginx serves for `TAGWERK_FRONTEND`, or fails with
+ * Prints the directory nginx serves for `FAHOBA_FRONTEND`, or fails with
  * the reason — the entrypoint stops the start then, rather than serve a
  * blank page.
  */
 final class FrontendCommand extends Command
 {
-    protected $signature = 'tagwerk:frontend {package : vendor/name of the frontend package}';
+    protected $signature = 'fahoba:frontend {package : vendor/name of the frontend package}';
 
     protected $description = 'Checks a frontend package and prints the directory of its built app';
 

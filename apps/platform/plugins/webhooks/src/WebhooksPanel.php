@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Tagwerk\Webhooks;
+namespace Fahoba\Webhooks;
 
+use Fahoba\PluginApi\Plugins\ConfiguresPanel;
+use Fahoba\Webhooks\Filament\WebhookResource;
 use Filament\Panel;
-use Tagwerk\PluginApi\Plugins\ConfiguresPanel;
-use Tagwerk\Webhooks\Filament\WebhookResource;
 
 final class WebhooksPanel implements ConfiguresPanel
 {

@@ -16,7 +16,7 @@ use Illuminate\Validation\ValidationException;
  */
 final class ImportRecipesCommand extends Command
 {
-    protected $signature = 'tagwerk:import-recipes {household : Household id} {file : A ZIP from tagwerk:export-recipes or the admin}';
+    protected $signature = 'fahoba:import-recipes {household : Household id} {file : A ZIP from fahoba:export-recipes or the admin}';
 
     protected $description = 'Imports a recipe collection into a household; known titles are skipped';
 

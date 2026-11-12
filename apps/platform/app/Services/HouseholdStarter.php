@@ -29,10 +29,10 @@ final class HouseholdStarter
     private static function setup(): array
     {
         return [
-            ['👋', __('Get to know Tagwerk'), __('Click once through wall, phone and admin panel: tasks, lists, stars, meals and calendar.')],
+            ['👋', __('Get to know Fahoba'), __('Click once through wall, phone and admin panel: tasks, lists, stars, meals and calendar.')],
             ['👥', __('Add family members'), __('In the admin panel under People — with colour and photo, children with the role “Child”.')],
             ['📱', __('Connect the tablet'), __('Create a device in the admin panel and enter the pairing code on the tablet.')],
-            ['📲', __('Tagwerk on your phone'), __('Scan the QR code on the admin panel dashboard and install the app.')],
+            ['📲', __('Fahoba on your phone'), __('Scan the QR code on the admin panel dashboard and install the app.')],
             ['📅', __('Connect Google Calendar'), __('In the admin panel under Connections.')],
             ['🎒', __('Enter the timetable'), __('Set the bell schedule on the child, then tap the lessons in the weekly grid.')],
         ];

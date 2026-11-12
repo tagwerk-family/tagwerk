@@ -7,11 +7,11 @@ namespace App\Jobs;
 use App\Enums\ListItemChange;
 use App\Integrations\ProviderRegistry;
 use App\Models\ProviderAccount;
+use Fahoba\PluginApi\Lists\ListItemDraft;
+use Fahoba\PluginApi\Lists\SyncsItems;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Queue\Queueable;
 use Illuminate\Support\Facades\Log;
-use Tagwerk\PluginApi\Lists\ListItemDraft;
-use Tagwerk\PluginApi\Lists\SyncsItems;
 use Throwable;
 
 /**

@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Tagwerk\Kochwiki;
+namespace Fahoba\Kochwiki;
 
-use Tagwerk\PluginApi\Security\ContributesToCsp;
+use Fahoba\PluginApi\Security\ContributesToCsp;
 
 /** Photos are shown from kochwiki.org, not copied. */
 final class KochwikiImages implements ContributesToCsp

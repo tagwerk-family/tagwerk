@@ -10,10 +10,10 @@ use App\Models\User;
 use App\Services\DevicePairingService;
 use App\Support\Designs;
 use App\Support\HouseholdContext;
+use Fahoba\PluginApi\Plugins\Catalog;
+use Fahoba\PluginApi\Plugins\LoadReport;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Livewire\Livewire;
-use Tagwerk\PluginApi\Plugins\Catalog;
-use Tagwerk\PluginApi\Plugins\LoadReport;
 use Tests\Fixtures\Themes\FixtureTheme;
 use Tests\TestCase;
 
@@ -25,7 +25,7 @@ final class DesignTest extends TestCase
 {
     use RefreshDatabase;
 
-    private const KEY = 'tagwerk/example-theme';
+    private const KEY = 'fahoba/example-theme';
 
     private Household $household;
 
@@ -42,7 +42,7 @@ final class DesignTest extends TestCase
         $this->token = app(DevicePairingService::class)->redeem($device->pairing_code)['token'];
     }
 
-    public function test_tagwerks_own_design_until_the_household_picks_one(): void
+    public function test_fahobas_own_design_until_the_household_picks_one(): void
     {
         $this->withToken($this->token)->getJson('/api/theme')
             ->assertOk()
@@ -56,10 +56,10 @@ final class DesignTest extends TestCase
             ->assertJsonPath('design.name', 'Fjord')
             ->json('design.url');
 
-        $this->assertMatchesRegularExpression('#^/api/design/tagwerk/example-theme/[0-9a-f]{12}\.css$#', $url);
+        $this->assertMatchesRegularExpression('#^/api/design/fahoba/example-theme/[0-9a-f]{12}\.css$#', $url);
     }
 
-    public function test_a_device_chooses_its_own_or_tagwerks(): void
+    public function test_a_device_chooses_its_own_or_fahobas(): void
     {
         $this->household->update(['design' => self::KEY]);
 
@@ -77,7 +77,7 @@ final class DesignTest extends TestCase
     }
 
     /** A package removed later must not leave the household without a design. */
-    public function test_a_removed_design_falls_back_to_tagwerks(): void
+    public function test_a_removed_design_falls_back_to_fahobas(): void
     {
         $this->household->update(['design' => 'acme/gone']);
 
@@ -94,7 +94,7 @@ final class DesignTest extends TestCase
             ->assertHeader('Cache-Control', 'immutable, max-age=31536000, public')
             ->assertSee(':root:where([data-design]){', false);
 
-        $this->get('/api/design/tagwerk/example-theme/000000000000.css')->assertNotFound();
+        $this->get('/api/design/fahoba/example-theme/000000000000.css')->assertNotFound();
     }
 
     public function test_only_files_the_stylesheet_names_are_served(): void

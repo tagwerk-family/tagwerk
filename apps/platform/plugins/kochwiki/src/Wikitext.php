@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Tagwerk\Kochwiki;
+namespace Fahoba\Kochwiki;
 
-use Tagwerk\PluginApi\Recipes\Ingredient;
+use Fahoba\PluginApi\Recipes\Ingredient;
 
 /**
  * A Koch-Wiki page into a recipe: the `{{Rezept}}` box, the sections

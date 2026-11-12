@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Tagwerk\Webhooks;
+namespace Fahoba\Webhooks;
 
 use App\Models\Concerns\BelongsToHousehold;
 use App\Models\Concerns\HasZonedTimestamps;

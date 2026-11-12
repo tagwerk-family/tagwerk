@@ -18,7 +18,7 @@ final class HouseholdArchiveReady extends HouseholdMessage
 
     public function title(): string
     {
-        return __('Your Tagwerk export is ready');
+        return __('Your Fahoba export is ready');
     }
 
     public function body(): string
@@ -41,7 +41,7 @@ final class HouseholdArchiveReady extends HouseholdMessage
         }
 
         return $message
-            ->line(__('Everything of :household — calendars, tasks, stars, recipes, photos — in one file. Another Tagwerk server can import it.', ['household' => $this->household->name]))
+            ->line(__('Everything of :household — calendars, tasks, stars, recipes, photos — in one file. Another Fahoba server can import it.', ['household' => $this->household->name]))
             ->action(__('Download'), $this->link())
             ->line($this->body());
     }

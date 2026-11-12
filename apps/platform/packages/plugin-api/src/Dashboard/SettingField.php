@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Tagwerk\PluginApi\Dashboard;
+namespace Fahoba\PluginApi\Dashboard;
 
 /**
  * One field of a widget's settings form.

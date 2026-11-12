@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Tagwerk\PluginApi\Households;
+namespace Fahoba\PluginApi\Households;
 
 /**
  * Who sees a notice. `Household` reaches wall, phones and admin alike;

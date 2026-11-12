@@ -5,17 +5,17 @@ declare(strict_types=1);
 namespace App\Support;
 
 use App\Integrations\Plugins\PluginManifest;
+use Fahoba\PluginApi\Languages\Coverage;
+use Fahoba\PluginApi\Languages\LanguagePack;
+use Fahoba\PluginApi\Languages\Reference;
 use Illuminate\Container\Attributes\Singleton;
 use Illuminate\Contracts\Container\Container;
 use Illuminate\Support\Arr;
-use Tagwerk\PluginApi\Languages\Coverage;
-use Tagwerk\PluginApi\Languages\LanguagePack;
-use Tagwerk\PluginApi\Languages\Reference;
 
 /**
- * A language pack's texts as Tagwerk uses them: without what would show
+ * A language pack's texts as Fahoba uses them: without what would show
  * broken, measured against the reference that ships with
- * `tagwerk/plugin-api` — the same one a translator's tests use.
+ * `fahoba/plugin-api` — the same one a translator's tests use.
  */
 #[Singleton]
 final class PackTexts

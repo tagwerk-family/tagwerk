@@ -7,9 +7,9 @@ namespace App\Services\Recipes;
 use App\Models\Household;
 use App\Services\Lists\IngredientTransfer;
 use App\Support\HouseholdContext;
-use Tagwerk\PluginApi\Recipes\DescribesRecipes;
-use Tagwerk\PluginApi\Recipes\Ingredient;
-use Tagwerk\PluginApi\Recipes\RecipeProvider;
+use Fahoba\PluginApi\Recipes\DescribesRecipes;
+use Fahoba\PluginApi\Recipes\Ingredient;
+use Fahoba\PluginApi\Recipes\RecipeProvider;
 
 /**
  * From recipes to the shopping list: scaled to who eats, without what is

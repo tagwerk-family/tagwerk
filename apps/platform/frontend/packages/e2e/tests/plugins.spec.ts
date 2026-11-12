@@ -29,7 +29,7 @@ test('switched off, the area leaves the menu', async ({ page }) => {
   await pair(page, household)
   await expect(page.getByTestId('mode').filter({ hasText: 'Beispiel' })).toBeVisible()
 
-  tinker(`App\\Models\\Household::findOrFail(${household})->update(["disabled_features" => ["tagwerk/example-area"]]);`)
+  tinker(`App\\Models\\Household::findOrFail(${household})->update(["disabled_features" => ["fahoba/example-area"]]);`)
   await page.reload()
 
   await expect(page.getByTestId('dashboard-grid')).toBeVisible()
@@ -61,7 +61,7 @@ test('a plugin tile is configured and its buttons act', async ({ page }) => {
   await page.getByTestId('widget-picker').click()
   await page.getByTestId('widget-offer').filter({ hasText: 'Zähler' }).click()
 
-  const tile = page.locator('[data-testid="dashboard-tile"][data-type="tagwerk/example-counter"]')
+  const tile = page.locator('[data-testid="dashboard-tile"][data-type="fahoba/example-counter"]')
   await expect(tile).toHaveCount(1)
 
   await tile.getByTestId('tile-settings-open').click()

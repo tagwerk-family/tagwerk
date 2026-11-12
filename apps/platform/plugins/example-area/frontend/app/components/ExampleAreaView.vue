@@ -4,7 +4,7 @@ const failed = ref(false)
 
 onMounted(async () => {
   try {
-    const response = await $fetch<{ household: string }>('/api/tagwerk/example-area/greeting', { baseURL: '/' })
+    const response = await $fetch<{ household: string }>('/api/fahoba/example-area/greeting', { baseURL: '/' })
     greeting.value = response.household
   } catch {
     failed.value = true

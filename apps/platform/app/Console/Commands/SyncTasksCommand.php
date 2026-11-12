@@ -10,8 +10,8 @@ use App\Integrations\ProviderRegistry;
 use App\Jobs\SyncTasksJob;
 use App\Models\Household;
 use App\Models\ProviderAccount;
+use Fahoba\PluginApi\Tasks\ImportsTasks;
 use Illuminate\Console\Command;
-use Tagwerk\PluginApi\Tasks\ImportsTasks;
 
 /**
  * Imports the tasks of all connected accounts.
@@ -22,7 +22,7 @@ use Tagwerk\PluginApi\Tasks\ImportsTasks;
  */
 final class SyncTasksCommand extends Command
 {
-    protected $signature = 'tagwerk:sync-tasks';
+    protected $signature = 'fahoba:sync-tasks';
 
     protected $description = 'Imports the tasks of all connected accounts';
 

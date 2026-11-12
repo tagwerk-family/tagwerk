@@ -15,7 +15,7 @@ use Illuminate\Console\Command;
  */
 final class ExportHouseholdCommand extends Command
 {
-    protected $signature = 'tagwerk:export-household
+    protected $signature = 'fahoba:export-household
         {household : Id of the household}
         {--output= : File to write; stdout without}
         {--with-secrets : Passwords (connections, webhooks, tiles) in plain text, for a move to another server}';

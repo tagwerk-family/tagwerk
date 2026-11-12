@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace App\Integrations\Plugins;
 
+use Fahoba\PluginApi\Plugins\LoadReport;
+use Fahoba\PluginApi\Plugins\Plugin;
 use Illuminate\Contracts\Foundation\Application;
-use Tagwerk\PluginApi\Plugins\LoadReport;
-use Tagwerk\PluginApi\Plugins\Plugin;
 use Throwable;
 
 /**
@@ -22,7 +22,7 @@ final class PluginLoader
     {
         foreach ($packages as $package) {
             if (($package['csp'] ?? []) === PluginManifest::MALFORMED) {
-                $this->report->fail($package['name'], 'extra.tagwerk.csp must map directives to lists of hosts.');
+                $this->report->fail($package['name'], 'extra.fahoba.csp must map directives to lists of hosts.');
 
                 continue;
             }

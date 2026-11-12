@@ -1,4 +1,4 @@
-# Tagwerk
+# Fahoba
 
 > Self-hosted family calendar for a wall-mounted tablet and the family's
 > phones: calendar, tasks with stars, shopping lists, meal plan, recipes,
@@ -6,28 +6,28 @@
 > households on one server, strictly separated. Source-available under
 > PolyForm Shield 1.0.0; the plugin API is MIT.
 
-Working on Tagwerk itself, read AGENTS.md first: it holds the conventions
+Working on Fahoba itself, read AGENTS.md first: it holds the conventions
 and the pitfalls. Writing a plugin, read docs/plugins.md and depend on
-`tagwerk/plugin-api` only — never on classes under `App\`.
+`fahoba/plugin-api` only — never on classes under `App\`.
 
 ## Plugins
 
-- [Writing a Tagwerk plugin](https://github.com/tagwerk-family/tagwerk/blob/master/docs/plugins.md): the guide — package, offers, tiles, providers, areas, language packs, design packs, testing, stability
-- [tagwerk/plugin-api](https://github.com/tagwerk-family/tagwerk/tree/master/apps/platform/packages/plugin-api): contracts, data objects, `Testing\PluginAssertions`
-- [Building a frontend](https://github.com/tagwerk-family/tagwerk/blob/master/docs/frontends.md): your own interface in place of the app — client, contract, shipping
-- [Frontend template](https://github.com/tagwerk-family/tagwerk/tree/master/apps/platform/templates/frontend): Vite + TypeScript on @tagwerk/client
-- [API contract](https://github.com/tagwerk-family/tagwerk/blob/master/apps/platform/routes/api-contract.txt): the routes frontends may rely on
-- [Plugin template](https://github.com/tagwerk-family/tagwerk/tree/master/apps/platform/templates/plugin): a widget plugin with tests, CI and AGENTS.md
-- [Example plugin](https://github.com/tagwerk-family/tagwerk/tree/master/apps/platform/plugins/example-area): an area and a tile with settings and buttons
+- [Writing a Fahoba plugin](https://github.com/fahoba/fahoba/blob/master/docs/plugins.md): the guide — package, offers, tiles, providers, areas, language packs, design packs, testing, stability
+- [fahoba/plugin-api](https://github.com/fahoba/fahoba/tree/master/apps/platform/packages/plugin-api): contracts, data objects, `Testing\PluginAssertions`
+- [Building a frontend](https://github.com/fahoba/fahoba/blob/master/docs/frontends.md): your own interface in place of the app — client, contract, shipping
+- [Frontend template](https://github.com/fahoba/fahoba/tree/master/apps/platform/templates/frontend): Vite + TypeScript on @fahoba/client
+- [API contract](https://github.com/fahoba/fahoba/blob/master/apps/platform/routes/api-contract.txt): the routes frontends may rely on
+- [Plugin template](https://github.com/fahoba/fahoba/tree/master/apps/platform/templates/plugin): a widget plugin with tests, CI and AGENTS.md
+- [Example plugin](https://github.com/fahoba/fahoba/tree/master/apps/platform/plugins/example-area): an area and a tile with settings and buttons
 
 ## Project
 
-- [AGENTS.md](https://github.com/tagwerk-family/tagwerk/blob/master/AGENTS.md): architecture, conventions, pitfalls
-- [README](https://github.com/tagwerk-family/tagwerk/blob/master/README.md): what it is, quick start
-- [Installation](https://github.com/tagwerk-family/tagwerk/blob/master/docs/installation.md): running a server
-- [CONTRIBUTING.md](https://github.com/tagwerk-family/tagwerk/blob/master/CONTRIBUTING.md): the contributor grant and what a pull request needs
+- [AGENTS.md](https://github.com/fahoba/fahoba/blob/master/AGENTS.md): architecture, conventions, pitfalls
+- [README](https://github.com/fahoba/fahoba/blob/master/README.md): what it is, quick start
+- [Installation](https://github.com/fahoba/fahoba/blob/master/docs/installation.md): running a server
+- [CONTRIBUTING.md](https://github.com/fahoba/fahoba/blob/master/CONTRIBUTING.md): the contributor grant and what a pull request needs
 
 ## Optional
 
-- [Architecture](https://github.com/tagwerk-family/tagwerk/blob/master/docs/architecture.md): the design and the reasoning behind it
-- [CHANGELOG](https://github.com/tagwerk-family/tagwerk/blob/master/CHANGELOG.md)
+- [Architecture](https://github.com/fahoba/fahoba/blob/master/docs/architecture.md): the design and the reasoning behind it
+- [CHANGELOG](https://github.com/fahoba/fahoba/blob/master/CHANGELOG.md)

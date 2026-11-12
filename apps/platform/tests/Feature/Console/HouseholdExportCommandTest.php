@@ -14,13 +14,13 @@ use App\Models\TaskCompletion;
 use App\Models\User;
 use App\Services\HouseholdExport;
 use App\Support\HouseholdContext;
+use Fahoba\PluginApi\Plugins\Catalog;
+use Fahoba\PluginApi\Plugins\ExportRules;
+use Fahoba\PluginApi\Plugins\LoadReport;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
-use Tagwerk\PluginApi\Plugins\Catalog;
-use Tagwerk\PluginApi\Plugins\ExportRules;
-use Tagwerk\PluginApi\Plugins\LoadReport;
 use Tests\TestCase;
 
 /**
@@ -85,7 +85,7 @@ final class HouseholdExportCommandTest extends TestCase
     /** @return array<string, mixed> */
     private function exported(): array
     {
-        $this->artisan('tagwerk:export-household', ['household' => $this->household->id, '--output' => $this->file])
+        $this->artisan('fahoba:export-household', ['household' => $this->household->id, '--output' => $this->file])
             ->assertSuccessful();
 
         return json_decode((string) file_get_contents($this->file), true, flags: JSON_THROW_ON_ERROR);
@@ -154,7 +154,7 @@ final class HouseholdExportCommandTest extends TestCase
 
     public function test_an_unknown_household_fails(): void
     {
-        $this->artisan('tagwerk:export-household', ['household' => 999999, '--output' => $this->file])
+        $this->artisan('fahoba:export-household', ['household' => 999999, '--output' => $this->file])
             ->assertFailed();
     }
 
@@ -169,7 +169,7 @@ final class HouseholdExportCommandTest extends TestCase
         DB::table('households')->delete();
         DB::table('users')->delete();
 
-        $this->artisan('tagwerk:import-household', ['file' => $this->file])->assertSuccessful();
+        $this->artisan('fahoba:import-household', ['file' => $this->file])->assertSuccessful();
 
         $this->assertSame(1, DB::table('households')->count());
         $this->assertSame('Lena', DB::table('people')->where('id', $this->child->id)->value('name'));
@@ -186,7 +186,7 @@ final class HouseholdExportCommandTest extends TestCase
         $this->exported();
         $before = DB::table('households')->count();
 
-        $this->artisan('tagwerk:import-household', ['file' => $this->file])->assertFailed();
+        $this->artisan('fahoba:import-household', ['file' => $this->file])->assertFailed();
 
         $this->assertSame($before, DB::table('households')->count());
     }
@@ -199,7 +199,7 @@ final class HouseholdExportCommandTest extends TestCase
         file_put_contents($this->file, json_encode($data, JSON_THROW_ON_ERROR));
         DB::table('households')->delete();
 
-        $this->artisan('tagwerk:import-household', ['file' => $this->file])->assertFailed();
+        $this->artisan('fahoba:import-household', ['file' => $this->file])->assertFailed();
 
         $this->assertSame(0, DB::table('households')->count());
     }

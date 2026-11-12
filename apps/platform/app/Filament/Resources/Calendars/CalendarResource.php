@@ -20,7 +20,7 @@ use UnitEnum;
 
 /**
  * Calendars are created when taken over from Google, not by hand. Only what
- * belongs to Tagwerk is editable: the mapping to a person and whether the
+ * belongs to Fahoba is editable: the mapping to a person and whether the
  * calendar is synced at all.
  */
 class CalendarResource extends Resource

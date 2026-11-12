@@ -6,10 +6,10 @@ namespace App\Jobs;
 
 use App\Integrations\ProviderRegistry;
 use App\Models\ProviderAccount;
+use Fahoba\PluginApi\Lists\ListItemDraft;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Queue\Queueable;
 use Illuminate\Support\Facades\Log;
-use Tagwerk\PluginApi\Lists\ListItemDraft;
 use Throwable;
 
 /**
@@ -49,7 +49,7 @@ final class PushListItemJob implements ShouldQueue
              * feature" must not depend on the configured queue driver. With
              * `sync` — common in tests and small installations — a rethrown
              * exception would break the response, and adding an item would
-             * fail although it is long saved in Tagwerk.
+             * fail although it is long saved in Fahoba.
              *
              * No retry: the item is in the authoritative list. A retry would
              * only be a second chance to miss the same convenience.

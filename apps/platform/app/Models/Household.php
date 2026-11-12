@@ -194,7 +194,7 @@ final class Household extends Model
      * Every household gets its built-in calendar.
      *
      * On the model and not in the admin panel so it also applies to
-     * households created by a seeder or a test — Tagwerk without a writable
+     * households created by a seeder or a test — Fahoba without a writable
      * calendar would be unusable in each of those cases.
      */
     protected static function booted(): void

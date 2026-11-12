@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Tagwerk\Kochwiki;
+namespace Fahoba\Kochwiki;
 
 use App\Models\CatalogRecipe;
 use Illuminate\Support\Facades\Cache;

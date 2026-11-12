@@ -16,14 +16,14 @@ use App\Services\Calendar\EventWriteService;
 use App\Support\HouseholdContext;
 use App\Support\PublicAddressResolver;
 use Carbon\CarbonImmutable;
+use Fahoba\CalDav\CalDavCalendarProvider;
+use Fahoba\PluginApi\Calendar\EventConflict;
+use Fahoba\PluginApi\Connections\AuthorizationLost;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\Client\Request;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Validation\ValidationException;
 use Sabre\VObject\Reader;
-use Tagwerk\CalDav\CalDavCalendarProvider;
-use Tagwerk\PluginApi\Calendar\EventConflict;
-use Tagwerk\PluginApi\Connections\AuthorizationLost;
 use Tests\Support\FakeResolver;
 use Tests\TestCase;
 
@@ -159,7 +159,7 @@ final class CalDavTest extends TestCase
         $vevent = Reader::read($stored['data'])->VEVENT;
         $this->assertSame('Zahnarzt', (string) $vevent->SUMMARY);
         $this->assertSame('20261023T070000Z', (string) $vevent->DTSTART);
-        $this->assertSame((string) $lena->id, (string) $vevent->{'X-TAGWERK-PEOPLE'});
+        $this->assertSame((string) $lena->id, (string) $vevent->{'X-FAHOBA-PEOPLE'});
         $this->assertSame($stored['etag'], $event->external_version);
 
         $result = app(CalendarSyncService::class)->sync($this->calendar()->fresh());

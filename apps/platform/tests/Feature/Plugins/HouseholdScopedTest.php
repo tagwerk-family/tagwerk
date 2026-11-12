@@ -6,10 +6,10 @@ namespace Tests\Feature\Plugins;
 
 use App\Models\Household;
 use App\Support\HouseholdContext;
+use Fahoba\PluginApi\Households\CurrentHousehold;
+use Fahoba\PluginApi\Households\HouseholdScoped;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Tagwerk\PluginApi\Households\CurrentHousehold;
-use Tagwerk\PluginApi\Households\HouseholdScoped;
 use Tests\TestCase;
 
 /** A plugin's own table gets the same rule as the core's: no context, no rows. */

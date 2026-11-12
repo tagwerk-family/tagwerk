@@ -8,10 +8,10 @@ use App\Filament\Pages\Auth\EditProfile;
 use App\Filament\Pages\ReadOnlyHousehold;
 use App\Support\ReadOnlyAdmin;
 use Closure;
+use Fahoba\PluginApi\Households\AvailableWhileReadOnly;
 use Filament\Pages\Page;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Tagwerk\PluginApi\Households\AvailableWhileReadOnly;
 
 /**
  * The admin of a read-only household opens only its read-only notice, the

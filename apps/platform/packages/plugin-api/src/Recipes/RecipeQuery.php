@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace Tagwerk\PluginApi\Recipes;
+namespace Fahoba\PluginApi\Recipes;
 
 /**
  * What someone looks for in the recipe book.
  *
  * `ids` narrows to known recipes — favourites and the cooking history are
- * Tagwerk's, and the provider only fills in what they look like.
+ * Fahoba's, and the provider only fills in what they look like.
  */
 final readonly class RecipeQuery
 {

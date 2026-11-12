@@ -36,7 +36,7 @@ final class ConfirmPushJob implements ShouldQueue
         try {
             $delivered = $push->send([$device], Locale::inEvery(fn (): array => [
                 'title' => __('Notifications are on'),
-                'body' => __('This is how Tagwerk reaches you.'),
+                'body' => __('This is how Fahoba reaches you.'),
                 'tag' => 'push-confirm',
             ]));
 

@@ -1,5 +1,5 @@
 {
-  "name": "tagwerk-emoji",
+  "name": "fahoba-emoji",
   "private": true,
   "type": "module",
   "description": "Builds public/emoji from Microsoft's Fluent Emoji and CLDR search words; see build.mjs",

@@ -1,7 +1,7 @@
 import { type Entry, entryFromUrl, entryWithoutAnswer } from '~/utils/entry'
 
 // A convenience for starting without a network, not a token.
-const REMEMBERED = 'tagwerk-entry'
+const REMEMBERED = 'fahoba-entry'
 
 function remembered(): string | null {
   try {

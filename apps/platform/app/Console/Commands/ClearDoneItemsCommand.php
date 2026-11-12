@@ -20,7 +20,7 @@ final class ClearDoneItemsCommand extends Command
 {
     public const HOURS = 12;
 
-    protected $signature = 'tagwerk:clear-done-items';
+    protected $signature = 'fahoba:clear-done-items';
 
     protected $description = 'Removes list items that have been ticked off for twelve hours';
 

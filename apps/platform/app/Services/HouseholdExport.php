@@ -6,12 +6,13 @@ namespace App\Services;
 
 use App\Integrations\Plugins\PluginCatalog;
 use App\Models\Household;
+use App\Support\RenamedFromTagwerk;
+use Fahoba\PluginApi\Plugins\ExportRules;
+use Fahoba\PluginApi\Plugins\LoadReport;
 use Illuminate\Database\Query\Builder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 use RuntimeException;
-use Tagwerk\PluginApi\Plugins\ExportRules;
-use Tagwerk\PluginApi\Plugins\LoadReport;
 
 /**
  * One household as plain rows, out of a server and into an empty database —
@@ -225,7 +226,7 @@ final class HouseholdExport
 
         $known = array_flip(Schema::getColumnListing($table));
 
-        $rows = array_map(static fn (array $row): array => ExportSecrets::seal($table, $row), $rows);
+        $rows = array_map(static fn (array $row): array => ExportSecrets::seal($table, RenamedFromTagwerk::row($table, $row)), $rows);
 
         foreach (array_chunk($rows, 500) as $chunk) {
             DB::table($table)->insert(array_map(

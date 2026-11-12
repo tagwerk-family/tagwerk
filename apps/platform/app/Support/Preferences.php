@@ -118,7 +118,7 @@ final class Preferences
      */
     public const HOUSEHOLD_BACKDROP = 'household';
 
-    /** Tagwerk's own design, whatever the household chose. */
+    /** Fahoba's own design, whatever the household chose. */
     public const CORE_DESIGN = 'core';
 
     private const USER_DEFAULTS = ['calendar_view' => 'day'];
@@ -156,7 +156,7 @@ final class Preferences
             'backdrop' => [self::HOUSEHOLD_BACKDROP, ...array_column(Backdrop::cases(), 'value')],
             /*
              * Colours, font and corners from an installed design pack.
-             * `household` follows the household, `core` is Tagwerk's own.
+             * `household` follows the household, `core` is Fahoba's own.
              */
             'design' => [self::HOUSEHOLD_BACKDROP, self::CORE_DESIGN, ...app(Designs::class)->keys()],
             /*

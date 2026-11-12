@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Tagwerk\Webhooks;
+namespace Fahoba\Webhooks;
 
 use App\Support\HouseholdContext;
 use App\Support\OutboundHttp;
@@ -71,14 +71,22 @@ final class DeliverWebhookJob implements ShouldQueue
             'data' => $this->data,
         ], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_THROW_ON_ERROR);
 
+        $own = [
+            'Event' => $this->event,
+            'Delivery' => $this->uuid,
+            'Signature' => 'sha256='.hash_hmac('sha256', $body, (string) $webhook->secret),
+        ];
+
+        $headers = ['Content-Type' => 'application/json', 'User-Agent' => 'Fahoba-Webhooks/1.0'];
+
+        // Receivers set up before the rename to Fahoba check X-Tagwerk-*.
+        foreach ($own as $name => $value) {
+            $headers['X-Fahoba-'.$name] = $value;
+            $headers['X-Tagwerk-'.$name] = $value;
+        }
+
         $response = $http->send('POST', $webhook->url, [
-            'headers' => [
-                'Content-Type' => 'application/json',
-                'User-Agent' => 'Tagwerk-Webhooks/1.0',
-                'X-Tagwerk-Event' => $this->event,
-                'X-Tagwerk-Delivery' => $this->uuid,
-                'X-Tagwerk-Signature' => 'sha256='.hash_hmac('sha256', $body, (string) $webhook->secret),
-            ],
+            'headers' => $headers,
             'body' => $body,
         ]);
 

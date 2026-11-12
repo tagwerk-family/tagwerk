@@ -10,12 +10,12 @@ use App\Models\Household;
 use App\Models\Person;
 use App\Models\User;
 use App\Security\ContentSecurityPolicy;
+use Fahoba\PluginApi\Plugins\Catalog;
+use Fahoba\PluginApi\Plugins\LoadReport;
+use Fahoba\PluginApi\Security\ContributesToCsp;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Log;
-use Tagwerk\PluginApi\Plugins\Catalog;
-use Tagwerk\PluginApi\Plugins\LoadReport;
-use Tagwerk\PluginApi\Security\ContributesToCsp;
 use Tests\TestCase;
 
 final class ContentSecurityPolicyTest extends TestCase
@@ -45,10 +45,10 @@ final class ContentSecurityPolicyTest extends TestCase
 
     public function test_enforced_and_off(): void
     {
-        config(['tagwerk.csp' => 'enforce']);
+        config(['fahoba.csp' => 'enforce']);
         $this->get('/admin/login')->assertHeader('Content-Security-Policy');
 
-        config(['tagwerk.csp' => 'off']);
+        config(['fahoba.csp' => 'off']);
         $response = $this->get('/admin/login');
         $this->assertFalse($response->headers->has('Content-Security-Policy'));
         $this->assertFalse($response->headers->has('Content-Security-Policy-Report-Only'));
@@ -88,7 +88,7 @@ final class ContentSecurityPolicyTest extends TestCase
 
     public function test_nginx_gets_the_app_policy_as_one_line(): void
     {
-        $this->artisan('tagwerk:csp')
+        $this->artisan('fahoba:csp')
             ->expectsOutputToContain('add_header Content-Security-Policy-Report-Only "default-src \'self\'; script-src \'self\';')
             ->assertSuccessful();
     }
@@ -134,7 +134,7 @@ final class ContentSecurityPolicyTest extends TestCase
         }
     }
 
-    /** `extra.tagwerk.csp` in a plugin's composer.json, without a class. */
+    /** `extra.fahoba.csp` in a plugin's composer.json, without a class. */
     public function test_a_plugin_declares_its_hosts_in_composer_json(): void
     {
         $this->manifest(['img-src' => ['https://cdn.example.net'], 'connect-src' => ['https://api.example.net']]);
@@ -170,7 +170,7 @@ final class ContentSecurityPolicyTest extends TestCase
         file_put_contents($directory.'/installed.json', json_encode(['packages' => [[
             'name' => 'acme/cdn',
             'version' => '1.0.0',
-            'extra' => ['tagwerk' => ['csp' => $csp]],
+            'extra' => ['fahoba' => ['csp' => $csp]],
         ]]]));
 
         $this->app->instance(PluginManifest::class, new PluginManifest($directory.'/installed.json', $directory.'/cache.php'));
@@ -182,7 +182,7 @@ final class ContentSecurityPolicyTest extends TestCase
 
         $this->call('POST', '/api/csp-report', [], [], [], ['CONTENT_TYPE' => 'application/csp-report'], json_encode([
             'csp-report' => [
-                'document-uri' => 'https://tagwerk.test/',
+                'document-uri' => 'https://fahoba.test/',
                 'effective-directive' => 'img-src',
                 'blocked-uri' => 'https://evil.test/'.str_repeat('x', 1000),
                 'original-policy' => 'not kept',

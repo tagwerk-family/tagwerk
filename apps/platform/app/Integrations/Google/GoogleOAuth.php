@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace App\Integrations\Google;
 
 use Carbon\CarbonImmutable;
+use Fahoba\PluginApi\Connections\AuthorizationLost;
+use Fahoba\PluginApi\Connections\ConnectedAccount;
 use Illuminate\Support\Facades\Http;
-use Tagwerk\PluginApi\Connections\AuthorizationLost;
-use Tagwerk\PluginApi\Connections\ConnectedAccount;
 
 /**
  * The OAuth flow with Google — shared by all Google providers.

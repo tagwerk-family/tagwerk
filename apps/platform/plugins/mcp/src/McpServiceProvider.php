@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace Tagwerk\Mcp;
+namespace Fahoba\Mcp;
 
 use App\Http\Middleware\ApiTokenScope;
+use Fahoba\PluginApi\Plugins\Catalog;
+use Fahoba\PluginApi\Plugins\Plugin;
+use Fahoba\PluginApi\Plugins\PluginRoutes;
 use Laravel\Mcp\Facades\Mcp;
-use Tagwerk\PluginApi\Plugins\Catalog;
-use Tagwerk\PluginApi\Plugins\Plugin;
-use Tagwerk\PluginApi\Plugins\PluginRoutes;
 
 final class McpServiceProvider extends Plugin
 {
@@ -22,7 +22,7 @@ final class McpServiceProvider extends Plugin
 
     public function bootPlugin(): void
     {
-        $route = Mcp::web('/mcp', TagwerkServer::class)
+        $route = Mcp::web('/mcp', FahobaServer::class)
             ->middleware([...PluginRoutes::MIDDLEWARE, 'feature:'.McpArea::KEY, RequireApiToken::class]);
 
         // Every MCP call is a POST; the tools tell reading from writing (ApiTool).

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace {{ namespace }};
 
-use Tagwerk\PluginApi\Areas\Area;
+use Fahoba\PluginApi\Areas\Area;
 
 /** An area a household switches on and off like a built-in one. */
 final class {{ class }}Area implements Area

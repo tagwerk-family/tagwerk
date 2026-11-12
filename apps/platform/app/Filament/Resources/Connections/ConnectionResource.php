@@ -18,7 +18,7 @@ use UnitEnum;
 /**
  * A household's connections — across all areas.
  *
- * One list instead of one per area: whoever wants to know what Tagwerk has
+ * One list instead of one per area: whoever wants to know what Fahoba has
  * open to the outside should see it in one place. The area is in the row.
  *
  * No form: a connection is made through the provider's consent or with the

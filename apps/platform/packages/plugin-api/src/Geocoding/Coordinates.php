@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Tagwerk\PluginApi\Geocoding;
+namespace Fahoba\PluginApi\Geocoding;
 
 /**
  * A place on earth, together with the spelling it was found under and — as

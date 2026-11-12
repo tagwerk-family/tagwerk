@@ -14,14 +14,14 @@ use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\HtmlString;
 use Illuminate\Support\Js;
 
-/** Look and theme of every Tagwerk panel — household admin and system alike. */
-final class TagwerkBrand
+/** Look and theme of every Fahoba panel — household admin and system alike. */
+final class FahobaBrand
 {
     public static function apply(Panel $panel): Panel
     {
         return $panel
             /*
-             * The wall's design (packages/shared/app/assets/css/tagwerk.css):
+             * The wall's design (packages/shared/app/assets/css/fahoba.css):
              * terracotta as the only accent, near-white surfaces and a deep
              * neutral grey. Filament uses 50/600 in light and 950/400 in dark
              * mode — the shades therefore hit background, accent and ink of
@@ -32,11 +32,11 @@ final class TagwerkBrand
              * If 500 is light enough for dark text, every button falls back to
              * a pale 400.
              */
-            ->brandName('Tagwerk')
+            ->brandName('Fahoba')
             ->brandLogo(fn (): string => asset('logo-light.svg'))
             ->darkModeBrandLogo(fn (): string => asset('logo-dark.svg'))
             ->brandLogoHeight('2rem')
-            ->favicon(fn (): string => asset('logo.svg'))
+            ->favicon(fn (): string => asset('favicon.svg'))
             ->font('Plus Jakarta Sans Variable', provider: LocalFontProvider::class)
             ->colors([
                 'primary' => [
@@ -71,8 +71,8 @@ final class TagwerkBrand
             ])
             ->renderHook(PanelsRenderHook::STYLES_AFTER, fn (): HtmlString => new HtmlString(sprintf(
                 '<link rel="stylesheet" href="%s?v=%d">',
-                asset('css/tagwerk-admin.css'),
-                filemtime(public_path('css/tagwerk-admin.css')),
+                asset('css/fahoba-admin.css'),
+                filemtime(public_path('css/fahoba-admin.css')),
             )))
 
             /*

@@ -24,7 +24,10 @@ use ZipArchive;
  */
 final class RecipeImport
 {
-    public const FORMAT = 'tagwerk-recipes';
+    public const FORMAT = 'fahoba-recipes';
+
+    /** Collections exported before the rename to Fahoba still import. */
+    private const LEGACY_FORMAT = 'tagwerk-recipes';
 
     public const VERSION = 1;
 
@@ -67,7 +70,7 @@ final class RecipeImport
         $found = LinkedRecipe::fromHtml($html, $url);
 
         if ($found === null) {
-            throw ValidationException::withMessages(['url' => __('The page has no recipe Tagwerk can read.')]);
+            throw ValidationException::withMessages(['url' => __('The page has no recipe Fahoba can read.')]);
         }
 
         $recipe = $this->create([...$found, 'source' => 'link']);
@@ -132,12 +135,12 @@ final class RecipeImport
                 ? json_decode((string) $zip->getFromName(self::MANIFEST), true)
                 : null;
 
-            if (! is_array($manifest) || ($manifest['format'] ?? null) !== self::FORMAT || ! is_array($manifest['recipes'] ?? null)) {
+            if (! is_array($manifest) || ! in_array($manifest['format'] ?? null, [self::FORMAT, self::LEGACY_FORMAT], true) || ! is_array($manifest['recipes'] ?? null)) {
                 throw ValidationException::withMessages(['file' => __('This is not a recipe collection.')]);
             }
 
             if (! is_int($manifest['version'] ?? null) || $manifest['version'] > self::VERSION) {
-                throw ValidationException::withMessages(['file' => __('This collection comes from a newer Tagwerk.')]);
+                throw ValidationException::withMessages(['file' => __('This collection comes from a newer Fahoba.')]);
             }
 
             if (count($manifest['recipes']) > self::MAX_RECIPES) {

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Tagwerk\PluginApi\Weather;
+namespace Fahoba\PluginApi\Weather;
 
 /** One hour of a day, as a row in the weather window. */
 final readonly class HourForecast

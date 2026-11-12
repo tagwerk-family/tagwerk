@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Tagwerk\Webhooks;
+namespace Fahoba\Webhooks;
 
-use Tagwerk\PluginApi\Areas\Area;
-use Tagwerk\PluginApi\Areas\OptIn;
+use Fahoba\PluginApi\Areas\Area;
+use Fahoba\PluginApi\Areas\OptIn;
 
 final class WebhooksArea implements Area, OptIn
 {
-    public const KEY = 'tagwerk/webhooks';
+    public const KEY = 'fahoba/webhooks';
 
     public function label(): string
     {

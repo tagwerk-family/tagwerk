@@ -1,4 +1,4 @@
-# Used by compose.standalone.yaml. TAGWERK_SITE comes from .env: a host name
+# Used by compose.standalone.yaml. FAHOBA_SITE comes from .env: a host name
 # gets a certificate automatically, ":80" serves plain HTTP for a proxy in
 # front of this one.
 {
@@ -9,7 +9,7 @@
 	}
 }
 
-{$TAGWERK_SITE} {
+{$FAHOBA_SITE} {
 	encode zstd gzip
 	reverse_proxy {
 		# Every app container, looked up again every few seconds: during

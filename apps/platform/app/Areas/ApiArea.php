@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App\Areas;
 
-use Tagwerk\PluginApi\Areas\Area;
-use Tagwerk\PluginApi\Areas\OptIn;
+use Fahoba\PluginApi\Areas\Area;
+use Fahoba\PluginApi\Areas\OptIn;
 
 /**
  * Tokens for other programs (`App\Auth\ApiTokens`). Off, no token of the

@@ -8,14 +8,14 @@ use App\Enums\ListKind;
 use App\Enums\ProviderArea;
 use App\Integrations\ProviderRegistry;
 use App\Models\ProviderAccount;
+use Fahoba\PluginApi\Connections\UsesCredentials;
+use Fahoba\PluginApi\Connections\UsesOAuth;
+use Fahoba\PluginApi\Lists\ListProvider;
 use Filament\Forms\Components\ColorPicker;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Schemas\Components\Utilities\Get;
 use Filament\Schemas\Schema;
-use Tagwerk\PluginApi\Connections\UsesCredentials;
-use Tagwerk\PluginApi\Connections\UsesOAuth;
-use Tagwerk\PluginApi\Lists\ListProvider;
 
 /** Without `household_id` — same reasoning as in `TaskForm`. */
 class ChecklistForm
@@ -42,7 +42,7 @@ class ChecklistForm
 
                 Select::make('list_provider')
                     ->label(__('Also push to'))
-                    ->placeholder(__('Nowhere — the list stays in Tagwerk'))
+                    ->placeholder(__('Nowhere — the list stays in Fahoba'))
 
                     /*
                      * From the registry: a new list service is offered here as

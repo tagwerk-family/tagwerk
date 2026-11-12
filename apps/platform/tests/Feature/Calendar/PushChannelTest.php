@@ -38,7 +38,7 @@ final class PushChannelTest extends TestCase
         ]);
 
         config([
-            'services.google.webhook_url' => 'https://tagwerk.test/api/calendar/google/webhook',
+            'services.google.webhook_url' => 'https://fahoba.test/api/calendar/google/webhook',
             'services.google.webhook_token' => 'channel-secret',
         ]);
     }
@@ -77,7 +77,7 @@ final class PushChannelTest extends TestCase
         $this->assertTrue($fresh->push_expires_at->isFuture());
 
         Http::assertSent(fn (Request $request): bool => str_contains($request->url(), '/events/watch')
-            && $request['address'] === 'https://tagwerk.test/api/calendar/google/webhook'
+            && $request['address'] === 'https://fahoba.test/api/calendar/google/webhook'
             && $request['token'] === 'channel-secret');
     }
 

@@ -8,17 +8,17 @@ use App\Enums\ProviderArea;
 use App\Exceptions\UnknownProvider;
 use App\Integrations\Plugins\PluginCatalog;
 use App\Models\ProviderAccount;
+use Fahoba\PluginApi\Calendar\CalendarProvider;
+use Fahoba\PluginApi\Connections\UsesCredentials;
+use Fahoba\PluginApi\Connections\UsesOAuth;
+use Fahoba\PluginApi\Geocoding\Geocoder;
+use Fahoba\PluginApi\Holidays\HolidaySource;
+use Fahoba\PluginApi\Lists\ListProvider;
+use Fahoba\PluginApi\Photos\PhotoSource;
+use Fahoba\PluginApi\Recipes\RecipeProvider;
+use Fahoba\PluginApi\SchoolHolidays\SchoolHolidaySource;
+use Fahoba\PluginApi\Weather\WeatherSource;
 use Illuminate\Contracts\Container\Container;
-use Tagwerk\PluginApi\Calendar\CalendarProvider;
-use Tagwerk\PluginApi\Connections\UsesCredentials;
-use Tagwerk\PluginApi\Connections\UsesOAuth;
-use Tagwerk\PluginApi\Geocoding\Geocoder;
-use Tagwerk\PluginApi\Holidays\HolidaySource;
-use Tagwerk\PluginApi\Lists\ListProvider;
-use Tagwerk\PluginApi\Photos\PhotoSource;
-use Tagwerk\PluginApi\Recipes\RecipeProvider;
-use Tagwerk\PluginApi\SchoolHolidays\SchoolHolidaySource;
-use Tagwerk\PluginApi\Weather\WeatherSource;
 
 /**
  * Finds the provider for a key.
@@ -27,7 +27,7 @@ use Tagwerk\PluginApi\Weather\WeatherSource;
  * call site show which contract comes back — and the domain services can ask
  * for capabilities without checking the return value.
  *
- * Built-in providers live in `config/tagwerk.php`, installed plugins come in
+ * Built-in providers live in `config/fahoba.php`, installed plugins come in
  * through the `PluginCatalog`. A provider is only instantiated when someone
  * asks for it, and then only once per request: a plugin with an expensive
  * constructor should not slow down every request that does not need it.
@@ -295,7 +295,7 @@ final class ProviderRegistry
     {
         return [
             ...$this->plugins->offered($family),
-            ...(array) config("tagwerk.providers.{$family}", []),
+            ...(array) config("fahoba.providers.{$family}", []),
         ];
     }
 }

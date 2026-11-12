@@ -1,7 +1,7 @@
 {
-  "name": "@tagwerk/client",
+  "name": "@fahoba/client",
   "version": "0.1.0",
-  "description": "Talk to a Tagwerk server from your own frontend: session, sign-in, realtime, and the rules the official app applies",
+  "description": "Talk to a Fahoba server from your own frontend: session, sign-in, realtime, and the rules the official app applies",
   "license": "MIT",
   "type": "module",
   "sideEffects": false,

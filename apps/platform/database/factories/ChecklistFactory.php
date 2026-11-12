@@ -29,7 +29,7 @@ final class ChecklistFactory extends Factory
     {
         return $this->state(fn (): array => [
             'kind' => ListKind::Shopping,
-            'list_provider' => 'tagwerk/bring',
+            'list_provider' => 'fahoba/bring',
         ]);
     }
 }

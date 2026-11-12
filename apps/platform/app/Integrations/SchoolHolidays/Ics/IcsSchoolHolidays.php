@@ -6,13 +6,13 @@ namespace App\Integrations\SchoolHolidays\Ics;
 
 use App\Support\OutboundHttp;
 use Carbon\CarbonImmutable;
+use Fahoba\PluginApi\Connections\ConnectedAccount;
+use Fahoba\PluginApi\Connections\CredentialField;
+use Fahoba\PluginApi\Connections\DescribesSetup;
+use Fahoba\PluginApi\Connections\UsesCredentials;
+use Fahoba\PluginApi\SchoolHolidays\SchoolHolidaySource;
+use Fahoba\PluginApi\SchoolHolidays\SchoolHolidaySuggestion;
 use Illuminate\Support\Facades\Cache;
-use Tagwerk\PluginApi\Connections\ConnectedAccount;
-use Tagwerk\PluginApi\Connections\CredentialField;
-use Tagwerk\PluginApi\Connections\DescribesSetup;
-use Tagwerk\PluginApi\Connections\UsesCredentials;
-use Tagwerk\PluginApi\SchoolHolidays\SchoolHolidaySource;
-use Tagwerk\PluginApi\SchoolHolidays\SchoolHolidaySuggestion;
 
 /**
  * Holidays from an ICS calendar published by a school, a country or a

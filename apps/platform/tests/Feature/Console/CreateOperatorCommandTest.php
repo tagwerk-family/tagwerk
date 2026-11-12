@@ -18,7 +18,7 @@ final class CreateOperatorCommandTest extends TestCase
 
     public function test_creates_an_operator_without_a_household(): void
     {
-        $this->artisan('tagwerk:create-operator', ['name' => 'Betrieb', 'email' => 'betrieb@example.test'])
+        $this->artisan('fahoba:create-operator', ['name' => 'Betrieb', 'email' => 'betrieb@example.test'])
             ->expectsQuestion('Password', 'long-enough-12')
             ->assertSuccessful();
 
@@ -30,13 +30,13 @@ final class CreateOperatorCommandTest extends TestCase
 
     public function test_refuses_a_short_password_and_a_taken_address(): void
     {
-        $this->artisan('tagwerk:create-operator', ['name' => 'Betrieb', 'email' => 'betrieb@example.test'])
+        $this->artisan('fahoba:create-operator', ['name' => 'Betrieb', 'email' => 'betrieb@example.test'])
             ->expectsQuestion('Password', 'too-short')
             ->assertFailed();
 
         User::factory()->create(['email' => 'taken@example.test']);
 
-        $this->artisan('tagwerk:create-operator', ['name' => 'Betrieb', 'email' => 'taken@example.test'])
+        $this->artisan('fahoba:create-operator', ['name' => 'Betrieb', 'email' => 'taken@example.test'])
             ->expectsQuestion('Password', 'long-enough-12')
             ->assertFailed();
 

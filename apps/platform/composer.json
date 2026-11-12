@@ -1,10 +1,10 @@
 {
     "$schema": "https://getcomposer.org/schema.json",
-    "name": "tagwerk/platform",
+    "name": "fahoba/platform",
     "type": "project",
-    "description": "Tagwerk: a family calendar for a wall tablet and the family's phones, several households on one server.",
+    "description": "Fahoba: a family calendar for a wall tablet and the family's phones, several households on one server.",
     "keywords": ["family", "calendar", "wall tablet", "kiosk", "self-hosted"],
-    "homepage": "https://github.com/tagwerk-family/tagwerk",
+    "homepage": "https://github.com/fahoba/fahoba",
     "license": "PolyForm-Shield-1.0.0",
     "require": {
         "php": "^8.5",
@@ -16,7 +16,7 @@
         "laravel/sanctum": "^4.0",
         "minishlink/web-push": "^11.0",
         "rlanvin/php-rrule": "^3.0",
-        "tagwerk/plugin-api": "^0.1"
+        "fahoba/plugin-api": "^0.1"
     },
     "require-dev": {
         "fakerphp/faker": "^1.23",
@@ -27,19 +27,19 @@
         "mockery/mockery": "^1.6",
         "nunomaduro/collision": "^8.6",
         "phpunit/phpunit": "^12.5.12",
-        "tagwerk/bring": "^0.1",
-        "tagwerk/caldav": "^0.1",
-        "tagwerk/example-area": "^0.1",
-        "tagwerk/example-language": "^0.1",
-        "tagwerk/example-theme": "^0.1",
-        "tagwerk/ics-feed": "^0.1",
-        "tagwerk/kochwiki": "^0.1",
-        "tagwerk/mcp": "^0.1",
-        "tagwerk/openapi": "^0.1",
-        "tagwerk/social-login": "^0.1",
-        "tagwerk/two-factor": "^0.1",
-        "tagwerk/webdav-backup": "^0.1",
-        "tagwerk/webhooks": "^0.1"
+        "fahoba/bring": "^0.1",
+        "fahoba/caldav": "^0.1",
+        "fahoba/example-area": "^0.1",
+        "fahoba/example-language": "^0.1",
+        "fahoba/example-theme": "^0.1",
+        "fahoba/ics-feed": "^0.1",
+        "fahoba/kochwiki": "^0.1",
+        "fahoba/mcp": "^0.1",
+        "fahoba/openapi": "^0.1",
+        "fahoba/social-login": "^0.1",
+        "fahoba/two-factor": "^0.1",
+        "fahoba/webdav-backup": "^0.1",
+        "fahoba/webhooks": "^0.1"
     },
     "autoload": {
         "psr-4": {

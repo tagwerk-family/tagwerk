@@ -16,19 +16,19 @@ use App\Services\Recipes\RecipeBook;
 use App\Services\Recipes\RecipeShopping;
 use App\Support\HouseholdContext;
 use Carbon\CarbonImmutable;
+use Fahoba\PluginApi\Recipes\Ingredient;
+use Fahoba\PluginApi\Recipes\RecipeProvider;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
 use Illuminate\Validation\Rule;
 use Illuminate\Validation\ValidationException;
-use Tagwerk\PluginApi\Recipes\Ingredient;
-use Tagwerk\PluginApi\Recipes\RecipeProvider;
 use Throwable;
 
 /**
  * The weekly meal plan on the tablet.
  *
- * The plan belongs to Tagwerk, the recipes come from the recipe provider. If
+ * The plan belongs to Fahoba, the recipes come from the recipe provider. If
  * that one is down the plan stays fully readable — the name is stored on the
  * entry, not just the recipe ID.
  */
@@ -292,7 +292,7 @@ final class WallMealController extends Controller
     /**
      * The pictures of the planned recipes, one lookup per source. A source
      * that is down costs the pictures, never the plan: the plan stays
-     * readable from what Tagwerk stored itself.
+     * readable from what Fahoba stored itself.
      *
      * @param  Collection<int, MealPlanEntry>  $entries
      * @return array<string, string|null>

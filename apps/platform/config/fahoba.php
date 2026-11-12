@@ -26,26 +26,26 @@ return [
     | First-party plugins
     |--------------------------------------------------------------------------
     |
-    | The Composer packages that may offer keys under `tagwerk/`. A key is
+    | The Composer packages that may offer keys under `fahoba/`. A key is
     | stored data (connections, meal plans, switched areas), so no other
-    | package may claim one — `tagwerk/bring` stays Tagwerk's own.
+    | package may claim one — `fahoba/bring` stays Fahoba's own.
     |
     */
 
     'first_party' => [
-        'tagwerk/bring',
-        'tagwerk/caldav',
-        'tagwerk/example-area',
-        'tagwerk/example-language',
-        'tagwerk/example-theme',
-        'tagwerk/ics-feed',
-        'tagwerk/kochwiki',
-        'tagwerk/mcp',
-        'tagwerk/openapi',
-        'tagwerk/social-login',
-        'tagwerk/two-factor',
-        'tagwerk/webdav-backup',
-        'tagwerk/webhooks',
+        'fahoba/bring',
+        'fahoba/caldav',
+        'fahoba/example-area',
+        'fahoba/example-language',
+        'fahoba/example-theme',
+        'fahoba/ics-feed',
+        'fahoba/kochwiki',
+        'fahoba/mcp',
+        'fahoba/openapi',
+        'fahoba/social-login',
+        'fahoba/two-factor',
+        'fahoba/webdav-backup',
+        'fahoba/webhooks',
     ],
 
     /*
@@ -119,7 +119,7 @@ return [
     |
     */
 
-    'photo_folders' => env('TAGWERK_PHOTO_FOLDERS'),
+    'photo_folders' => env('FAHOBA_PHOTO_FOLDERS'),
 
     /*
     |--------------------------------------------------------------------------
@@ -143,25 +143,25 @@ return [
     |
     | Comma-separated IPs or CIDR ranges that may reach /admin,
     | e.g. the tailnet `100.64.0.0/10`. Empty: reachable from anywhere. Behind
-    | a reverse proxy it needs TAGWERK_TRUSTED_PROXIES, otherwise every
+    | a reverse proxy it needs FAHOBA_TRUSTED_PROXIES, otherwise every
     | request comes from the proxy's address.
     |
     */
 
-    'admin_allowed_ips' => env('TAGWERK_ADMIN_ALLOWED_IPS'),
+    'admin_allowed_ips' => env('FAHOBA_ADMIN_ALLOWED_IPS'),
 
     /*
-    | Where "Move to Tagwerk Cloud" on the export page leads. Empty hides
+    | Where "Move to Fahoba Cloud" on the export page leads. Empty hides
     | the line; nothing else in the admin mentions the hosted service.
     */
-    'hosted_url' => env('TAGWERK_HOSTED_URL', ''),
+    'hosted_url' => env('FAHOBA_HOSTED_URL', ''),
 
     // Largest export the admin accepts for a move — Livewire's temporary
     // upload stops at 12 MB unless raised there and in php.ini and nginx
-    // too. Bigger ones: tagwerk:import-household --new.
-    'import_max_mb' => (int) env('TAGWERK_IMPORT_MAX_MB', 12),
+    // too. Bigger ones: fahoba:import-household --new.
+    'import_max_mb' => (int) env('FAHOBA_IMPORT_MAX_MB', 12),
 
-    'trusted_proxies' => env('TAGWERK_TRUSTED_PROXIES'),
+    'trusted_proxies' => env('FAHOBA_TRUSTED_PROXIES'),
 
     /*
     |--------------------------------------------------------------------------
@@ -174,7 +174,7 @@ return [
     |
     */
 
-    'csp' => env('TAGWERK_CSP', 'report-only'),
+    'csp' => env('FAHOBA_CSP', 'report-only'),
 
     /*
     |--------------------------------------------------------------------------
@@ -189,7 +189,7 @@ return [
     |
     */
 
-    'mail' => env('TAGWERK_MAIL', 'on'),
+    'mail' => env('FAHOBA_MAIL', 'on'),
 
     /*
     |--------------------------------------------------------------------------

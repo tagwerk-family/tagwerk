@@ -2,28 +2,28 @@
 
 declare(strict_types=1);
 
-namespace Tagwerk\Bring;
+namespace Fahoba\Bring;
 
 use Closure;
+use Fahoba\PluginApi\Connections\ConnectedAccount;
+use Fahoba\PluginApi\Connections\CredentialField;
+use Fahoba\PluginApi\Connections\DescribesSetup;
+use Fahoba\PluginApi\Connections\UsesCredentials;
+use Fahoba\PluginApi\Lists\ListItemDraft;
+use Fahoba\PluginApi\Lists\ListProvider;
+use Fahoba\PluginApi\Lists\ListsTargets;
+use Fahoba\PluginApi\Lists\RemoteList;
+use Fahoba\PluginApi\Lists\RemoteListItem;
+use Fahoba\PluginApi\Lists\SyncsItems;
 use Illuminate\Support\Str;
 use RuntimeException;
-use Tagwerk\PluginApi\Connections\ConnectedAccount;
-use Tagwerk\PluginApi\Connections\CredentialField;
-use Tagwerk\PluginApi\Connections\DescribesSetup;
-use Tagwerk\PluginApi\Connections\UsesCredentials;
-use Tagwerk\PluginApi\Lists\ListItemDraft;
-use Tagwerk\PluginApi\Lists\ListProvider;
-use Tagwerk\PluginApi\Lists\ListsTargets;
-use Tagwerk\PluginApi\Lists\RemoteList;
-use Tagwerk\PluginApi\Lists\RemoteListItem;
-use Tagwerk\PluginApi\Lists\SyncsItems;
 use Throwable;
 
 /**
  * Bring! as a shopping list that syncs both ways.
  *
  * Both ways because Bring is where voice assistants write: whoever tells
- * Alexa to add milk expects it on the wall. Tagwerk stays the list the
+ * Alexa to add milk expects it on the wall. Fahoba stays the list the
  * household works with; Bring is a second door into it.
  */
 final class BringListProvider implements DescribesSetup, ListProvider, ListsTargets, SyncsItems, UsesCredentials
@@ -32,7 +32,7 @@ final class BringListProvider implements DescribesSetup, ListProvider, ListsTarg
 
     public function key(): string
     {
-        return 'tagwerk/bring';
+        return 'fahoba/bring';
     }
 
     public function label(): string
@@ -54,9 +54,9 @@ final class BringListProvider implements DescribesSetup, ListProvider, ListsTarg
     {
         return [
             __('Sign in with the e-mail and password of your Bring account. If you sign in to Bring with Google or Apple, first set a password via “Forgot password” in the Bring app.'),
-            __('You choose afterwards, on the list in the admin panel, which Bring list belongs to which Tagwerk list.'),
+            __('You choose afterwards, on the list in the admin panel, which Bring list belongs to which Fahoba list.'),
             __('New items and ticks go both ways. Whatever is added there shows up here within minutes.'),
-            __('Bring has no official interface. If Bring changes something, only the sync fails — the list in Tagwerk stays.'),
+            __('Bring has no official interface. If Bring changes something, only the sync fails — the list in Fahoba stays.'),
         ];
     }
 
@@ -199,7 +199,7 @@ final class BringListProvider implements DescribesSetup, ListProvider, ListsTarg
 
     /**
      * The Bring list for a target: its ID, else a list of that name, else
-     * the one Bring opens by default. Tagwerk's "Einkaufsliste" and Bring's
+     * the one Bring opens by default. Fahoba's "Einkaufsliste" and Bring's
      * "Zuhause" rarely share a name, and the default is almost always meant.
      */
     private function list(ConnectedAccount $account, ?string $target): string

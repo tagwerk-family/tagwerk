@@ -40,7 +40,7 @@ return [
     |
     */
 
-    'version' => env('APP_VERSION') ?: env('TAGWERK_BUILD', 'dev'),
+    'version' => env('APP_VERSION') ?: env('FAHOBA_BUILD', 'dev'),
 
     /*
     |--------------------------------------------------------------------------

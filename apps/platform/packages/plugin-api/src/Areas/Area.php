@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Tagwerk\PluginApi\Areas;
+namespace Fahoba\PluginApi\Areas;
 
 /**
  * An area a plugin brings: `offer('areas', 'vendor/name', Class)`.

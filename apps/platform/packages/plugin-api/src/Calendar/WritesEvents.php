@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Tagwerk\PluginApi\Calendar;
+namespace Fahoba\PluginApi\Calendar;
 
 /**
  * Capability: create, change and delete events at the provider.
  *
- * Without it the event exists only in Tagwerk. That is not an exception
+ * Without it the event exists only in Fahoba. That is not an exception
  * branch but the way the built-in calendar works.
  */
 interface WritesEvents

@@ -24,7 +24,7 @@ use Illuminate\Database\Seeder;
  */
 final class CalendarSeeder extends Seeder
 {
-    private const ACCOUNT_LABEL = 'beispiel@tagwerk.invalid';
+    private const ACCOUNT_LABEL = 'beispiel@fahoba.invalid';
 
     public function run(): void
     {
@@ -74,7 +74,7 @@ final class CalendarSeeder extends Seeder
 
             $calendarsByPerson[$name] = Calendar::create([
                 'provider_account_id' => $source->id,
-                'external_id' => mb_strtolower($name).'@tagwerk.invalid',
+                'external_id' => mb_strtolower($name).'@fahoba.invalid',
                 'summary' => $name,
                 'color' => $color,
                 'timezone' => $household->timezone,

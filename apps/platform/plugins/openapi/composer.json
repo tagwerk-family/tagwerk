@@ -1,22 +1,22 @@
 {
-    "name": "tagwerk/openapi",
-    "description": "OpenAPI description of Tagwerk's API, generated from the routes",
+    "name": "fahoba/openapi",
+    "description": "OpenAPI description of Fahoba's API, generated from the routes",
     "type": "library",
     "version": "0.1.0",
     "license": "PolyForm-Shield-1.0.0",
     "require": {
         "php": "^8.5",
         "dedoc/scramble": "^0.13.50",
-        "tagwerk/plugin-api": "^0.1"
+        "fahoba/plugin-api": "^0.1"
     },
     "autoload": {
         "psr-4": {
-            "Tagwerk\\OpenApi\\": "src/"
+            "Fahoba\\OpenApi\\": "src/"
         }
     },
     "extra": {
-        "tagwerk": {
-            "provider": "Tagwerk\\OpenApi\\OpenApiServiceProvider"
+        "fahoba": {
+            "provider": "Fahoba\\OpenApi\\OpenApiServiceProvider"
         }
     }
 }

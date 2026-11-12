@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Tagwerk\PluginApi\Lists;
+namespace Fahoba\PluginApi\Lists;
 
-use Tagwerk\PluginApi\Connections\ConnectedAccount;
+use Fahoba\PluginApi\Connections\ConnectedAccount;
 
 /**
  * Capability: items travel both ways, not only out.

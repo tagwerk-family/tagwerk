@@ -7,12 +7,12 @@ namespace Tests\Feature\Plugins;
 use App\Integrations\Plugins\PluginCatalog;
 use App\Integrations\ProviderContracts;
 use App\Integrations\ProviderRegistry;
+use Fahoba\PluginApi\Connections\DescribesSetup;
+use Fahoba\PluginApi\Connections\UsesCredentials;
+use Fahoba\PluginApi\Connections\UsesOAuth;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
-use Tagwerk\PluginApi\Connections\DescribesSetup;
-use Tagwerk\PluginApi\Connections\UsesCredentials;
-use Tagwerk\PluginApi\Connections\UsesOAuth;
 use Tests\TestCase;
 
 /**
@@ -26,7 +26,7 @@ final class ProviderContractTest extends TestCase
     use RefreshDatabase;
 
     /**
-     * Areas that manage without a builtin provider. Lists live in Tagwerk
+     * Areas that manage without a builtin provider. Lists live in Fahoba
      * anyway; their providers only additionally push outwards.
      */
     private const WITHOUT_BUILTIN = ['lists'];
@@ -36,7 +36,7 @@ final class ProviderContractTest extends TestCase
     {
         $areas = [];
 
-        foreach (array_keys((array) config('tagwerk.providers')) as $area) {
+        foreach (array_keys((array) config('fahoba.providers')) as $area) {
             $areas[$area] = $registry->all($area);
         }
 
@@ -45,7 +45,7 @@ final class ProviderContractTest extends TestCase
 
     public function test_every_area_has_a_contract(): void
     {
-        foreach (array_keys((array) config('tagwerk.providers')) as $area) {
+        foreach (array_keys((array) config('fahoba.providers')) as $area) {
             $this->assertArrayHasKey($area, ProviderContracts::BASE, "Area {$area} without contract.");
         }
     }

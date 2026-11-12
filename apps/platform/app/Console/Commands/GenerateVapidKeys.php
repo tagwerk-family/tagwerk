@@ -9,7 +9,7 @@ use Minishlink\WebPush\VAPID;
 
 final class GenerateVapidKeys extends Command
 {
-    protected $signature = 'tagwerk:vapid-keys';
+    protected $signature = 'fahoba:vapid-keys';
 
     protected $description = 'Generates a VAPID key pair for Web Push';
 

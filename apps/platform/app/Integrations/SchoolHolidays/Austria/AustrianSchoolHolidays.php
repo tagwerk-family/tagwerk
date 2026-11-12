@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace App\Integrations\SchoolHolidays\Austria;
 
 use Carbon\CarbonImmutable;
-use Tagwerk\PluginApi\Connections\ConnectedAccount;
-use Tagwerk\PluginApi\SchoolHolidays\SchoolHolidaySource;
-use Tagwerk\PluginApi\SchoolHolidays\SchoolHolidaySuggestion;
+use Fahoba\PluginApi\Connections\ConnectedAccount;
+use Fahoba\PluginApi\SchoolHolidays\SchoolHolidaySource;
+use Fahoba\PluginApi\SchoolHolidays\SchoolHolidaySuggestion;
 use Yasumi\Yasumi;
 
 /**

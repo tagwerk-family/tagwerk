@@ -31,7 +31,7 @@ return [
     ],
 
     /*
-     * Web push to the phone PWA. `php artisan tagwerk:vapid-keys` generates
+     * Web push to the phone PWA. `php artisan fahoba:vapid-keys` generates
      * the keys once.
      *
      * Changing the public key invalidates all existing subscriptions — the

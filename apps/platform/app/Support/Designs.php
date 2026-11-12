@@ -5,11 +5,11 @@ declare(strict_types=1);
 namespace App\Support;
 
 use App\Integrations\Plugins\PluginCatalog;
+use Fahoba\PluginApi\Plugins\LoadReport;
+use Fahoba\PluginApi\Themes\Stylesheet;
+use Fahoba\PluginApi\Themes\Theme;
 use Illuminate\Container\Attributes\Singleton;
 use Illuminate\Contracts\Container\Container;
-use Tagwerk\PluginApi\Plugins\LoadReport;
-use Tagwerk\PluginApi\Themes\Stylesheet;
-use Tagwerk\PluginApi\Themes\Theme;
 use Throwable;
 
 /**

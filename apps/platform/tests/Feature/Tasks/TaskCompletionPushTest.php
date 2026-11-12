@@ -110,7 +110,7 @@ final class TaskCompletionPushTest extends TestCase
 
     /**
      * If the external service fails, the completion still stands: it is
-     * recorded in Tagwerk, and that is the authoritative answer.
+     * recorded in Fahoba, and that is the authoritative answer.
      */
     public function test_an_outage_outside_only_costs_the_report(): void
     {

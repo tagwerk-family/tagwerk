@@ -2,16 +2,16 @@
 
 declare(strict_types=1);
 
-namespace Tagwerk\Bring;
+namespace Fahoba\Bring;
 
 use Carbon\CarbonImmutable;
+use Fahoba\PluginApi\Connections\AuthorizationLost;
+use Fahoba\PluginApi\Connections\ConnectedAccount;
 use Illuminate\Http\Client\PendingRequest;
 use Illuminate\Http\Client\RequestException;
 use Illuminate\Http\Client\Response;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Http;
-use Tagwerk\PluginApi\Connections\AuthorizationLost;
-use Tagwerk\PluginApi\Connections\ConnectedAccount;
 use Throwable;
 
 /**
@@ -19,7 +19,7 @@ use Throwable;
  *
  * Bring publishes no API. Endpoints and the client key follow the
  * maintained `bring-api` library (Python, used by Home Assistant); if Bring
- * changes them, only the sync breaks — the list in Tagwerk stays.
+ * changes them, only the sync breaks — the list in Fahoba stays.
  *
  * Bring knows no OAuth: the household's email and password stay in the
  * account, encrypted, and the tokens from the login are kept next to them so

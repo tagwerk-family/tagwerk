@@ -19,7 +19,7 @@ Artisan::command('inspire', function () {
  * Fallback polling, because Google itself calls its notifications not
  * entirely reliable.
  */
-Schedule::command('tagwerk:sync-calendars')
+Schedule::command('fahoba:sync-calendars')
     ->everyFifteenMinutes()
     ->withoutOverlapping()
     ->onOneServer();
@@ -32,7 +32,7 @@ Schedule::command('tagwerk:sync-calendars')
  * Tasks from outside. Google Tasks has no notifications; for a wall tablet a
  * quarter of an hour is enough.
  */
-Schedule::command('tagwerk:sync-tasks')
+Schedule::command('fahoba:sync-tasks')
     ->everyFifteenMinutes()
     ->withoutOverlapping()
     ->onOneServer();
@@ -41,24 +41,24 @@ Schedule::command('tagwerk:sync-tasks')
  * Short, because a voice assistant fills the list at the provider: whoever
  * says "Milch" in the kitchen expects it on the wall shortly after.
  */
-Schedule::command('tagwerk:sync-lists')
+Schedule::command('fahoba:sync-lists')
     ->everyFiveMinutes()
     ->withoutOverlapping()
     ->onOneServer();
 
-Schedule::command('tagwerk:clear-done-items')
+Schedule::command('fahoba:clear-done-items')
     ->hourlyAt(41)
     ->onOneServer();
 
-Schedule::command('tagwerk:purge-household-archives')
+Schedule::command('fahoba:purge-household-archives')
     ->dailyAt('03:53')
     ->onOneServer();
 
-Schedule::command('tagwerk:purge-photo-trash')
+Schedule::command('fahoba:purge-photo-trash')
     ->dailyAt('03:43')
     ->onOneServer();
 
-Schedule::command('tagwerk:renew-push-channels')
+Schedule::command('fahoba:renew-push-channels')
     ->dailyAt('03:17')
     ->onOneServer();
 
@@ -66,7 +66,7 @@ Schedule::command('tagwerk:renew-push-channels')
  * Every quarter hour, because the summary is due in each household's own
  * time zone — the command decides by itself whose evening it is right now.
  */
-Schedule::command('tagwerk:send-daily-summary')
+Schedule::command('fahoba:send-daily-summary')
     ->everyFifteenMinutes()
     ->withoutOverlapping()
     ->onOneServer();

@@ -21,6 +21,9 @@ use App\Services\DevicePairingService;
 use App\Services\Lists\ListImportService;
 use App\Services\Lists\ListSyncService;
 use App\Support\HouseholdContext;
+use Fahoba\Bring\BringListProvider;
+use Fahoba\PluginApi\Connections\AuthorizationLost;
+use Fahoba\PluginApi\Lists\ListItemDraft;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\Client\Request;
 use Illuminate\Support\Facades\DB;
@@ -28,9 +31,6 @@ use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Queue;
 use Livewire\Livewire;
-use Tagwerk\Bring\BringListProvider;
-use Tagwerk\PluginApi\Connections\AuthorizationLost;
-use Tagwerk\PluginApi\Lists\ListItemDraft;
 use Tests\TestCase;
 
 /**
@@ -124,7 +124,7 @@ final class BringTest extends TestCase
         }
     }
 
-    public function test_connecting_pairs_the_bring_lists_with_tagwerk_lists(): void
+    public function test_connecting_pairs_the_bring_lists_with_fahoba_lists(): void
     {
         $this->fakeBring(items: ['purchase' => [['uuid' => 'u1', 'itemId' => 'Eier', 'specification' => '']]]);
 
@@ -180,7 +180,7 @@ final class BringTest extends TestCase
 
         Livewire::test(EditChecklist::class, ['record' => $list->getRouteKey()])
             ->fillForm([
-                'list_provider' => 'tagwerk/bring',
+                'list_provider' => 'fahoba/bring',
                 'list_account_id' => $account->id,
                 'list_target' => 'list-shop',
             ])
@@ -321,7 +321,7 @@ final class BringTest extends TestCase
             'list_account_id' => $this->account(['household_id' => $suspended->id])->id,
         ]));
 
-        $this->artisan('tagwerk:sync-lists')->assertSuccessful();
+        $this->artisan('fahoba:sync-lists')->assertSuccessful();
 
         Queue::assertPushed(SyncListJob::class, 1);
         Queue::assertPushed(SyncListJob::class, fn (SyncListJob $job): bool => $job->checklistId === $synced->id);
@@ -363,7 +363,7 @@ final class BringTest extends TestCase
         return ProviderAccount::factory()->create([
             'household_id' => $this->household->id,
             'area' => ProviderArea::Lists,
-            'provider' => 'tagwerk/bring',
+            'provider' => 'fahoba/bring',
             'access_token' => null,
             'refresh_token' => null,
             'token_expires_at' => null,
@@ -378,7 +378,7 @@ final class BringTest extends TestCase
         return Checklist::factory()->create([
             'household_id' => $this->household->id,
             'name' => 'Einkauf',
-            'list_provider' => 'tagwerk/bring',
+            'list_provider' => 'fahoba/bring',
             'list_account_id' => fn (): int => (int) $this->account()->id,
             ...$attributes,
         ]);

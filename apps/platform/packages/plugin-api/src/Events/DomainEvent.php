@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Tagwerk\PluginApi\Events;
+namespace Fahoba\PluginApi\Events;
 
 use Illuminate\Foundation\Events\Dispatchable;
 

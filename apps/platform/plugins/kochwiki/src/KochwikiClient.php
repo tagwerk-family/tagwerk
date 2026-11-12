@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Tagwerk\Kochwiki;
+namespace Fahoba\Kochwiki;
 
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Sleep;
@@ -182,6 +182,6 @@ final class KochwikiClient
     {
         $contact = (string) config('mail.from.address');
 
-        return 'Tagwerk/1.0 (+'.config('app.url').($contact !== '' ? '; '.$contact : '').')';
+        return 'Fahoba/1.0 (+'.config('app.url').($contact !== '' ? '; '.$contact : '').')';
     }
 }

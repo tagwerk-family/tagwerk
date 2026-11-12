@@ -117,7 +117,7 @@ export function useAgenda() {
 
       // The service worker answered from its cache: the display is
       // correct but no longer current.
-      stale.value = response.headers.get('x-tagwerk-cache') === 'hit'
+      stale.value = response.headers.get('x-fahoba-cache') === 'hit'
     }
     catch (error: unknown) {
       if (request !== latestRequest) {

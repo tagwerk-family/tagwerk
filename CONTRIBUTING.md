@@ -1,6 +1,6 @@
-# Contributing to Tagwerk
+# Contributing to Fahoba
 
-Thanks for wanting to help. Tagwerk is source-available under the
+Thanks for wanting to help. Fahoba is source-available under the
 [PolyForm Shield License 1.0.0](LICENSE): anyone may read, run and change
 it for themselves; offering it to others as a hosted service or a competing
 product is reserved for the licensor.
@@ -27,13 +27,13 @@ which is why a pull request cannot be merged without it.
   that cost time once already. The reasons behind the
   design live in [`docs/architecture.md`](docs/architecture.md).
 - Questions and ideas go to
-  [Discussions](https://github.com/tagwerk-family/tagwerk/discussions), not issues.
+  [Discussions](https://github.com/fahoba/fahoba/discussions), not issues.
 
 ## Plugins instead of pull requests
 
 Much of what a household wants — a new calendar service, a tile for the
 bins, a recipe server — fits a plugin better than a change to the core. A
-plugin builds on `tagwerk/plugin-api` (MIT), so it may carry any licence
+plugin builds on `fahoba/plugin-api` (MIT), so it may carry any licence
 and needs no contributor grant. Start with
 [`docs/plugins.md`](docs/plugins.md); its *Good first plugins* list has
 ideas, and its *Directory* takes a pull request with your plugin's row.

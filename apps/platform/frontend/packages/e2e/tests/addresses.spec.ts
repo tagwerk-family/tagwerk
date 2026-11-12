@@ -1,7 +1,7 @@
 import { expect, test } from '@playwright/test'
 
 /*
- * Two applications live side by side under https://tagwerk.test: the app
+ * Two applications live side by side under https://fahoba.test: the app
  * (wall and phone) at the root and Laravel for /api and /admin. These tests
  * check the split itself — that the Laravel welcome page does not answer
  * again and one does not get in the other's way.
@@ -10,7 +10,7 @@ import { expect, test } from '@playwright/test'
 test('/ serves the wall instead of the Laravel start page', async ({ page }) => {
   await page.goto('/')
 
-  await expect(page.getByRole('heading', { name: 'Willkommen bei Tagwerk' })).toBeVisible()
+  await expect(page.getByRole('heading', { name: 'Willkommen bei Fahoba' })).toBeVisible()
   await expect(page.getByText('Laravel')).toHaveCount(0)
 })
 
@@ -24,7 +24,7 @@ test('/ offers the phone sign-in to whoever is not a tablet, and back', async ({
 
   await page.getByTestId('entry-back').click()
 
-  await expect(page.getByRole('heading', { name: 'Willkommen bei Tagwerk' })).toBeVisible()
+  await expect(page.getByRole('heading', { name: 'Willkommen bei Fahoba' })).toBeVisible()
 })
 
 test('/admin stays the admin panel although the wall registers a service worker', async ({ page }) => {

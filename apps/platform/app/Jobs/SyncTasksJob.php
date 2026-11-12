@@ -6,10 +6,10 @@ namespace App\Jobs;
 
 use App\Models\ProviderAccount;
 use App\Services\Tasks\TaskImportService;
+use Fahoba\PluginApi\Connections\AuthorizationLost;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Queue\Queueable;
 use Illuminate\Support\Facades\Log;
-use Tagwerk\PluginApi\Connections\AuthorizationLost;
 
 /**
  * Imports the tasks of one connection.

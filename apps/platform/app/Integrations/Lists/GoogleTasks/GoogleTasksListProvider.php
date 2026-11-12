@@ -6,14 +6,14 @@ namespace App\Integrations\Lists\GoogleTasks;
 
 use App\Integrations\Google\GoogleOAuth;
 use App\Integrations\Google\GoogleTasksClient;
-use Tagwerk\PluginApi\Connections\ConnectedAccount;
-use Tagwerk\PluginApi\Connections\DescribesSetup;
-use Tagwerk\PluginApi\Connections\TokenSet;
-use Tagwerk\PluginApi\Connections\UsesOAuth;
-use Tagwerk\PluginApi\Lists\ListItemDraft;
-use Tagwerk\PluginApi\Lists\ListProvider;
-use Tagwerk\PluginApi\Lists\ListsTargets;
-use Tagwerk\PluginApi\Lists\RemoteList;
+use Fahoba\PluginApi\Connections\ConnectedAccount;
+use Fahoba\PluginApi\Connections\DescribesSetup;
+use Fahoba\PluginApi\Connections\TokenSet;
+use Fahoba\PluginApi\Connections\UsesOAuth;
+use Fahoba\PluginApi\Lists\ListItemDraft;
+use Fahoba\PluginApi\Lists\ListProvider;
+use Fahoba\PluginApi\Lists\ListsTargets;
+use Fahoba\PluginApi\Lists\RemoteList;
 
 /**
  * Google Tasks as a target for shopping items.
@@ -23,7 +23,7 @@ use Tagwerk\PluginApi\Lists\RemoteList;
  * connected their task lists along with it. They are two rows among the
  * connections, to be disconnected separately.
  *
- * One way like every list provider: Tagwerk reads nothing back, so an outage
+ * One way like every list provider: Fahoba reads nothing back, so an outage
  * only costs a convenience.
  */
 final class GoogleTasksListProvider implements DescribesSetup, ListProvider, ListsTargets, UsesOAuth
@@ -56,7 +56,7 @@ final class GoogleTasksListProvider implements DescribesSetup, ListProvider, Lis
     public function setupNotes(): array
     {
         return [
-            __('Items only go out — ticking off happens in Tagwerk.'),
+            __('Items only go out — ticking off happens in Fahoba.'),
             __('You choose the target list afterwards in the overview.'),
             __('This approval only covers lists. To bring in your tasks, connect Google Tasks a second time as tasks.'),
         ];

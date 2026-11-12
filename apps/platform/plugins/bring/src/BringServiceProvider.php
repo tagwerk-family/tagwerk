@@ -2,15 +2,15 @@
 
 declare(strict_types=1);
 
-namespace Tagwerk\Bring;
+namespace Fahoba\Bring;
 
-use Tagwerk\PluginApi\Plugins\Catalog;
-use Tagwerk\PluginApi\Plugins\Plugin;
+use Fahoba\PluginApi\Plugins\Catalog;
+use Fahoba\PluginApi\Plugins\Plugin;
 
 final class BringServiceProvider extends Plugin
 {
     protected function registerPlugin(): void
     {
-        $this->app->make(Catalog::class)->offer('lists', 'tagwerk/bring', BringListProvider::class);
+        $this->app->make(Catalog::class)->offer('lists', 'fahoba/bring', BringListProvider::class);
     }
 }

@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Storage;
 /** Exports and unfinished imports are copies of a family's data; they do not linger. */
 final class PurgeHouseholdArchivesCommand extends Command
 {
-    protected $signature = 'tagwerk:purge-household-archives';
+    protected $signature = 'fahoba:purge-household-archives';
 
     protected $description = 'Deletes household exports and uploads older than a week';
 

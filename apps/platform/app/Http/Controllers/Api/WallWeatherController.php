@@ -8,8 +8,8 @@ use App\Http\Controllers\Controller;
 use App\Integrations\ProviderRegistry;
 use App\Models\Household;
 use App\Support\HouseholdContext;
+use Fahoba\PluginApi\Weather\TemperatureUnit;
 use Illuminate\Http\JsonResponse;
-use Tagwerk\PluginApi\Weather\TemperatureUnit;
 
 /**
  * The weather at the household's location.

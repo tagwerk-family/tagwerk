@@ -11,7 +11,7 @@ use Tests\TestCase;
  * A released migration stays as it was. A server that ran it never runs it
  * again, so a change would only reach fresh installations — and during a
  * rollout the previous release still serves on the same schema. Fixes go
- * into a new migration; `tagwerk:seal-migrations` seals at release time.
+ * into a new migration; `fahoba:seal-migrations` seals at release time.
  */
 final class MigrationsAppendOnlyTest extends TestCase
 {
@@ -27,7 +27,7 @@ final class MigrationsAppendOnlyTest extends TestCase
 
     public function test_the_seal_covers_the_released_migrations(): void
     {
-        $this->assertNotEmpty(app(MigrationSeal::class)->sealed(), 'Run php artisan tagwerk:seal-migrations.');
+        $this->assertNotEmpty(app(MigrationSeal::class)->sealed(), 'Run php artisan fahoba:seal-migrations.');
     }
 
     /**

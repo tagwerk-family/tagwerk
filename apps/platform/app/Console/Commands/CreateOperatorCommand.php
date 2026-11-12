@@ -17,7 +17,7 @@ use function Laravel\Prompts\password;
  */
 final class CreateOperatorCommand extends Command
 {
-    protected $signature = 'tagwerk:create-operator
+    protected $signature = 'fahoba:create-operator
         {name : Shown in the admin panel}
         {email : Login of the operator}';
 

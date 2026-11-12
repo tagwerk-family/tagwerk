@@ -10,6 +10,7 @@ use App\Integrations\Plugins\PluginCatalog;
 use App\Integrations\ProviderContracts;
 use App\Models\User;
 use BackedEnum;
+use Fahoba\PluginApi\Plugins\Extension;
 use Filament\Actions\Action;
 use Filament\Forms\Components\Toggle;
 use Filament\Notifications\Notification;
@@ -22,7 +23,6 @@ use Filament\Schemas\Components\Text;
 use Filament\Schemas\Components\Utilities\Get;
 use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
-use Tagwerk\PluginApi\Plugins\Extension;
 use UnitEnum;
 
 /**

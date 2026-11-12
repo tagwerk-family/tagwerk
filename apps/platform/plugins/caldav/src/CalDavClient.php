@@ -2,18 +2,18 @@
 
 declare(strict_types=1);
 
-namespace Tagwerk\CalDav;
+namespace Fahoba\CalDav;
 
 use App\Support\OutboundHttp;
 use Carbon\CarbonImmutable;
 use DOMDocument;
 use DOMElement;
 use DOMXPath;
+use Fahoba\PluginApi\Calendar\EventConflict;
 use Illuminate\Http\Client\Response;
-use Tagwerk\PluginApi\Calendar\EventConflict;
 
 /**
- * The few WebDAV/CalDAV requests Tagwerk needs, through `OutboundHttp`:
+ * The few WebDAV/CalDAV requests Fahoba needs, through `OutboundHttp`:
  * the address comes from a household and must not point into the server's
  * own network.
  */
@@ -263,7 +263,7 @@ final class CalDavClient
     }
 
     /**
-     * Task-only lists (VTODO) are calendars too; Tagwerk wants the ones with events.
+     * Task-only lists (VTODO) are calendars too; Fahoba wants the ones with events.
      *
      * @param  array<string, DOMElement>  $props
      */

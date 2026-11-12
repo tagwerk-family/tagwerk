@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Tagwerk\PluginApi\Dashboard;
+namespace Fahoba\PluginApi\Dashboard;
 
 /** The household a tile is drawn for — what a widget may know about it. */
 final readonly class WidgetContext

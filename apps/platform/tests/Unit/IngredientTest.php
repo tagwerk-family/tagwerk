@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Tests\Unit;
 
+use Fahoba\PluginApi\Recipes\Ingredient;
 use PHPUnit\Framework\Attributes\DataProvider;
-use Tagwerk\PluginApi\Recipes\Ingredient;
 use Tests\TestCase;
 
 final class IngredientTest extends TestCase

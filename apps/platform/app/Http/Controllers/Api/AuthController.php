@@ -18,6 +18,7 @@ use App\Support\Abilities;
 use App\Support\HouseholdContext;
 use App\Support\Locale;
 use App\Support\OutgoingMail;
+use Fahoba\PluginApi\Households\Notice;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cookie;
@@ -25,7 +26,6 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rule;
 use Illuminate\Validation\ValidationException;
 use Laravel\Sanctum\PersonalAccessToken;
-use Tagwerk\PluginApi\Households\Notice;
 
 /**
  * Personal login for the phone PWA.

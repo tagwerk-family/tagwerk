@@ -7,9 +7,9 @@ namespace App\Services\Holidays;
 use App\Integrations\ProviderRegistry;
 use App\Models\Household;
 use Carbon\CarbonImmutable;
+use Fahoba\PluginApi\Holidays\HolidayEntry;
 use Illuminate\Contracts\Cache\Repository as Cache;
 use Illuminate\Support\Collection;
-use Tagwerk\PluginApi\Holidays\HolidayEntry;
 
 /**
  * A household's public holidays in a period.

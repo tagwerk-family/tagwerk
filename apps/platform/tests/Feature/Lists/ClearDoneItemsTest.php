@@ -27,7 +27,7 @@ final class ClearDoneItemsTest extends TestCase
             });
         });
 
-        $this->artisan('tagwerk:clear-done-items')->assertSuccessful();
+        $this->artisan('fahoba:clear-done-items')->assertSuccessful();
 
         foreach ($lists as $list) {
             $left = app(HouseholdContext::class)->forId(

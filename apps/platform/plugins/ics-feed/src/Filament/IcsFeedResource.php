@@ -2,13 +2,15 @@
 
 declare(strict_types=1);
 
-namespace Tagwerk\IcsFeed\Filament;
+namespace Fahoba\IcsFeed\Filament;
 
 use App\Filament\Concerns\BelongsToArea;
 use App\Filament\NavigationGroup;
 use App\Models\Person;
 use App\Support\HouseholdTimezone;
 use BackedEnum;
+use Fahoba\IcsFeed\IcsFeed;
+use Fahoba\IcsFeed\IcsFeedArea;
 use Filament\Actions\Action;
 use Filament\Actions\DeleteAction;
 use Filament\Actions\EditAction;
@@ -22,8 +24,6 @@ use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
-use Tagwerk\IcsFeed\IcsFeed;
-use Tagwerk\IcsFeed\IcsFeedArea;
 use UnitEnum;
 
 /**

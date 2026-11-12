@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Tagwerk\IcsFeed;
+namespace Fahoba\IcsFeed;
 
 use App\Models\Event;
 use App\Models\Household;
@@ -32,7 +32,7 @@ final class IcsCalendar
         $host = (string) parse_url((string) config('app.url'), PHP_URL_HOST);
 
         $calendar = new VCalendar([
-            'PRODID' => '-//Tagwerk//ICS feed//EN',
+            'PRODID' => '-//Fahoba//ICS feed//EN',
             'X-WR-CALNAME' => $feed->name,
             'X-WR-TIMEZONE' => $zone,
         ]);

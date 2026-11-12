@@ -31,10 +31,10 @@ export default defineNuxtConfig({
 
   app: {
     head: {
-      title: 'Tagwerk',
+      title: 'Fahoba',
       htmlAttrs: { lang: 'de' },
       link: [
-        { rel: 'icon', type: 'image/svg+xml', href: '/icon.svg' },
+        { rel: 'icon', type: 'image/svg+xml', href: '/favicon.svg' },
         { rel: 'manifest', href: '/manifest.webmanifest' },
       ],
       meta: [
@@ -64,7 +64,7 @@ export default defineNuxtConfig({
     server: {
       // DDEV's router addresses the dev server under the project domain.
       // Otherwise Vite rejects foreign hosts with 403.
-      allowedHosts: ['tagwerk.test'],
+      allowedHosts: ['fahoba.test'],
     },
   },
 

@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace Tests\Unit;
 
+use Fahoba\ExampleTheme\Fjord;
+use Fahoba\PluginApi\Testing\PluginAssertions;
+use Fahoba\PluginApi\Themes\Stylesheet;
 use PHPUnit\Framework\Attributes\DataProvider;
-use Tagwerk\ExampleTheme\Fjord;
-use Tagwerk\PluginApi\Testing\PluginAssertions;
-use Tagwerk\PluginApi\Themes\Stylesheet;
 use Tests\Fixtures\Themes\FixtureTheme;
 use Tests\TestCase;
 

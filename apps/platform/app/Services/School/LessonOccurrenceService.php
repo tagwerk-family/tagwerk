@@ -14,8 +14,8 @@ use App\Models\Person;
 use App\Models\SchoolClosure;
 use App\Services\Holidays\HolidayService;
 use Carbon\CarbonImmutable;
+use Fahoba\PluginApi\Holidays\HolidayEntry;
 use Illuminate\Support\Collection;
-use Tagwerk\PluginApi\Holidays\HolidayEntry;
 
 /**
  * Expands the timetable for a period.

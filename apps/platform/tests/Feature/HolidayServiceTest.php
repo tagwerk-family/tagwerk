@@ -7,9 +7,9 @@ namespace Tests\Feature;
 use App\Models\Household;
 use App\Services\Holidays\HolidayService;
 use Carbon\CarbonImmutable;
+use Fahoba\PluginApi\Holidays\HolidayEntry;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Cache;
-use Tagwerk\PluginApi\Holidays\HolidayEntry;
 use Tests\TestCase;
 
 final class HolidayServiceTest extends TestCase

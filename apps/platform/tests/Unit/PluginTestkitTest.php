@@ -4,20 +4,20 @@ declare(strict_types=1);
 
 namespace Tests\Unit;
 
+use Fahoba\PluginApi\Dashboard\DataWidget;
+use Fahoba\PluginApi\Dashboard\HandlesActions;
+use Fahoba\PluginApi\Dashboard\HasSettings;
+use Fahoba\PluginApi\Dashboard\SettingField;
+use Fahoba\PluginApi\Dashboard\WidgetContent;
+use Fahoba\PluginApi\Dashboard\WidgetContext;
+use Fahoba\PluginApi\Languages\Reference;
+use Fahoba\PluginApi\Testing\PluginAssertions;
 use Illuminate\Support\Arr;
 use PHPUnit\Framework\AssertionFailedError;
 use PHPUnit\Framework\TestCase;
-use Tagwerk\PluginApi\Dashboard\DataWidget;
-use Tagwerk\PluginApi\Dashboard\HandlesActions;
-use Tagwerk\PluginApi\Dashboard\HasSettings;
-use Tagwerk\PluginApi\Dashboard\SettingField;
-use Tagwerk\PluginApi\Dashboard\WidgetContent;
-use Tagwerk\PluginApi\Dashboard\WidgetContext;
-use Tagwerk\PluginApi\Languages\Reference;
-use Tagwerk\PluginApi\Testing\PluginAssertions;
 use Tests\Fixtures\Languages\Italian;
 
-/** The testkit a plugin author runs without a Tagwerk checkout. */
+/** The testkit a plugin author runs without a Fahoba checkout. */
 final class PluginTestkitTest extends TestCase
 {
     use PluginAssertions;
@@ -64,7 +64,7 @@ final class PluginTestkitTest extends TestCase
     {
         $this->assertPluginKey('acme/waste');
 
-        foreach (['waste', 'tagwerk/waste', 'Acme/Waste'] as $key) {
+        foreach (['waste', 'fahoba/waste', 'Acme/Waste'] as $key) {
             try {
                 $this->assertPluginKey($key);
             } catch (AssertionFailedError) {
@@ -136,7 +136,7 @@ final class CompletePack extends Italian
             return self::$directory;
         }
 
-        $directory = sys_get_temp_dir().'/tagwerk-complete-pack-'.getmypid();
+        $directory = sys_get_temp_dir().'/fahoba-complete-pack-'.getmypid();
         $reference = Reference::load();
 
         if (! is_dir("{$directory}/backend/it")) {

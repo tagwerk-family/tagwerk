@@ -1,21 +1,21 @@
 {
-    "name": "tagwerk/webdav-backup",
+    "name": "fahoba/webdav-backup",
     "description": "Nightly backup of database and uploads to a WebDAV folder — Nextcloud, a NAS, a storage box",
     "type": "library",
     "version": "0.1.0",
     "license": "PolyForm-Shield-1.0.0",
     "require": {
         "php": "^8.5",
-        "tagwerk/plugin-api": "^0.1"
+        "fahoba/plugin-api": "^0.1"
     },
     "autoload": {
         "psr-4": {
-            "Tagwerk\\WebDavBackup\\": "src/"
+            "Fahoba\\WebDavBackup\\": "src/"
         }
     },
     "extra": {
-        "tagwerk": {
-            "provider": "Tagwerk\\WebDavBackup\\WebDavBackupServiceProvider"
+        "fahoba": {
+            "provider": "Fahoba\\WebDavBackup\\WebDavBackupServiceProvider"
         }
     }
 }

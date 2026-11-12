@@ -7,6 +7,7 @@ namespace App\Http\Middleware;
 use App\Models\PersonalAccessToken;
 use Closure;
 use Illuminate\Http\Request;
+use Symfony\Component\HttpFoundation\Cookie;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
@@ -33,7 +34,21 @@ use Symfony\Component\HttpFoundation\Response;
  */
 final class DeviceTokenFromCookie
 {
-    public const COOKIE = 'tagwerk_device_token';
+    public const COOKIE = 'fahoba_device_token';
+
+    public static function cookie(string $token, bool $secure): Cookie
+    {
+        return cookie()->forever(
+            self::COOKIE,
+            $token,
+            path: '/',
+            domain: null,
+            secure: $secure,
+            httpOnly: true,
+            raw: false,
+            sameSite: 'lax',
+        );
+    }
 
     public function handle(Request $request, Closure $next): Response
     {

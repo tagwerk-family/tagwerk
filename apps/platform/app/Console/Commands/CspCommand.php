@@ -14,14 +14,14 @@ use Illuminate\Console\Command;
  */
 final class CspCommand extends Command
 {
-    protected $signature = 'tagwerk:csp';
+    protected $signature = 'fahoba:csp';
 
     protected $description = 'Prints the Content Security Policy of the app as an nginx add_header line';
 
     public function handle(ContentSecurityPolicy $policy): int
     {
         $this->line($policy->mode() === 'off'
-            ? '# Content Security Policy switched off (TAGWERK_CSP=off).'
+            ? '# Content Security Policy switched off (FAHOBA_CSP=off).'
             : sprintf('add_header %s "%s" always;', $policy->headerName(), $policy->forApp()));
 
         return self::SUCCESS;

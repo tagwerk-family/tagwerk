@@ -6,11 +6,11 @@ namespace App\Filament\Pages;
 
 use App\Support\ReadOnlyAdmin;
 use BackedEnum;
+use Fahoba\PluginApi\Households\AvailableWhileReadOnly;
 use Filament\Pages\Page;
 use Filament\Schemas\Components\Text;
 use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
-use Tagwerk\PluginApi\Households\AvailableWhileReadOnly;
 
 /**
  * Where every admin page of a read-only household leads. Only there.

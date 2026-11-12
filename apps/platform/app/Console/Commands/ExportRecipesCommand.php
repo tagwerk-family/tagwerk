@@ -14,7 +14,7 @@ use Illuminate\Console\Command;
  */
 final class ExportRecipesCommand extends Command
 {
-    protected $signature = 'tagwerk:export-recipes {household : Household id} {file : Path of the ZIP to write}';
+    protected $signature = 'fahoba:export-recipes {household : Household id} {file : Path of the ZIP to write}';
 
     protected $description = 'Writes a household\'s own recipes with photos into a ZIP';
 

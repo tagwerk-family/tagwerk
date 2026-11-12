@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Tagwerk\SocialLogin;
+namespace Fahoba\SocialLogin;
 
 use App\Auth\AppToken;
 use App\Auth\SecondFactors;
@@ -22,7 +22,7 @@ use Symfony\Component\HttpFoundation\RedirectResponse as SymfonyRedirect;
  * started: in the app with its token cookie, or in the admin panel with the
  * web session — under the same rules as a password.
  *
- * Deliberately not behind TAGWERK_ADMIN_ALLOWED_IPS: the app's sign-in is
+ * Deliberately not behind FAHOBA_ADMIN_ALLOWED_IPS: the app's sign-in is
  * public, phones are on the move.
  */
 final class SocialLoginController extends Controller

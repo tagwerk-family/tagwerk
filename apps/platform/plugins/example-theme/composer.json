@@ -1,21 +1,21 @@
 {
-    "name": "tagwerk/example-theme",
+    "name": "fahoba/example-theme",
     "description": "A design pack: cool colours and rounder corners for wall and phone — template and test bed",
     "type": "library",
     "version": "0.1.0",
     "license": "MIT",
     "require": {
         "php": "^8.5",
-        "tagwerk/plugin-api": "^0.1"
+        "fahoba/plugin-api": "^0.1"
     },
     "autoload": {
         "psr-4": {
-            "Tagwerk\\ExampleTheme\\": "src/"
+            "Fahoba\\ExampleTheme\\": "src/"
         }
     },
     "extra": {
-        "tagwerk": {
-            "provider": "Tagwerk\\ExampleTheme\\ExampleThemePlugin"
+        "fahoba": {
+            "provider": "Fahoba\\ExampleTheme\\ExampleThemePlugin"
         }
     }
 }

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Tagwerk\PluginApi\Calendar;
+namespace Fahoba\PluginApi\Calendar;
 
 /**
  * What every calendar provider must be able to do: name itself.
@@ -14,7 +14,7 @@ namespace Tagwerk\PluginApi\Calendar;
  */
 interface CalendarProvider
 {
-    /** Key in the database and in config/tagwerk.php. */
+    /** Key in the database and in config/fahoba.php. */
     public function key(): string;
 
     /** Name for the admin and the wall. */

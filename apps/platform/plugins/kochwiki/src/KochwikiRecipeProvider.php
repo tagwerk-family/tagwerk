@@ -2,20 +2,20 @@
 
 declare(strict_types=1);
 
-namespace Tagwerk\Kochwiki;
+namespace Fahoba\Kochwiki;
 
 use App\Enums\ConnectionStatus;
 use App\Enums\ProviderArea;
 use App\Models\CatalogRecipe;
 use App\Models\ProviderAccount;
 use App\Support\Recipes\RecipeSearch;
+use Fahoba\PluginApi\Connections\DescribesSetup;
+use Fahoba\PluginApi\Connections\UsesCredentials;
+use Fahoba\PluginApi\Recipes\DescribesRecipes;
+use Fahoba\PluginApi\Recipes\RecipeDetail;
+use Fahoba\PluginApi\Recipes\RecipeProvider;
+use Fahoba\PluginApi\Recipes\RecipeQuery;
 use Illuminate\Database\Eloquent\Builder;
-use Tagwerk\PluginApi\Connections\DescribesSetup;
-use Tagwerk\PluginApi\Connections\UsesCredentials;
-use Tagwerk\PluginApi\Recipes\DescribesRecipes;
-use Tagwerk\PluginApi\Recipes\RecipeDetail;
-use Tagwerk\PluginApi\Recipes\RecipeProvider;
-use Tagwerk\PluginApi\Recipes\RecipeQuery;
 
 /**
  * About 11,000 recipes from kochwiki.org, read from the server's mirror.
@@ -26,7 +26,7 @@ use Tagwerk\PluginApi\Recipes\RecipeQuery;
  */
 final class KochwikiRecipeProvider implements DescribesRecipes, DescribesSetup, RecipeProvider, UsesCredentials
 {
-    public const KEY = 'tagwerk/kochwiki';
+    public const KEY = 'fahoba/kochwiki';
 
     /** Koch-Wiki tags generously; the filter offers the most used only. */
     private const CATEGORIES = 40;

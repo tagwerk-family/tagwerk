@@ -25,18 +25,18 @@ final class ApiContractTest extends TestCase
         $this->assertSame(
             [],
             array_values(array_diff($promised, $current)),
-            'These routes are gone or renamed. Frontends rely on them: keep them until a major release, then run php artisan tagwerk:api-contract.',
+            'These routes are gone or renamed. Frontends rely on them: keep them until a major release, then run php artisan fahoba:api-contract.',
         );
         $this->assertSame(
             [],
             array_values(array_diff($current, $promised)),
-            'New routes: add them to the contract with php artisan tagwerk:api-contract (docs/frontends.md).',
+            'New routes: add them to the contract with php artisan fahoba:api-contract (docs/frontends.md).',
         );
     }
 
     public function test_plugin_routes_are_not_part_of_it(): void
     {
-        $this->assertNotContains('GET /api/tagwerk/example-area/greeting', ApiContract::routes());
+        $this->assertNotContains('GET /api/fahoba/example-area/greeting', ApiContract::routes());
         $this->assertContains('GET /api/wall/agenda', ApiContract::routes());
         $this->assertContains('POST /broadcasting/auth', ApiContract::routes());
     }

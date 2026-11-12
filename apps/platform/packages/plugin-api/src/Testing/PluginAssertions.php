@@ -2,26 +2,26 @@
 
 declare(strict_types=1);
 
-namespace Tagwerk\PluginApi\Testing;
+namespace Fahoba\PluginApi\Testing;
 
+use Fahoba\PluginApi\Dashboard\DataWidget;
+use Fahoba\PluginApi\Dashboard\HandlesActions;
+use Fahoba\PluginApi\Dashboard\HasSettings;
+use Fahoba\PluginApi\Dashboard\WidgetContent;
+use Fahoba\PluginApi\Dashboard\WidgetContext;
+use Fahoba\PluginApi\Languages\Coverage;
+use Fahoba\PluginApi\Languages\LanguagePack;
+use Fahoba\PluginApi\Languages\Reference;
+use Fahoba\PluginApi\Themes\Stylesheet;
+use Fahoba\PluginApi\Themes\Theme;
 use PHPUnit\Framework\AssertionFailedError;
-use Tagwerk\PluginApi\Dashboard\DataWidget;
-use Tagwerk\PluginApi\Dashboard\HandlesActions;
-use Tagwerk\PluginApi\Dashboard\HasSettings;
-use Tagwerk\PluginApi\Dashboard\WidgetContent;
-use Tagwerk\PluginApi\Dashboard\WidgetContext;
-use Tagwerk\PluginApi\Languages\Coverage;
-use Tagwerk\PluginApi\Languages\LanguagePack;
-use Tagwerk\PluginApi\Languages\Reference;
-use Tagwerk\PluginApi\Themes\Stylesheet;
-use Tagwerk\PluginApi\Themes\Theme;
 use Throwable;
 
 /**
- * Checks a plugin can run in its own repository, without a Tagwerk
+ * Checks a plugin can run in its own repository, without a Fahoba
  * checkout: `use PluginAssertions;` in a PHPUnit `TestCase`.
  *
- * They check what Tagwerk would otherwise only find on a wall: a tile that
+ * They check what Fahoba would otherwise only find on a wall: a tile that
  * breaks on the empty settings it starts with, a form with a key twice,
  * content JSON cannot carry, a button name anyone may send unguarded.
  */
@@ -80,9 +80,9 @@ trait PluginAssertions
     }
 
     /**
-     * A pack Tagwerk accepts, with every reference text translated and the
+     * A pack Fahoba accepts, with every reference text translated and the
      * same placeholders. What fails here would show in English on a wall —
-     * the message lists each text, so a new Tagwerk version tells the
+     * the message lists each text, so a new Fahoba version tells the
      * translator what it added.
      */
     protected function assertLanguagePackComplete(LanguagePack $pack): void
@@ -100,7 +100,7 @@ trait PluginAssertions
     }
 
     /**
-     * A design Tagwerk will show: only its tokens, light and dark, fonts and
+     * A design Fahoba will show: only its tokens, light and dark, fonts and
      * pictures beside the file, readable text in both themes.
      */
     protected function assertThemeValid(Theme $theme): void
@@ -110,11 +110,11 @@ trait PluginAssertions
         $this->assertNull($problem, (string) $problem);
     }
 
-    /** A key a plugin may offer: vendor/name, lower case, not Tagwerk's. */
+    /** A key a plugin may offer: vendor/name, lower case, not Fahoba's. */
     protected function assertPluginKey(string $key): void
     {
         $this->assertMatchesRegularExpression(self::KEY, $key, "{$key} must look like vendor/name in lower case.");
-        $this->assertStringStartsNotWith('tagwerk/', $key, 'The tagwerk/ prefix is reserved.');
+        $this->assertStringStartsNotWith('fahoba/', $key, 'The fahoba/ prefix is reserved.');
     }
 
     private function contentOf(callable $call, string $when, bool $refusalIsFine = false): ?WidgetContent

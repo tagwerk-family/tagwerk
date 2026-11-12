@@ -65,12 +65,12 @@ class AdminPanelProvider extends PanelProvider
             app($class)->configurePanel($panel);
         }
 
-        // Built once at boot, like the cached routes: changing TAGWERK_MAIL needs a restart.
+        // Built once at boot, like the cached routes: changing FAHOBA_MAIL needs a restart.
         if (OutgoingMail::enabled()) {
             $panel->passwordReset();
         }
 
-        return TagwerkBrand::apply($panel)
+        return FahobaBrand::apply($panel)
             ->navigationGroups(NavigationGroup::class)
             // Saved means done: back to the list instead of staying in the form.
             ->resourceCreatePageRedirect('index')

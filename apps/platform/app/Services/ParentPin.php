@@ -116,6 +116,6 @@ final class ParentPin
 
     private function cacheKey(int|string $device): string
     {
-        return "tagwerk:pin-unlocked:{$device}";
+        return "fahoba:pin-unlocked:{$device}";
     }
 }

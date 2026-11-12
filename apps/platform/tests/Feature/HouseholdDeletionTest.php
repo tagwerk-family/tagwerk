@@ -15,13 +15,13 @@ use App\Models\User;
 use App\Services\HouseholdDeletion;
 use App\Services\PhotoImage;
 use App\Support\HouseholdContext;
+use Fahoba\PluginApi\Households\HouseholdDeleting;
 use Filament\Facades\Filament;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Storage;
 use Livewire\Livewire;
 use RuntimeException;
-use Tagwerk\PluginApi\Households\HouseholdDeleting;
 use Tests\TestCase;
 
 /**
@@ -81,7 +81,7 @@ final class HouseholdDeletionTest extends TestCase
         $archive = sys_get_temp_dir().'/tw-archive-'.uniqid();
         mkdir($archive);
         file_put_contents($archive.'/keep.jpg', 'x');
-        config(['tagwerk.photo_folders' => $root]);
+        config(['fahoba.photo_folders' => $root]);
 
         $household = Household::factory()->create();
         $linked = Household::factory()->create();

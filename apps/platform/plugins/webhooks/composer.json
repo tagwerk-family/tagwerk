@@ -1,21 +1,21 @@
 {
-    "name": "tagwerk/webhooks",
+    "name": "fahoba/webhooks",
     "description": "Tells other services what happens in a household: signed POST requests on chosen events",
     "type": "library",
     "version": "0.1.0",
     "license": "PolyForm-Shield-1.0.0",
     "require": {
         "php": "^8.5",
-        "tagwerk/plugin-api": "^0.1"
+        "fahoba/plugin-api": "^0.1"
     },
     "autoload": {
         "psr-4": {
-            "Tagwerk\\Webhooks\\": "src/"
+            "Fahoba\\Webhooks\\": "src/"
         }
     },
     "extra": {
-        "tagwerk": {
-            "provider": "Tagwerk\\Webhooks\\WebhooksServiceProvider"
+        "fahoba": {
+            "provider": "Fahoba\\Webhooks\\WebhooksServiceProvider"
         }
     }
 }

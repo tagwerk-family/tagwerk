@@ -8,16 +8,16 @@ use App\Integrations\Google\GoogleOAuth;
 use App\Integrations\Google\GoogleTasksClient;
 use App\Models\Task;
 use Carbon\CarbonImmutable;
-use Tagwerk\PluginApi\Connections\ConnectedAccount;
-use Tagwerk\PluginApi\Connections\DescribesSetup;
-use Tagwerk\PluginApi\Connections\TokenSet;
-use Tagwerk\PluginApi\Connections\UsesOAuth;
-use Tagwerk\PluginApi\Lists\RemoteList;
-use Tagwerk\PluginApi\Tasks\ImportsTasks;
-use Tagwerk\PluginApi\Tasks\ListsTaskLists;
-use Tagwerk\PluginApi\Tasks\RemoteTask;
-use Tagwerk\PluginApi\Tasks\TaskProvider;
-use Tagwerk\PluginApi\Tasks\WritesTasks;
+use Fahoba\PluginApi\Connections\ConnectedAccount;
+use Fahoba\PluginApi\Connections\DescribesSetup;
+use Fahoba\PluginApi\Connections\TokenSet;
+use Fahoba\PluginApi\Connections\UsesOAuth;
+use Fahoba\PluginApi\Lists\RemoteList;
+use Fahoba\PluginApi\Tasks\ImportsTasks;
+use Fahoba\PluginApi\Tasks\ListsTaskLists;
+use Fahoba\PluginApi\Tasks\RemoteTask;
+use Fahoba\PluginApi\Tasks\TaskProvider;
+use Fahoba\PluginApi\Tasks\WritesTasks;
 
 /**
  * Google Tasks as a source of tasks.
@@ -54,15 +54,15 @@ final class GoogleTasksTaskProvider implements DescribesSetup, ImportsTasks, Lis
 
     public function description(): string
     {
-        return __('Brings in tasks from Google Tasks; Tagwerk assigns stars and people.');
+        return __('Brings in tasks from Google Tasks; Fahoba assigns stars and people.');
     }
 
     public function setupNotes(): array
     {
         return [
-            __('Tasks brought in keep their title from the provider — stars, assignees and repetition belong to Tagwerk.'),
+            __('Tasks brought in keep their title from the provider — stars, assignees and repetition belong to Fahoba.'),
             __('A sync never overwrites these additions.'),
-            __('When a task is ticked off in Tagwerk, that goes back to Google.'),
+            __('When a task is ticked off in Fahoba, that goes back to Google.'),
         ];
     }
 

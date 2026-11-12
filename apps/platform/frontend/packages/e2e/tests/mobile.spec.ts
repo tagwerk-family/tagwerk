@@ -443,7 +443,7 @@ test.describe('without stored login', () => {
 
     // Nobody signed in any more: the start page with both ways in.
     await page.reload()
-    await expect(page.getByRole('heading', { name: 'Willkommen bei Tagwerk' })).toBeVisible()
+    await expect(page.getByRole('heading', { name: 'Willkommen bei Fahoba' })).toBeVisible()
   })
 
   /*
@@ -849,7 +849,7 @@ test('swipes through tall day columns on a phone', async ({ page }) => {
  */
 test('offers to install the app and asks again after seven days', async ({ page }) => {
   // Answered, so the push sheet does not take the band's turn.
-  await page.addInitScript(() => localStorage.setItem('tagwerk-push-asked', '1'))
+  await page.addInitScript(() => localStorage.setItem('fahoba-push-asked', '1'))
 
   const band = page.getByTestId('install-offer')
 
@@ -876,7 +876,7 @@ test('offers to install the app and asks again after seven days', async ({ page 
   await page.evaluate(() => {
     const week = 7 * 24 * 60 * 60 * 1000
 
-    localStorage.setItem('tagwerk-install-snoozed', String(Number(localStorage.getItem('tagwerk-install-snoozed')) - week))
+    localStorage.setItem('fahoba-install-snoozed', String(Number(localStorage.getItem('fahoba-install-snoozed')) - week))
   })
   await page.reload()
   await browserOffersInstall()
@@ -1271,7 +1271,7 @@ test('opens the admin from the menu and comes back', async ({ page }) => {
   await expect(page).toHaveURL(/\/admin$/)
   await page.getByTestId('to-app').click()
 
-  await expect(page).toHaveURL(/tagwerk\.test\/$/)
+  await expect(page).toHaveURL(/fahoba\.test\/$/)
   await expect(page.getByRole('heading', { level: 1, name: 'Start' })).toBeVisible()
 })
 
@@ -1293,7 +1293,7 @@ test('shows every admin page without sideways scrolling', async ({ page }) => {
 
   // The interfaces' pages exist only while switched on, and they are off by default.
   const household = 'App\\Models\\Household::orderBy("id")->first()'
-  tinker(`${household}->update(["opted_in_features" => ["api", "tagwerk/ics-feed", "tagwerk/webhooks"]]);`)
+  tinker(`${household}->update(["opted_in_features" => ["api", "fahoba/ics-feed", "fahoba/webhooks"]]);`)
 
   try {
     for (const path of pages) {
@@ -1335,9 +1335,9 @@ test('catches up on a forgotten task of a past day', async ({ page }) => {
 
     await page.context().clearCookies()
     await page.context().addCookies([{
-      name: 'tagwerk_user_token',
+      name: 'fahoba_user_token',
       value: token,
-      url: 'https://tagwerk.test',
+      url: 'https://fahoba.test',
       secure: true,
       httpOnly: true,
       sameSite: 'Lax',

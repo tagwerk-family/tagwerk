@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Integrations\Calendar\Google;
 
 /**
- * The keys under which Tagwerk stores its own data on the Google event.
+ * The keys under which Fahoba stores its own data on the Google event.
  *
  * One place for the write and the read path: if the two sides drifted apart,
  * it would go unnoticed because nothing crashes — the echo protection would
@@ -20,7 +20,7 @@ namespace App\Integrations\Calendar\Google;
 final class EventProperties
 {
     /** Recognises our own write when it comes back through the channel. */
-    public const REVISION = 'tagwerk_revision';
+    public const REVISION = 'fahoba_revision';
 
     /**
      * The explicit person mapping, as a list of IDs.
@@ -28,5 +28,15 @@ final class EventProperties
      * Also stored on the event itself so it survives a full resync after
      * `410 Gone`.
      */
-    public const PEOPLE = 'tagwerk_people';
+    public const PEOPLE = 'fahoba_people';
+
+    /**
+     * The keys from before the rename to Fahoba, still read: events written
+     * then carry them at Google, and without them every assignment and the
+     * echo protection of those events would be lost.
+     */
+    public const LEGACY = [
+        self::REVISION => 'tagwerk_revision',
+        self::PEOPLE => 'tagwerk_people',
+    ];
 }

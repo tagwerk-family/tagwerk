@@ -10,13 +10,13 @@ use App\Models\Concerns\BelongsToHousehold;
 use App\Models\Concerns\HasZonedTimestamps;
 use Carbon\CarbonImmutable;
 use Database\Factories\ProviderAccountFactory;
+use Fahoba\PluginApi\Connections\ConnectedAccount;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use LogicException;
-use Tagwerk\PluginApi\Connections\ConnectedAccount;
 
 /**
  * A connection to a provider, for exactly one area.

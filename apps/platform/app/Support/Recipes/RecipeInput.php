@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App\Support\Recipes;
 
+use Fahoba\PluginApi\Recipes\Ingredient;
 use Illuminate\Validation\Rule;
-use Tagwerk\PluginApi\Recipes\Ingredient;
 
 /**
  * The fields of an own recipe as they arrive — from the device form, a

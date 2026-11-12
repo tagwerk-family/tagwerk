@@ -11,12 +11,12 @@ use App\Jobs\SyncListJob;
 use App\Models\Checklist;
 use App\Models\Household;
 use App\Models\ProviderAccount;
+use Fahoba\PluginApi\Lists\SyncsItems;
 use Illuminate\Console\Command;
-use Tagwerk\PluginApi\Lists\SyncsItems;
 
 final class SyncListsCommand extends Command
 {
-    protected $signature = 'tagwerk:sync-lists';
+    protected $signature = 'fahoba:sync-lists';
 
     protected $description = 'Pulls items from providers that sync lists both ways';
 

@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Tagwerk\Kochwiki;
+namespace Fahoba\Kochwiki;
 
+use Fahoba\PluginApi\Plugins\Catalog;
+use Fahoba\PluginApi\Plugins\Plugin;
 use Illuminate\Console\Scheduling\Schedule;
-use Tagwerk\PluginApi\Plugins\Catalog;
-use Tagwerk\PluginApi\Plugins\Plugin;
 
 final class KochwikiServiceProvider extends Plugin
 {
@@ -25,7 +25,7 @@ final class KochwikiServiceProvider extends Plugin
         }
 
         $this->callAfterResolving(Schedule::class, static function (Schedule $schedule): void {
-            $schedule->command('tagwerk:kochwiki-sync')
+            $schedule->command('fahoba:kochwiki-sync')
                 ->dailyAt('03:41')
                 ->withoutOverlapping()
                 ->onOneServer();

@@ -8,8 +8,8 @@ use App\Models\Device;
 use App\Models\Household;
 use App\Models\User;
 use Closure;
+use Fahoba\PluginApi\Languages\LanguagePack;
 use Illuminate\Support\Facades\App;
-use Tagwerk\PluginApi\Languages\LanguagePack;
 
 /**
  * Which language someone sees.

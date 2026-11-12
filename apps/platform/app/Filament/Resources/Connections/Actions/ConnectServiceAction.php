@@ -9,6 +9,11 @@ use App\Enums\ProviderArea;
 use App\Integrations\ProviderRegistry;
 use App\Models\ProviderAccount;
 use App\Support\HouseholdContext;
+use Fahoba\PluginApi\Connections\CredentialField;
+use Fahoba\PluginApi\Connections\DescribesSetup;
+use Fahoba\PluginApi\Connections\FinishesConnection;
+use Fahoba\PluginApi\Connections\UsesCredentials;
+use Fahoba\PluginApi\Connections\UsesOAuth;
 use Filament\Actions\Action;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\ToggleButtons;
@@ -20,11 +25,6 @@ use Filament\Schemas\Components\Wizard\Step;
 use Filament\Support\Enums\Width;
 use Filament\Support\Icons\Heroicon;
 use Illuminate\Http\RedirectResponse;
-use Tagwerk\PluginApi\Connections\CredentialField;
-use Tagwerk\PluginApi\Connections\DescribesSetup;
-use Tagwerk\PluginApi\Connections\FinishesConnection;
-use Tagwerk\PluginApi\Connections\UsesCredentials;
-use Tagwerk\PluginApi\Connections\UsesOAuth;
 use Throwable;
 
 /**
@@ -38,7 +38,7 @@ use Throwable;
  * It stays extensible because nothing here names a provider: the choice
  * comes from the registry, the explanations from the provider, and so do the
  * input fields. A new service is a class and an entry in
- * `config/tagwerk.php`.
+ * `config/fahoba.php`.
  */
 final class ConnectServiceAction
 {

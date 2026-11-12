@@ -14,7 +14,7 @@ export interface ThemeState {
   next_change: string | null
   /** The household's gradient behind the glass look. */
   backdrop: string
-  /** An installed design pack's stylesheet; null is Tagwerk's own. */
+  /** An installed design pack's stylesheet; null is Fahoba's own. */
   design?: Design | null
   /** Every installed design, for the settings. */
   designs?: Array<Pick<Design, 'key' | 'name'>>

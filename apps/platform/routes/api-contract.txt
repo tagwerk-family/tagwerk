@@ -1,4 +1,4 @@
-# Tagwerk's HTTP contract for frontends: written by `php artisan tagwerk:api-contract`.
+# Fahoba's HTTP contract for frontends: written by `php artisan fahoba:api-contract`.
 # Add lines, never remove or rename one before a major release (docs/frontends.md).
 DELETE /api/auth/account
 DELETE /api/auth/household

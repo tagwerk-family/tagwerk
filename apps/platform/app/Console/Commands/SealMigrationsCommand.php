@@ -13,7 +13,7 @@ use Illuminate\Console\Command;
  */
 final class SealMigrationsCommand extends Command
 {
-    protected $signature = 'tagwerk:seal-migrations';
+    protected $signature = 'fahoba:seal-migrations';
 
     protected $description = 'Records the released migrations so they cannot change afterwards';
 

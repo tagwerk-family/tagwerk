@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace App\Integrations\Tasks\Builtin;
 
-use Tagwerk\PluginApi\Tasks\TaskProvider;
+use Fahoba\PluginApi\Tasks\TaskProvider;
 
 /**
- * Tagwerk's own tasks.
+ * Fahoba's own tasks.
  *
  * Without a single capability: these tasks come from nowhere and go nowhere.
  * That the class is almost empty is the proof that the capabilities are cut
@@ -24,6 +24,6 @@ final class BuiltinTaskProvider implements TaskProvider
 
     public function label(): string
     {
-        return 'Tagwerk';
+        return 'Fahoba';
     }
 }

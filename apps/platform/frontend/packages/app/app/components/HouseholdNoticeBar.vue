@@ -9,7 +9,7 @@ interface Props {
 
 const props: Props = defineProps<Props>()
 
-const STORAGE_KEY = 'tagwerk-notice-seen'
+const STORAGE_KEY = 'fahoba-notice-seen'
 
 function readSeen(): string[] {
   try {

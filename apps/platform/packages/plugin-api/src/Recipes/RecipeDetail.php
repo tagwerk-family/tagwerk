@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Tagwerk\PluginApi\Recipes;
+namespace Fahoba\PluginApi\Recipes;
 
 /**
  * A whole recipe as the cooking view shows it.

@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace App\Integrations\Plugins;
 
 use App\Models\PluginSetting;
+use Fahoba\PluginApi\Plugins\Extension;
 use Illuminate\Container\Attributes\Scoped;
 use Illuminate\Contracts\Container\Container;
-use Tagwerk\PluginApi\Plugins\Extension;
 
 /**
  * The installed extensions and whether the operator switched them on.

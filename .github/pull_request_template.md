@@ -8,4 +8,4 @@
 - [ ] Playwright run after `pnpm build` (if the UI changed)
 - [ ] CHANGELOG under `[Unreleased]`; README, installation and kiosk guide in English **and** German if touched
 - [ ] Migrations only added, never changed
-- [ ] I agree to the contributor grant in [CONTRIBUTING.md](https://github.com/tagwerk-family/tagwerk/blob/master/CONTRIBUTING.md)
+- [ ] I agree to the contributor grant in [CONTRIBUTING.md](https://github.com/fahoba/fahoba/blob/master/CONTRIBUTING.md)

@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Tagwerk\PluginApi\Photos;
+namespace Fahoba\PluginApi\Photos;
 
-use Tagwerk\PluginApi\Connections\ConnectedAccount;
+use Fahoba\PluginApi\Connections\ConnectedAccount;
 
 /**
  * A source that can name all of its pictures along with their date.

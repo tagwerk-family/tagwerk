@@ -15,6 +15,7 @@ use App\Services\ParentPin;
 use App\Services\Photos\PhotoRules;
 use App\Support\Designs;
 use App\Support\Locale;
+use Fahoba\PluginApi\Geocoding\Coordinates;
 use Filament\Forms\Components\CheckboxList;
 use Filament\Forms\Components\Hidden;
 use Filament\Forms\Components\Select;
@@ -26,7 +27,6 @@ use Filament\Schemas\Components\Section;
 use Filament\Schemas\Components\Utilities\Get;
 use Filament\Schemas\Components\Utilities\Set;
 use Filament\Schemas\Schema;
-use Tagwerk\PluginApi\Geocoding\Coordinates;
 
 class HouseholdForm
 {
@@ -422,7 +422,7 @@ class HouseholdForm
                         Select::make('design')
                             ->label(__('Design'))
                             ->options(fn (): array => app(Designs::class)->options())
-                            ->placeholder('Tagwerk')
+                            ->placeholder('Fahoba')
                             ->visible(fn (): bool => app(Designs::class)->options() !== [])
                             ->helperText(__('Colours, font and corners from an installed design. Devices and phones may choose their own.'))
                             ->columnSpanFull(),

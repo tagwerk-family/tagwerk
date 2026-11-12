@@ -41,10 +41,10 @@ final class WallPhotoTest extends TestCase
         $device = app(DevicePairingService::class)->createCode($this->household, 'Küche');
         $this->token = app(DevicePairingService::class)->redeem($device->pairing_code)['token'];
 
-        $this->root = sys_get_temp_dir().'/tagwerk-photos-'.bin2hex(random_bytes(4));
+        $this->root = sys_get_temp_dir().'/fahoba-photos-'.bin2hex(random_bytes(4));
         $this->folder = $this->root.'/'.$this->household->id;
         mkdir($this->folder.'/Urlaub', 0700, true);
-        config(['tagwerk.photo_folders' => $this->root]);
+        config(['fahoba.photo_folders' => $this->root]);
     }
 
     protected function tearDown(): void
@@ -208,7 +208,7 @@ final class WallPhotoTest extends TestCase
         $this->assertNull($source->verifyCredentials(['path' => 'Urlaub']));
         $this->assertNotNull($source->verifyCredentials(['path' => '../../etc']));
 
-        config(['tagwerk.photo_folders' => null]);
+        config(['fahoba.photo_folders' => null]);
         $this->assertNotNull($source->verifyCredentials(['path' => '']));
     }
 

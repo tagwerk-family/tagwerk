@@ -18,12 +18,12 @@ use App\Models\User;
 use App\Services\HouseholdArchive;
 use App\Services\HouseholdExport;
 use App\Services\HouseholdImport;
+use Fahoba\PluginApi\Plugins\Catalog;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use RuntimeException;
-use Tagwerk\PluginApi\Plugins\Catalog;
 use Tests\Feature\Dashboard\StationWidget;
 use Tests\TestCase;
 
@@ -145,7 +145,7 @@ final class HouseholdImportTest extends TestCase
     {
         $source = Household::factory()->create();
         ProviderAccount::withoutHouseholdScope()->create([
-            'household_id' => $source->id, 'area' => 'lists', 'provider' => 'tagwerk/bring', 'status' => 'active', 'account_label' => 'Bring',
+            'household_id' => $source->id, 'area' => 'lists', 'provider' => 'fahoba/bring', 'status' => 'active', 'account_label' => 'Bring',
             'credentials' => ['email' => 'anna@example.org', 'password' => 'bring-geheim'],
         ]);
         $calendar = Calendar::withoutHouseholdScope()->where('household_id', $source->id)->firstOrFail();
@@ -153,13 +153,13 @@ final class HouseholdImportTest extends TestCase
 
         $plain = app(HouseholdExport::class)->export($source);
         $this->assertStringNotContainsString('bring-geheim', (string) json_encode($plain));
-        $this->assertSame(['lists: tagwerk/bring'], app(HouseholdImport::class)->import($plain)->reconnect);
+        $this->assertSame(['lists: fahoba/bring'], app(HouseholdImport::class)->import($plain)->reconnect);
 
         $revealed = app(HouseholdExport::class)->export($source, secrets: true);
         $this->assertStringNotContainsString('channel-1', (string) json_encode($revealed));
 
         $result = app(HouseholdImport::class)->import($revealed);
-        $account = ProviderAccount::withoutHouseholdScope()->where('household_id', $result->household->id)->where('provider', 'tagwerk/bring')->sole();
+        $account = ProviderAccount::withoutHouseholdScope()->where('household_id', $result->household->id)->where('provider', 'fahoba/bring')->sole();
 
         $this->assertSame([], $result->reconnect);
         $this->assertSame('bring-geheim', $account->credentials['password']);
