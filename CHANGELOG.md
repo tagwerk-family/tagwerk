@@ -56,6 +56,9 @@ its tablets need not.
 - **Symfony 8.1.11.** Advisories of 2026-11-04 against `http-foundation`,
   `http-kernel`, `routing` and `html-sanitizer` stopped the image build at
   `composer audit`; the lock now pins the fixed releases.
+- **node-forge 1.4.3.** Four advisories against `node-forge` up to 1.4.2
+  (via Nuxt's development server, `listhen`) stopped CI at `pnpm audit`; the
+  override lifts it.
 - **The tapped reward card says it was requested** (“Angefragt – die Eltern
   entscheiden”, framed in the child's colour). The hourglass beside the
   balance sat above the cards, where nobody looked after tapping one below;
