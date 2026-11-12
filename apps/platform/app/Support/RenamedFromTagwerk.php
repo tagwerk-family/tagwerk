@@ -39,8 +39,10 @@ final class RenamedFromTagwerk
             $row['external_id'] = 'fahoba';
         }
 
-        if ($table === 'provider_accounts' && ($row['account_label'] ?? null) === 'Tagwerk') {
-            $row['account_label'] = 'Fahoba';
+        // The built-in account's label is the name shown to the family: Tagwerk
+        // until 0.3.0, Fahoba in 0.3.0.
+        if ($table === 'provider_accounts' && in_array($row['account_label'] ?? null, ['Tagwerk', 'Fahoba'], true)) {
+            $row['account_label'] = 'Family Home Base';
         }
 
         return $row;

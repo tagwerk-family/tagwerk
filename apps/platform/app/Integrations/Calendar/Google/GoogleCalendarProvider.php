@@ -69,7 +69,7 @@ final class GoogleCalendarProvider implements CalendarProvider, DescribesSetup, 
     public function setupNotes(): array
     {
         return [
-            __('Google will ask which permissions Fahoba gets — read and write calendars.'),
+            __('Google will ask which permissions Family Home Base gets — read and write calendars.'),
             __('You choose afterwards in the calendar settings which calendars appear.'),
             __('This approval only covers events. Tasks and lists stay untouched.'),
         ];

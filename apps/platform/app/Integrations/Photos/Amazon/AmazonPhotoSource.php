@@ -48,7 +48,7 @@ final class AmazonPhotoSource extends FolderPhotoSource
     public function setupNotes(): array
     {
         return [
-            __('Amazon Photos has no interface for third parties, not even through AWS. That is why Fahoba reads a folder on the server.'),
+            __('Amazon Photos has no interface for third parties, not even through AWS. That is why Family Home Base reads a folder on the server.'),
             __('The Amazon Photos app no longer syncs to the computer automatically. Download albums and the Family Vault in the browser (Select → Download), always into the same folder — pictures already there are not downloaded twice.'),
             __('Put this folder into the household\'s photo folder on the server and enter the subfolder here.'),
         ];

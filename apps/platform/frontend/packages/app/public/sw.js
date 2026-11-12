@@ -121,7 +121,7 @@ self.addEventListener('push', (event) => {
    * notifications without content, and a silent push counts as abuse in
    * Chrome and costs the permission.
    */
-  let data = { title: 'Fahoba', body: 'Es gibt Neuigkeiten.' }
+  let data = { title: 'Family Home Base', body: 'Es gibt Neuigkeiten.' }
 
   if (event.data) {
     try {

@@ -41,7 +41,7 @@ final class BuiltinCalendar
                 'provider' => BuiltinCalendarProvider::KEY,
             ],
             [
-                'account_label' => 'Fahoba',
+                'account_label' => 'Family Home Base',
                 'status' => ConnectionStatus::Active,
             ],
         );

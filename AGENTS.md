@@ -4,9 +4,10 @@
 
 ## OVERVIEW
 
-The name is short for **Fa**mily **Ho**me **Bo**ard, written out in
-taglines and descriptions. Otherwise “Fahoba” in prose, `fahoba` in code,
-repositories and packages.
+What a family sees is **Family Home Base**, written out: app, admin,
+mails, push, wordmark, translations. “Fahoba” (its short form) names the
+project in code, repositories, packages and the README; `fahoba` in
+identifiers. Never put “Fahoba” into a text someone reads in the UI.
 
 Self-hosted family calendar for a wall-mounted Android tablet, as a replacement
 for commercial devices such as Dæly Calendar or Hearth Display.
@@ -330,7 +331,7 @@ Filament 3. Here the respective current major versions are used on purpose, beca
 - **The server computes the theme** (`App\Services\ThemeSchedule`). The
   UI does not compare with times of day itself, but sets an
   alarm for `next_change` and then asks again.
-- **The mark** is the family's home: a tick inside a house on a
+- **The mark** is the family's home base: a tick inside a house on a
   terracotta tile (`#ea580c` → `#b93a0a`). It lives in `TwLogo.vue` (layer,
   gradient id from `useId()` — several logos share a page) and
   `app/public/icon.svg`. `public/favicon.svg` (Laravel, linked by app and

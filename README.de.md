@@ -2,7 +2,7 @@
 
 *English version: [`README.md`](README.md)*
 
-**Fa**mily **Ho**me **Bo**ard — die Zentrale, in der der Familienalltag zusammenläuft.
+Family Home Base — die Zentrale, in der der Familienalltag zusammenläuft.
 
 Selbst gehosteter Familienkalender für ein wandmontiertes Tablet und die
 Handys der Familie — Kalender, Aufgaben mit Sternen und Belohnungen, Listen,
@@ -32,7 +32,7 @@ services:
     restart: unless-stopped
     depends_on: { db: { condition: service_healthy } }
     environment:
-      APP_NAME: Fahoba
+      APP_NAME: Family Home Base
       APP_URL: https://${FAHOBA_HOST}
       APP_KEY: ${APP_KEY}
       LOG_CHANNEL: stderr

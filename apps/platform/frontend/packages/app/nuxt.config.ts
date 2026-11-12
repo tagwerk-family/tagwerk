@@ -31,7 +31,7 @@ export default defineNuxtConfig({
 
   app: {
     head: {
-      title: 'Fahoba',
+      title: 'Family Home Base',
       htmlAttrs: { lang: 'de' },
       link: [
         { rel: 'icon', type: 'image/svg+xml', href: '/favicon.svg' },

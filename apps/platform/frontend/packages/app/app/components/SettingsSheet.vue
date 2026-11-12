@@ -277,7 +277,7 @@ const DESIGNS = computed(() => (themeState.value?.designs ?? []).length === 0
   ? null
   : {
       household: t('device.backdropHousehold'),
-      core: 'Fahoba',
+      core: 'Family Home Base',
       ...Object.fromEntries((themeState.value?.designs ?? []).map(design => [design.key, design.name])),
     })
 const PHONE_MENU = computed(() => ({ drawer: t('device.phoneMenuDrawer'), bottom: t('device.phoneMenuBottom') }))

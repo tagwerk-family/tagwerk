@@ -39,7 +39,7 @@ final class HouseholdStarterTest extends TestCase
         $setup = Task::query()->where('person_id', $parent)->get();
 
         $this->assertContains('Tablet verbinden', $setup->pluck('title')->all());
-        $this->assertContains('Fahoba kennenlernen', $setup->pluck('title')->all());
+        $this->assertContains('Family Home Base kennenlernen', $setup->pluck('title')->all());
         $this->assertTrue($setup->every(fn (Task $task): bool => $task->points === 0 && $task->rrule === null));
     }
 

@@ -10,7 +10,7 @@ import { expect, test } from '@playwright/test'
 test('/ serves the wall instead of the Laravel start page', async ({ page }) => {
   await page.goto('/')
 
-  await expect(page.getByRole('heading', { name: 'Willkommen bei Fahoba' })).toBeVisible()
+  await expect(page.getByRole('heading', { name: 'Willkommen bei Family Home Base' })).toBeVisible()
   await expect(page.getByText('Laravel')).toHaveCount(0)
 })
 
@@ -24,7 +24,7 @@ test('/ offers the phone sign-in to whoever is not a tablet, and back', async ({
 
   await page.getByTestId('entry-back').click()
 
-  await expect(page.getByRole('heading', { name: 'Willkommen bei Fahoba' })).toBeVisible()
+  await expect(page.getByRole('heading', { name: 'Willkommen bei Family Home Base' })).toBeVisible()
 })
 
 test('/admin stays the admin panel although the wall registers a service worker', async ({ page }) => {

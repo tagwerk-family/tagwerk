@@ -70,7 +70,7 @@ final class RecipeImport
         $found = LinkedRecipe::fromHtml($html, $url);
 
         if ($found === null) {
-            throw ValidationException::withMessages(['url' => __('The page has no recipe Fahoba can read.')]);
+            throw ValidationException::withMessages(['url' => __('The page has no recipe Family Home Base can read.')]);
         }
 
         $recipe = $this->create([...$found, 'source' => 'link']);
@@ -140,7 +140,7 @@ final class RecipeImport
             }
 
             if (! is_int($manifest['version'] ?? null) || $manifest['version'] > self::VERSION) {
-                throw ValidationException::withMessages(['file' => __('This collection comes from a newer Fahoba.')]);
+                throw ValidationException::withMessages(['file' => __('This collection comes from a newer Family Home Base.')]);
             }
 
             if (count($manifest['recipes']) > self::MAX_RECIPES) {

@@ -302,7 +302,7 @@ above; tablets and phones stay signed in, and the database is carried over.
 - In `deploy/.env`, rename `TAGWERK_HOST` (Traefik) or `TAGWERK_SITE`
   (Caddy) to `FAHOBA_HOST`/`FAHOBA_SITE` — the start stops without it.
   Other `TAGWERK_*` keep working for now; rename them when convenient.
-- Set `APP_NAME=Fahoba`, otherwise mails and the browser tab keep the old
+- Set `APP_NAME="Family Home Base"`, otherwise mails and the browser tab keep the old
   name.
 - With `FAHOBA_IMAGE`/`TAGWERK_IMAGE` set to the old image address, point it
   at `ghcr.io/fahoba/fahoba`.

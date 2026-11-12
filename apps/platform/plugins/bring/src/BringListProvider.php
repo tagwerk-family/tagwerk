@@ -54,9 +54,9 @@ final class BringListProvider implements DescribesSetup, ListProvider, ListsTarg
     {
         return [
             __('Sign in with the e-mail and password of your Bring account. If you sign in to Bring with Google or Apple, first set a password via “Forgot password” in the Bring app.'),
-            __('You choose afterwards, on the list in the admin panel, which Bring list belongs to which Fahoba list.'),
+            __('You choose afterwards, on the list in the admin panel, which Bring list belongs to which Family Home Base list.'),
             __('New items and ticks go both ways. Whatever is added there shows up here within minutes.'),
-            __('Bring has no official interface. If Bring changes something, only the sync fails — the list in Fahoba stays.'),
+            __('Bring has no official interface. If Bring changes something, only the sync fails — the list in Family Home Base stays.'),
         ];
     }
 

@@ -2,7 +2,7 @@
 
 *Deutsche Fassung: [`README.de.md`](README.de.md)*
 
-**Fa**mily **Ho**me **Bo**ard — where the family's day comes together.
+Family Home Base — where the family's day comes together.
 
 Self-hosted family calendar for a wall-mounted tablet and the family's
 phones — calendar, tasks with stars and rewards, lists, meal plan and recipe
@@ -32,7 +32,7 @@ services:
     restart: unless-stopped
     depends_on: { db: { condition: service_healthy } }
     environment:
-      APP_NAME: Fahoba
+      APP_NAME: Family Home Base
       APP_URL: https://${FAHOBA_HOST}
       APP_KEY: ${APP_KEY}
       LOG_CHANNEL: stderr

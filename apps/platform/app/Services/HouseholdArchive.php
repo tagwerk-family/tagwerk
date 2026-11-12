@@ -59,7 +59,7 @@ final class HouseholdArchive
         $archive = new ZipArchive;
 
         if ($archive->open($zip, ZipArchive::RDONLY) !== true) {
-            throw new RuntimeException(__('This is no Fahoba household export.'));
+            throw new RuntimeException(__('This is no Family Home Base household export.'));
         }
 
         $json = $archive->getFromName(self::JSON);
@@ -68,7 +68,7 @@ final class HouseholdArchive
         if (! is_array($data) || ! is_array($data['tables'] ?? null)) {
             $archive->close();
 
-            throw new RuntimeException(__('This is no Fahoba household export.'));
+            throw new RuntimeException(__('This is no Family Home Base household export.'));
         }
 
         foreach (self::files($data['tables']) as [$disk, $path]) {

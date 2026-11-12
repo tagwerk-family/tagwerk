@@ -443,7 +443,7 @@ test.describe('without stored login', () => {
 
     // Nobody signed in any more: the start page with both ways in.
     await page.reload()
-    await expect(page.getByRole('heading', { name: 'Willkommen bei Fahoba' })).toBeVisible()
+    await expect(page.getByRole('heading', { name: 'Willkommen bei Family Home Base' })).toBeVisible()
   })
 
   /*

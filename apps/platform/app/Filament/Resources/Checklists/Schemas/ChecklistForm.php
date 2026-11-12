@@ -42,7 +42,7 @@ class ChecklistForm
 
                 Select::make('list_provider')
                     ->label(__('Also push to'))
-                    ->placeholder(__('Nowhere — the list stays in Fahoba'))
+                    ->placeholder(__('Nowhere — the list stays in Family Home Base'))
 
                     /*
                      * From the registry: a new list service is offered here as

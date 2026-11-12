@@ -58,7 +58,7 @@ export function pairingCode(household?: number): string {
 export async function pair(page: Page, household?: number): Promise<void> {
   await page.goto('/')
 
-  await expect(page.getByRole('heading', { name: 'Willkommen bei Fahoba' })).toBeVisible()
+  await expect(page.getByRole('heading', { name: 'Willkommen bei Family Home Base' })).toBeVisible()
   await page.getByRole('button', { name: /Wandtablet einrichten/ }).click()
 
   await page.getByPlaceholder('ABCD1234').fill(pairingCode(household))

@@ -18,7 +18,7 @@ final class PhoneAppWidgetTest extends TestCase
         $this->actingAs(User::factory()->create(['household_id' => Household::factory()->create()->id]))
             ->get('/admin')
             ->assertSuccessful()
-            ->assertSee('Fahoba aufs Handy')
+            ->assertSee('Family Home Base aufs Handy')
             ->assertSee(url('/'));
     }
 
@@ -27,6 +27,6 @@ final class PhoneAppWidgetTest extends TestCase
         $operator = User::factory()->create(['household_id' => null]);
         $operator->forceFill(['is_operator' => true])->save();
 
-        $this->actingAs($operator)->get('/admin')->assertSuccessful()->assertDontSee('Fahoba aufs Handy');
+        $this->actingAs($operator)->get('/admin')->assertSuccessful()->assertDontSee('Family Home Base aufs Handy');
     }
 }

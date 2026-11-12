@@ -37,6 +37,6 @@ final class HouseholdInvitation extends Notification implements ShouldQueue
             ->line(__('“:household” invites you to their family calendar. You keep your sign-in and switch between the households in the app.', ['household' => $household]))
             ->action(__('Open invitation'), url('/'))
             ->line(__('Nothing changes until you accept in the app.'))
-            ->salutation(__('Your Fahoba'));
+            ->salutation(__('Your Family Home Base'));
     }
 }

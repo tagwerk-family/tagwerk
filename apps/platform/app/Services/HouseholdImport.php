@@ -91,11 +91,11 @@ final class HouseholdImport
     public function import(array $data, ?string $files = null, ?User $importer = null): ImportResult
     {
         if (($data['format'] ?? null) !== HouseholdExport::FORMAT || ! is_array($data['tables'] ?? null) || ! is_array($data['tables']['households'][0] ?? null)) {
-            throw new RuntimeException(__('This is no Fahoba household export.'));
+            throw new RuntimeException(__('This is no Family Home Base household export.'));
         }
 
         if (! DB::table('migrations')->where('migration', (string) ($data['migration'] ?? ''))->exists()) {
-            throw new RuntimeException(__('The export comes from a newer Fahoba. Update this server first.'));
+            throw new RuntimeException(__('The export comes from a newer Family Home Base. Update this server first.'));
         }
 
         /** @var array<string, list<array<string, mixed>>> $tables */

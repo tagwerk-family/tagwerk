@@ -9,7 +9,7 @@
     "failed": "Cela n’a pas fonctionné.",
     "tryAgain": "Cela n’a pas fonctionné. Veuillez réessayer.",
     "today": "Aujourd’hui",
-    "loading": "Chargement de Fahoba …",
+    "loading": "Chargement de Family Home Base …",
     "fetching": "Chargement …",
     "areas": "Rubriques",
     "asOf": "État à {time}",
@@ -27,13 +27,13 @@
     "retry": "Réessayer"
   },
   "pairing": {
-    "welcome": "Bienvenue sur Fahoba",
-    "how": "Comment souhaitez-vous utiliser Fahoba ?",
+    "welcome": "Bienvenue sur Family Home Base",
+    "how": "Comment souhaitez-vous utiliser Family Home Base ?",
     "wall": "Installer une tablette murale",
     "phone": "Se connecter sur le téléphone",
     "admin": "Administration",
     "adminHint": "Configurer le foyer, les personnes et les appareils",
-    "setUp": "Installer Fahoba",
+    "setUp": "Installer Family Home Base",
     "code": "Code d’appairage",
     "connect": "Connecter"
   },

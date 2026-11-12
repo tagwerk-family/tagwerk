@@ -32,7 +32,7 @@ final class FahobaBrand
              * If 500 is light enough for dark text, every button falls back to
              * a pale 400.
              */
-            ->brandName('Fahoba')
+            ->brandName('Family Home Base')
             ->brandLogo(fn (): string => asset('logo-light.svg'))
             ->darkModeBrandLogo(fn (): string => asset('logo-dark.svg'))
             ->brandLogoHeight('2rem')

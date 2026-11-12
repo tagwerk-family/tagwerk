@@ -165,7 +165,7 @@ const link = 'min-h-11 w-full text-base font-semibold text-accent'
     <TwLogo class="size-14" />
 
     <h1 class="mt-6 font-display text-4xl font-semibold">
-      Fahoba
+      Family Home Base
     </h1>
 
     <p class="mt-1 text-lg text-ink-2">

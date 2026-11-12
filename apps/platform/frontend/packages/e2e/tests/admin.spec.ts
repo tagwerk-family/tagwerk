@@ -58,7 +58,7 @@ test('login carries the logo, fonts and colours of the wall', async ({ page }) =
   await expect(page.locator('img.fi-logo[src$="/logo-light.svg"]')).toBeVisible()
   await expect(page.locator('img.fi-logo[src$="/logo-dark.svg"]')).toBeHidden()
 
-  await expect(page).toHaveTitle(/Fahoba/)
+  await expect(page).toHaveTitle(/Family Home Base/)
   await expect(page.locator('link[rel=icon]')).toHaveAttribute('href', /\/favicon\.svg$/)
 
   const icon = await page.request.get('/favicon.svg')
@@ -100,7 +100,7 @@ test('after login the logo and heading follow the wall style', async ({ page }) 
 
   const heading = page.locator('.fi-header-heading')
   await expect(heading).toBeVisible()
-  await expect(page.getByRole('img', { name: 'Logo von Fahoba' }).first()).toBeVisible()
+  await expect(page.getByRole('img', { name: 'Logo von Family Home Base' }).first()).toBeVisible()
 
   const font = await heading.evaluate(element => getComputedStyle(element).fontFamily)
   expect(font).toContain('Plus Jakarta Sans Variable')

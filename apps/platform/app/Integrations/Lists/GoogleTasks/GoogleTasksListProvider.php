@@ -56,7 +56,7 @@ final class GoogleTasksListProvider implements DescribesSetup, ListProvider, Lis
     public function setupNotes(): array
     {
         return [
-            __('Items only go out — ticking off happens in Fahoba.'),
+            __('Items only go out — ticking off happens in Family Home Base.'),
             __('You choose the target list afterwards in the overview.'),
             __('This approval only covers lists. To bring in your tasks, connect Google Tasks a second time as tasks.'),
         ];

@@ -31,18 +31,18 @@ final class LoginLink extends Notification implements ShouldQueue
     {
         $minutes = LoginLinks::LIFETIME_MINUTES;
         $mail = (new MailMessage)
-            ->subject($this->code !== null ? __('Your Fahoba code: :code', ['code' => $this->code]) : __('Your sign-in link for Fahoba'))
+            ->subject($this->code !== null ? __('Your Family Home Base code: :code', ['code' => $this->code]) : __('Your sign-in link for Family Home Base'))
             ->greeting(__('Hello :name,', ['name' => $user->name]))
             ->line(__('the button signs you in without a password.'))
-            ->action(__('Sign in to Fahoba'), $this->url);
+            ->action(__('Sign in to Family Home Base'), $this->url);
 
         if ($this->code !== null) {
-            $mail->line(__('Do you use Fahoba as an app on your home screen? Then enter this code there instead:'))
+            $mail->line(__('Do you use Family Home Base as an app on your home screen? Then enter this code there instead:'))
                 ->line("**{$this->code}**");
         }
 
         return $mail
             ->line(__('Valid for :minutes minutes and only once. If you did not ask for it, ignore this e-mail.', ['minutes' => $minutes]))
-            ->salutation(__('Your Fahoba'));
+            ->salutation(__('Your Family Home Base'));
     }
 }

@@ -170,7 +170,7 @@ class FolderPhotoSource implements DescribesSetup, ListsPhotos, PhotoSource, Use
         }
 
         if (! is_readable($path)) {
-            return __('Fahoba cannot read the folder.');
+            return __('Family Home Base cannot read the folder.');
         }
 
         return null;
@@ -197,7 +197,7 @@ class FolderPhotoSource implements DescribesSetup, ListsPhotos, PhotoSource, Use
     {
         return [
             __('The operator creates the household\'s photo folder on the server — a network share or a sync lands there.'),
-            __('Fahoba only reads; it moves, changes and deletes nothing.'),
+            __('Family Home Base only reads; it moves, changes and deletes nothing.'),
         ];
     }
 

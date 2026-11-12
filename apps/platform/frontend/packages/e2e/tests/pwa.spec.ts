@@ -44,7 +44,7 @@ test('a wall that starts without network comes up as a kiosk with its last state
   await page.context().setOffline(true)
   await page.reload()
 
-  await expect(page.getByRole('heading', { name: 'Willkommen bei Fahoba' })).toBeHidden()
+  await expect(page.getByRole('heading', { name: 'Willkommen bei Family Home Base' })).toBeHidden()
   await page.getByRole('button', { name: 'Kalender', exact: true }).click()
 
   await expect(page.getByTestId('event').first()).toBeVisible()
@@ -132,7 +132,7 @@ test('a push message without JSON still shows a notification', async ({ page }) 
   await push('Es gibt Neuigkeiten in der Einkaufsliste.')
 
   await expect.poll(() => shown(page)).toEqual([{
-    title: 'Fahoba',
+    title: 'Family Home Base',
     body: 'Es gibt Neuigkeiten in der Einkaufsliste.',
     tag: 'fahoba',
     icon: '/icon-192.png',

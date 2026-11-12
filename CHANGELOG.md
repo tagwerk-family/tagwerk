@@ -7,12 +7,22 @@ tokens; such a change is named here.
 
 ## [Unreleased]
 
+### Changed
+
+- **The family reads “Family Home Base”, written out** — app, admin,
+  wordmark, mails, push and the app's name on the home screen. “Fahoba”
+  stays the short form for code, repositories and packages: an acronym
+  nobody can pronounce at first sight is no name to greet a family with.
+  A migration relabels the built-in connections, and an export from 0.3.0
+  imports with the new label. Set `APP_NAME="Family Home Base"` in
+  `deploy/.env`: mails take their sender's name from it.
+
 ## [0.3.0] — 2026-11-12
 
 ### Renamed: Tagwerk is now Fahoba
 
 For trademark reasons. The name is short for **Fa**mily **Ho**me
-**Bo**ard. The next release is 0.3.0 — still a minor one, as everything
+**Ba**se. The next release is 0.3.0 — still a minor one, as everything
 before 1.0.0: plugin authors must follow the rename, a running server and
 its tablets need not.
 

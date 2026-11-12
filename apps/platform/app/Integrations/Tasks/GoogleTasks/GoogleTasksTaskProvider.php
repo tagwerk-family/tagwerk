@@ -54,15 +54,15 @@ final class GoogleTasksTaskProvider implements DescribesSetup, ImportsTasks, Lis
 
     public function description(): string
     {
-        return __('Brings in tasks from Google Tasks; Fahoba assigns stars and people.');
+        return __('Brings in tasks from Google Tasks; Family Home Base assigns stars and people.');
     }
 
     public function setupNotes(): array
     {
         return [
-            __('Tasks brought in keep their title from the provider — stars, assignees and repetition belong to Fahoba.'),
+            __('Tasks brought in keep their title from the provider — stars, assignees and repetition belong to Family Home Base.'),
             __('A sync never overwrites these additions.'),
-            __('When a task is ticked off in Fahoba, that goes back to Google.'),
+            __('When a task is ticked off in Family Home Base, that goes back to Google.'),
         ];
     }
 

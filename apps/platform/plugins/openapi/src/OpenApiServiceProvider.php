@@ -31,7 +31,7 @@ final class OpenApiServiceProvider extends Plugin
                 'api_path' => 'api',
                 'info' => [
                     'version' => (string) config('app.version', '1'),
-                    'description' => 'Fahoba API. Authenticate with an API token (Settings → API access) as Bearer token; '
+                    'description' => 'Family Home Base API. Authenticate with an API token (Settings → API access) as Bearer token; '
                         .'read-only tokens may only send GET requests.',
                 ],
                 'middleware' => ['throttle:30,1'],

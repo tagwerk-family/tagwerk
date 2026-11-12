@@ -23,7 +23,7 @@ enum EventOrigin: string
     {
         return match ($this) {
             self::Remote => __('Taken from the provider'),
-            self::App => __('Created in Fahoba'),
+            self::App => __('Created in Family Home Base'),
         };
     }
 }

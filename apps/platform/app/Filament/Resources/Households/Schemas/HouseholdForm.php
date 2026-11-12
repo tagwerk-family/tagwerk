@@ -422,7 +422,7 @@ class HouseholdForm
                         Select::make('design')
                             ->label(__('Design'))
                             ->options(fn (): array => app(Designs::class)->options())
-                            ->placeholder('Fahoba')
+                            ->placeholder('Family Home Base')
                             ->visible(fn (): bool => app(Designs::class)->options() !== [])
                             ->helperText(__('Colours, font and corners from an installed design. Devices and phones may choose their own.'))
                             ->columnSpanFull(),

@@ -14,7 +14,7 @@
     </div>
 
     <div class="text-center text-sm text-gray-500 dark:text-gray-400">
-        <p>{{ __('Scan it on the tablet — or enter the code under “Set up Fahoba”.') }}</p>
+        <p>{{ __('Scan it on the tablet — or enter the code under “Set up Family Home Base”.') }}</p>
         <p class="mt-1">{{ __('Valid until :time.', ['time' => $validUntil]) }}</p>
     </div>
 </div>

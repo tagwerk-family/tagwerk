@@ -99,7 +99,7 @@ class ConnectionsTable
                     ->label(__('Disconnect'))
                     ->modalHeading(__('End connection'))
                     ->modalDescription(fn (ProviderAccount $record): string => $record->area === ProviderArea::Lists
-                        ? __('The lists in Fahoba stay with all their items; only the sync ends.')
+                        ? __('The lists in Family Home Base stay with all their items; only the sync ends.')
                         : __('Whatever was brought in from it is removed as well.'))
 
                     /*

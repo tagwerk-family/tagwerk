@@ -61,7 +61,7 @@ final class TandoorRecipeProvider implements DescribesSetup, RecipeProvider, Use
     {
         return [
             __('The token is in Tandoor under Settings → API. It does not expire.'),
-            __('Fahoba only reads; the weekly plan stays in Fahoba.'),
+            __('Family Home Base only reads; the weekly plan stays in Family Home Base.'),
         ];
     }
 

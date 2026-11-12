@@ -1898,7 +1898,7 @@ test('takes the parent PIN from the keyboard', async ({ page }) => {
   await expect(pin.getByTestId('pin-ok')).toBeEnabled()
   await page.keyboard.press('Enter')
 
-  await expect(page.getByRole('heading', { name: 'Willkommen bei Fahoba' })).toBeVisible()
+  await expect(page.getByRole('heading', { name: 'Willkommen bei Family Home Base' })).toBeVisible()
 })
 
 /*
@@ -1923,9 +1923,9 @@ test('unpairs the tablet behind the PIN and shows the start page', async ({ page
 
   await pin.getByRole('button', { name: 'OK' }).click()
 
-  await expect(page.getByRole('heading', { name: 'Willkommen bei Fahoba' })).toBeVisible()
+  await expect(page.getByRole('heading', { name: 'Willkommen bei Family Home Base' })).toBeVisible()
 
   // Still the start page after a reload: the cookie is gone, not just hidden.
   await page.reload()
-  await expect(page.getByRole('heading', { name: 'Willkommen bei Fahoba' })).toBeVisible()
+  await expect(page.getByRole('heading', { name: 'Willkommen bei Family Home Base' })).toBeVisible()
 })

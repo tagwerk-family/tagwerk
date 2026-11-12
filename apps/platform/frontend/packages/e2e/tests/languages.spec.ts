@@ -57,7 +57,7 @@ test.describe('a language from a pack', () => {
     await recordTexts(page)
     await page.goto('/')
 
-    await expect(page.getByRole('heading', { name: 'Bienvenue sur Fahoba' })).toBeVisible()
+    await expect(page.getByRole('heading', { name: 'Bienvenue sur Family Home Base' })).toBeVisible()
     await expect(page.locator('html')).toHaveAttribute('lang', 'fr')
     expect(await germanShown(page)).toEqual([])
   })

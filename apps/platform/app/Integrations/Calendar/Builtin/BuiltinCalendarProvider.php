@@ -28,6 +28,6 @@ final class BuiltinCalendarProvider implements CalendarProvider
 
     public function label(): string
     {
-        return 'Fahoba';
+        return 'Family Home Base';
     }
 }

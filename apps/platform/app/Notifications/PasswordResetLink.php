@@ -32,12 +32,12 @@ final class PasswordResetLink extends Notification implements ShouldQueue
         $minutes = (int) config('auth.passwords.users.expire');
 
         return (new MailMessage)
-            ->subject(__('New password for Fahoba'))
+            ->subject(__('New password for Family Home Base'))
             ->greeting(__('Hello :name,', ['name' => $user->name]))
-            ->line(__('someone asked for a new password for your Fahoba account.'))
+            ->line(__('someone asked for a new password for your Family Home Base account.'))
             ->action(__('Set a new password'), $url)
             ->line(__('The link is valid for :minutes minutes and only once.', ['minutes' => $minutes]))
             ->line(__('If that was not you, just ignore this e-mail — your password stays as it is.'))
-            ->salutation(__('Your Fahoba'));
+            ->salutation(__('Your Family Home Base'));
     }
 }

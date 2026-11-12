@@ -29,7 +29,7 @@ final class BuiltinRecipeProvider implements DescribesRecipes, RecipeProvider
 
     public function label(): string
     {
-        return 'Fahoba';
+        return 'Family Home Base';
     }
 
     /** A book of our own needs no credentials. */

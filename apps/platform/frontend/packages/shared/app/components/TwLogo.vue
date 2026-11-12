@@ -1,6 +1,6 @@
 <script setup lang="ts">
 /*
- * Fahoba's mark — the family's home: a tick inside a house, on a
+ * Fahoba's mark — the family's home base: a tick inside a house, on a
  * terracotta tile.
  *
  * Fixed colours instead of tokens — a mark does not change with the theme.

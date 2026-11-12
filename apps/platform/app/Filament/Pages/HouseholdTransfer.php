@@ -70,7 +70,7 @@ class HouseholdTransfer extends Page implements AvailableWhileReadOnly
 
         return $schema->components([
             Section::make(__('Export'))
-                ->description(__('Everything of this household in one file: calendars, tasks, stars, lists, recipes, photos. Another Fahoba server imports it. Paired tablets do not travel; connections only with their passwords.'))
+                ->description(__('Everything of this household in one file: calendars, tasks, stars, lists, recipes, photos. Another Family Home Base server imports it. Paired tablets do not travel; connections only with their passwords.'))
                 ->schema([
                     Text::make(__('This export contains passwords in plain text. Do not forward it; delete it after the move.'))
                         ->color('danger')
@@ -110,11 +110,11 @@ class HouseholdTransfer extends Page implements AvailableWhileReadOnly
                     ]),
                     // One line, only on self-hosted servers that name the service.
                     Text::make(fn () => $hosted === '' ? '' : new HtmlString(
-                        e(__('Rather not run a server?')).' <a class="underline" href="'.e($hosted).'">'.e(__('Move to Fahoba Cloud')).'</a>'
+                        e(__('Rather not run a server?')).' <a class="underline" href="'.e($hosted).'">'.e(__('Move to Family Home Base Cloud')).'</a>'
                     ))->visible($hosted !== ''),
                 ]),
             Section::make(__('Move a household here'))
-                ->description(__('Upload the export of another Fahoba server. It arrives as a new household next to this one; you need the same address there and here. Tablets pair again, connections are set up again.'))
+                ->description(__('Upload the export of another Family Home Base server. It arrives as a new household next to this one; you need the same address there and here. Tablets pair again, connections are set up again.'))
                 ->visible(! app(ReadOnlyAdmin::class)->applies())
                 ->schema([
                     Text::make(match (true) {
