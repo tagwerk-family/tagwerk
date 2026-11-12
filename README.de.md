@@ -2,7 +2,7 @@
 
 *English version: [`README.md`](README.md)*
 
-**Fa**mily · **Ho**me · **Ba**se — die Zentrale, in der der Familienalltag zusammenläuft.
+**Fa**mily **Ho**me **Bo**ard — die Zentrale, in der der Familienalltag zusammenläuft.
 
 Selbst gehosteter Familienkalender für ein wandmontiertes Tablet und die
 Handys der Familie — Kalender, Aufgaben mit Sternen und Belohnungen, Listen,

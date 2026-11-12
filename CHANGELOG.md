@@ -11,8 +11,8 @@ tokens; such a change is named here.
 
 ### Renamed: Tagwerk is now Fahoba
 
-For trademark reasons. The name is an acronym: **Fa**mily · **Ho**me ·
-**Ba**se. The next release is 0.3.0 — still a minor one, as everything
+For trademark reasons. The name is short for **Fa**mily **Ho**me
+**Bo**ard. The next release is 0.3.0 — still a minor one, as everything
 before 1.0.0: plugin authors must follow the rename, a running server and
 its tablets need not.
 

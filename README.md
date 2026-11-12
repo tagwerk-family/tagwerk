@@ -2,7 +2,7 @@
 
 *Deutsche Fassung: [`README.de.md`](README.de.md)*
 
-**Fa**mily · **Ho**me · **Ba**se — where the family's day comes together.
+**Fa**mily **Ho**me **Bo**ard — where the family's day comes together.
 
 Self-hosted family calendar for a wall-mounted tablet and the family's
 phones — calendar, tasks with stars and rewards, lists, meal plan and recipe
