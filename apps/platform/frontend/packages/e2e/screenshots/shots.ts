@@ -10,12 +10,15 @@ export async function settle(page: Page): Promise<void> {
   await page.evaluate(() => document.fonts.ready)
   await page.waitForTimeout(800)
   // The demo household's Google sample is expired on purpose (an e2e test
-  // needs the banner); a real household shows it only when it is true.
-  await page.getByRole('status').filter({ hasText: 'Zugang abgelaufen' }).evaluateAll(banners => {
-    for (const banner of banners) {
-      (banner as HTMLElement).style.display = 'none'
-    }
-  })
+  // needs the banner); a real household shows it only when it is true. The
+  // household notice says the same since notices exist.
+  await page.getByRole('status').filter({ hasText: 'Zugang abgelaufen' })
+    .or(page.getByTestId('household-notice'))
+    .evaluateAll(banners => {
+      for (const banner of banners) {
+        (banner as HTMLElement).style.display = 'none'
+      }
+    })
 }
 
 /** Light or dark for this device or account, stored like a tap in the settings would. */
