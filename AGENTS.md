@@ -332,8 +332,8 @@ Filament 3. Here the respective current major versions are used on purpose, beca
   UI does not compare with times of day itself, but sets an
   alarm for `next_change` and then asks again.
 - **The mark** is the family's home base: a roof over a small house,
-  terracotta `#B84B2D` on a sand tile `#F4E3CF` (three paths in a 160 box,
-  delivered by a designer; `TwLogo.vue` and `app/public/icon.svg` hold the
+  terracotta `#B84B2D` on a sand tile `#F4E3CF` (three paths in a 160 box;
+  `TwLogo.vue` and `app/public/icon.svg` hold the
   tile). The variants differ only in the mark's scale:
   `public/favicon.svg` (Laravel, linked by app and admin) draws it larger,
   every pixel counts at 16 px; `resources/brand/maskable.svg` full bleed

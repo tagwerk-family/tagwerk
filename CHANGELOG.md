@@ -21,8 +21,8 @@ tokens; such a change is named here.
   geladen” without a picture; it now stands from the first paint (Nuxt's
   loading template) and keeps its place when the app takes over. The home
   screen says “Home Base”: Android cut the full name off.
-- **A new mark: a roof over a small house**, terracotta on sand, by a
-  designer. Android gets a maskable icon of its own — the rounded tile
+- **A new mark: a roof over a small house**, terracotta on sand.
+  Android gets a maskable icon of its own — the rounded tile
   cropped to a circle showed its corners — and the admin's lockup sets the
   mark beside the name without the tile.
 
