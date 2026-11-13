@@ -19,6 +19,10 @@ export default defineNuxtConfig({
 
   css: ['~/assets/css/main.css'],
 
+  // Stands until the app mounts — language.client.ts holds the mount until
+  // the texts are there, and a blank screen read like a broken app.
+  spaLoadingTemplate: 'spa-loading-template.html',
+
   /*
    * An import map can only be inline, and its content changes with every
    * build — the Content Security Policy would need a new hash each time.

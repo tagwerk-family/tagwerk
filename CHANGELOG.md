@@ -16,6 +16,11 @@ tokens; such a change is named here.
   A migration relabels the built-in connections, and an export from 0.3.0
   imports with the new label. Set `APP_NAME="Family Home Base"` in
   `deploy/.env`: mails take their sender's name from it.
+- **Opening the app shows the mark and the name at once.** Until the
+  texts had loaded the screen stayed blank, and then read “… wird
+  geladen” without a picture; it now stands from the first paint (Nuxt's
+  loading template) and keeps its place when the app takes over. The home
+  screen says “Home Base”: Android cut the full name off.
 
 ## [0.3.0] — 2026-11-12
 

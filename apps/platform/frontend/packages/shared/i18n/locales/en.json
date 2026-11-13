@@ -43,7 +43,7 @@
     "failed": "That didn't work.",
     "tryAgain": "That didn't work. Please try again.",
     "today": "Today",
-    "loading": "Loading Family Home Base …",
+    "loading": "Loading …",
     "fetching": "Loading …",
     "areas": "Areas",
     "asOf": "As of {time}",

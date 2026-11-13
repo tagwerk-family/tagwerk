@@ -960,13 +960,7 @@ function completeItem(item: ListItemDto): void {
       @paired="freshlyPaired"
     />
 
-    <div
-      v-else-if="paired !== true"
-      role="status"
-      class="flex h-full items-center justify-center font-display text-2xl text-ink-3"
-    >
-      {{ $t('common.loading') }}
-    </div>
+    <AppLoading v-else-if="paired !== true" />
 
     <div v-else class="flex h-full">
       <!-- Catches the waking touch, so it does not also press what lies below,

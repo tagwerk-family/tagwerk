@@ -30,7 +30,7 @@
     "common.failed": "That didn't work.",
     "common.tryAgain": "That didn't work. Please try again.",
     "common.today": "Today",
-    "common.loading": "Loading Family Home Base …",
+    "common.loading": "Loading …",
     "common.fetching": "Loading …",
     "common.areas": "Areas",
     "common.asOf": "As of {time}",

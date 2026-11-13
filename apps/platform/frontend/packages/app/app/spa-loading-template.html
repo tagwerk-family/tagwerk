@@ -1,0 +1,11 @@
+<!--
+  Shown before the app mounts, while language and texts load; Nuxt removes
+  it on mount. No script (the CSP allows none inline) and no text that needs
+  a language — the name is the same in every one. The colours are the
+  tokens of fahoba.css, already loaded with the entry's stylesheet.
+-->
+<div role="status" style="position: fixed; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1rem; background: var(--canvas, #fafaf9)">
+  <img src="/icon.svg" alt="" width="80" height="80">
+  <p style="margin: 0; font-family: var(--font-heading, system-ui, sans-serif); font-size: 1.875rem; font-weight: 700; color: var(--ink, #1a1a18)">Family Home Base</p>
+  <p style="margin: 0; font-size: 1.125rem; visibility: hidden">&nbsp;</p>
+</div>

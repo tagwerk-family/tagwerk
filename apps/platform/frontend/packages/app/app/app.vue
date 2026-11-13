@@ -48,11 +48,5 @@ onMounted(decide)
   <div v-else-if="entry === 'user' && checked" class="h-full overflow-y-auto">
     <LoginScreen />
   </div>
-  <div
-    v-else
-    role="status"
-    class="flex h-full items-center justify-center bg-canvas font-display text-2xl text-ink-3"
-  >
-    {{ $t('common.loading') }}
-  </div>
+  <AppLoading v-else class="bg-canvas" />
 </template>
