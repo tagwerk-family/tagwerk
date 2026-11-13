@@ -35,7 +35,7 @@ final class FahobaBrand
             ->brandName('Family Home Base')
             ->brandLogo(fn (): string => asset('logo-light.svg'))
             ->darkModeBrandLogo(fn (): string => asset('logo-dark.svg'))
-            ->brandLogoHeight('2rem')
+            ->brandLogoHeight('2.25rem')
             ->favicon(fn (): string => asset('favicon.svg'))
             ->font('Plus Jakarta Sans Variable', provider: LocalFontProvider::class)
             ->colors([

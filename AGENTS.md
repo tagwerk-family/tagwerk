@@ -331,21 +331,27 @@ Filament 3. Here the respective current major versions are used on purpose, beca
 - **The server computes the theme** (`App\Services\ThemeSchedule`). The
   UI does not compare with times of day itself, but sets an
   alarm for `next_change` and then asks again.
-- **The mark** is the family's home base: a tick inside a house on a
-  terracotta tile (`#ea580c` → `#b93a0a`). It lives in `TwLogo.vue` (layer,
-  gradient id from `useId()` — several logos share a page) and
-  `app/public/icon.svg`. `public/favicon.svg` (Laravel, linked by app and
-  admin) is a bold variant — filled house, cut-out tick — because the
-  outline blurs at 16 px. The lockup exists twice (`public/logo-light.svg`,
-  `logo-dark.svg`, for the admin); its wordmark is Plus Jakarta Sans 800 as
-  a path, not as text, so swapping the UI font does not change it.
-  The app also ships `icon-192.png`, `icon-512.png`, `favicon.ico` and a
-  white-on-transparent `badge-96.png` (source `resources/brand/badge.svg`)
-  for the notification status bar — Android ignores SVG there and reads the
-  badge by alpha only. **Render them through Chromium, never `magick` on
-  the SVG:** its built-in renderer drops gradients and strokes and paints
-  the tile black. `node scripts/render-brand.mjs` in `packages/e2e`, then
-  pack `favicon.ico` as its header says.
+- **The mark** is the family's home base: a roof over a small house,
+  terracotta `#B84B2D` on a sand tile `#F4E3CF` (three paths in a 160 box,
+  delivered by a designer; `TwLogo.vue` and `app/public/icon.svg` hold the
+  tile). The variants differ only in the mark's scale:
+  `public/favicon.svg` (Laravel, linked by app and admin) draws it larger,
+  every pixel counts at 16 px; `resources/brand/maskable.svg` full bleed
+  with the mark inside Android's safe circle (`icon-maskable-512.png`) —
+  the tile's corners would show in a circle; `badge.svg` white on
+  transparent; `avatar.svg` square for GitHub and npm. The lockup
+  (`public/logo-light.svg`, `logo-dark.svg`, for the admin) sets the mark
+  without its tile beside the name, Plus Jakarta Sans 700 as a path, not
+  as text, so swapping the UI font does not change it
+  (`storage/app/brand/lockup.py`, not in Git).
+  The app also ships `icon-192.png`, `icon-512.png`, `favicon.ico` and the
+  `badge-96.png` for the notification status bar — Android ignores SVG
+  there and reads the badge by alpha only. **Render them through Chromium,
+  never `magick` on the SVG:** its built-in renderer dropped gradients and
+  strokes of the earlier mark. `node scripts/render-brand.mjs` in
+  `packages/e2e`, then pack `favicon.ico` as its header says. nginx serves
+  the app's icons by name (`.ddev/nginx/fahoba-apps.conf`,
+  `deploy/nginx.conf`): a new file there 404s until both list it.
 - **Admin groups** (`NavigationGroup`): Family (people, accounts),
   Everyday (tasks, rewards, star history, lists, recipes, photos),
   Calendar & school (calendars, timetable, school closures), Setup,

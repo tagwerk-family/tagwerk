@@ -19,6 +19,8 @@ mkdirSync(`${platform}storage/app/brand`, { recursive: true })
 const jobs = [
   [`${app}icon.svg`, `${app}icon-512.png`, 512],
   [`${app}icon.svg`, `${app}icon-192.png`, 192],
+  // Android crops a maskable icon to its own shape; the tile's corners would show.
+  [`${platform}resources/brand/maskable.svg`, `${app}icon-maskable-512.png`, 512],
   [`${platform}resources/brand/badge.svg`, `${app}badge-96.png`, 96],
   // Square, without rounded corners: GitHub and npm round the avatar themselves.
   [`${platform}resources/brand/avatar.svg`, `${platform}storage/app/brand/avatar-1024.png`, 1024],
