@@ -12,7 +12,7 @@
 <template>
   <svg viewBox="0 0 160 160" aria-hidden="true" focusable="false">
     <rect width="160" height="160" rx="34" fill="#F4E3CF" />
-    <g fill="#B84B2D" transform="translate(80 80) scale(1.1) translate(-80 -51.5)">
+    <g fill="#C2410C" transform="translate(80 80) scale(1.1) translate(-80 -51.5)">
       <path d="M26 80V39L73 8v31z" />
       <path d="M87 8l47 31v41L87 39z" />
       <path d="M53 64l27-19 27 19v31H53z" />
