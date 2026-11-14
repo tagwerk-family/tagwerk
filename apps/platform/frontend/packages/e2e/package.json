@@ -4,7 +4,8 @@
   "private": true,
   "scripts": {
     "e2e": "playwright test",
-    "screenshots": "playwright test -c screenshots.config.ts"
+    "screenshots": "playwright test -c screenshots.config.ts --project=wall --project=phone",
+    "screenshots:website": "playwright test -c screenshots.config.ts --project=website"
   },
   "devDependencies": {
     "@axe-core/playwright": "4.14.0",

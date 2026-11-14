@@ -19,6 +19,7 @@ export default defineConfig({
   },
   projects: [
     { name: 'wall', testMatch: 'wall.ts', use: { ...devices['Desktop Chrome'], viewport: { width: 1280, height: 800 } } },
+    { name: 'website', testMatch: 'website.ts', use: { ...devices['Desktop Chrome'], viewport: { width: 1280, height: 800 }, deviceScaleFactor: 2 } },
     { name: 'phone', testMatch: 'phone.ts', use: { ...devices['Pixel 7'] } },
   ],
 })
